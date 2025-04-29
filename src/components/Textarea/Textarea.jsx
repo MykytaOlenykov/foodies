@@ -5,23 +5,21 @@ import * as styles from "./Textarea.module.css";
 const MAX_LENGTH = 200;
 
 /**
- * A textarea that auto-resizes to fit content and shows a character counter.
- * Counter turns red if value length exceeds maxLength.
- *
  * @param {object} props
- * @param {string} props.value                - Controlled value of the textarea
- * @param {function} props.onChange           - Change handler (e) => void
- * @param {string} [props.placeholder]        - Placeholder text
- * @param {number} props.maxLength            - Max length of the textarea (default: 200)
- * @param {string} [props.className]          - Additional class for container
+ * @param {number} props.maxLength - Max length of the textarea (default: 200)
+ * @param {string} props.value - Controlled value of the textarea
+ * @param {function} props.onChange - Change handler (e) => void
+ * @param {string} [props.placeholder] - Placeholder text
+ * @param {boolean} [props.disabled] - Whether the textarea is disabled
+ * @param {boolean} [props.required] - Whether the textarea is required
  */
 const Textarea = ({
   value,
   onChange,
   placeholder = '',
   maxLength = MAX_LENGTH,
-  className,
-  ...rest
+  disabled = false,
+  required = false,
 }) => {
   const ref = useRef(null);
 
@@ -36,14 +34,15 @@ const Textarea = ({
   const overLimit = value.length > maxLength;
 
   return (
-    <div className={clsx(styles.TextareaContainer, className)}>
+    <div className={styles.TextareaContainer}>
       <textarea
         ref={ref}
         className={styles.Textarea}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        {...rest}
+        disabled={disabled}
+        required={required}
       />
       <div>
         <span className={clsx(styles.TextareaCounter, overLimit && styles.overLimit)}>

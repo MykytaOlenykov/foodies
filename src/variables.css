@@ -13,4 +13,5 @@
 
     --transition-duration: 0.3s;
     --transition-timing-function: ease;
+    --Typography-line-clamp: 1;
 }

@@ -2,34 +2,32 @@ import * as styles from "./ButtonIcon.module.css";
 import clsx from "clsx";
 
 /**
- * A styled button with icon
- *
- * @param {{
- *   variant?: "dark" | "light",
- *   size?: "small" | "medium",
- *   disabled?: boolean,
- *   icon?: React.ReactNode,
- * }} props
- * @param {"dark"|"light"} — colour/style preset.
- * @param {"small"|"medium"} — padding/font-size preset.
- * @param {boolean} — whether the button is disabled.
+ * @param {object} props
+ * @param {"dark"|"light"} props.variant— colour/style preset.
+ * @param {"small"|"medium"} props.size — padding/font-size preset.
+ * @param {boolean} props.disabled — whether the button is disabled.
+ * @param {"button"|"submit"|"reset"} [props.type] — button type.
  * @param {React.ReactNode} [props.icon] — an icon element.
+ * @param {(e) => void} props.onClick — click handler
  */
 const ButtonIcon = ({
   variant,
   size,
   icon,
-  ...rest
+  disabled,
+  type = "button",
+  onClick,
 }) => {
   return (
     <button
-      {...rest}
       className={clsx(
         styles.ButtonIcon,
         styles[variant],
         styles[size],
-        rest.className,
       )}
+      disabled={disabled}
+      type={type}
+      onClick={onClick}
     >
       {icon}
     </button>

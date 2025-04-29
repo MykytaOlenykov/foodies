@@ -60,3 +60,10 @@
 .ButtonIcon.dark:not(:disabled):hover svg {
     color: var(--main-color);
 }
+
+.ButtonIcon:disabled {
+    background: var(--gray-light-color);
+    border-color: var(--gray-light-color);
+    color: var(--gray-color);
+    cursor: not-allowed;
+}

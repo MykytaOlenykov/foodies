@@ -23,7 +23,7 @@
 }
 
 .DualButton.left:hover {
-    opacity: 0.5;
+    opacity: 0.7;
 }
 
 .DualButton.right {
@@ -35,5 +35,5 @@
 }
 
 .DualButton.right:hover {
-    opacity: 0.5;
+    opacity: 0.7;
 }

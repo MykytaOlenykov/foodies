@@ -2,41 +2,37 @@ import * as styles from "./Button.module.css";
 import clsx from "clsx";
 
 /**
- * A styled button with optional icon, border, and size/variant presets.
- *
- * @param {{
- *   variant?: "dark" | "light" | "transparent",
- *   size?: "small" | "medium",
- *   bordered?: boolean,
- *   disabled?: boolean,
- *   icon?: React.ReactNode,
- *   children: React.ReactNode,
- * }} props
- * @param {"dark"|"light"|"transparent"} [props.variant="dark"] — colour/style preset.
- * @param {"small"|"medium"} [props.size="medium"] — padding/font-size preset.
- * @param {boolean} [props.bordered=false] — whether to draw a border.
- * @param {boolean} — whether the button is disabled.
- * @param {React.ReactNode} [props.icon] — an icon element.
- * @param {React.ReactNode} props.children — button text.
+ * @param {object} props
+ * @param {"dark"|"light"|"transparent"} props.variant — colour/style preset.
+ * @param {"small"|"medium"} props.size — padding/font-size preset.
+ * @param {boolean} props.bordered — whether to draw a border.
+ * @param {React.ReactNode} props.icon — an icon element.
+ * @param {boolean} props.disabled — whether the button is disabled.
+ * @param {"button"|"submit"|"reset"} [props.type] — button type.
+ * @param {React.ReactNode} props.children — button text or other content.
+ * @param {(e) => void} props.onClick — click handler
  */
 const Button = ({
-  variant = "dark",
-  size = "medium",
+  variant,
+  size,
   bordered = false,
+  disabled = false,
+  type = "button",
   icon,
   children,
-  ...rest
+  onClick,
 }) => {
   return (
     <button
-      {...rest}
       className={clsx(
         styles.Button,
         styles[variant],
         styles[size],
         bordered && styles.bordered,
-        rest.className,
       )}
+      disabled={disabled}
+      type={type}
+      onClick={onClick}
     >
       {children}
       {icon}
