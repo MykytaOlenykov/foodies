@@ -1,0 +1,73 @@
+.Button {
+    font-weight: 700;
+    border-radius: var(--border-radius-m);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease, border 0.3s ease, color 0.3s ease;
+    text-transform: uppercase;
+}
+
+.Button.small {
+    padding: 14px;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.Button.medium {
+    padding: 16px 32px;
+    height: 56px;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.Button.light {
+    background: var(--white-color);
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+}
+
+.Button.light.bordered {
+    border: 1px solid var(--white-color);
+}
+
+.Button.light:hover {
+    background: var(--main-color);
+    border: 1px solid var(--white-color);
+    color: var(--white-color);
+}
+
+.Button.dark {
+    background: var(--main-color);
+    color: var(--white-color);
+}
+
+.Button.dark.bordered {
+    border: 1px solid var(--main-color);
+}
+
+.Button.dark:hover {
+    background: var(--white-color);
+    color: var(--main-color);
+}
+
+.Button.transparent {
+    background: transparent;
+    color: var(--white-color);
+}
+
+.Button.transparent.bordered {
+    border: 1px solid var(--white-transparent-color);
+}
+
+.Button.transparent:hover {
+    background: var(--white-color);
+    color: var(--main-color);
+}
+
+.Button:disabled {
+    background: var(--gray-color);
+    border: 1px solid var(--gray-color);
+    color: var(--white-color);
+    cursor: not-allowed;
+}

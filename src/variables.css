@@ -1,0 +1,10 @@
+:root {
+    --main-color: #050505;
+    --gray-color: #BFBEBE;
+    --white-color: #FFFFFF;
+    --white-transparent-color: rgba(255, 255, 255, 0.2);
+
+    --border-radius-s: 15px;
+    --border-radius-m: 30px;
+    --border-radius-full: 50%;
+}
