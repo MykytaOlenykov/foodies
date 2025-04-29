@@ -1,0 +1,33 @@
+.TextareaContainer {
+    width: 100%;
+    border-bottom: 1px solid var(--gray-color);
+    display: flex;
+    gap: 38px;
+    padding-bottom: 16px;
+}
+
+.Textarea {
+    width: 100%;
+    border: none;
+    resize: none;
+    outline: none;
+}
+
+.TextareaCounter,
+.TextareaTotal {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+}
+
+.TextareaCounter {
+    color: var(--main-color);
+}
+
+.TextareaCounter.overLimit {
+    color: var(--red-color);
+}
+
+.TextareaTotal {
+    color: var(--gray-color);
+}
