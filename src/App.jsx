@@ -11,7 +11,7 @@ export const App = () => {
 
   return (
     <Routes>
-      <Route path="/hello-world" element={<div>Hello world!</div>} />
+      <Route path="/hello-world" element={<div>Hello World</div>} />
     </Routes>
   );
 };
