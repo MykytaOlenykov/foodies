@@ -6,14 +6,14 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); 
-    background: rgba(0, 0, 0, 0.5);
+    background:  rgba(38, 38, 41, 0.2);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
     opacity: 0;
     pointer-events: none; 
-    transition: opacity 0.3s ease; 
+    transition: opacity var(--transition-duration) var(--transition-timing-function);; 
   }
   
   .backdrop.open {
@@ -25,10 +25,10 @@
   .content {
     padding: 60px 30px;
     background-color: white;
-    border-radius: 8px;
+    border-radius: 30px;
     box-sizing: border-box;
     position: relative;
-    transition: transform 0.3s ease-in-out;
+    transition: transform var(--transition-duration) var(--transition-timing-function);
     opacity: 0;
     transform: scale(0.95); 
   }
@@ -37,29 +37,42 @@
     opacity: 1;
     transform: scale(1);
   }
+  .closeIcon {
+    width: 12px;
+    height: 12px;
+  }
   
   .close {
     position: absolute;
-    width: 30px;
-    height: 30px;
-    top: 10px;
-    right: 10px;
+    width: 24px;
+    height: 24px;
+    top: 16px;
+    right: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     background: none;
     border: none;
-    color: #333;
+    color: var(--main-color);
     cursor: pointer;
+    padding: 0;
+    transition: background-color var(--transition-duration) var(--transition-timing-function),
+    color var(--transition-duration) var(--transition-timing-function);
+
   }
   .close:hover{
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: var(--main-color);
+    color: var(--white-color);
   }
   
   @media (min-width: 768px) {
     .content {
       padding: 80px;
+    }
+    .close{
+      top: 20px;
+      right: 20px;
     }
     
   }
