@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 
 const api = axios.create({
@@ -16,5 +16,7 @@ api.interceptors.request.use(config => {
   }
   return config;
 });
+
+export const checkApiConnection = () => api.get("/ok");
 
 export default api;
