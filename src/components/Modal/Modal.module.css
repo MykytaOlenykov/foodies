@@ -40,15 +40,22 @@
   
   .close {
     position: absolute;
+    width: 30px;
+    height: 30px;
     top: 10px;
     right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
     background: none;
     border: none;
-    font-size: 20px;
     color: #333;
     cursor: pointer;
   }
-
+  .close:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+  }
   
   @media (min-width: 768px) {
     .content {
