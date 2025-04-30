@@ -1,0 +1,39 @@
+.DualButtonGroup {
+    width: fit-content;
+    border-radius: var(--border-radius-m);
+    background: var(--white-color);
+}
+
+.DualButton {
+    flex: 1;
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.DualButton.left {
+    padding: 14px 30px;
+    background: var(--white-color);
+    color: var(--main-color);
+    border-radius: var(--border-radius-m) 0 0 var(--border-radius-m);
+}
+
+.DualButton.left:hover {
+    opacity: 0.7;
+}
+
+.DualButton.right {
+    padding: 14px 28px;
+    border-radius: var(--border-radius-m);
+    background: var(--main-color);
+    color: var(--white-color);
+    border: 1px solid var(--gray-color);
+}
+
+.DualButton.right:hover {
+    opacity: 0.7;
+}

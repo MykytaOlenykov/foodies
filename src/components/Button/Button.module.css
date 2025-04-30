@@ -1,0 +1,82 @@
+.Button {
+    width: fit-content;
+    font-weight: 700;
+    border-radius: var(--border-radius-m);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background var(--transition-duration) var(--transition-timing-function), border var(--transition-duration) var(--transition-timing-function), color var(--transition-duration) var(--transition-timing-function);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.Button svg {
+    width: 22px;
+    height: 22px;
+    transition: color var(--transition-duration) var(--transition-timing-function);
+}
+
+.Button.small {
+    padding: 14px;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.Button.medium {
+    padding: 16px 32px;
+    height: 56px;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.Button.light {
+    background: var(--white-color);
+    color: var(--main-color);
+    border: 1px solid transparent;
+}
+
+.Button.light:not(:disabled):hover {
+    background: var(--main-color);
+    color: var(--white-color);
+}
+
+.Button.light:not(:disabled):hover svg {
+    color: var(--white-color);
+}
+
+.Button.dark {
+    background: var(--main-color);
+    color: var(--white-color);
+}
+
+.Button.dark:not(:disabled):hover {
+    background: var(--white-color);
+    color: var(--main-color);
+}
+
+.Button.transparent {
+    background: transparent;
+    color: var(--white-color);
+}
+
+.Button.transparent:not(:disabled):hover {
+    background: var(--white-color);
+    color: var(--main-color);
+}
+
+.Button.transparent.bordered {
+    border: 1px solid var(--white-transparent-color);
+}
+
+.Button.bordered {
+    border: 1px solid var(--main-color);
+}
+
+.Button:disabled {
+    background: var(--gray-color);
+    border: 1px solid var(--gray-color);
+    color: var(--white-color);
+    cursor: not-allowed;
+}
