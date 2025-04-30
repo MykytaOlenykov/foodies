@@ -2,11 +2,12 @@ import * as styles from "./Testimonials.module.css";
 import { Typography } from "../Typography/Typography.jsx";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import QuoteImage from '../../assets/images/quote.svg?react';
-import { Pagination, } from 'swiper/modules';
+import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
 const SLIDE_PER_VIEW = 1;
+const SLIDE_AUTOPLAY_DELAY = 5000;
 
 /**
  * @param {object} props
@@ -37,9 +38,13 @@ const Testimonials = ({data}) => {
       <Typography variant="h2">Testimonials</Typography>
       <Swiper
         loop
-        modules={[Pagination]}
+        modules={[Pagination, Autoplay]}
         className={styles.Testimonials__swiper}
         slidesPerView={SLIDE_PER_VIEW}
+        autoplay={{
+          delay: SLIDE_AUTOPLAY_DELAY,
+          disableOnInteraction: false,
+        }}
         pagination={{
           clickable: true,
           horizontalClass: styles.Testimonials__pagination,
