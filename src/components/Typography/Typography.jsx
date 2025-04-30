@@ -14,12 +14,13 @@ const tagMap = {
 
  * @param {object} props
  * @param {"h1"|"h2"|"h3"|"h4"|"body"} props.variant  — typography style
+ * @param {"black"|"gray"|"white"} [props.textColor] — text color
  * @param {boolean} [props.truncate] — whether to truncate the text
  * @param {number} [props.lineClamp] — number of lines to clamp
  * @param {React.ReactNode} props.children
  * @param {string} [props.className]
  */
-const Typography = ({ variant, children, truncate, lineClamp, className }) => {
+const Typography = ({ variant = "body", children, truncate, lineClamp, className, textColor = "black" }) => {
   const Tag = tagMap[variant] || 'p';
 
   return (
@@ -27,6 +28,7 @@ const Typography = ({ variant, children, truncate, lineClamp, className }) => {
       className={clsx(
         styles.Typography,
         styles[variant],
+        styles[textColor],
         truncate && styles.truncate,
         lineClamp && styles.lineClamp,
         className

@@ -14,6 +14,18 @@
     }
 }
 
+.black {
+    color: var(--main-color);
+}
+
+.gray {
+    color: var(--gray-color);
+}
+
+.white {
+    color: var(--white-color);
+}
+
 .h1 {
     font-size: 40px;
     text-transform: uppercase;
