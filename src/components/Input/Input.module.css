@@ -1,0 +1,94 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+.inputWrapper {
+    position: relative;
+    width: 100%;
+}
+
+.input {
+    width: 100%;
+    padding: 16px 48px 16px 18px; /* Leave space for icon on the right */
+    font-family: Mulish, sans-serif; /* todo replace with theme */
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.02em;
+    background-color: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    /* todo remove when global styles are added */
+    box-sizing: border-box;
+}
+
+.default {
+    border: 1px solid #BFBEBE; /* todo replace with theme */
+    border-radius: 30px;
+}
+
+.underline {
+    border: none;
+    border-bottom: 1px solid #BFBEBE; /* todo replace with theme */
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.default::placeholder {
+    color: #1A1A1A; /* todo replace with theme */
+    opacity: 1;
+}
+
+.underline::placeholder {
+    color: #BFBEBE; /* todo replace with theme */
+    opacity: 1;
+}
+
+.input:focus {
+    border-color: #050505; /* todo replace with theme */
+    outline: none;
+}
+
+.error {
+    border-color: #dc2626;
+}
+
+.iconButton {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1A1A1A;
+}
+
+.errorMessage {
+    color: #dc2626;
+    font-size: 13px;
+    margin-top: 2px;
+    font-style: italic;
+}
+
+.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.counter {
+    font: inherit;
+    position: absolute;
+    top: 16px;
+    line-height: 24px;
+    right: 0;
+    color: #BFBEBE;
+}
