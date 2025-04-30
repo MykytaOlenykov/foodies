@@ -53,3 +53,39 @@ export const WithIcon = () => {
     />
   );
 };
+
+export const Variants = () => {
+  const [value, setValue] = React.useState('');
+  const [underlineValue, setUnderlineValue] = React.useState('');
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '300px' }}>
+      <Input
+        placeholder="Default input"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+      <Input
+        placeholder="Underline input"
+        value={underlineValue}
+        onChange={(e) => setUnderlineValue(e.target.value)}
+        variant="underline"
+      />
+    </div>
+  );
+};
+
+export const WithCounter = () => {
+  const [value, setValue] = React.useState('');
+
+  return (
+    <Input
+      placeholder="Enter recipe"
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      variant="underline"
+      multiline
+      maxLength={200}
+    />
+  );
+};

@@ -12,15 +12,12 @@
 
 .input {
     width: 100%;
-    padding: 12px 48px 12px 18px; /* Leave space for icon on the right */
-    border: 1px solid #BFBEBE; /* todo replace with theme */
-    border-radius: 30px;
+    padding: 16px 48px 16px 18px; /* Leave space for icon on the right */
     font-family: Mulish, sans-serif; /* todo replace with theme */
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
     letter-spacing: -0.02em;
-    color: #1A1A1A;
     background-color: #ffffff;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
@@ -28,8 +25,26 @@
     box-sizing: border-box;
 }
 
-.input::placeholder {
+.default {
+    border: 1px solid #BFBEBE; /* todo replace with theme */
+    border-radius: 30px;
+}
+
+.underline {
+    border: none;
+    border-bottom: 1px solid #BFBEBE; /* todo replace with theme */
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.default::placeholder {
     color: #1A1A1A; /* todo replace with theme */
+    opacity: 1;
+}
+
+.underline::placeholder {
+    color: #BFBEBE; /* todo replace with theme */
     opacity: 1;
 }
 
@@ -67,4 +82,13 @@
 .disabled {
     opacity: 0.6;
     pointer-events: none;
+}
+
+.counter {
+    font: inherit;
+    position: absolute;
+    top: 16px;
+    line-height: 24px;
+    right: 0;
+    color: #BFBEBE;
 }
