@@ -1,0 +1,61 @@
+
+.backdrop {
+  width: 100vw;
+  height: 100vh;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none; 
+    transition: opacity 0.3s ease; 
+  }
+  
+  .backdrop.open {
+    opacity: 1;
+    pointer-events: auto; 
+  }
+  
+  
+  .content {
+    padding: 60px 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-sizing: border-box;
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+    opacity: 0;
+    transform: scale(0.95); 
+  }
+  
+  .content.open {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #333;
+    cursor: pointer;
+  }
+
+  
+  @media (min-width: 768px) {
+    .content {
+      padding: 80px;
+    }
+    
+  }
+  
+
+  
