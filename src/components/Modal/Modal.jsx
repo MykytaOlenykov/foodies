@@ -1,6 +1,14 @@
 import style from "./Modal.module.css";
 import { useEffect } from "react";
 
+// function which I use for open/close modal
+// const toggleModal = () => {
+//   setIsModalOpen((prev)=> {
+//     return !prev
+//   }); 
+// };
+
+
 const Modal = ({ isOpen, closeModal, children }) => {
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -14,13 +22,26 @@ const Modal = ({ isOpen, closeModal, children }) => {
         closeModal(); 
       }
     };
-
     document.addEventListener("keydown", handleEsc);
 
     return () => {
       document.removeEventListener("keydown", handleEsc);
     };
   }, [closeModal]);
+
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden"; 
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    
+    return () => {
+      document.body.style.overflow = "auto"; 
+    };
+  }, [isOpen]); 
 
   return (
     <div
