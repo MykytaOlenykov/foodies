@@ -1,5 +1,14 @@
-const UserPage = () => {
-  return <h1>User Page Stub</h1>;
-}
+import styles from "./UserPage.module.css";
 
-export default UserPage
+const UserPage = () => {
+  return (
+    <section className={styles.userPage}>
+      <h1 className={styles.title}>User Page Stub</h1>
+      <p className={styles.text}>
+        Here will be the user's profile and settings.
+      </p>
+    </section>
+  );
+};
+
+export default UserPage;
