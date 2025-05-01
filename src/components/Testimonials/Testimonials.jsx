@@ -25,16 +25,15 @@ const TestimonialsCard = ({ text, author }) => {
 };
 
 /**
- *
  * @param {object} props
  * @param {Array<{text: string, author: string}>} props.data
  */
 const Testimonials = ({data}) => {
   return (
     <div className={styles.Testimonials}>
-      <span className={styles.Testimonials__subtitle}>
+      <Typography variant="body" className={styles.Testimonials__subtitle}>
         What our customer say
-      </span>
+      </Typography>
       <Typography variant="h2">Testimonials</Typography>
       <Swiper
         loop
