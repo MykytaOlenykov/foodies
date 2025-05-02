@@ -4,11 +4,9 @@ import { BrowserRouter } from "react-router";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import "modern-normalize";
+import "./index.css";
 
 import { App } from "./App";
-
-import "./index.css";
-import "./variables.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
