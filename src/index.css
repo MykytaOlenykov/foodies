@@ -54,6 +54,10 @@ img {
   height: auto;
 }
 
+button {
+  padding: 0;
+}
+
 body {
   font-family: "Mulish", sans-serif;
   font-weight: 500;
