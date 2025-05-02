@@ -1,16 +1,18 @@
 import style from "./Modal.module.css";
 import { useEffect } from "react";
-import MyIcon from '../../assets/icons/x.svg?react';
+import CloseIcon from '../../assets/icons/x.svg?react';
 
-
-
-// function which I use for open/close modal
-// const toggleModal = () => {
-//   setIsModalOpen((prev)=> {
-//     return !prev
-//   }); 
-// };
-
+/**
+ * @param {object} props
+ * @param {boolean} props.isOpen - Whether the modal is open or not.
+ * @param {() => void} props.closeModal - Function to close the modal.
+ * @param {React.ReactNode} props.children - Modal content to display inside.
+ *
+ * Features:
+ * - Closes on backdrop click
+ * - Closes on Escape key press
+ * - Disables body scroll when open
+ */
 
 const Modal = ({ isOpen, closeModal, children }) => {
   const handleBackdropClick = (e) => {
@@ -39,7 +41,6 @@ const Modal = ({ isOpen, closeModal, children }) => {
     } else {
       document.body.style.overflow = "auto";
     }
-
     
     return () => {
       document.body.style.overflow = "auto"; 
@@ -53,7 +54,7 @@ const Modal = ({ isOpen, closeModal, children }) => {
     >
       <div className={`${style.content} ${isOpen ? style.open : ""}`}>
         <button onClick={closeModal} className={style.close} aria-label="Close modal">
-          <MyIcon width={12} height={12} className={style.closeIcon}/>
+          <CloseIcon width={12} height={12} className={style.closeIcon}/>
         </button>
 
         {children}
