@@ -6,14 +6,31 @@ import { useSelector } from "react-redux";
 import Auth from "../Auth/Auth";
 import HeaderNav from "./HeaderNav/HeaderNav";
 import HeaderProfile from "./HeaderProfile/HeaderProfile";
-import ModalBox from "../ModalBox/ModalBox";
-import SignInForm from "../SignInForm/SignInForm";
-import Logout from "../Logout/Logout";
 
 import styles from "./Header.module.css";
 
 // Temp stub instead of Redux-selector
-const selectAuthIsSignedIn = () => true;
+const selectAuthIsSignedIn = () => true
+
+// Temp stub for Modal
+const Modal = () => {
+  return null;
+};
+
+// Temp stub for SignInForm
+const SignInForm = ({ variant }) => (
+  <div>
+    <p>SignInForm Stub ({variant})</p>
+  </div>
+);
+
+// Temp stub for Logout
+const Logout = ({ setModalLogoutOpen }) => (
+  <div>
+    <p>Logout Stub</p>
+    <button onClick={() => setModalLogoutOpen(false)}>Close Logout</button>
+  </div>
+);
 
 export default function Header() {
   const { pathname } = useLocation();
@@ -56,24 +73,24 @@ export default function Header() {
         </div>
       )}
 
-      <ModalBox
+      <Modal
         isOpen={!isSignedIn && modalSignInOpen}
         onClose={() => setModalSignInOpen(false)}
       >
         <SignInForm variant="sign-in" />
-      </ModalBox>
-      <ModalBox
+      </Modal>
+      <Modal
         isOpen={modalSignUpOpen}
         onClose={() => setModalSignUpOpen(false)}
       >
         <SignInForm variant="sign-up" />
-      </ModalBox>
-      <ModalBox
+      </Modal>
+      <Modal
         isOpen={modalLogoutOpen}
         onClose={() => setModalLogoutOpen(false)}
       >
         <Logout setModalLogoutOpen={setModalLogoutOpen} />
-      </ModalBox>
+      </Modal>
     </header>
   );
 }

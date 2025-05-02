@@ -8,12 +8,16 @@ import BurgerMenuIcon from "../../../assets/icons/burger-menu.svg?react";
 
 import styles from "./HeaderProfile.module.css";
 import HeaderProfileMenu from "./HeaderProfileMenu";
-import ModalBox from "../../ModalBox/ModalBox";
 import HeaderModal from "../HeaderModal/HeaderModal";
 import styleModal from "../HeaderModal/HeaderModal.module.css";
 
 // Temp stub instead of Redux-selector
 const selectAuthUserData = () => false;
+
+// Temp stub for Modal
+const Modal = () => {
+  return null;
+};
 
 const HeaderProfile = ({ isHome, onClick }) => {
   const userData = useSelector(selectAuthUserData);
@@ -41,7 +45,7 @@ const HeaderProfile = ({ isHome, onClick }) => {
           type="button"
           className={clx(styles.btn_arrow, toogleOpen && styles.btn_arrow_open)}
         >
-          <ChevronDownIcon />
+          <ChevronDownIcon className={styles.icon_arrow} />
         </button>
       </div>
 
@@ -54,11 +58,14 @@ const HeaderProfile = ({ isHome, onClick }) => {
         className={styles.btn_menu}
         onClick={handlerToogleModal}
       >
-        <BurgerMenuIcon stroke={isHome ? "#fff" : "#000"} />
+        <BurgerMenuIcon
+          className={styles.icon_menu}
+          stroke={isHome ? "#fff" : "#000"}
+        />
       </button>
 
       {toogleModal && (
-        <ModalBox
+        <Modal
           isOpen={toogleModal}
           onClose={handlerToogleModal}
           customeStyles={styleModal.wrap_modal}
@@ -68,7 +75,7 @@ const HeaderProfile = ({ isHome, onClick }) => {
           stroke="#fff"
         >
           <HeaderModal handlerToogleModal={handlerToogleModal} />
-        </ModalBox>
+        </Modal>
       )}
     </div>
   );

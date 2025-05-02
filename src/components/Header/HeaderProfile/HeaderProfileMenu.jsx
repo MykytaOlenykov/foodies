@@ -20,7 +20,7 @@ const HeaderProfileMenu = ({ onClick, onClose }) => {
         onClick={onClick}
       >
         Log out
-        <ArrowUpRightIcon className={clx(styles.icon_logout)} stroke="#fff" />
+        <ArrowUpRightIcon className={styles.icon_logout} />
       </button>
     </div>
   );
