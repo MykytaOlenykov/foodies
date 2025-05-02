@@ -1,4 +1,4 @@
-import cx from "classnames";
+import clx from "clsx";
 import { NavLink } from "react-router";
 import styles from "./HeaderNav.module.css";
 import { Button } from "../../Button/Button";
@@ -12,17 +12,10 @@ const HeaderNav = ({ isHome, notAutorizedClick }) => {
 
   return (
     <nav className={styles.navigation}>
-      <ul className={cx(!isHome && styles.headerAll)}>
+      <ul className={clx(!isHome && styles.headerAll)}>
         <li>
           <NavLink to="/">
-            <Button
-              variant="light"
-              size="small"
-              className={cx(
-                styles.navigationButton,
-                !isHome && styles.navigationButton_inactive,
-              )}
-            >
+            <Button variant="light" size="small" bordered={isHome}>
               Home
             </Button>
           </NavLink>
@@ -30,14 +23,7 @@ const HeaderNav = ({ isHome, notAutorizedClick }) => {
         <li>
           {isSignedIn ? (
             <NavLink to="/recipe/add">
-              <Button
-                variant="light"
-                size="small"
-                className={cx(
-                  styles.navigationButton,
-                  isHome && styles.navigationButton_inactive,
-                )}
-              >
+              <Button variant="light" size="small" bordered={isHome}>
                 Add recipe
               </Button>
             </NavLink>
@@ -45,11 +31,8 @@ const HeaderNav = ({ isHome, notAutorizedClick }) => {
             <Button
               variant="light"
               size="small"
+              bordered={isHome}
               onClick={notAutorizedClick}
-              className={cx(
-                styles.navigationButton,
-                isHome && styles.navigationButton_inactive,
-              )}
             >
               Add recipe
             </Button>

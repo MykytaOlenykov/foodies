@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import cx from "classnames";
+import clx from "clsx";
 import emptyImages from "../../../assets/images/empty";
 
-import { ButtonIcon } from "../../ButtonIcon/ButtonIcon";
-import Icon from "../../Icon/Icon";
+import ChevronDownIcon from "../../../assets/icons/chevron-down.svg?react";
+import BurgerMenuIcon from "../../../assets/icons/burger-menu.svg?react";
+
 import styles from "./HeaderProfile.module.css";
 import HeaderProfileMenu from "./HeaderProfileMenu";
 import ModalBox from "../../ModalBox/ModalBox";
@@ -36,39 +37,25 @@ const HeaderProfile = ({ isHome, onClick }) => {
       <div className={styles.profile} onClick={handlerOpenProfile}>
         <img className={styles.profileImg} src={avatarURL} alt={name} />
         <p className={styles.profileName}>{name}</p>
-        <ButtonIcon
-          icon={
-            <Icon
-              iconId="icon-chevron-down"
-              width="18"
-              height="18"
-              stroke="#fff"
-            />
-          }
-          className={cx(styles.btn_arrow, toogleOpen && styles.btn_arrow_open)}
-          variant="dark"
-          size="small"
-        />
+        <button
+          type="button"
+          className={clx(styles.btn_arrow, toogleOpen && styles.btn_arrow_open)}
+        >
+          <ChevronDownIcon />
+        </button>
       </div>
 
       {toogleOpen && (
         <HeaderProfileMenu onClick={onClick} onClose={handlerOpenProfile} />
       )}
 
-      <ButtonIcon
-        icon={
-          <Icon
-            iconId="icon-mobile-menu"
-            width="28"
-            height="28"
-            stroke={isHome ? "#fff" : "#000"}
-          />
-        }
+      <button
+        type="button"
         className={styles.btn_menu}
-        variant="dark"
-        size="medium"
         onClick={handlerToogleModal}
-      />
+      >
+        <BurgerMenuIcon stroke={isHome ? "#fff" : "#000"} />
+      </button>
 
       {toogleModal && (
         <ModalBox

@@ -1,7 +1,8 @@
 import Modal from "react-modal";
+import clx from "clsx";
+
 import styles from "./ModalBox.module.css";
-import Icon from "../Icon/Icon";
-import cx from "classnames";
+import CloseIcon from "../../assets/icons/x.svg?react";
 
 export const ModalBox = ({
   isOpen,
@@ -16,20 +17,20 @@ export const ModalBox = ({
   return (
     <Modal
       isOpen={isOpen}
-      className={cx(styles.content, customStyles)}
+      className={clx(styles.content, customStyles)}
       overlayClassName={styles.overlay}
       ariaHideApp={false}
       closeTimeoutMS={250}
-      onRequestClose={() => onClose()}
+      onRequestClose={onClose}
       bodyOpenClassName={styles.block_scroll}
     >
       <button
-        className={cx(styles.button, btnStyle)}
+        className={clx(styles.button, btnStyle)}
         type="button"
-        onClick={() => onClose()}
+        onClick={onClose}
+        aria-label="Close modal"
       >
-        <Icon
-          iconId={"icon-close-btn"}
+        <CloseIcon
           width={width}
           height={height}
           stroke={stroke}
@@ -40,4 +41,5 @@ export const ModalBox = ({
     </Modal>
   );
 };
+
 export default ModalBox;

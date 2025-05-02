@@ -1,8 +1,11 @@
 import { useDispatch } from "react-redux";
-import cx from "classnames";
+import clx from "clsx";
 
 import { Button } from "../Button/Button";
+import { Typography } from "../Typography/Typography";
 import styles from "./Logout.module.css";
+
+import  ArrowUpRightIcon from "../../assets/icons/arrow-up-right.svg?react";
 
 // Temp stub instead of Redux-selector
 const logoutUser = () => false;
@@ -18,14 +21,25 @@ export const Logout = ({ setModalLogoutOpen }) => {
 
   return (
     <form
-      className={cx(styles.container, styles["logout-form"])}
+      className={clx(styles.container, styles["logout-form"])}
       onSubmit={handleLogout}
     >
-      <h2 className={styles["logout-title"]}>LOG OUT</h2>
-      <p className={styles.text}>You can always log back in at any time.</p>
+      <Typography variant="h2" className={styles["logout-title"]}>
+        LOG OUT
+      </Typography>
+
+      <Typography variant="body" className={styles.text}>
+        You can always log back in at any time.
+      </Typography>
+
       <ul className={styles.list}>
         <li>
-          <Button type="submit" variant="log_follow" size="small">
+          <Button
+            type="submit"
+            variant="log_follow"
+            size="small"
+            icon={<ArrowUpRightIcon />}
+          >
             Log out
           </Button>
         </li>

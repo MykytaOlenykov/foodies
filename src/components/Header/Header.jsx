@@ -1,4 +1,4 @@
-import cx from "classnames";
+import clx from "clsx";
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router";
 import { useSelector } from "react-redux";
@@ -13,7 +13,7 @@ import Logout from "../Logout/Logout";
 import styles from "./Header.module.css";
 
 // Temp stub instead of Redux-selector
-const selectAuthIsSignedIn = () => false;
+const selectAuthIsSignedIn = () => true;
 
 export default function Header() {
   const { pathname } = useLocation();
@@ -27,9 +27,9 @@ export default function Header() {
   const isHome = pathname === "/" || pathname.split("/")[1] === "category";
 
   return (
-    <header className={cx(styles.header, !isHome && styles.headerAll)}>
+    <header className={clx(styles.header, !isHome && styles.headerAll)}>
       <NavLink
-        className={cx(styles.logo, !isHome && styles.logo_white)}
+        className={clx(styles.logo, !isHome && styles.logo_white)}
         to="/"
         aria-label="Logo Foodies"
       >

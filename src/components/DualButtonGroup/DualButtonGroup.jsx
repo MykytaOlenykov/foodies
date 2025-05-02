@@ -2,8 +2,6 @@ import React from 'react';
 import clsx from 'clsx';
 import styles from './DualButtonGroup.module.css';
 
-import { Button } from "../Button/Button";
-
 /**
  * @param {object} props
  * @param {string} props.leftLabel       — text for the left button
@@ -19,25 +17,23 @@ const DualButtonGroup = ({
 }) => {
   return (
     <div className={styles.DualButtonGroup}>
-      <Button
-        variant="light"
-        size="small"
+      <button
+        type="button"
         onClick={onLeftClick}
         className={clsx(styles.DualButton, styles.left)}
       >
         {leftLabel}
-      </Button>
+      </button>
 
-      <Button
-        variant="dark"
-        size="small"
+      <button
+        type="button"
         onClick={onRightClick}
         className={clsx(styles.DualButton, styles.right)}
       >
         {rightLabel}
-      </Button>
+      </button>
     </div>
   );
-};
+}
 
 export { DualButtonGroup };

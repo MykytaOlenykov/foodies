@@ -1,6 +1,6 @@
 import styles from "./HeaderModal.module.css";
 import { NavLink } from "react-router";
-import cx from "classnames";
+import clx from "clsx";
 
 const HeaderModal = ({ handlerToogleModal }) => {
   const handlerClickOnLink = (e) => {
@@ -28,8 +28,8 @@ const HeaderModal = ({ handlerToogleModal }) => {
         </ul>
       </nav>
       <div className={styles.wrap_img_modal}>
-        <div className={cx(styles.imageSmall, styles.imageGeneral)}></div>
-        <div className={cx(styles.imageBig, styles.imageGeneral)}></div>
+        <div className={clx(styles.imageSmall, styles.imageGeneral)}></div>
+        <div className={clx(styles.imageBig, styles.imageGeneral)}></div>
       </div>
     </div>
   );

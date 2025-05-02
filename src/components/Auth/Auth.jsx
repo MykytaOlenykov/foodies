@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import cx from "classnames";
+import clx from "clsx";
 
 import { Button } from "../Button/Button";
 import styles from "./Auth.module.css";
@@ -17,7 +17,7 @@ const Auth = ({
 
   return isAuthLoading ? (
     <Loader
-      className={cx(
+      className={clx(
         styles["auth-loader"],
         isHomepage ? styles["loader-light"] : styles["loader-dark"],
       )}
@@ -27,7 +27,7 @@ const Auth = ({
       <Button
         variant="light"
         size="small"
-        className={cx(
+        className={clx(
           styles.authButton,
           isHomepage ? styles.homeSignIn : styles.allSighIn,
         )}
@@ -38,7 +38,7 @@ const Auth = ({
       <Button
         variant="dark"
         size="small"
-        className={cx(
+        className={clx(
           styles.authButton,
           isHomepage ? styles.homeSignUp : styles.allSighUp,
         )}

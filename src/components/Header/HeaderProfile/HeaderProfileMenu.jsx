@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router";
-import cx from "classnames";
+import clx from "clsx";
 
-import Icon from "../../Icon/Icon";
 import styles from "./HeaderProfile.module.css";
+import  ArrowUpRightIcon from "../../../assets/icons/arrow-up-right.svg?react";
 
 const selectAuthUserId = () => false;
 
@@ -15,18 +15,12 @@ const HeaderProfileMenu = ({ onClick, onClose }) => {
         Profile
       </NavLink>
       <button
-        type='button'
-        className={cx(styles.link, styles.link_logout)}
+        type="button"
+        className={clx(styles.link, styles.link_logout)}
         onClick={onClick}
       >
         Log out
-        <Icon
-          iconId='icon-arrow-up-right'
-          width='18'
-          height='18'
-          customStyle={cx(styles.icon_logout)}
-          stroke='#fff'
-        />
+        <ArrowUpRightIcon className={clx(styles.icon_logout)} stroke="#fff" />
       </button>
     </div>
   );
