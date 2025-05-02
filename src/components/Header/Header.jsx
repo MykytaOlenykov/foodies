@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import Auth from "../Auth/Auth";
 import HeaderNav from "./HeaderNav/HeaderNav";
 import HeaderProfile from "./HeaderProfile/HeaderProfile";
+import Logout from "../Logout/Logout";
 
 import styles from "./Header.module.css";
 
@@ -21,14 +22,6 @@ const Modal = () => {
 const SignInForm = ({ variant }) => (
   <div>
     <p>SignInForm Stub ({variant})</p>
-  </div>
-);
-
-// Temp stub for Logout
-const Logout = ({ setModalLogoutOpen }) => (
-  <div>
-    <p>Logout Stub</p>
-    <button onClick={() => setModalLogoutOpen(false)}>Close Logout</button>
   </div>
 );
 
