@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import Auth from "../Auth/Auth";
 import HeaderNav from "./HeaderNav/HeaderNav";
 import HeaderProfile from "./HeaderProfile/HeaderProfile";
+import SignInForm from "../SignInForm/SignInForm";
 import Logout from "../Logout/Logout";
 
 import styles from "./Header.module.css";
@@ -17,13 +18,6 @@ const selectAuthIsSignedIn = () => false;
 const Modal = () => {
   return null;
 };
-
-// Temp stub for SignInForm
-const SignInForm = ({ variant }) => (
-  <div>
-    <p>SignInForm Stub ({variant})</p>
-  </div>
-);
 
 export default function Header() {
   const { pathname } = useLocation();
@@ -37,7 +31,7 @@ export default function Header() {
   const isHome = pathname === "/" || pathname.split("/")[1] === "category";
 
   return (
-    <header className={clx(styles.header, !isHome && styles.headerAll)}>
+    <header className={clx(isHome ? styles.header : styles.headerAll)}>
       <NavLink
         className={clx(styles.logo, !isHome && styles.logo_white)}
         to="/"

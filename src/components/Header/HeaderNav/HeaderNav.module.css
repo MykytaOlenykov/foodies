@@ -10,7 +10,7 @@
     margin-right: auto;
   }
 
-  .wrap_navigation {
+ .navigation ul.wrap_navigation {
     display: flex;
     align-items: center;
     column-gap: 16px;

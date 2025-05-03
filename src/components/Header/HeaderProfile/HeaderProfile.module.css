@@ -73,7 +73,7 @@
 .icon_menu {
   width: 28px;
   height: 28px;
-  stroke: var(--main-color);
+  stroke: var(--white-color);
 }
 
 .btn_menu:hover .icon_menu {

@@ -9,14 +9,6 @@
   overflow: hidden;
 }
 
-.authButton {
-  padding: 14px;
-  font-size: 12px;
-  line-height: 18px;
-  border-radius: 30px;
-  text-transform: uppercase;
-}
-
 .homeSignIn {
   color: var(--main-color);
   background-color: var(--white-color);
@@ -55,9 +47,6 @@
 }
 
 @media screen and (min-width: 768px) {
-  .authContainer {
-    width: 210px;
-  }
 
   .authContainer .authButton {
     padding: 14px 28px;

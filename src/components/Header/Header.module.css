@@ -5,6 +5,7 @@
   justify-content: space-between;
   border-radius: var(--border-radius-m) var(--border-radius-m) 0 0;
   background-color: var(--main-color);
+  padding: 68px 8px 0 8px;
   margin: 8px 8px 0 8px;
 }
 

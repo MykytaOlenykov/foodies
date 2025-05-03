@@ -28,7 +28,6 @@ const Auth = ({
         variant="light"
         size="small"
         className={clx(
-          styles.authButton,
           isHomepage ? styles.homeSignIn : styles.allSighIn,
         )}
         onClick={openSignIn}
@@ -39,7 +38,6 @@ const Auth = ({
         variant="dark"
         size="small"
         className={clx(
-          styles.authButton,
           isHomepage ? styles.homeSignUp : styles.allSighUp,
         )}
         onClick={openSignUp}
