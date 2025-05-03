@@ -11,7 +11,7 @@ import Logout from "../Logout/Logout";
 import styles from "./Header.module.css";
 
 // Temp stub instead of Redux-selector
-const selectAuthIsSignedIn = () => true
+const selectAuthIsSignedIn = () => false;
 
 // Temp stub for Modal
 const Modal = () => {

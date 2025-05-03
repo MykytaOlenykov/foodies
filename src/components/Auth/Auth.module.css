@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: space-between;
 
-  background-color: var(--color-white);
+  background-color: var(--white-color);
   border-radius: 30px;
   position: relative;
   overflow: hidden;
@@ -18,24 +18,24 @@
 }
 
 .homeSignIn {
-  color: var(--color-main);
-  background-color: var(--color-white);
+  color: var(--main-color);
+  background-color: var(--white-color);
 }
 
 .allSighIn {
-  color: var(--color-white);
-  background-color: var(--color-button);
+  color: var(--white-color);
+  background-color: var(--button-color);
 }
 
 .homeSignUp {
-  color: var(--color-white);
-  background-color: var(--color-button);
-  border: 1px solid var(--color-gray);
+  color: var(--white-color);
+  background-color: var(--button-color);
+  border: 1px solid var(--gray-color);
 }
 
 .allSighUp {
-  color: var(--color-main);
-  background-color: var(--color-white);
+  color: var(--main-color);
+  background-color: var(--white-color);
 }
 
 .auth-loader {
@@ -47,11 +47,11 @@
 }
 
 .loader-light {
-  color: var(--color-white);
+  color: var(--white-color);
 }
 
 .loader-dark {
-  color: var(--color-main);
+  color: var(--main-color);
 }
 
 @media screen and (min-width: 768px) {

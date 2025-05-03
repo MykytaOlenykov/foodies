@@ -3,13 +3,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: var(--radius-medium) var(--radius-medium) 0 0;
-  background-color: var(--color-main);
+  border-radius: var(--border-radius-m) var(--border-radius-m) 0 0;
+  background-color: var(--main-color);
   margin: 8px 8px 0 8px;
 }
 
 .headerAll {
-  color: var(--color-main);
+  color: var(--main-color);
   background-color: inherit;
 }
 
@@ -17,7 +17,7 @@
   position: absolute;
   left: 16px;
   top: 23px;
-  color: var(--color-white);
+  color: var(--white-color);
   font-size: 20px;
   font-weight: 800;
   line-height: 1.2;
@@ -26,8 +26,8 @@
 }
 
 .logo_white {
-  color: var(--color-main);
-  background-color: var(--color-white);
+  color: var(--main-color);
+  background-color: var(--white-color);
 }
 
 .authWrap {
@@ -61,7 +61,7 @@
     top: 29px;
   }
 
-  authWrap {
+  .authWrap {
     position: static;
     gap: 16px;
   }

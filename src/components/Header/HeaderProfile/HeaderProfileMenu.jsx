@@ -3,7 +3,7 @@ import { NavLink } from "react-router";
 import clx from "clsx";
 
 import styles from "./HeaderProfile.module.css";
-import  ArrowUpRightIcon from "../../../assets/icons/arrow-up-right.svg?react";
+import ArrowUpRightIcon from "../../../assets/icons/arrow-up-right.svg?react";
 
 const selectAuthUserId = () => false;
 

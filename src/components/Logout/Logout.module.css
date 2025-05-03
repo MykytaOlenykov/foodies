@@ -16,7 +16,7 @@
   font-size: 14px;
   line-height: 20px;
   letter-spacing: -0.28px;
-  color: var(--color-gray);
+  color: var(--gray-color);
   text-align: center;
 }
 
@@ -29,23 +29,23 @@
 }
 
 .logout-button {
-  background-color: var(--color-button);
+  background-color: var(--button-color);
 }
 
 .logout-button:hover,
 .logout-button:focus {
-  background-color: var(--color-main);
+  background-color: var(--main-color);
 }
 
 .cancel-button {
   background-color: var(--color-white);
-  color: var(--color-main);
-  border: 1px solid var(--color-gray);
+  color: var(--main-color);
+  border: 1px solid var(--gray-color);
 }
 
 .cancel-button:hover,
 .cancel-button:focus {
-  border: 1px solid var(--color-main);
+  border: 1px solid var(--main-color);
 }
 
 @media screen and (min-width: 768px) {
@@ -63,7 +63,7 @@
     margin-top: 20px;
     font-size: 16px;
     line-height: 24px;
-    color: var(--color-button);
+    color: var(--button-color);
   }
 
   .list {

@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   line-height: 0;
-  background-color: var(--color-button);
+  background-color: var(--button-color);
   border-radius: 30px;
   cursor: pointer;
 }
@@ -25,7 +25,7 @@
 }
 
 .profileName {
-  color: var(--color-white);
+  color: var(--white-color);
   font-size: 12px;
   font-weight: 700;
   line-height: 1.5;
@@ -52,7 +52,7 @@
 .icon_arrow {
   width: 18px;
   height: 18px;
-  stroke: var(--color-white);
+  stroke: var(--white-color);
   transition: transform 0.3s ease;
 }
 
@@ -73,11 +73,11 @@
 .icon_menu {
   width: 28px;
   height: 28px;
-  stroke: var(--color-black);
+  stroke: var(--main-color);
 }
 
 .btn_menu:hover .icon_menu {
-  stroke: var(--color-accent);
+  stroke: var(--accent-color);
 }
 
 .wrap_profile_modal {
@@ -89,36 +89,43 @@
   padding: 16px 0 16px 16px;
   row-gap: 4px;
   border-radius: 15px;
-  border: 1px solid var(--color-gray);
-  background-color: var(--color-main);
+  border: 1px solid var(--gray-color);
+  background-color: var(--main-color);
+  box-sizing: border-box;
+  z-index: 100;
 }
 
 .link {
   margin-right: 16px;
-  color: var(--color-white);
+  color: var(--white-color);
   font-size: 12px;
   font-weight: 700;
   line-height: 1.5;
   letter-spacing: -0.24px;
   text-transform: uppercase;
+  padding: 0;
+  background: none;
+  border: none;
+  text-align: left;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
 }
 
 .link_logout {
   display: flex;
   align-items: center;
-  background-color: var(--color-main);
-}
-
-.link_logout:hover {
-  text-decoration: underline;
-  text-underline-offset: 0.2rem;
+  background-color: var(--main-color);
 }
 
 .icon_logout {
   width: 18px;
   height: 18px;
   margin-left: 2px;
-  stroke: var(--color-white);
+  stroke: var(--white-color);
 }
 
 
