@@ -11,5 +11,5 @@ export function normalizeHttpError(error) {
     message = error.response?.data?.message || DEFAULT_ERROR_MESSAGE;
   }
 
-  return { status, message };
+  return { isHttpError: true, status, message };
 }

@@ -33,6 +33,7 @@ export const logout = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       await api.post("/auth/logout");
+      tokenStorage.token = null;
     } catch (error) {
       return rejectWithValue({ error: normalizeHttpError(error) });
     }
