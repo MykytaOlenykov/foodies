@@ -1,0 +1,73 @@
+import { useState } from "react";
+import { useFormik } from "formik";
+import { Eye, EyeOff } from "lucide-react";
+
+import Input from "../Input/Input";
+import { Button } from "../Button/Button";
+import { loginValidationSchema } from "./lib";
+
+import css from "./SignInForm.module.css";
+
+const defaultInitialValues = { email: "", password: "" };
+
+/**
+ * SignInForm component for user registration.
+ *
+ * @param {Object} props - Component props
+ * @param {function(Object): void} props.onSubmit - Callback triggered on form submit with form values.
+ * @param {Object} [props.initialValues] - Optional initial values for the form fields (`email`, `password`).
+ * @param {boolean} [props.disabled=false] - Disables all form inputs and the submit button when true.
+ */
+export const SignInForm = ({
+  onSubmit,
+  initialValues = {},
+  disabled = false,
+}) => {
+  const [visiblePassword, setVisiblePassword] = useState(false);
+
+  const { values, errors, handleChange, handleSubmit } = useFormik({
+    initialValues: { ...defaultInitialValues, ...initialValues },
+    onSubmit,
+    validationSchema: loginValidationSchema,
+  });
+
+  return (
+    <form noValidate onSubmit={handleSubmit}>
+      <div className={css.fieldsContainer}>
+        <Input
+          value={values.email}
+          error={errors.email}
+          name="email"
+          onChange={handleChange("email")}
+          placeholder="Email"
+          required
+          disabled={disabled}
+        />
+
+        <Input
+          value={values.password}
+          error={errors.password}
+          name="password"
+          onChange={handleChange("password")}
+          onIconClick={() => setVisiblePassword((prev) => !prev)}
+          type={visiblePassword ? "text" : "password"}
+          iconRight={visiblePassword ? <EyeOff size={18} /> : <Eye size={18} />}
+          placeholder="Password"
+          required
+          disabled={disabled}
+        />
+      </div>
+
+      <Button
+        className={css.button}
+        type="submit"
+        variant="dark"
+        size="medium"
+        bordered
+        disabled={disabled}
+      >
+        Sign in
+      </Button>
+    </form>
+  );
+};

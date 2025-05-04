@@ -13,21 +13,42 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) =>
     builder
-      .addCase(register.fulfilled, (state, { payload }) => {
-        state.user = payload;
-        state.error = null;
+      .addCase(register.fulfilled, () => {
+        // TODO
       })
-      .addCase(register.pending, () => {})
-      .addCase(register.rejected, () => {})
-      .addCase(login.fulfilled, () => {})
-      .addCase(login.pending, () => {})
-      .addCase(login.rejected, () => {})
-      .addCase(logout.fulfilled, () => {})
-      .addCase(logout.pending, () => {})
-      .addCase(logout.rejected, () => {})
-      .addCase(getCurrentUser.fulfilled, () => {})
-      .addCase(getCurrentUser.pending, () => {})
-      .addCase(getCurrentUser.rejected, () => {}),
+      .addCase(register.pending, () => {
+        // TODO
+      })
+      .addCase(register.rejected, () => {
+        // TODO
+      })
+      .addCase(login.fulfilled, () => {
+        // TODO
+      })
+      .addCase(login.pending, () => {
+        // TODO
+      })
+      .addCase(login.rejected, () => {
+        // TODO
+      })
+      .addCase(logout.fulfilled, () => {
+        // TODO
+      })
+      .addCase(logout.pending, () => {
+        // TODO
+      })
+      .addCase(logout.rejected, () => {
+        // TODO
+      })
+      .addCase(getCurrentUser.fulfilled, () => {
+        // TODO
+      })
+      .addCase(getCurrentUser.pending, () => {
+        // TODO
+      })
+      .addCase(getCurrentUser.rejected, () => {
+        // TODO
+      }),
 });
 
 export const authReducer = authSlice.reducer;

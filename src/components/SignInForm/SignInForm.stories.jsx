@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { action } from "@storybook/addon-actions";
 
-import { SignUpForm } from "./SignUpForm";
+import { SignInForm } from "./SignInForm";
 
 export default {
-  title: "Components/SignUpForm",
-  component: SignUpForm,
+  title: "Components/SignInForm",
+  component: SignInForm,
 };
 
 export const Default = () => {
@@ -14,7 +14,7 @@ export const Default = () => {
   const handleSubmit = (values, formActions) => {
     setDisabled(true);
     setTimeout(() => {
-      action("sign-up-form-submitted")(values);
+      action("sign-in-form-submitted")(values);
       formActions.resetForm();
       setDisabled(false);
     }, 1000);
@@ -22,7 +22,7 @@ export const Default = () => {
 
   return (
     <div style={{ padding: "20px", maxWidth: "400px" }}>
-      <SignUpForm onSubmit={handleSubmit} disabled={disabled} />
+      <SignInForm onSubmit={handleSubmit} disabled={disabled} />
     </div>
   );
 };
