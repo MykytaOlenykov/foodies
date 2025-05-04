@@ -3,7 +3,8 @@ import clsx from "clsx";
 
 /**
  * @param {object} props
- * @param {"dark"|"light"|"transparent"} props.variant — colour/style preset.
+ * @param {string} props.className - CSS class to apply to the component.
+ * @param {"dark"|"light"|"transparent"} props.variant — color/style preset.
  * @param {"small"|"medium"} props.size — padding/font-size preset.
  * @param {boolean} props.bordered — whether to draw a border.
  * @param {React.ReactNode} props.icon — an icon element.
@@ -13,6 +14,7 @@ import clsx from "clsx";
  * @param {(e) => void} props.onClick — click handler
  */
 const Button = ({
+  className,
   variant,
   size,
   bordered = false,
@@ -29,6 +31,7 @@ const Button = ({
         styles[variant],
         styles[size],
         bordered && styles.bordered,
+        className,
       )}
       disabled={disabled}
       type={type}
