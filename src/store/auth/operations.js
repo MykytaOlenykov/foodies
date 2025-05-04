@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import api from "../../services/api";
-import { tokenStorage } from "../../utils/tokenStorage";
+import { tokenStorage, normalizeHttpError } from "../../utils";
 
 export const register = createAsyncThunk(
   "auth/register",
@@ -10,7 +10,7 @@ export const register = createAsyncThunk(
       const res = await api.post("/auth/register", { name, email, password });
       return res.data.user;
     } catch (error) {
-      return rejectWithValue({ error });
+      return rejectWithValue({ error: normalizeHttpError(error) });
     }
   },
 );
@@ -23,7 +23,7 @@ export const login = createAsyncThunk(
       tokenStorage.token = data.token;
       return data.user;
     } catch (error) {
-      return rejectWithValue({ error });
+      return rejectWithValue({ error: normalizeHttpError(error) });
     }
   },
 );
@@ -34,7 +34,7 @@ export const logout = createAsyncThunk(
     try {
       await api.post("/auth/logout");
     } catch (error) {
-      return rejectWithValue({ error });
+      return rejectWithValue({ error: normalizeHttpError(error) });
     }
   },
 );
@@ -46,7 +46,7 @@ export const getCurrentUser = createAsyncThunk(
       const res = await api.get("/auth/current");
       return res.data.user;
     } catch (error) {
-      return rejectWithValue({ error });
+      return rejectWithValue({ error: normalizeHttpError(error) });
     }
   },
 );
