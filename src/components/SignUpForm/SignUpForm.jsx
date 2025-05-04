@@ -10,7 +10,19 @@ import css from "./SignUpForm.module.css";
 
 const defaultInitialValues = { name: "", email: "", password: "" };
 
-export const SignUpForm = ({ onSubmit, initialValues = {} }) => {
+/**
+ * SignUpForm component for user registration.
+ *
+ * @param {Object} props - Component props
+ * @param {function(Object): void} props.onSubmit - Callback triggered on form submit with form values.
+ * @param {Object} [props.initialValues] - Optional initial values for the form fields (`name`, `email`, `password`).
+ * @param {boolean} [props.disabled=false] - Disables all form inputs and the submit button when true.
+ */
+export const SignUpForm = ({
+  onSubmit,
+  initialValues = {},
+  disabled = false,
+}) => {
   const [visiblePassword, setVisiblePassword] = useState(false);
 
   const { values, errors, handleChange, handleSubmit } = useFormik({
@@ -29,6 +41,7 @@ export const SignUpForm = ({ onSubmit, initialValues = {} }) => {
           onChange={handleChange("name")}
           placeholder="Name"
           required
+          disabled={disabled}
         />
 
         <Input
@@ -38,6 +51,7 @@ export const SignUpForm = ({ onSubmit, initialValues = {} }) => {
           onChange={handleChange("email")}
           placeholder="Email"
           required
+          disabled={disabled}
         />
 
         <Input
@@ -50,6 +64,7 @@ export const SignUpForm = ({ onSubmit, initialValues = {} }) => {
           iconRight={visiblePassword ? <EyeOff size={18} /> : <Eye size={18} />}
           placeholder="Password"
           required
+          disabled={disabled}
         />
       </div>
 
@@ -59,6 +74,7 @@ export const SignUpForm = ({ onSubmit, initialValues = {} }) => {
         variant="dark"
         size="medium"
         bordered
+        disabled={disabled}
       >
         Create
       </Button>

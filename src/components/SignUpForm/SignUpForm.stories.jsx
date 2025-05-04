@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { action } from "@storybook/addon-actions";
 
 import { SignUpForm } from "./SignUpForm";
@@ -8,13 +9,20 @@ export default {
 };
 
 export const Default = () => {
-  const handleSubmit = (values) => {
-    action("form-submitted")(values);
+  const [disabled, setDisabled] = useState(false);
+
+  const handleSubmit = (values, formActions) => {
+    setDisabled(true);
+    setTimeout(() => {
+      action("form-submitted")(values);
+      formActions.resetForm();
+      setDisabled(false);
+    }, 1000);
   };
 
   return (
     <div style={{ padding: "20px", maxWidth: "400px" }}>
-      <SignUpForm onSubmit={handleSubmit} />
+      <SignUpForm onSubmit={handleSubmit} disabled={disabled} />
     </div>
   );
 };
