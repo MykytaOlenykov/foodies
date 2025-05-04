@@ -11,7 +11,7 @@ import css from "./SignInForm.module.css";
 const defaultInitialValues = { email: "", password: "" };
 
 /**
- * SignInForm component for user registration.
+ * SignInForm component for user login.
  *
  * @param {Object} props - Component props
  * @param {function(Object): void} props.onSubmit - Callback triggered on form submit with form values.
