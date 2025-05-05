@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import CategoryList from "../CategoryList/CategoryList";
-import Recipes from "../RecipesMainPage/Recipes/Recipes.jsx";
+import Recipes from "../RecipesMainPage/Recipes/Recipes.jsx"; // Імпортуємо компонент Recipes
 
 const Categories = () => {
   // Стан для збереження рецептів
