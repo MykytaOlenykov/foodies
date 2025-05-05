@@ -2,20 +2,23 @@
   min-height: 60vh;
   background-color: #fdfdfd;
   padding: 4rem 2rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.title {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: #222;
-  font-weight: bold;
 }
 
 .text {
-  font-size: 1.2rem;
-  color: #555;
+  color: var(--button-color);
+  font-size: 1rem;
+  line-height: 24px;
+  letter-spacing: -0.32px;
+  max-width: 443px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.profileContainer {
+  display: flex;
+  gap: 40px;
+}
+.profile button {
+  margin-top: 20px;
+  width: 100%;
+  justify-content: center;
 }
