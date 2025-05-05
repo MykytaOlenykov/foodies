@@ -1,4 +1,5 @@
 import styles from './Input.module.css';
+import { Typography } from "../Typography/Typography.jsx";
 
 /**
  * A reusable styled input component with optional error message and right-side icon.
@@ -54,8 +55,7 @@ const Input = ({
           </div>
         )}
       </div>
-      {/*todo: replace with typography*/}
-      {error && <div className={styles.errorMessage}>{error}</div>}
+      {error && <Typography variant="body" className={styles.errorMessage}>{error}</Typography>}
     </div>
   );
 };
