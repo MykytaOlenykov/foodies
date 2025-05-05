@@ -8,6 +8,7 @@ import { fetchRecipesByCategory } from "../../redux/recipes/operations";
 import { Pagination } from "../Pagination/Pagination";
 import { Testimonials } from "../Testimonials/Testimonials.jsx";
 import axios from "axios";
+import Container from "../UI/Container/Container.jsx";
 
 const Recipes = (category) => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const Recipes = (category) => {
 
   localStorage.setItem(
     "token",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImlhdCI6MTc0NjM2OTI0OSwiZXhwIjoxNzQ2NDAxNjQ5fQ.JnWItWE2E2WswxObjwuwETyCk-MELPDvvs_O6nOB6e4",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImlhdCI6MTc0NjQ0MTg5MiwiZXhwIjoxNzQ2NDc0MjkyfQ.O1QGMync13PFKdPeZaQKIZRarz6v5Qvd400C6Uip46Y",
   );
   const handleBackClick = () => {
     setShowCategories(true);
@@ -36,7 +37,7 @@ const Recipes = (category) => {
             },
           },
         );
-        setTestimonials(response.data);
+        setTestimonials(response.data.data.testimonials);
       } catch (error) {
         console.error("Error fetching testimonials:", error);
       }
@@ -44,8 +45,6 @@ const Recipes = (category) => {
 
     fetchTestimonials();
   }, []);
-
-  console.log(testimonials);
 
   useEffect(() => {
     dispatch(
@@ -79,29 +78,31 @@ const Recipes = (category) => {
   };
 
   return (
-    <div className={css.recipes}>
-      <button
-        className={css.backButton}
-        type="button"
-        onClick={handleBackClick}
-      >
-        <img src={arrowLefttIcon} alt="Back" />
-        Back
-      </button>
-      <h1 className={css.category}>{category.categoryName}</h1>
-      <p className={css.description}>
-        Go on a taste journey, where every sip is a sophisticated creative
-        chord, and every dessert is an expression of the most refined
-        gastronomic desires.
-      </p>
-      <RecipeList recipes={selectedRecipes.recipes} />
-      <Pagination
-        totalPages={totalPages}
-        activePage={currentPage}
-        onPageChange={handlePageChange}
-      />
-      <Testimonials data={testimonials.data.testimonials} />
-    </div>
+    <Container>
+      <div className={css.recipes}>
+        <button
+          className={css.backButton}
+          type="button"
+          onClick={handleBackClick}
+        >
+          <img src={arrowLefttIcon} alt="Back" />
+          Back
+        </button>
+        <h1 className={css.category}>{category.categoryName}</h1>
+        <p className={css.description}>
+          Go on a taste journey, where every sip is a sophisticated creative
+          chord, and every dessert is an expression of the most refined
+          gastronomic desires.
+        </p>
+        <RecipeList recipes={selectedRecipes.recipes} />
+        <Pagination
+          totalPages={totalPages}
+          activePage={currentPage}
+          onPageChange={handlePageChange}
+        />
+        {/* <Testimonials data={testimonials} /> */}
+      </div>
+    </Container>
   );
 };
 
