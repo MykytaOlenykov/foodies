@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { SignUpModal } from "../SignUpModal";
 import { SignInModal } from "../SignInModal";
+import { LogOutModal } from "../LogOutModal";
 import Modal from "../Modal/Modal";
 import {
   openSignUp,
@@ -10,6 +11,8 @@ import {
   closeSignIn,
   selectIsOpenSignIn,
   selectIsOpenSignUp,
+  closeLogOut,
+  selectIsOpenLogOut,
 } from "../../store/auth";
 
 export const AuthModals = () => {
@@ -17,6 +20,7 @@ export const AuthModals = () => {
 
   const isOpenSignUp = useSelector(selectIsOpenSignUp);
   const isOpenSignIn = useSelector(selectIsOpenSignIn);
+  const isOpenLogOut = useSelector(selectIsOpenLogOut);
 
   const handleRedirectToSignIn = () => {
     dispatch(closeSignUp());
@@ -26,6 +30,10 @@ export const AuthModals = () => {
   const handleRedirectToSignUp = () => {
     dispatch(closeSignIn());
     dispatch(openSignUp());
+  };
+
+  const handleCloseLogOut = () => {
+    dispatch(closeLogOut());
   };
 
   return (
@@ -39,6 +47,12 @@ export const AuthModals = () => {
       {isOpenSignIn && (
         <Modal isOpen closeModal={() => dispatch(closeSignIn())}>
           <SignInModal onRedirectToSignUp={handleRedirectToSignUp} />
+        </Modal>
+      )}
+
+      {isOpenLogOut && (
+        <Modal isOpen closeModal={handleCloseLogOut}>
+          <LogOutModal onClose={handleCloseLogOut} />
         </Modal>
       )}
     </>

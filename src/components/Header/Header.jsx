@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { NavLink, useLocation } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import clx from "clsx";
@@ -7,7 +6,7 @@ import Auth from "../Auth/Auth";
 import HeaderNav from "./HeaderNav/HeaderNav";
 import HeaderProfile from "./HeaderProfile/HeaderProfile";
 import Modal from "../Modal/Modal";
-import { openSignIn, openSignUp } from "../../store/auth";
+import { openLogOut, openSignIn, openSignUp } from "../../store/auth";
 
 import styles from "./Header.module.css";
 
@@ -21,9 +20,6 @@ export default function Header() {
   const { pathname } = useLocation();
 
   const isSignedIn = useSelector(selectAuthIsSignedIn);
-
-  // TODO: FIX
-  const [modalLogoutOpen, setModalLogoutOpen] = useState(false);
 
   const isHome = pathname === "/" || pathname.split("/")[1] === "category";
 
@@ -43,10 +39,7 @@ export default function Header() {
       />
 
       {isSignedIn ? (
-        <HeaderProfile
-          onClick={() => setModalLogoutOpen(true)}
-          isHome={isHome}
-        />
+        <HeaderProfile onClick={() => dispatch(openLogOut())} isHome={isHome} />
       ) : (
         <div className={styles.authWrap}>
           <Auth
@@ -56,12 +49,6 @@ export default function Header() {
           />
         </div>
       )}
-
-      {/* // TODO: FIX */}
-      <Modal isOpen={modalLogoutOpen} onClose={() => setModalLogoutOpen(false)}>
-        {/* // TODO: FIX */}
-        {/* <Logout setModalLogoutOpen={setModalLogoutOpen} /> */}
-      </Modal>
     </header>
   );
 }

@@ -10,8 +10,10 @@ const initialState = {
     avatarURL: null,
   },
   error: null,
+  isLoggedIn: false,
   isOpenSignUp: false,
   isOpenSignIn: false,
+  isOpenLogOut: true,
 };
 
 const authSlice = createSlice({
@@ -30,25 +32,27 @@ const authSlice = createSlice({
     closeSignIn(state) {
       state.isOpenSignIn = false;
     },
+    openLogOut(state) {
+      state.isOpenLogOut = true;
+    },
+    closeLogOut(state) {
+      state.isOpenLogOut = false;
+    },
   },
   extraReducers: (builder) =>
     builder
       .addCase(register.fulfilled, (state, { payload }) => {
         state.user = { ...state.user, ...payload };
+        state.isLoggedIn = true;
         state.isOpenSignUp = false;
       })
       .addCase(login.fulfilled, (state, { payload }) => {
         state.user = { ...state.user, ...payload };
+        state.isLoggedIn = true;
         state.isOpenSignIn = false;
       })
-      .addCase(logout.fulfilled, () => {
-        // TODO
-      })
-      .addCase(logout.pending, () => {
-        // TODO
-      })
-      .addCase(logout.rejected, () => {
-        // TODO
+      .addCase(logout.fulfilled, (state) => {
+        state.isOpenLogOut = false;
       })
       .addCase(getCurrentUser.fulfilled, () => {
         // TODO
@@ -61,7 +65,13 @@ const authSlice = createSlice({
       }),
 });
 
-export const { openSignUp, closeSignUp, openSignIn, closeSignIn } =
-  authSlice.actions;
+export const {
+  openSignUp,
+  closeSignUp,
+  openSignIn,
+  closeSignIn,
+  openLogOut,
+  closeLogOut,
+} = authSlice.actions;
 
 export const authReducer = authSlice.reducer;
