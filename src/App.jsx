@@ -19,7 +19,7 @@ export const App = () => {
       .then(() => console.log("✅ API is reachable"))
       .catch((err) => console.error("❌ API connection failed:", err));
   }, []);
-
+  
   return (
     <Routes>
       <Route path="/" element={<SharedLayout />}>
