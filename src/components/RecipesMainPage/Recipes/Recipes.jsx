@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import RecipeList from "../RecipesMainPage/RecipeList/RecipeList.jsx";
-import arrowLefttIcon from "../../assets/icons/arrow-left.svg";
+import RecipeList from "../RecipeList/RecipeList.jsx";
+import arrowLefttIcon from "../../../assets/icons/arrow-left.svg";
 import css from "./Recipes.module.css";
 import Categories from "../../Categories/Categories.jsx";
 import { fetchRecipesByCategory } from "../../../redux/recipes/operations.js";

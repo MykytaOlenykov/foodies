@@ -1,5 +1,5 @@
 import React from "react";
-import RecipeCard from "../RecipesMainPage/RecipeCard/RecipeCard.jsx";
+import RecipeCard from "../RecipeCard/RecipeCard.jsx";
 import css from "./RecipeList.module.css";
 
 const RecipeList = ({ recipes }) => {
