@@ -52,6 +52,8 @@ const authSlice = createSlice({
         state.isOpenSignIn = false;
       })
       .addCase(logout.fulfilled, (state) => {
+        state.user = { ...initialState.user };
+        state.isLoggedIn = false;
         state.isOpenLogOut = false;
       })
       .addCase(getCurrentUser.fulfilled, () => {
