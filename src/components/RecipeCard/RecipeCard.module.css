@@ -1,0 +1,107 @@
+.recipeCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+
+.recipeImage {
+  width: 100%;
+  height: 230px;
+  border-radius: 20px;
+}
+
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+.title {
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--main-color);
+}
+
+.description {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  color: #1a1a1a;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.authorInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.recipeIcons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.receiptButtons {
+  width: 36px;
+  height: 36px;
+  background-color: var(--white-color);
+  border-radius: 30px;
+  cursor: pointer;
+  border: 1px solid var(--gray-color);
+  /* padding: 9px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.authorButton {
+  width: 32px;
+  height: 32px;
+  border-radius: 30px;
+  padding: 0px;
+  background-color: var(--gray-color);
+  border: none;
+  cursor: pointer;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  object-fit: cover;
+}
+
+.authorName {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  color: #1a1a1a;
+}
+
+.isFavorite {
+  background-color: var(--main-color);
+}
+
+.thumb {
+  width: 343px;
+  height: 230px;
+}
+
+.thumb img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}

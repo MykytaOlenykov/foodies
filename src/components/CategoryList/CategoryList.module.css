@@ -1,0 +1,14 @@
+.buttonOnImage {
+  position: absolute;
+  top: 10px; /* Відступ від верхнього краю */
+  left: 10px; /* Відступ від лівого краю */
+  background-color: rgba(0, 0, 0, 0.5); /* Напівпрозорий фон */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

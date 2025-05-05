@@ -1,0 +1,39 @@
+.recipes {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0px 16px;
+  height: auto;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0px;
+  background-color: var(--white-color);
+  color: var(--main-color);
+  border: none;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.category {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 32px;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.description {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  color: var(--gray-color);
+}
