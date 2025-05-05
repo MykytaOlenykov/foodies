@@ -1,66 +1,47 @@
+import { useCallback, useEffect } from "react";
 import style from "./Modal.module.css";
-import { useEffect } from "react";
-import CloseIcon from '../../assets/icons/x.svg?react';
+import CloseIcon from "../../assets/icons/x.svg?react";
 
-/**
- * @param {object} props
- * @param {boolean} props.isOpen - Whether the modal is open or not.
- * @param {() => void} props.closeModal - Function to close the modal.
- * @param {React.ReactNode} props.children - Modal content to display inside.
- *
- * Features:
- * - Closes on backdrop click
- * - Closes on Escape key press
- * - Disables body scroll when open
- */
-
-const Modal = ({ isOpen, closeModal, children }) => {
-  const handleBackdropClick = (e) => {
-    if (e.target === e.currentTarget) {
-      closeModal();
-    }
-  };
+export const Modal = ({ isOpen, closeModal, children }) => {
+  const handleBackdropClick = useCallback((e) => {
+    if (e.target === e.currentTarget) closeModal();
+  }, [closeModal]);
 
   useEffect(() => {
-    const handleEsc = (event) => {
-      if (event.key === "Escape") {
-        closeModal(); 
-      }
+    const handleEsc = (e) => {
+      if (e.key === "Escape") closeModal();
     };
-    document.addEventListener("keydown", handleEsc);
+
+    if (isOpen) {
+      document.addEventListener("keydown", handleEsc);
+    }
 
     return () => {
       document.removeEventListener("keydown", handleEsc);
     };
-  }, [closeModal]);
-
+  }, [isOpen, closeModal]);
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden"; 
-    } else {
-      document.body.style.overflow = "auto";
-    }
-    
+    document.body.style.overflow = isOpen ? "hidden" : "auto";
     return () => {
-      document.body.style.overflow = "auto"; 
+      document.body.style.overflow = "auto";
     };
-  }, [isOpen]); 
+  }, [isOpen]);
 
   return (
     <div
-      className={`${style.backdrop} ${isOpen ? style.open : ""}`} 
+      className={`${style.backdrop} ${isOpen ? style.open : ""}`}
       onClick={handleBackdropClick}
+      role="dialog"
+      aria-modal="true"
+      style={{ display: isOpen ? "flex" : "none" }}
     >
       <div className={`${style.content} ${isOpen ? style.open : ""}`}>
         <button onClick={closeModal} className={style.close} aria-label="Close modal">
-          <CloseIcon width={12} height={12} className={style.closeIcon}/>
+          <CloseIcon className={style.closeIcon} />
         </button>
-
         {children}
       </div>
     </div>
   );
 };
-
-export default Modal;
