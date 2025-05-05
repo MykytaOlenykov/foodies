@@ -9,8 +9,37 @@ const RecipeList = ({ category }) => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedRecipes, setSelectedRecipes] = useState([]);
+  const [mediaMode, setMediaMode] = useState("desktop"); // Стан для медіа-режиму
 
-  const recipesPerPage = 8;
+  let recipesPerPage = null; // Значення за замовчуванням для десктопу
+
+  // Визначення медіа-режиму
+  useEffect(() => {
+    const updateMediaMode = () => {
+      if (window.innerWidth < 768) {
+        setMediaMode("mobile");
+      } else if (window.innerWidth >= 768 && window.innerWidth < 1440) {
+        setMediaMode("tablet");
+      } else {
+        setMediaMode("desktop");
+      }
+    };
+
+    updateMediaMode(); // Визначаємо режим при першому рендері
+    window.addEventListener("resize", updateMediaMode); // Відстежуємо зміни розміру вікна
+
+    return () => {
+      window.removeEventListener("resize", updateMediaMode); // Очищення слухача
+    };
+  }, []);
+
+  if (mediaMode === "mobile") {
+    recipesPerPage = 8;
+  } else if (mediaMode === "tablet") {
+    recipesPerPage = 12;
+  } else if (mediaMode === "desktop") {
+    recipesPerPage = 12;
+  }
 
   useEffect(() => {
     dispatch(
@@ -40,18 +69,21 @@ const RecipeList = ({ category }) => {
   const totalPages = Math.ceil(selectedRecipes.total / recipesPerPage);
 
   return (
-    <div className={css.recipeList}>
-      {selectedRecipes.recipes.map((recipe) => (
-        <RecipeCard
-          key={recipe.id}
-          recipeId={recipe.id}
-          title={recipe.title}
-          image={recipe.thumb}
-          description={recipe.description}
-          owner={recipe.owner}
-          favorited={recipe.isFavorite}
-        />
-      ))}
+    <div className={css.recipeListBlock}>
+      <div className={css.recipeList}>
+        {selectedRecipes.recipes.map((recipe) => (
+          <RecipeCard
+            key={recipe.id}
+            recipeId={recipe.id}
+            title={recipe.title}
+            image={recipe.thumb}
+            description={recipe.description}
+            owner={recipe.owner}
+            favorited={recipe.isFavorite}
+            mediaMode={mediaMode}
+          />
+        ))}
+      </div>
       <Pagination
         totalPages={totalPages}
         activePage={currentPage}

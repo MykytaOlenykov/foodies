@@ -10,13 +10,21 @@ const RecipeCard = ({
   owner,
   isAuthenticated,
   favorited,
+  mediaMode,
 }) => {
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(favorited); // Локальний стан для улюбленого рецепта
   const [loading, setLoading] = useState(false); // Стан для відстеження запиту
 
-  const truncatedDescription =
-    description.length > 100 ? description.slice(0, 97) + "..." : description;
+  let truncatedDescription = null;
+
+  if (mediaMode === "desktop") {
+    truncatedDescription =
+      description.length > 70 ? description.slice(0, 80) + "..." : description;
+  } else {
+    truncatedDescription =
+      description.length > 100 ? description.slice(0, 97) + "..." : description;
+  }
 
   isAuthenticated = true;
 
@@ -59,11 +67,11 @@ const RecipeCard = ({
   };
 
   const handleRecipeClick = () => {
-    navigate(`/recipe/${recipeId}`); // Перенаправляємо на сторінку рецепта
+    navigate(`/recipe/${recipeId}`);
   };
 
   const getInitials = (name) => {
-    if (!name) return "NN"; // Якщо ім'я відсутнє
+    if (!name) return "NN";
     const words = name.split(" ");
     const firstInitial = words[0]?.[0]?.toUpperCase() || "";
     const secondInitial = words[1]?.[0]?.toUpperCase() || "";

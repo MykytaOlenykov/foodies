@@ -1,9 +1,21 @@
 .recipeCard {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 16px;
+  justify-content: space-between;
   width: 342px;
+  height: 366px;
+}
+
+@media (min-width: 768px) {
+  .recipeCard {
+    width: 342px;
+    height: 427px;
+  }
+}
+@media (min-width: 1440px) {
+  .recipeCard {
+    width: 290px;
+  }
 }
 
 .recipeImage {
@@ -16,7 +28,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
 }
 .title {
   font-size: 18px;
@@ -33,6 +45,7 @@
   line-height: 20px;
   letter-spacing: -0.02em;
   color: #1a1a1a;
+  height: 54px;
 }
 
 .actions {
@@ -98,6 +111,20 @@
 .thumb {
   width: 342px;
   height: 230px;
+}
+
+@media (min-width: 768px) {
+  .thumb {
+    width: 342px;
+    height: 275px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .thumb {
+    width: 290px;
+    height: 275px;
+  }
 }
 
 .thumb img {
