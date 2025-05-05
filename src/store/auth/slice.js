@@ -3,24 +3,34 @@ import { createSlice } from "@reduxjs/toolkit";
 import { register, login, logout, getCurrentUser } from "./operations";
 
 const initialState = {
-  user: null,
+  user: {
+    id: null,
+    name: null,
+    email: null,
+    avatarURL: null,
+  },
   error: null,
+  isOpenSignUp: false,
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    openSignUp(state) {
+      state.isOpenSignUp = true;
+    },
+    closeSignUp(state) {
+      state.isOpenSignUp = false;
+    },
+  },
   extraReducers: (builder) =>
     builder
-      .addCase(register.fulfilled, () => {
-        // TODO
+      .addCase(register.fulfilled, (state, { payload }) => {
+        state.user = { ...state.user, ...payload };
       })
-      .addCase(register.pending, () => {
-        // TODO
-      })
-      .addCase(register.rejected, () => {
-        // TODO
+      .addCase(register.rejected, (state, { payload }) => {
+        state.error = payload;
       })
       .addCase(login.fulfilled, () => {
         // TODO
@@ -50,5 +60,7 @@ const authSlice = createSlice({
         // TODO
       }),
 });
+
+export const { openSignUp, closeSignUp } = authSlice.actions;
 
 export const authReducer = authSlice.reducer;

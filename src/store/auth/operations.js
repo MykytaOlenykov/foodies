@@ -7,8 +7,12 @@ export const register = createAsyncThunk(
   "auth/register",
   async ({ name, email, password }, { rejectWithValue }) => {
     try {
-      const res = await api.post("/auth/register", { name, email, password });
-      return res.data.user;
+      const { data } = await api.post("/auth/register", {
+        name,
+        email,
+        password,
+      });
+      return data.data.user;
     } catch (error) {
       return rejectWithValue({ error: normalizeHttpError(error) });
     }
@@ -21,7 +25,7 @@ export const login = createAsyncThunk(
     try {
       const { data } = await api.post("/auth/login", { email, password });
       tokenStorage.token = data.token;
-      return data.user;
+      return data.data.user;
     } catch (error) {
       return rejectWithValue({ error: normalizeHttpError(error) });
     }
@@ -33,7 +37,7 @@ export const logout = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       await api.post("/auth/logout");
-      tokenStorage.token = "";
+      tokenStorage.clear();
     } catch (error) {
       return rejectWithValue({ error: normalizeHttpError(error) });
     }
@@ -44,8 +48,8 @@ export const getCurrentUser = createAsyncThunk(
   "auth/getCurrentUser",
   async (_, { rejectWithValue }) => {
     try {
-      const res = await api.get("/auth/current");
-      return res.data.user;
+      const { data } = await api.get("/auth/current");
+      return data.data.user;
     } catch (error) {
       return rejectWithValue({ error: normalizeHttpError(error) });
     }

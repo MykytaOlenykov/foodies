@@ -8,6 +8,10 @@ class TokenStorage {
   get token() {
     return localStorage.getItem(this.#TOKEN_LS_KEY);
   }
+
+  clear() {
+    localStorage.removeItem(this.#TOKEN_LS_KEY);
+  }
 }
 
 export const tokenStorage = new TokenStorage();
