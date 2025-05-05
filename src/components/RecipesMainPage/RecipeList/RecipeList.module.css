@@ -1,5 +1,6 @@
 .recipeList {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  /* flex-wrap: wrap; */
 }

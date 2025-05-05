@@ -30,41 +30,38 @@ const TestimonialsCard = ({ text, author }) => {
  */
 const Testimonials = ({ data }) => {
   return (
-    console.log(data),
-    (
-      <div className={styles.Testimonials}>
-        <Typography variant="body" className={styles.Testimonials__subtitle}>
-          What our customer say
-        </Typography>
-        <Typography variant="h2">Testimonials</Typography>
-        <Swiper
-          loop
-          modules={[Pagination, Autoplay]}
-          className={styles.Testimonials__swiper}
-          slidesPerView={SLIDE_PER_VIEW}
-          autoplay={{
-            delay: SLIDE_AUTOPLAY_DELAY,
-            disableOnInteraction: false,
-          }}
-          pagination={{
-            clickable: true,
-            horizontalClass: styles.Testimonials__pagination,
-            bulletClass: styles.Testimonials__paginationBullet,
-            bulletActiveClass: styles.active,
-          }}
-        >
-          {data.map((item, index) => (
-            <SwiperSlide>
-              <TestimonialsCard
-                key={index}
-                text={item.testimonial}
-                author={item.owner.name}
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-    )
+    <div className={styles.Testimonials}>
+      <Typography variant="body" className={styles.Testimonials__subtitle}>
+        What our customer say
+      </Typography>
+      <Typography variant="h2">Testimonials</Typography>
+      <Swiper
+        loop
+        modules={[Pagination, Autoplay]}
+        className={styles.Testimonials__swiper}
+        slidesPerView={SLIDE_PER_VIEW}
+        autoplay={{
+          delay: SLIDE_AUTOPLAY_DELAY,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+          horizontalClass: styles.Testimonials__pagination,
+          bulletClass: styles.Testimonials__paginationBullet,
+          bulletActiveClass: styles.active,
+        }}
+      >
+        {data.map((item, index) => (
+          <SwiperSlide>
+            <TestimonialsCard
+              key={index}
+              text={item.testimonial}
+              author={item.owner.name}
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   );
 };
 

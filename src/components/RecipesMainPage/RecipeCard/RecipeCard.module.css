@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: center;
   gap: 16px;
+  width: 342px;
 }
 
 .recipeImage {
@@ -56,12 +57,10 @@
 .receiptButtons {
   width: 36px;
   height: 36px;
-  /* background-color: var(--white-color); */
   background-color: #f4f4f4;
   border-radius: 30px;
   cursor: pointer;
   border: 1px solid var(--gray-color);
-  /* padding: 9px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -97,7 +96,7 @@
 }
 
 .thumb {
-  width: 343px;
+  width: 342px;
   height: 230px;
 }
 

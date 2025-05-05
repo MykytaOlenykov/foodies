@@ -1,9 +1,13 @@
-.recipes {
+.mainBlock {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 0px;
-  height: auto;
+  gap: 32px;
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .backButton {
@@ -36,4 +40,16 @@
   line-height: 20px;
   letter-spacing: -0.02em;
   color: var(--gray-color);
+}
+
+.filtersBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.recipesBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
