@@ -62,6 +62,14 @@ const RecipeCard = ({
     navigate(`/recipe/${recipeId}`); // Перенаправляємо на сторінку рецепта
   };
 
+  const getInitials = (name) => {
+    if (!name) return "NN"; // Якщо ім'я відсутнє
+    const words = name.split(" ");
+    const firstInitial = words[0]?.[0]?.toUpperCase() || "";
+    const secondInitial = words[1]?.[0]?.toUpperCase() || "";
+    return `${firstInitial}${secondInitial}`;
+  };
+
   return (
     <div className={css.recipeCard}>
       <div className={css.thumb}>
@@ -77,11 +85,18 @@ const RecipeCard = ({
               className={css.authorButton}
               onClick={handleAuthorClick}
             >
-              <img
-                src={owner.avatar || "/src/assets/images/foto.jpg"}
-                alt={owner.name}
-                className={css.avatar}
-              />
+              {owner.avatarURL ? (
+                <img
+                  src={
+                    "https://mykytaolenykov.com/foodies/api/static" +
+                    owner.avatarURL
+                  }
+                  alt={owner.name}
+                  className={css.avatar}
+                />
+              ) : (
+                <div className={css.initials}>{getInitials(owner.name)}</div>
+              )}
             </button>
             <span className={css.authorName}>{owner.name}</span>
           </div>

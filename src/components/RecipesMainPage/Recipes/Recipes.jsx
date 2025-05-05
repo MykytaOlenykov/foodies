@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import RecipeList from "../RecipeList/RecipeList";
+import RecipeList from "../RecipesMainPage/RecipeList/RecipeList.jsx";
 import arrowLefttIcon from "../../assets/icons/arrow-left.svg";
 import css from "./Recipes.module.css";
-import Categories from "../Categories/Categories";
-import { fetchRecipesByCategory } from "../../redux/recipes/operations";
-import { Pagination } from "../Pagination/Pagination";
-import { Testimonials } from "../Testimonials/Testimonials.jsx";
+import Categories from "../../Categories/Categories.jsx";
+import { fetchRecipesByCategory } from "../../../redux/recipes/operations.js";
+import { Pagination } from "../../Pagination/Pagination.jsx";
+import { Testimonials } from "../../Testimonials/Testimonials.jsx";
 import axios from "axios";
-import Container from "../UI/Container/Container.jsx";
+import Container from "../../UI/Container/Container.jsx";
 
 const Recipes = (category) => {
   const dispatch = useDispatch();
@@ -21,11 +21,9 @@ const Recipes = (category) => {
     "token",
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImlhdCI6MTc0NjQ0MTg5MiwiZXhwIjoxNzQ2NDc0MjkyfQ.O1QGMync13PFKdPeZaQKIZRarz6v5Qvd400C6Uip46Y",
   );
-  const handleBackClick = () => {
-    setShowCategories(true);
-  };
 
   const recipesPerPage = 8;
+
   useEffect(() => {
     const fetchTestimonials = async () => {
       try {
@@ -72,6 +70,10 @@ const Recipes = (category) => {
   if (!selectedRecipes || selectedRecipes.length === 0) {
     return <p>No recipes available.</p>;
   }
+
+  const handleBackClick = () => {
+    setShowCategories(true);
+  };
 
   const handlePageChange = (page) => {
     setCurrentPage(page);

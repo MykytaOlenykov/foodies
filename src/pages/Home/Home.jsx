@@ -8,9 +8,9 @@ export default function Home() {
       <div className={styles.container}>
         <div>
           <Hero
-            title="Welcome to the Recipe App"
-            subtitle="Discover delicious recipes from around the world"
-            buttonText="Get Started"
+            title="Improve Your Culinary Talents"
+            subtitle="Amazing recipes for beginners in the world of cooking, enveloping you in the aromas and tastes of various cuisines."
+            buttonText="Add Recipe"
             onButtonClick={() => console.log("Button clicked!")}
           />
           <Categories />
