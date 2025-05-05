@@ -76,10 +76,16 @@
 }
 
 .h4 {
-    font-size: 20px;
+    font-size: 16px;
     line-height: 24px;
     font-weight: 800;
     text-transform: uppercase;
+}
+
+@media (min-width: 481px) {
+    .h4 {
+        font-size: 20px;
+    }
 }
 
 .body {

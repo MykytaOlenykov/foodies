@@ -1,17 +1,19 @@
 :root {
     --main-color: #050505;
     --gray-color: #BFBEBE;
+    --gray-dark-color: #aaaaaa;
     --gray-light-color: #E8E8E8;
     --white-color: #FFFFFF;
     --red-color: #d10808;
     --white-transparent-color: rgba(255, 255, 255, 0.2);
     --white-transparent-color-2: rgba(255, 255, 255, 0.1);
+    --button-color: #1A1A1A;
 
     --border-radius-s: 15px;
     --border-radius-m: 30px;
     --border-radius-full: 50%;
 
-    --transition-duration: 0.3s;
+    --transition-duration: 0.2s;
     --transition-timing-function: ease;
     --Typography-line-clamp: 1;
 }
