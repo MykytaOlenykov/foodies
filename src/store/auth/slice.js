@@ -11,6 +11,7 @@ const initialState = {
   },
   error: null,
   isOpenSignUp: false,
+  isOpenSignIn: false,
 };
 
 const authSlice = createSlice({
@@ -23,6 +24,12 @@ const authSlice = createSlice({
     closeSignUp(state) {
       state.isOpenSignUp = false;
     },
+    openSignIn(state) {
+      state.isOpenSignIn = true;
+    },
+    closeSignIn(state) {
+      state.isOpenSignIn = false;
+    },
   },
   extraReducers: (builder) =>
     builder
@@ -30,17 +37,9 @@ const authSlice = createSlice({
         state.user = { ...state.user, ...payload };
         state.isOpenSignUp = false;
       })
-      .addCase(register.rejected, (state, { payload }) => {
-        state.error = payload;
-      })
-      .addCase(login.fulfilled, () => {
-        // TODO
-      })
-      .addCase(login.pending, () => {
-        // TODO
-      })
-      .addCase(login.rejected, () => {
-        // TODO
+      .addCase(login.fulfilled, (state, { payload }) => {
+        state.user = { ...state.user, ...payload };
+        state.isOpenSignIn = false;
       })
       .addCase(logout.fulfilled, () => {
         // TODO
@@ -62,6 +61,7 @@ const authSlice = createSlice({
       }),
 });
 
-export const { openSignUp, closeSignUp } = authSlice.actions;
+export const { openSignUp, closeSignUp, openSignIn, closeSignIn } =
+  authSlice.actions;
 
 export const authReducer = authSlice.reducer;

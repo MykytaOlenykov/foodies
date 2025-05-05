@@ -1,29 +1,30 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 
-import { SignUpForm } from "../SignUpForm";
 import { Typography } from "../Typography/Typography";
-import { register } from "../../store/auth";
+import { SignInForm } from "../SignInForm";
+import { login, selectUser } from "../../store/auth";
 import { DEFAULT_ERROR_MESSAGE } from "../../constants/common";
 
-import css from "./SignUpModal.module.css";
+import css from "./SignInModal.module.css";
 
 /**
- * SignUpModal component renders a registration form with a submit handler and redirect logic.
+ * SignInModal component renders a registration form with a submit handler and redirect logic.
  *
  * @param {object} props
- * @param {() => void} [props.onRedirectToSignIn] - Callback function to redirect the user to the sign-in modal or page.
+ * @param {() => void} [props.onRedirectToSignUp] - Callback function to redirect the user to the sign-in modal or page.
  */
-export const SignUpModal = ({ onRedirectToSignIn }) => {
+export const SignInModal = ({ onRedirectToSignUp }) => {
   const dispatch = useDispatch();
+  const user = useSelector(selectUser);
 
   const [disabledForm, setDisabledForm] = useState(false);
 
   const handleSubmit = async (values, formActions) => {
     try {
       setDisabledForm(true);
-      await dispatch(register(values)).unwrap();
+      await dispatch(login(values)).unwrap();
       formActions.resetForm();
     } catch (error) {
       toast.error(error.error?.message ?? DEFAULT_ERROR_MESSAGE);
@@ -35,19 +36,23 @@ export const SignUpModal = ({ onRedirectToSignIn }) => {
   return (
     <div className={css.container}>
       <Typography className={css.title} variant="h2">
-        Sign up
+        Sign in
       </Typography>
 
-      <SignUpForm onSubmit={handleSubmit} disabled={disabledForm} />
+      <SignInForm
+        onSubmit={handleSubmit}
+        disabled={disabledForm}
+        initialValues={{ email: user?.email ?? "" }}
+      />
 
       <div className={css.text}>
-        I already have an account?
+        Don't have an account?
         <button
           className={css.button}
           type="button"
-          onClick={onRedirectToSignIn}
+          onClick={onRedirectToSignUp}
         >
-          Sign in
+          Create an account
         </button>
       </div>
     </div>

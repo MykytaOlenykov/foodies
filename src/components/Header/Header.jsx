@@ -7,9 +7,9 @@ import Auth from "../Auth/Auth";
 import HeaderNav from "./HeaderNav/HeaderNav";
 import HeaderProfile from "./HeaderProfile/HeaderProfile";
 import Modal from "../Modal/Modal";
+import { openSignIn, openSignUp } from "../../store/auth";
 
 import styles from "./Header.module.css";
-import { openSignUp } from "../../store/auth";
 
 // Temp stub instead of Redux-selector
 // TODO: Temp stub for Modal
@@ -23,7 +23,6 @@ export default function Header() {
   const isSignedIn = useSelector(selectAuthIsSignedIn);
 
   // TODO: FIX
-  const [modalSignInOpen, setModalSignInOpen] = useState(false);
   const [modalLogoutOpen, setModalLogoutOpen] = useState(false);
 
   const isHome = pathname === "/" || pathname.split("/")[1] === "category";
@@ -40,7 +39,7 @@ export default function Header() {
 
       <HeaderNav
         isHome={isHome}
-        notAutorizedClick={() => setModalSignInOpen(true)}
+        notAutorizedClick={() => dispatch(openSignIn())}
       />
 
       {isSignedIn ? (
@@ -52,17 +51,13 @@ export default function Header() {
         <div className={styles.authWrap}>
           <Auth
             isHomepage={isHome}
-            openSignIn={() => setModalSignInOpen(true)}
+            openSignIn={() => dispatch(openSignIn())}
             openSignUp={() => dispatch(openSignUp())}
           />
         </div>
       )}
 
       {/* // TODO: FIX */}
-      <Modal isOpen={modalSignInOpen} onClose={() => setModalSignInOpen(false)}>
-        {/* // TODO: FIX */}
-        {/* <SignInForm variant="sign-in" /> */}
-      </Modal>
       <Modal isOpen={modalLogoutOpen} onClose={() => setModalLogoutOpen(false)}>
         {/* // TODO: FIX */}
         {/* <Logout setModalLogoutOpen={setModalLogoutOpen} /> */}
