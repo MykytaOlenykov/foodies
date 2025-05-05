@@ -1,4 +1,5 @@
 import styles from "./Home.module.css";
+import Categories from "../../components/Categories/Categories";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
         <p className={styles.description}>
           This is a temporary stub for Home Page.
         </p>
+        <Categories />
       </div>
     </section>
   );
