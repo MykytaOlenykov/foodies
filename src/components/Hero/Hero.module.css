@@ -2,8 +2,7 @@
   background-color: var(--main-color);
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  max-width: 375px;
-  margin: 0 auto;
+  margin: 0 8px 0;
   padding: 20px;
   position: relative;
   overflow: hidden;
@@ -85,7 +84,7 @@
 
 @media (min-width: 768px) {
   .heroSection {
-    max-width: 768px;
+    margin: 0 16px 0;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
   }
@@ -148,6 +147,12 @@
 
   .heroImageWrapper {
     padding-bottom: 82px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .heroSection {
+    margin: 0 20px 0;
   }
 }
 

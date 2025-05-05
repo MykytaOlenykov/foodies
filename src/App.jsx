@@ -1,7 +1,17 @@
 import { Route, Routes } from "react-router";
 import { checkApiConnection } from "./services/api.js";
-import { useEffect } from "react";
-import Hero from "./components/Hero/Hero";
+import { lazy, useEffect } from "react";
+
+import SharedLayout from "./components/layout/SharedLayout/SharedLayout";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import Verify from "./pages/Verify/Verify";
+
+const Home = lazy(() => import("./pages/Home/Home.jsx"));
+const Category = lazy(() => import("./pages/Category/Category.jsx"));
+const Recipe = lazy(() => import("./pages/Recipe/Recipe.jsx"));
+const UserPage = lazy(() => import("./pages/UserPage/UserPage.jsx"));
+const NotFound = lazy(() => import("./pages/NotFound/NotFound.jsx"));
+const AddRecipe = lazy(() => import("./pages/AddRecipe/AddRecipe.jsx"));
 
 export const App = () => {
   useEffect(() => {
@@ -9,11 +19,21 @@ export const App = () => {
       .then(() => console.log("✅ API is reachable"))
       .catch((err) => console.error("❌ API connection failed:", err));
   }, []);
-
+  
   return (
     <Routes>
-      <Route path="/" element={<Hero />} />
-      <Route path="/hello-world" element={<div>Hello World</div>} />
+      <Route path="/" element={<SharedLayout />}>
+        <Route index element={<Home />} />
+        <Route path="/category" element={<Category />} />
+        <Route path="/user/:id" element={<UserPage />} />
+        <Route path="/recipe/:recipeId" element={<Recipe />} />
+        <Route
+          path="/recipe/add"
+          element={<PrivateRoute component={AddRecipe} />}
+        />
+        <Route path="/auth/verify/:token" element={<Verify />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
     </Routes>
   );
 };
