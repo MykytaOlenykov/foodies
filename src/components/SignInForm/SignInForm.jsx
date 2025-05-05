@@ -14,7 +14,7 @@ const defaultInitialValues = { email: "", password: "" };
  * SignInForm component for user login.
  *
  * @param {Object} props - Component props
- * @param {function(Object): void} props.onSubmit - Callback triggered on form submit with form values.
+ * @param {function(Object, Object): void} props.onSubmit - Callback triggered on form submit with form values and actions.
  * @param {Object} [props.initialValues] - Optional initial values for the form fields (`email`, `password`).
  * @param {boolean} [props.disabled=false] - Disables all form inputs and the submit button when true.
  */
