@@ -14,7 +14,6 @@ import clsx from "clsx";
  * @param {(e) => void} props.onClick — click handler
  */
 const Button = ({
-  className,
   variant,
   size,
   bordered = false,
@@ -23,6 +22,8 @@ const Button = ({
   icon,
   children,
   onClick,
+  className,
+  ...restProps
 }) => {
   return (
     <button
@@ -36,6 +37,7 @@ const Button = ({
       disabled={disabled}
       type={type}
       onClick={onClick}
+      {...restProps}
     >
       {children}
       {icon}
