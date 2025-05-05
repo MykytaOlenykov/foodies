@@ -46,7 +46,7 @@ export const SignInModal = ({ onRedirectToSignUp }) => {
       />
 
       <div className={css.text}>
-        Don't have an account?
+        <span>Don't have an account?</span>
         <button
           className={css.button}
           type="button"

@@ -13,7 +13,7 @@ const initialState = {
   isLoggedIn: false,
   isOpenSignUp: false,
   isOpenSignIn: false,
-  isOpenLogOut: true,
+  isOpenLogOut: false,
 };
 
 const authSlice = createSlice({

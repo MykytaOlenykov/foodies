@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { SignUpModal } from "../SignUpModal";
 import { SignInModal } from "../SignInModal";
 import { LogOutModal } from "../LogOutModal";
-import Modal from "../Modal/Modal";
+import { Modal } from "../Modal/Modal";
 import {
   openSignUp,
   closeSignUp,

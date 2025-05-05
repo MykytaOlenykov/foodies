@@ -41,7 +41,7 @@ export const SignUpModal = ({ onRedirectToSignIn }) => {
       <SignUpForm onSubmit={handleSubmit} disabled={disabledForm} />
 
       <div className={css.text}>
-        I already have an account?
+        <span>I already have an account?</span>
         <button
           className={css.button}
           type="button"

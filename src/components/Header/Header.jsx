@@ -5,7 +5,6 @@ import clx from "clsx";
 import Auth from "../Auth/Auth";
 import HeaderNav from "./HeaderNav/HeaderNav";
 import HeaderProfile from "./HeaderProfile/HeaderProfile";
-import Modal from "../Modal/Modal";
 import { openLogOut, openSignIn, openSignUp } from "../../store/auth";
 
 import styles from "./Header.module.css";

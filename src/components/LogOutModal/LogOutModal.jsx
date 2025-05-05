@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 
 import { Button } from "../Button/Button";
 import { Typography } from "../Typography/Typography";
+import { useBreakpoint } from "../../hooks/useBreakpoint";
 import { logout } from "../../store/auth";
 import { DEFAULT_ERROR_MESSAGE } from "../../constants/common";
 
@@ -12,6 +13,9 @@ import css from "./LogOutModal.module.css";
 export const LogOutModal = ({ onClose }) => {
   const dispatch = useDispatch();
   const [disabled, setDisabled] = useState(false);
+
+  const breakpoint = useBreakpoint();
+  const isMobile = ["mobile", "small-mobile"].includes(breakpoint);
 
   const handleLogout = async () => {
     try {
@@ -27,7 +31,7 @@ export const LogOutModal = ({ onClose }) => {
   return (
     <div className={css.container}>
       <Typography className={css.title} variant="h2">
-        Log out
+        {isMobile ? "Log out" : "Are you logging out?"}
       </Typography>
 
       <Typography className={css.text} variant="body">
