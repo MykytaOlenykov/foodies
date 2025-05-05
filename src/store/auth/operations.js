@@ -12,6 +12,7 @@ export const register = createAsyncThunk(
         email,
         password,
       });
+      tokenStorage.token = data.data.token;
       return data.data.user;
     } catch (error) {
       return rejectWithValue({ error: normalizeHttpError(error) });
@@ -24,7 +25,7 @@ export const login = createAsyncThunk(
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const { data } = await api.post("/auth/login", { email, password });
-      tokenStorage.token = data.token;
+      tokenStorage.token = data.data.token;
       return data.data.user;
     } catch (error) {
       return rejectWithValue({ error: normalizeHttpError(error) });

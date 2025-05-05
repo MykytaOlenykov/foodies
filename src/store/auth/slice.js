@@ -28,6 +28,7 @@ const authSlice = createSlice({
     builder
       .addCase(register.fulfilled, (state, { payload }) => {
         state.user = { ...state.user, ...payload };
+        state.isOpenSignUp = false;
       })
       .addCase(register.rejected, (state, { payload }) => {
         state.error = payload;

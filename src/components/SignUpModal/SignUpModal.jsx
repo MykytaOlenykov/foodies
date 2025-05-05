@@ -9,6 +9,12 @@ import { DEFAULT_ERROR_MESSAGE } from "../../constants/common";
 
 import css from "./SignUpModal.module.css";
 
+/**
+ * SignUpModal component renders a registration form with a submit handler and redirect logic.
+ *
+ * @param {object} props
+ * @param {() => void} [props.redirect] - Callback function to redirect the user (e.g., to the sign-in modal or page).
+ */
 export const SignUpModal = ({ redirect }) => {
   const dispatch = useDispatch();
 
@@ -19,7 +25,6 @@ export const SignUpModal = ({ redirect }) => {
       setDisabledForm(true);
       await dispatch(register(values)).unwrap();
       formActions.resetForm();
-      redirect?.();
     } catch (error) {
       toast.error(error.error?.message ?? DEFAULT_ERROR_MESSAGE);
     } finally {
