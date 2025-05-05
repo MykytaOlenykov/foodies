@@ -1,19 +1,19 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router";
 import { Provider } from "react-redux";
-import store from "./redux/store";
+import { BrowserRouter } from "react-router";
 import "modern-normalize";
-import "./index.css";
 
 import { App } from "./App";
+import { store } from "./store";
+import "./index.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Provider store={store}>
         <App />
-      </BrowserRouter>
-    </Provider>
+      </Provider>
+    </BrowserRouter>
   </StrictMode>,
 );
