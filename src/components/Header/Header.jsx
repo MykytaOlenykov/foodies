@@ -1,20 +1,19 @@
-import clx from "clsx";
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router";
 import { useSelector } from "react-redux";
+import clx from "clsx";
 
 import Auth from "../Auth/Auth";
 import HeaderNav from "./HeaderNav/HeaderNav";
 import HeaderProfile from "./HeaderProfile/HeaderProfile";
-import SignInForm from "../SignInForm/SignInForm";
-import Logout from "../Logout/Logout";
 
 import styles from "./Header.module.css";
 
 // Temp stub instead of Redux-selector
+// TODO: Temp stub for Modal
 const selectAuthIsSignedIn = () => false;
 
-// Temp stub for Modal
+// TODO: Temp stub for Modal
 const Modal = () => {
   return null;
 };
@@ -60,23 +59,21 @@ export default function Header() {
         </div>
       )}
 
+      {/* // TODO: FIX */}
       <Modal
         isOpen={!isSignedIn && modalSignInOpen}
         onClose={() => setModalSignInOpen(false)}
       >
-        <SignInForm variant="sign-in" />
+        {/* // TODO: FIX */}
+        {/* <SignInForm variant="sign-in" /> */}
       </Modal>
-      <Modal
-        isOpen={modalSignUpOpen}
-        onClose={() => setModalSignUpOpen(false)}
-      >
-        <SignInForm variant="sign-up" />
+      <Modal isOpen={modalSignUpOpen} onClose={() => setModalSignUpOpen(false)}>
+        {/* // TODO: FIX */}
+        {/* <SignInForm variant="sign-up" /> */}
       </Modal>
-      <Modal
-        isOpen={modalLogoutOpen}
-        onClose={() => setModalLogoutOpen(false)}
-      >
-        <Logout setModalLogoutOpen={setModalLogoutOpen} />
+      <Modal isOpen={modalLogoutOpen} onClose={() => setModalLogoutOpen(false)}>
+        {/* // TODO: FIX */}
+        {/* <Logout setModalLogoutOpen={setModalLogoutOpen} /> */}
       </Modal>
     </header>
   );
