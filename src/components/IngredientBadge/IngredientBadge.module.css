@@ -1,0 +1,75 @@
+.IngredientBadge {
+  position: relative;
+  display: flex;
+  width: 178px;
+  height: 90px;
+  overflow: hidden;
+  gap: 14px;
+}
+.imageWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+  height: 100%;
+  padding: 15px;
+  border: 1px solid var(--gray-color);
+  border-radius: var(--border-radius-s);
+}
+.image {
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  flex: 1;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.32px;
+  overflow: hidden;
+}
+
+.name {
+  color: var(--main-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: help;
+}
+
+.measure {
+  color: var(--gray-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: help;
+}
+
+.deleteButton {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+@media (max-width: 375px) {
+  .IngredientBadge {
+    width: 152px;
+    height: 75px;
+    gap: 10px;
+  }
+
+  .imageWrapper {
+    width: 75px;
+    padding: 10px;
+  }
+
+  .content {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.28px;
+    gap: 2px;
+  }
+}

@@ -21,6 +21,8 @@ const Button = ({
   icon,
   children,
   onClick,
+  className,
+  ...restProps
 }) => {
   return (
     <button
@@ -29,10 +31,12 @@ const Button = ({
         styles[variant],
         styles[size],
         bordered && styles.bordered,
+        className
       )}
       disabled={disabled}
       type={type}
       onClick={onClick}
+      {...restProps}
     >
       {children}
       {icon}

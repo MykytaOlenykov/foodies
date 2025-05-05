@@ -1,0 +1,25 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.separator {
+  color: var(--gray-color);
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.text {
+  line-height: 18px;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
