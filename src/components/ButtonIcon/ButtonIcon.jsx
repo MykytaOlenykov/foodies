@@ -17,6 +17,8 @@ const ButtonIcon = ({
   disabled,
   type = "button",
   onClick,
+  className,
+  ...restProps
 }) => {
   return (
     <button
@@ -24,10 +26,12 @@ const ButtonIcon = ({
         styles.ButtonIcon,
         styles[variant],
         styles[size],
+        className,
       )}
       disabled={disabled}
       type={type}
       onClick={onClick}
+      {...restProps}
     >
       {icon}
     </button>
