@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import CategoryList from "../../components/CategoriesList/CategoriesList";
+import { CategoryList } from "../../components/CategoriesList/CategoriesList";
 import allCategories from "./categorieList.json";
 import Container from "../../components/UI/Container/Container";
 import css from "./Category.module.css";

@@ -4,9 +4,10 @@ import css from "./CategoryItem.module.css";
 import { ArrowUpRight } from "lucide-react";
 
 export default function CategoryItem({ data }) {
+  const categoryName = data.name;
   return (
     <>
-      <div className={`${css.thumb} ${css[data.name.toLowerCase()]}`}>
+      <div className={`${css.thumb} ${css[categoryName.toLowerCase()]}`}>
         <div className={css.wrapper}>
           <p className={css.label}>{data.name}</p>
           <Link to={`/category/${data.id}`}>

@@ -31,11 +31,7 @@
 }
 
 .allCategories {
-  color: var(--white-color);
-  font-weight: 800;
-
   letter-spacing: -0.32px;
-  text-transform: uppercase;
 }
 
 /* tablet */
@@ -65,8 +61,9 @@
     width: 704px;
     grid-column: span 2;
   }
+
   .allCategories {
-    font-size: 20px;
+    letter-spacing: -0.4px;
   }
 }
 
