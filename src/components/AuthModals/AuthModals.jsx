@@ -38,23 +38,17 @@ export const AuthModals = () => {
 
   return (
     <>
-      {isOpenSignUp && (
-        <Modal isOpen closeModal={() => dispatch(closeSignUp())}>
-          <SignUpModal onRedirectToSignIn={handleRedirectToSignIn} />
-        </Modal>
-      )}
+      <Modal isOpen={isOpenSignUp} closeModal={() => dispatch(closeSignUp())}>
+        <SignUpModal onRedirectToSignIn={handleRedirectToSignIn} />
+      </Modal>
 
-      {isOpenSignIn && (
-        <Modal isOpen closeModal={() => dispatch(closeSignIn())}>
-          <SignInModal onRedirectToSignUp={handleRedirectToSignUp} />
-        </Modal>
-      )}
+      <Modal isOpen={isOpenSignIn} closeModal={() => dispatch(closeSignIn())}>
+        <SignInModal onRedirectToSignUp={handleRedirectToSignUp} />
+      </Modal>
 
-      {isOpenLogOut && (
-        <Modal isOpen closeModal={handleCloseLogOut}>
-          <LogOutModal onClose={handleCloseLogOut} />
-        </Modal>
-      )}
+      <Modal isOpen={isOpenLogOut} closeModal={handleCloseLogOut}>
+        <LogOutModal onClose={handleCloseLogOut} />
+      </Modal>
     </>
   );
 };
