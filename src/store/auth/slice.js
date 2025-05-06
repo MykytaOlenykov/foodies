@@ -1,54 +1,91 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { register, login, logout, getCurrentUser } from "./operations";
+import { appClearSessionAction } from "../utils";
 
 const initialState = {
-  user: null,
+  user: {
+    id: null,
+    name: null,
+    email: null,
+    avatarURL: null,
+  },
   error: null,
+  isLoadingStatus: true,
+  isLoggedIn: false,
+  isOpenSignUp: false,
+  isOpenSignIn: false,
+  isOpenLogOut: false,
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    openSignUp(state) {
+      state.isOpenSignUp = true;
+    },
+    closeSignUp(state) {
+      state.isOpenSignUp = false;
+    },
+    openSignIn(state) {
+      state.isOpenSignIn = true;
+    },
+    closeSignIn(state) {
+      state.isOpenSignIn = false;
+    },
+    openLogOut(state) {
+      state.isOpenLogOut = true;
+    },
+    closeLogOut(state) {
+      state.isOpenLogOut = false;
+    },
+  },
   extraReducers: (builder) =>
     builder
-      .addCase(register.fulfilled, () => {
-        // TODO
+      .addCase(register.fulfilled, (state, { payload }) => {
+        state.user = { ...state.user, ...payload };
+        state.isLoggedIn = true;
+        state.isOpenSignUp = false;
       })
-      .addCase(register.pending, () => {
-        // TODO
+      .addCase(login.fulfilled, (state, { payload }) => {
+        state.user = { ...state.user, ...payload };
+        state.isLoggedIn = true;
+        state.isOpenSignIn = false;
       })
-      .addCase(register.rejected, () => {
-        // TODO
+      .addCase(logout.fulfilled, (state) => {
+        state.user = { ...initialState.user };
+        state.isLoggedIn = false;
+        state.isOpenLogOut = false;
       })
-      .addCase(login.fulfilled, () => {
-        // TODO
+      .addCase(getCurrentUser.fulfilled, (state, { payload }) => {
+        state.user = { ...state.user, ...payload };
+        state.isLoggedIn = true;
+        state.isLoadingStatus = false;
       })
-      .addCase(login.pending, () => {
-        // TODO
+      .addCase(getCurrentUser.pending, (state) => {
+        state.isLoadingStatus = true;
       })
-      .addCase(login.rejected, () => {
-        // TODO
+      .addCase(getCurrentUser.rejected, (state) => {
+        state.isLoggedIn = false;
+        state.isLoadingStatus = false;
       })
-      .addCase(logout.fulfilled, () => {
-        // TODO
-      })
-      .addCase(logout.pending, () => {
-        // TODO
-      })
-      .addCase(logout.rejected, () => {
-        // TODO
-      })
-      .addCase(getCurrentUser.fulfilled, () => {
-        // TODO
-      })
-      .addCase(getCurrentUser.pending, () => {
-        // TODO
-      })
-      .addCase(getCurrentUser.rejected, () => {
-        // TODO
+      .addCase(appClearSessionAction, (state) => {
+        state.user = { ...initialState.user };
+        state.error = null;
+        state.isLoggedIn = false;
+        state.isLoadingStatus = false;
+        state.isOpenLogOut = false;
       }),
 });
+
+export const {
+  openSignUp,
+  closeSignUp,
+  openSignIn,
+  closeSignIn,
+  openLogOut,
+  closeLogOut,
+} = authSlice.actions;
 
 export const authReducer = authSlice.reducer;
