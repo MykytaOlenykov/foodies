@@ -6,7 +6,6 @@ const MyRecipes = () => <div>My Recipes Content</div>;
 const MyFavorites = () => <div>My Favorites Content</div>;
 const Followers = () => <div>Followers Content</div>;
 const Following = () => <div>Following Content</div>;
-
 /**
  * @param {object} props
  * @param {boolean} props.isMyProfile — Indicates if the profile belongs to the logged-in user.
@@ -73,7 +72,7 @@ export const ProfileTabs = ({ isMyProfile }) => {
         ))}
       </Tabs>
 
-      <Box sx={{ padding: 2 }}>{tabConfig[value]?.component}</Box>
+      <Box>{tabConfig[value]?.component}</Box>
     </Box>
   );
 };

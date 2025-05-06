@@ -19,4 +19,6 @@ api.interceptors.request.use((config) => {
 
 export const checkApiConnection = () => api.get("/ok");
 
+export const getUserDataById = (id) => api.get(`api/users/${id}`);
+
 export default api;

@@ -6,25 +6,22 @@ import { Typography } from "../Typography/Typography";
 
 /**
  * @param {object} props
- * @param {string} props.avatarURL — URL of the user's avatar image.
- * @param {string} props.name — Full name of the user.
- * @param {string} props.email — Email address of the user.
+ * @param {UserModel} props.user — User data object.
  * @param {boolean} props.isMyProfile — Flag indicating if this is the current user's own profile.
- * @param {object} [props.stats] — Object with user statistics.
- * @param {number} [props.stats.recipes] — Number of added recipes.
- * @param {number} [props.stats.favorites] — Number of favorite recipes (only if `isMyProfile` is true).
- * @param {number} [props.stats.followers] — Number of followers.
- * @param {number} [props.stats.following] — Number of users this user is following (only if `isMyProfile` is true).
  * @param {() => void} [props.onAvatarChange] — Optional click handler for changing avatar.
  */
-export const ProfileCard = ({
-  avatarURL,
-  name,
-  email,
-  isMyProfile,
-  stats = { recipes: 0, favorites: 0, followers: 0, following: 0 },
-  onAvatarChange,
-}) => {
+
+export const ProfileCard = ({ user, isMyProfile, onAvatarChange }) => {
+  const {
+    avatarURL,
+    name,
+    email,
+    recipesCount,
+    favoriteRecipesCount,
+    followersCount,
+    followingCount,
+  } = user;
+
   return (
     <div className={styles.profileCard}>
       <div className={styles.avatarWrapper}>
@@ -51,19 +48,19 @@ export const ProfileCard = ({
           <span title={email}>{email}</span>
         </div>
         <div>
-          <label>Added recipes:</label> {stats.recipes}
+          <label>Added recipes:</label> {recipesCount}
         </div>
         {isMyProfile && (
           <div>
-            <label>Favorites:</label> {stats.favorites}
+            <label>Favorites:</label> {favoriteRecipesCount}
           </div>
         )}
         <div>
-          <label>Followers:</label> {stats.followers}
+          <label>Followers:</label> {followersCount}
         </div>
         {isMyProfile && (
           <div>
-            <label>Following:</label> {stats.following}
+            <label>Following:</label> {followingCount}
           </div>
         )}
       </div>
