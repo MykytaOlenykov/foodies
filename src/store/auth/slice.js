@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { register, login, logout, getCurrentUser } from "./operations";
+import { appClearSessionAction } from "../utils";
 
 const initialState = {
   user: {
@@ -10,6 +11,7 @@ const initialState = {
     avatarURL: null,
   },
   error: null,
+  isLoadingStatus: true,
   isLoggedIn: false,
   isOpenSignUp: false,
   isOpenSignIn: false,
@@ -56,14 +58,24 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
         state.isOpenLogOut = false;
       })
-      .addCase(getCurrentUser.fulfilled, () => {
-        // TODO
+      .addCase(getCurrentUser.fulfilled, (state, { payload }) => {
+        state.user = { ...state.user, ...payload };
+        state.isLoggedIn = true;
+        state.isLoadingStatus = false;
       })
-      .addCase(getCurrentUser.pending, () => {
-        // TODO
+      .addCase(getCurrentUser.pending, (state) => {
+        state.isLoadingStatus = true;
       })
-      .addCase(getCurrentUser.rejected, () => {
-        // TODO
+      .addCase(getCurrentUser.rejected, (state) => {
+        state.isLoggedIn = false;
+        state.isLoadingStatus = false;
+      })
+      .addCase(appClearSessionAction, (state) => {
+        state.user = { ...initialState.user };
+        state.error = null;
+        state.isLoggedIn = false;
+        state.isLoadingStatus = false;
+        state.isOpenLogOut = false;
       }),
 });
 
