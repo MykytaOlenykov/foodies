@@ -1,5 +1,5 @@
 import styles from "./Home.module.css";
-import Hero from "../../components/Hero/Hero.jsx";
+import { Hero } from "../../components/Hero/Hero.jsx";
 
 export default function Home() {
   return (

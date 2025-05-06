@@ -9,7 +9,7 @@ import TabletSmall from "../../assets/images/hero/tablet_small_dessert.webp@1x.w
 import DesktopLarge from "../../assets/images/hero/desktop_big_meat.webp@1x.webp";
 import DesktopSmall from "../../assets/images/hero/desktop_small_dessert.webp@1x.webp";
 
-const HeroImageSet = () => {
+export const HeroImageSet = () => {
   return (
     <div className={styles.heroImageWrapper}>
       {/* Mobile */}
@@ -50,5 +50,3 @@ const HeroImageSet = () => {
     </div>
   );
 };
-
-export default HeroImageSet;

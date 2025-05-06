@@ -1,23 +1,24 @@
 import styles from "./Hero.module.css";
-import HeroImageSet from "./HeroImageSet";
+import { HeroImageSet } from "./HeroImageSet";
+import { Typography } from "../Typography/Typography";
 
-const Hero = () => {
+export const Hero = () => {
   return (
     <section className={styles.container}>
       <div className={styles.heroSection}>
         <div className={styles.heroTextWrapper}>
-          <h1 className={styles.heroTitle}>Improve Your Culinary Talents</h1>
-          <p className={styles.heroSubtitle}>
-            Amazing recipes for beginners in the world of cooking, enveloping
-            you in the aromas and tastes of various cuisines.
-          </p>
+          <Typography className={styles.heroTitle} variant="h1">
+            {"Improve Your Culinary Talents"}
+          </Typography>
+          <Typography className={styles.heroSubtitle} variant="p">
+            {
+              "Amazing recipes for beginners in the world of cooking, enveloping you in the aromas and tastes of various cuisines."
+            }
+          </Typography>
           <button className={styles.heroButton}>ADD RECIPE</button>
         </div>
-
         <HeroImageSet />
       </div>
     </section>
   );
 };
-
-export default Hero;

@@ -21,9 +21,6 @@
 
 .heroTitle {
   color: var(--white-color);
-  font-size: 40px;
-  font-weight: 800;
-  line-height: 40px;
   letter-spacing: -0.02em;
   text-align: center;
   max-width: 327px;
@@ -32,9 +29,6 @@
 
 .heroSubtitle {
   color: var(--white-color);
-  font-weight: 500px;
-  font-size: 14px;
-  line-height: 20px;
   letter-spacing: -0.02px;
   text-align: center;
   margin: 0 auto;
