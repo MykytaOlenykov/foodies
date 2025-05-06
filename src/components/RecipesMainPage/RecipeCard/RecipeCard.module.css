@@ -5,7 +5,6 @@
   width: 342px;
   height: 366px;
 }
-
 @media (min-width: 768px) {
   .recipeCard {
     width: 342px;
@@ -15,6 +14,7 @@
 @media (min-width: 1440px) {
   .recipeCard {
     width: 290px;
+    gap: 16px;
   }
 }
 
@@ -30,7 +30,13 @@
   justify-content: center;
   gap: 6px;
 }
-.title {
+@media (min-width: 1440px) {
+  .cardInfo {
+    gap: 8px;
+  }
+}
+
+.cardTitle {
   font-size: 18px;
   font-weight: 800;
   line-height: 24px;
@@ -38,27 +44,75 @@
   text-transform: uppercase;
   color: var(--main-color);
 }
+@media (min-width: 1440px) {
+  .cardTitle {
+    font-size: 20px;
+  }
+}
 
-.description {
+.cardDescription {
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
   letter-spacing: -0.02em;
-  color: #1a1a1a;
+  color: var(--button-color);
   height: 54px;
 }
+@media (min-width: 1440px) {
+  .cardDescription {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
 
-.actions {
+.cardActions {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 8px;
 }
 
-.authorInfo {
+.cardAuthorInfo {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.cardAuthorButton {
+  width: 32px;
+  height: 32px;
+  border-radius: 30px;
+  padding: 0px;
+  background-color: var(--gray-color);
+  border: none;
+  cursor: pointer;
+}
+@media (min-width: 1440px) {
+  .cardAuthorButton {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  object-fit: cover;
+}
+
+.cardAuthorName {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  color: #1a1a1a;
+}
+@media (min-width: 1440px) {
+  .cardAuthorName {
+    font-size: 16px;
+    line-height: 24px;
+  }
 }
 
 .recipeIcons {
@@ -78,30 +132,11 @@
   justify-content: center;
   align-items: center;
 }
-
-.authorButton {
-  width: 32px;
-  height: 32px;
-  border-radius: 30px;
-  padding: 0px;
-  background-color: var(--gray-color);
-  border: none;
-  cursor: pointer;
-}
-
-.avatar {
-  width: 100%;
-  height: 100%;
-  border-radius: 30px;
-  object-fit: cover;
-}
-
-.authorName {
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: -0.02em;
-  color: #1a1a1a;
+@media (min-width: 1440px) {
+  .receiptButtons {
+    width: 42px;
+    height: 42px;
+  }
 }
 
 .isFavorite {
@@ -112,14 +147,12 @@
   width: 342px;
   height: 230px;
 }
-
 @media (min-width: 768px) {
   .thumb {
     width: 342px;
     height: 275px;
   }
 }
-
 @media (min-width: 1440px) {
   .thumb {
     width: 290px;
@@ -139,4 +172,25 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+@media (min-width: 1440px) {
+  .initials {
+    font-size: 18px;
+  }
+}
+
+.svgIcon {
+  width: 16px;
+  height: 16px;
+  fill: var(--main-color);
+}
+@media (min-width: 1440px) {
+  .svgIcon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.fillFavorite {
+  fill: var(--white-color);
 }

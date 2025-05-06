@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
-import RecipeList from "../RecipeList/RecipeList.jsx";
-import arrowLefttIcon from "../../../assets/icons/arrow-left.svg";
-import Categories from "../../Categories/Categories.jsx";
-import { Testimonials } from "../../Testimonials/Testimonials.jsx";
-import Container from "../../UI/Container/Container.jsx";
+import ArrowLefttIcon from "../../../assets/icons/arrow-left.svg?react";
 import { useDispatch } from "react-redux";
-import { fetchTestimonials } from "../../../redux/recipes/operations.js";
+import { fetchTestimonials } from "../../../store/recipes/operations.js";
+import Container from "../../UI/Container/Container.jsx";
+import Categories from "../../Categories/Categories.jsx";
+import RecipeList from "../RecipeList/RecipeList.jsx";
+import { Testimonials } from "../../Testimonials/Testimonials.jsx";
 import css from "./Recipes.module.css";
 
 const Recipes = (category) => {
@@ -15,7 +15,7 @@ const Recipes = (category) => {
 
   localStorage.setItem(
     "token",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImlhdCI6MTc0NjQ0MTg5MiwiZXhwIjoxNzQ2NDc0MjkyfQ.O1QGMync13PFKdPeZaQKIZRarz6v5Qvd400C6Uip46Y",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImlhdCI6MTc0NjUyNzUxMSwiZXhwIjoxNzQ2NTU5OTExfQ.URK9aqLeFWu0Y_QGi07w1OOh0uubTZFfV44JCdHUnxc",
   );
 
   // Мемоізована функція для отримання відгуків
@@ -52,7 +52,7 @@ const Recipes = (category) => {
             type="button"
             onClick={handleBackClick}
           >
-            <img src={arrowLefttIcon} alt="Back" />
+            <ArrowLefttIcon className={css.recipesBackIcon} />
             Back
           </button>
           <h1 className={css.recipesCategory}>{category.categoryName}</h1>
@@ -62,13 +62,8 @@ const Recipes = (category) => {
             gastronomic desires.
           </p>
         </div>
-        <div className={css.recipesBlock}>
-          <div className={css.recipesFiltersBlock}>
-            <input type="search" placeholder="Search" className={css.search} />
-            <input type="search" placeholder="Sort by" className={css.search} />
-          </div>
-          <RecipeList category={category} />
-        </div>
+        <RecipeList category={category} />
+
         <Testimonials data={testimonials} />
       </div>
     </Container>

@@ -9,7 +9,7 @@ const categories = [
     image: "/src/assets/images/categories/Desserts.webp@1x.webp",
   },
   {
-    id: 2,
+    id: "all",
     name: "Asian",
     image: "/src/assets/images/categories/Desserts.webp@1x.webp",
   },

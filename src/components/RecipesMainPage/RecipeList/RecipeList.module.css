@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
+  width: 100%;
 }
 
 .recipeList {
@@ -20,10 +21,48 @@ img {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 16px;
+    justify-content: space-between;
   }
 }
 @media (min-width: 1440px) {
   .recipeList {
     gap: 20px;
+  }
+}
+
+.recipesBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+@media (min-width: 1440px) {
+  .recipesBlock {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 40px;
+  }
+}
+
+.recipesFiltersBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .recipesFiltersBlock {
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .recipesFiltersBlock {
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 464px;
   }
 }

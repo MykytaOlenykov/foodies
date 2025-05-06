@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Modal } from "../../Modal/Modal.jsx";
+import NoImage from "../../../assets/images/no-image.svg?react";
+import HeartIcon from "../../../assets/icons/heart.svg?react";
+import ArrowUpIcon from "../../../assets/icons/arrow-up-right.svg?react";
 import css from "./RecipeCard.module.css";
 
 const RecipeCard = ({
@@ -20,11 +24,14 @@ const RecipeCard = ({
 
   if (mediaMode === "desktop") {
     truncatedDescription =
-      description.length > 70 ? description.slice(0, 80) + "..." : description;
+      description.length > 70 ? description.slice(0, 67) + "..." : description;
   } else {
     truncatedDescription =
       description.length > 100 ? description.slice(0, 97) + "..." : description;
   }
+
+  const truncatedCardTitle =
+    title.length > 18 ? title.slice(0, 20) + "..." : title;
 
   isAuthenticated = true;
 
@@ -61,8 +68,7 @@ const RecipeCard = ({
     if (isAuthenticated) {
       navigate(`/user/${owner.id}`); // Перенаправляємо на сторінку профілю автора
     } else {
-      // Відкриваємо модальне вікно для авторизації
-      alert("Please sign in to view the author's profile."); // Замініть на виклик Modal
+      return <Modal />;
     }
   };
 
@@ -77,20 +83,19 @@ const RecipeCard = ({
     const secondInitial = words[1]?.[0]?.toUpperCase() || "";
     return `${firstInitial}${secondInitial}`;
   };
-
   return (
     <div className={css.recipeCard}>
       <div className={css.thumb}>
-        <img src={image} alt={title} className={css.recipeImage} />
+        <img src={image || NoImage} alt={title} className={css.recipeImage} />
       </div>
       <div className={css.cardInfo}>
-        <h3 className={css.title}>{title}</h3>
-        <p className={css.description}>{truncatedDescription}</p>
-        <div className={css.actions}>
-          <div className={css.authorInfo}>
+        <h3 className={css.cardTitle}>{truncatedCardTitle}</h3>
+        <p className={css.cardDescription}>{truncatedDescription}</p>
+        <div className={css.cardActions}>
+          <div className={css.cardAuthorInfo}>
             <button
               type="button"
-              className={css.authorButton}
+              className={css.cardAuthorButton}
               onClick={handleAuthorClick}
             >
               {owner.avatarURL ? (
@@ -106,7 +111,7 @@ const RecipeCard = ({
                 <div className={css.initials}>{getInitials(owner.name)}</div>
               )}
             </button>
-            <span className={css.authorName}>{owner.name}</span>
+            <span className={css.cardAuthorName}>{owner.name}</span>
           </div>
           <div className={css.recipeIcons}>
             {/* Кнопка для улюблених */}
@@ -119,13 +124,9 @@ const RecipeCard = ({
               disabled={loading}
             >
               {isFavorite ? (
-                <svg width="16" height="16" fill="white">
-                  <path d="M14.317 5.667a3.019 3.019 0 0 0-.684-1.915l-.2-.22a3.019 3.019 0 0 0-1.837-.868l-.296-.015a3.019 3.019 0 0 0-1.914.684l-.22.2-.707.707a.65.65 0 0 1-.919 0l-.707-.707A3.017 3.017 0 1 0 2.566 7.8L8 13.234 13.434 7.8l.199-.22a3.02 3.02 0 0 0 .684-1.913Zm1.3 0A4.317 4.317 0 0 1 14.5 8.566l-.147.153-5.893 5.894a.65.65 0 0 1-.919 0L1.646 8.719a4.318 4.318 0 1 1 6.107-6.105l.246.246.248-.246.153-.147a4.317 4.317 0 0 1 2.9-1.119l.212.006a4.316 4.316 0 0 1 2.84 1.26l.147.153a4.319 4.319 0 0 1 1.118 2.9Z" />
-                </svg>
+                <HeartIcon className={`${css.fillFavorite} ${css.svgIcon}`} />
               ) : (
-                <svg width="16" height="16" fill="black">
-                  <path d="M14.317 5.667a3.019 3.019 0 0 0-.684-1.915l-.2-.22a3.019 3.019 0 0 0-1.837-.868l-.296-.015a3.019 3.019 0 0 0-1.914.684l-.22.2-.707.707a.65.65 0 0 1-.919 0l-.707-.707A3.017 3.017 0 1 0 2.566 7.8L8 13.234 13.434 7.8l.199-.22a3.02 3.02 0 0 0 .684-1.913Zm1.3 0A4.317 4.317 0 0 1 14.5 8.566l-.147.153-5.893 5.894a.65.65 0 0 1-.919 0L1.646 8.719a4.318 4.318 0 1 1 6.107-6.105l.246.246.248-.246.153-.147a4.317 4.317 0 0 1 2.9-1.119l.212.006a4.316 4.316 0 0 1 2.84 1.26l.147.153a4.319 4.319 0 0 1 1.118 2.9Z" />
-                </svg>
+                <HeartIcon className={css.svgIcon} />
               )}
             </button>
             {/* Кнопка для переходу на сторінку рецепта */}
@@ -134,10 +135,7 @@ const RecipeCard = ({
               className={css.receiptButtons}
               onClick={handleRecipeClick}
             >
-              <img
-                src="/src/assets/icons/arrow-up-right.svg"
-                alt="Recipe Page"
-              />
+              <ArrowUpIcon className={css.svgIcon} />
             </button>
           </div>
         </div>
