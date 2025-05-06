@@ -6,7 +6,8 @@ import SharedLayout from "./components/layout/SharedLayout/SharedLayout";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Verify from "./pages/Verify/Verify";
 import { checkApiConnection } from "./services/api.js";
-import { getCurrentUser } from "./store/auth/operations.js";
+import { getCurrentUser } from "./store/auth";
+import { getAllAreas } from "./store/areas";
 
 const Home = lazy(() => import("./pages/Home/Home.jsx"));
 const Category = lazy(() => import("./pages/Category/Category.jsx"));
@@ -24,6 +25,7 @@ export const App = () => {
       .catch((err) => console.error("❌ API connection failed:", err));
 
     dispatch(getCurrentUser());
+    dispatch(getAllAreas());
   }, [dispatch]);
 
   return (
