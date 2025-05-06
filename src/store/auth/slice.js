@@ -73,10 +73,8 @@ const authSlice = createSlice({
       .addCase(appClearSessionAction, (state) => {
         state.user = { ...initialState.user };
         state.error = null;
-        state.isLoadingStatus = false;
         state.isLoggedIn = false;
-        state.isOpenSignUp = false;
-        state.isOpenSignIn = false;
+        state.isLoadingStatus = false;
         state.isOpenLogOut = false;
       }),
 });
