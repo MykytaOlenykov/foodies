@@ -1,11 +1,11 @@
-import { useState } from "react";
 import { NavLink, useLocation } from "react-router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import clx from "clsx";
 
 import Auth from "../Auth/Auth";
 import HeaderNav from "./HeaderNav/HeaderNav";
 import HeaderProfile from "./HeaderProfile/HeaderProfile";
+import { openLogOut, openSignIn, openSignUp } from "../../store/auth";
 
 import styles from "./Header.module.css";
 
@@ -13,19 +13,12 @@ import styles from "./Header.module.css";
 // TODO: Temp stub for Modal
 const selectAuthIsSignedIn = () => false;
 
-// TODO: Temp stub for Modal
-const Modal = () => {
-  return null;
-};
-
 export default function Header() {
+  const dispatch = useDispatch();
+
   const { pathname } = useLocation();
 
   const isSignedIn = useSelector(selectAuthIsSignedIn);
-
-  const [modalSignInOpen, setModalSignInOpen] = useState(false);
-  const [modalSignUpOpen, setModalSignUpOpen] = useState(false);
-  const [modalLogoutOpen, setModalLogoutOpen] = useState(false);
 
   const isHome = pathname === "/" || pathname.split("/")[1] === "category";
 
@@ -41,40 +34,20 @@ export default function Header() {
 
       <HeaderNav
         isHome={isHome}
-        notAutorizedClick={() => setModalSignInOpen(true)}
+        notAutorizedClick={() => dispatch(openSignIn())}
       />
 
       {isSignedIn ? (
-        <HeaderProfile
-          onClick={() => setModalLogoutOpen(true)}
-          isHome={isHome}
-        />
+        <HeaderProfile onClick={() => dispatch(openLogOut())} isHome={isHome} />
       ) : (
         <div className={styles.authWrap}>
           <Auth
             isHomepage={isHome}
-            openSignIn={() => setModalSignInOpen(true)}
-            openSignUp={() => setModalSignUpOpen(true)}
+            openSignIn={() => dispatch(openSignIn())}
+            openSignUp={() => dispatch(openSignUp())}
           />
         </div>
       )}
-
-      {/* // TODO: FIX */}
-      <Modal
-        isOpen={!isSignedIn && modalSignInOpen}
-        onClose={() => setModalSignInOpen(false)}
-      >
-        {/* // TODO: FIX */}
-        {/* <SignInForm variant="sign-in" /> */}
-      </Modal>
-      <Modal isOpen={modalSignUpOpen} onClose={() => setModalSignUpOpen(false)}>
-        {/* // TODO: FIX */}
-        {/* <SignInForm variant="sign-up" /> */}
-      </Modal>
-      <Modal isOpen={modalLogoutOpen} onClose={() => setModalLogoutOpen(false)}>
-        {/* // TODO: FIX */}
-        {/* <Logout setModalLogoutOpen={setModalLogoutOpen} /> */}
-      </Modal>
     </header>
   );
 }
