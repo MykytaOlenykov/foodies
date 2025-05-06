@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Tabs, Tab, Box } from "@mui/material";
 
-// Dummy tab content components
+// TODO: Dummy tab content components, change to real components
 const MyRecipes = () => <div>My Recipes Content</div>;
 const MyFavorites = () => <div>My Favorites Content</div>;
 const Followers = () => <div>Followers Content</div>;
@@ -44,9 +44,13 @@ export const ProfileTabs = ({ isMyProfile }) => {
         paddingLeft: 0,
         paddingRight: 0,
         marginRight: "40px",
+        overflowX: "auto",
       },
       ".Mui-selected": {
         color: "var(--main-color) !important",
+      },
+      "& .MuiTabs-scrollButtons": {
+        color: "var(--main-color)",
       },
     },
     indicator: {
@@ -60,6 +64,9 @@ export const ProfileTabs = ({ isMyProfile }) => {
       <Tabs
         value={value}
         onChange={handleChange}
+        variant="scrollable"
+        scrollButtons="auto"
+        allowScrollButtonsMobile
         slotProps={{
           indicator: {
             sx: tabStyles.indicator,

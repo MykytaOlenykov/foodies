@@ -1,12 +1,12 @@
 .userPage {
   min-height: 60vh;
-  background-color: #fdfdfd;
+  background-color: var(--white-color);
   padding: 4rem 2rem;
 }
-
 .text {
   color: var(--button-color);
   font-size: 1rem;
+  font-weight: 500;
   line-height: 24px;
   letter-spacing: -0.32px;
   max-width: 443px;
@@ -21,4 +21,30 @@
   margin-top: 20px;
   width: 100%;
   justify-content: center;
+}
+@media (max-width: 1200px) {
+  .profileContainer {
+    flex-direction: column;
+    gap: 80px;
+    align-items: center;
+  }
+}
+@media (max-width: 768px) {
+  .userPage {
+    padding: 4rem 1rem;
+  }
+}
+@media (max-width: 440px) {
+  .text {
+    color: var(--gray-color);
+    font-size: 0.875rem;
+    line-height: 20px;
+    letter-spacing: -0.28px;
+    max-width: 100%;
+    margin-top: 16px;
+    margin-bottom: 32px;
+  }
+  .profile {
+    width: 100%;
+  }
 }

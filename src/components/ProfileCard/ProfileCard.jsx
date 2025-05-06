@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment, useRef } from "react";
 import styles from "./ProfileCard.module.css";
 import PlusIcon from "../../assets/icons/plus.svg?react";
 import { ButtonIcon } from "../ButtonIcon/ButtonIcon";
@@ -12,6 +12,9 @@ import { Typography } from "../Typography/Typography";
  */
 
 export const ProfileCard = ({ user, isMyProfile, onAvatarChange }) => {
+  const baseApiURL = import.meta.env.VITE_API_BASE_URL;
+  const fileInputRef = useRef();
+
   const {
     avatarURL,
     name,
@@ -22,22 +25,53 @@ export const ProfileCard = ({ user, isMyProfile, onAvatarChange }) => {
     followingCount,
   } = user;
 
+  const handleAvatarClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    try {
+      onAvatarChange?.(file);
+    } catch (error) {
+      //TODO add notification
+      console.error("Avatar update failed", error);
+    }
+  };
+
   return (
     <div className={styles.profileCard}>
       <div className={styles.avatarWrapper}>
-        <img
-          className={styles.avatar}
-          src={avatarURL}
-          alt={`${name}'s avatar`}
-        />
-        {isMyProfile && (
-          <ButtonIcon
-            className={styles.avatarEdit}
-            variant="dark"
-            size="small"
-            icon={<PlusIcon width={18} height={18} />}
-            onClick={onAvatarChange}
+        {avatarURL ? (
+          <img
+            className={styles.avatar}
+            src={`${baseApiURL}api/static${avatarURL}`}
+            alt={`${name}'s avatar`}
           />
+        ) : (
+          <Typography variant="h2" className={styles.fallbackAvatar}>
+            {name?.charAt(0).toUpperCase()}
+          </Typography>
+        )}
+        {isMyProfile && (
+          <Fragment>
+            <ButtonIcon
+              className={styles.avatarEdit}
+              variant="dark"
+              size="small"
+              icon={<PlusIcon width={18} height={18} />}
+              onClick={handleAvatarClick}
+            />
+            <input
+              type="file"
+              accept="image/png, image/jpeg"
+              ref={fileInputRef}
+              onChange={handleFileChange}
+              className={styles.fileInput}
+            />
+          </Fragment>
         )}
       </div>
       <Typography variant="h3">{name}</Typography>

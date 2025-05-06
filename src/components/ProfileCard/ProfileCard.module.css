@@ -10,7 +10,6 @@
   background-color: #fff;
   position: relative;
 }
-
 .avatarWrapper {
   position: relative;
   display: flex;
@@ -19,12 +18,19 @@
   width: 120px;
   height: 120px;
 }
-
 .avatar {
   width: 100%;
   border-radius: var(--border-radius-full);
 }
-
+.fallbackAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: var(--gray-color);
+  border-radius: var(--border-radius-full);
+}
 .avatarEdit {
   position: absolute;
   bottom: 0;
@@ -32,7 +38,9 @@
   transform: translate(-50%, 50%);
   z-index: 1;
 }
-
+.fileInput {
+  display: none;
+}
 .profileData {
   width: 100%;
   display: flex;
@@ -45,12 +53,10 @@
   line-height: 24px;
   letter-spacing: -0.32px;
 }
-
 .profileData div {
   text-overflow: ellipsis;
   overflow: hidden;
 }
-
 .profileData > div > label {
   color: var(--gray-color);
   font-size: 14px;
@@ -58,4 +64,14 @@
   line-height: 20px;
   letter-spacing: -0.28px;
   margin-right: 8px;
+}
+@media (max-width: 440px) {
+  .profileCard {
+    width: 100%;
+    padding: 30px 54px;
+    gap: 16px;
+  }
+  .profileData {
+    width: auto;
+  }
 }

@@ -5,35 +5,64 @@ import { ProfileTabs } from "../../components/ProfileTabs/ProfileTabs";
 import { Typography } from "../../components/Typography/Typography";
 import styles from "./UserPage.module.css";
 import { useEffect, useState } from "react";
-import { getUserDataById } from "../../services/api";
+import {
+  followUserById,
+  getUserDataById,
+  updateUserAvatar,
+} from "../../services/api";
 
 const UserPage = () => {
   const { id } = useParams();
   const [user, setUser] = useState(null);
 
-  const loggedInUserId = 1; // Replace with real current user id
+  const loggedInUserId = 26; // TODO: Replace with real current user id
   const isMyProfile = user?.id === loggedInUserId;
 
+  const fetchUserData = async () => {
+    try {
+      const data = await getUserDataById(id);
+      setUser(data.user);
+    } catch (err) {
+      //TODO: add notification
+      console.error("Failed to load user:", err);
+    }
+  };
+
   useEffect(() => {
-    getUserDataById(id)
-      .then((data) => setUser(data.user))
-      .catch((err) => {
-        console.error(err);
-        setUser({
-          id: 1,
-          name: "Jane",
-          email: "janedou@example.com",
-          avatarURL:
-            "https://img.freepik.com/premium-vector/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4866.jpg",
-          recipesCount: 10,
-          followersCount: 15,
-          favoriteRecipesCount: 10,
-          followingCount: 11,
-        });
-      });
+    fetchUserData();
   }, [id]);
 
-  if (!user) return <p>User not found</p>;
+  const handleAvatarChange = async (file) => {
+    try {
+      const data = await updateUserAvatar(file);
+      setUser((prev) => ({
+        ...prev,
+        avatarURL: data.avatarURL,
+      }));
+    } catch (error) {
+      //TODO: add notification
+      console.error("Failed to update user avatar:", error);
+    }
+  };
+
+  const handleFollow = async () => {
+    try {
+      const data = await followUserById(id);
+      //TODO: add notification
+      console.log(data.message);
+
+      // Refresh user data after follow
+      await fetchUserData();
+    } catch (error) {
+      //TODO: add notification
+      console.error("Failed to follow user:", error);
+    }
+  };
+
+  //TODO: add loader
+
+  if (!user)
+    return <section className={styles.userPage}>User not found</section>;
 
   return (
     <section className={styles.userPage}>
@@ -47,14 +76,14 @@ const UserPage = () => {
           <ProfileCard
             user={user}
             isMyProfile={isMyProfile}
-            onAvatarChange={() => alert("Change avatar clicked")}
+            onAvatarChange={handleAvatarChange}
           />
           {isMyProfile ? (
             <Button variant="dark" size="medium">
               LOG OUT
             </Button>
           ) : (
-            <Button variant="dark" size="medium">
+            <Button variant="dark" size="medium" onClick={handleFollow}>
               FOLLOW
             </Button>
           )}
