@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { register, login, logout, getCurrentUser } from "./operations";
+import { appClearSessionAction } from "../utils";
 
 const initialState = {
   user: {
@@ -68,6 +69,15 @@ const authSlice = createSlice({
       .addCase(getCurrentUser.rejected, (state) => {
         state.isLoggedIn = false;
         state.isLoadingStatus = false;
+      })
+      .addCase(appClearSessionAction, (state) => {
+        state.user = { ...initialState.user };
+        state.error = null;
+        state.isLoadingStatus = false;
+        state.isLoggedIn = false;
+        state.isOpenSignUp = false;
+        state.isOpenSignIn = false;
+        state.isOpenLogOut = false;
       }),
 });
 
