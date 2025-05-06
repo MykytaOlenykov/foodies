@@ -1,5 +1,6 @@
-import { DEFAULT_ERROR_MESSAGE } from "../constants/common";
 import { isAxiosError } from "axios";
+
+import { DEFAULT_ERROR_MESSAGE } from "../constants/common";
 
 export function normalizeHttpError(error) {
   let status = 500;
