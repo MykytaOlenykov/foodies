@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { getAllAreas } from "./operations";
+import { getAllCategories } from "./operations";
 
 const initialState = {
   items: [],
@@ -8,23 +8,23 @@ const initialState = {
   error: null,
 };
 
-const areasSlice = createSlice({
-  name: "areas",
+const categoriesSlice = createSlice({
+  name: "categories",
   initialState,
   reducers: {},
   extraReducers: (builder) =>
     builder
-      .addCase(getAllAreas.fulfilled, (state, { payload }) => {
+      .addCase(getAllCategories.fulfilled, (state, { payload }) => {
         state.items = payload;
         state.loading = false;
       })
-      .addCase(getAllAreas.pending, (state) => {
+      .addCase(getAllCategories.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getAllAreas.rejected, (state, { payload }) => {
+      .addCase(getAllCategories.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload?.error;
       }),
 });
 
-export const areasReducer = areasSlice.reducer;
+export const categoriesReducer = categoriesSlice.reducer;
