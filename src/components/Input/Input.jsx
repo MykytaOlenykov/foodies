@@ -19,6 +19,7 @@ import { Typography } from "../Typography/Typography.jsx";
  * @param {string} [props.className] - Additional CSS classes for custom styling.
  * @param {string} [props.name] - The name attribute for the input element.
  * @param {(e) => void} [props.onFocus] - Optional focus handler for the input.
+ * @param {(e) => void} [props.onBlur] - Optional blur handler for the input.
  */
 const Input = ({
   placeholder,
@@ -35,6 +36,7 @@ const Input = ({
   className,
   name,
   onFocus,
+  onBlur,
 }) => {
   const showCounter = typeof maxLength === "number";
 
@@ -51,6 +53,7 @@ const Input = ({
           disabled={disabled}
           name={name}
           onFocus={onFocus}
+          onBlur={onBlur}
         />
         {iconRight && (
           <button type="button" className={styles.iconButton} onClick={onIconClick}>

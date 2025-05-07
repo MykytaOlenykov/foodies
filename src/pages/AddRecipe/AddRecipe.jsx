@@ -36,7 +36,10 @@ const IngredientsFieldGroup = ({ ingredientsList, onAdd }) => {
           </Typography>
           <SearchSelect
             value={ingredientSearch}
-            onChange={setIngredientSearch}
+            onChange={(val) => {
+              setIngredientSearch(val);
+              if (!val) setSelectedIngredient(null);
+            }}
             items={ingredientsList}
             onSelect={(item) => {
               setSelectedIngredient(item)
@@ -59,7 +62,7 @@ const IngredientsFieldGroup = ({ ingredientsList, onAdd }) => {
         bordered
         size="medium"
         icon={<PlusIcon />}
-        disabled={!setSelectedIngredient || !measure}
+        disabled={!setSelectedIngredient || !measure || !ingredientSearch}
         onClick={() => {
           onAdd({
             ...selectedIngredient,
@@ -206,7 +209,10 @@ const AddRecipe = () => {
                   <div>
                     <SearchSelect
                       value={areaSearch}
-                      onChange={setAreaSearch}
+                      onChange={(val) => {
+                        setAreaSearch(val);
+                        if (!val) setFieldValue("area", null);
+                      }}
                       name="area"
                       items={areasList}
                       onSelect={(item) => {
@@ -227,7 +233,10 @@ const AddRecipe = () => {
                     <div>
                       <SearchSelect
                         value={categorySearch}
-                        onChange={setCategorySearch}
+                        onChange={(val) => {
+                          setCategorySearch(val);
+                          if (!val) setFieldValue("category", null);
+                        }}
                         name="category"
                         items={categoriesList}
                         onSelect={(item) => {

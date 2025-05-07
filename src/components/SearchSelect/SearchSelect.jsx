@@ -52,6 +52,16 @@ const SearchSelect = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const handleBlur = () => {
+    const exists = items.find((item) => item.name.toLowerCase() === query.toLowerCase());
+    if (exists) {
+      const selectedItem = items.find((item) => item.name.toLowerCase() === query.toLowerCase());
+      onSelect(selectedItem);
+    } else {
+      setQuery("");
+    }
+  }
+
   return (
     <div ref={wrapperRef} className={styles.wrapper} >
       <Input
@@ -62,6 +72,7 @@ const SearchSelect = ({
         iconRight={open ? <ChevronUp /> : <ChevronDown />}
         onFocus={() => setOpen(true)}
         onIconClick={() => setOpen((prev) => !prev)}
+        onBlur={handleBlur}
       />
       {open && (
         <ul className={styles.dropdownList}>
