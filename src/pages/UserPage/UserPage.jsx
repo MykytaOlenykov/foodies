@@ -109,15 +109,30 @@ const UserPage = () => {
             onAvatarChange={handleAvatarChange}
           />
           {isMyProfile ? (
-            <Button variant="dark" size="medium" onClick={handleOpenLogOut}>
+            <Button
+              variant="dark"
+              bordered={true}
+              size="medium"
+              onClick={handleOpenLogOut}
+            >
               LOG OUT
             </Button>
           ) : user.isFollowed ? (
-            <Button variant="dark" size="medium" onClick={handleUnFollow}>
+            <Button
+              variant="dark"
+              size="medium"
+              bordered={true}
+              onClick={handleUnFollow}
+            >
               FOLLOWING
             </Button>
           ) : (
-            <Button variant="dark" size="medium" onClick={handleFollow}>
+            <Button
+              variant="dark"
+              size="medium"
+              bordered={true}
+              onClick={handleFollow}
+            >
               FOLLOW
             </Button>
           )}
