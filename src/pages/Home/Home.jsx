@@ -1,6 +1,5 @@
 import styles from "./Home.module.css";
 import Hero from "../../components/Hero/Hero";
-import Categories from "../../components/Categories/Categories";
 
 export default function Home() {
   return (
