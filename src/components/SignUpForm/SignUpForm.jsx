@@ -4,21 +4,21 @@ import { Eye, EyeOff } from "lucide-react";
 
 import Input from "../Input/Input";
 import { Button } from "../Button/Button";
-import { loginValidationSchema } from "./lib";
+import { registerValidationSchema } from "./lib";
 
-import css from "./SignInForm.module.css";
+import css from "./SignUpForm.module.css";
 
-const defaultInitialValues = { email: "", password: "" };
+const defaultInitialValues = { name: "", email: "", password: "" };
 
 /**
- * SignInForm component for user login.
+ * SignUpForm component for user registration.
  *
  * @param {Object} props - Component props
  * @param {function(Object, Object): void} props.onSubmit - Callback triggered on form submit with form values and actions.
- * @param {Object} [props.initialValues] - Optional initial values for the form fields (`email`, `password`).
+ * @param {Object} [props.initialValues] - Optional initial values for the form fields (`name`, `email`, `password`).
  * @param {boolean} [props.disabled=false] - Disables all form inputs and the submit button when true.
  */
-export const SignInForm = ({
+export const SignUpForm = ({
   onSubmit,
   initialValues = {},
   disabled = false,
@@ -28,12 +28,22 @@ export const SignInForm = ({
   const { values, errors, handleChange, handleSubmit } = useFormik({
     initialValues: { ...defaultInitialValues, ...initialValues },
     onSubmit,
-    validationSchema: loginValidationSchema,
+    validationSchema: registerValidationSchema,
   });
 
   return (
     <form noValidate onSubmit={handleSubmit}>
       <div className={css.fieldsContainer}>
+        <Input
+          value={values.name}
+          error={errors.name}
+          name="name"
+          onChange={handleChange("name")}
+          placeholder="Name"
+          required
+          disabled={disabled}
+        />
+
         <Input
           value={values.email}
           error={errors.email}
@@ -66,7 +76,7 @@ export const SignInForm = ({
         bordered
         disabled={disabled}
       >
-        Sign in
+        Create
       </Button>
     </form>
   );

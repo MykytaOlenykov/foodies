@@ -1,47 +1,64 @@
 .backdrop {
-  width: 100vw;
-  height: 100vh;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); 
-  background:  rgba(38, 38, 41, 0.2);
+  inset: 0;
+  background: rgba(38, 38, 41, 0.2);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
   opacity: 0;
-  pointer-events: none; 
-  transition: opacity var(--transition-duration) var(--transition-timing-function);; 
+  pointer-events: none;
+  transition: opacity var(--transition-duration)
+    var(--transition-timing-function);
 }
+
 .backdrop.open {
   opacity: 1;
-  pointer-events: auto; 
+  pointer-events: auto;
 }
+
 .content {
-  padding: 60px 30px;
-  background-color: var(--white-color);
-  border-radius: 30px;
-  box-sizing: border-box;
   position: relative;
-  transition: transform var(--transition-duration) var(--transition-timing-function);
+
+  margin: 0 16px;
+  padding: 60px 30px;
+  max-width: 343px;
+  min-inline-size: min(280px, 100% - 32px); /* prevents edge collision */
+  width: 100%;
+  max-height: 90vh;
+
+  background-color: var(--white-color);
+  border-radius: var(--border-radius-m);
+  overflow-y: auto;
   opacity: 0;
-  transform: scale(0.95); 
+  transform: scale(0.95);
+
+  transition: transform var(--transition-duration)
+      var(--transition-timing-function),
+    opacity var(--transition-duration) var(--transition-timing-function);
+
+  @media screen and (min-width: 768px) {
+    padding: 80px;
+    max-width: 560px;
+  }
 }
+
 .content.open {
   opacity: 1;
   transform: scale(1);
 }
+
 .closeIcon {
   width: 12px;
   height: 12px;
 }
+
 .close {
   position: absolute;
   width: 24px;
   height: 24px;
-  top: 16px;
-  right: 16px;
+  top: 20px;
+  right: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,20 +68,12 @@
   color: var(--main-color);
   cursor: pointer;
   padding: 0;
-  transition: background-color var(--transition-duration) var(--transition-timing-function),
-  color var(--transition-duration) var(--transition-timing-function);
-}
-.close:hover{
-  background-color: var(--main-color);
-  color: var(--white-color);
+  transition: background-color var(--transition-duration)
+      var(--transition-timing-function),
+    color var(--transition-duration) var(--transition-timing-function);
 }
 
-@media (min-width: 768px) {
-  .content {
-    padding: 80px;
-  }
-  .close{
-    top: 20px;
-    right: 20px;
-  }
+.close:hover {
+  background-color: var(--main-color);
+  color: var(--white-color);
 }

@@ -1,9 +1,11 @@
 import styles from './Input.module.css';
+import { Typography } from "../Typography/Typography.jsx";
 
 /**
  * A reusable styled input component with optional error message and right-side icon.
  *
  * @param {Object} props
+ * @param {string} props.name - The input name used in form submission.
  * @param {string} props.placeholder - The input placeholder text. Appends "*" if the field is required.
  * @param {string} props.value - The current value of the input.
  * @param {(e: React.ChangeEvent<HTMLInputElement>) => void} props.onChange - Handler called when input value changes.
@@ -17,6 +19,7 @@ import styles from './Input.module.css';
  * @param {() => void} [props.onIconClick] - Optional click handler for the right-side icon button.
  */
 const Input = ({
+  name,
   placeholder,
   value,
   onChange,
@@ -35,6 +38,7 @@ const Input = ({
     <div className={`${styles.wrapper} ${disabled ? styles.disabled : ''}`}>
       <div className={styles.inputWrapper}>
         <input
+          name={name}
           className={`${styles.input} ${styles[variant]} ${error ? styles.error : ''}`}
           type={type}
           placeholder={required ? `${placeholder}*` : placeholder}
@@ -54,8 +58,7 @@ const Input = ({
           </div>
         )}
       </div>
-      {/*todo: replace with typography*/}
-      {error && <div className={styles.errorMessage}>{error}</div>}
+      {error && <Typography variant="body" className={styles.errorMessage}>{error}</Typography>}
     </div>
   );
 };

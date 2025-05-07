@@ -1,66 +1,57 @@
-import style from "./Modal.module.css";
-import { useEffect } from "react";
-import CloseIcon from '../../assets/icons/x.svg?react';
+import { useCallback, useEffect } from "react";
+import { createPortal } from "react-dom";
+import clsx from "clsx";
 
-/**
- * @param {object} props
- * @param {boolean} props.isOpen - Whether the modal is open or not.
- * @param {() => void} props.closeModal - Function to close the modal.
- * @param {React.ReactNode} props.children - Modal content to display inside.
- *
- * Features:
- * - Closes on backdrop click
- * - Closes on Escape key press
- * - Disables body scroll when open
- */
+import css from "./Modal.module.css";
 
-const Modal = ({ isOpen, closeModal, children }) => {
-  const handleBackdropClick = (e) => {
-    if (e.target === e.currentTarget) {
-      closeModal();
-    }
-  };
+import CloseIcon from "../../assets/icons/x.svg?react";
+
+const modalRootRef = document.getElementById("modal-root");
+
+export const Modal = ({ isOpen, closeModal, modalClassName, children }) => {
+  const handleBackdropClick = useCallback(
+    (e) => {
+      if (e.target === e.currentTarget) closeModal();
+    },
+    [closeModal],
+  );
 
   useEffect(() => {
-    const handleEsc = (event) => {
-      if (event.key === "Escape") {
-        closeModal(); 
-      }
+    const handleEsc = (e) => {
+      if (e.key === "Escape") closeModal();
     };
-    document.addEventListener("keydown", handleEsc);
+
+    if (isOpen) {
+      document.addEventListener("keydown", handleEsc);
+    }
 
     return () => {
       document.removeEventListener("keydown", handleEsc);
     };
-  }, [closeModal]);
-
+  }, [isOpen, closeModal]);
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden"; 
-    } else {
-      document.body.style.overflow = "auto";
-    }
-    
-    return () => {
-      document.body.style.overflow = "auto"; 
-    };
-  }, [isOpen]); 
+    document.body.style.overflow = isOpen ? "hidden" : "auto";
 
-  return (
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
+  return createPortal(
     <div
-      className={`${style.backdrop} ${isOpen ? style.open : ""}`} 
+      className={clsx(css.backdrop, isOpen && css.open)}
       onClick={handleBackdropClick}
     >
-      <div className={`${style.content} ${isOpen ? style.open : ""}`}>
-        <button onClick={closeModal} className={style.close} aria-label="Close modal">
-          <CloseIcon width={12} height={12} className={style.closeIcon}/>
+      <div className={clsx(css.content, isOpen && css.open, modalClassName)}>
+        <button onClick={closeModal} className={css.close}>
+          <CloseIcon className={css.closeIcon} />
         </button>
-
         {children}
       </div>
-    </div>
+    </div>,
+    modalRootRef,
   );
 };
-
-export default Modal;

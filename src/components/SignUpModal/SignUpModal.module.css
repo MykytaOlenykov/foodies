@@ -1,0 +1,56 @@
+.container {
+  width: 100%;
+}
+
+.title {
+  margin-bottom: 32px;
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 40px;
+  }
+}
+
+.text {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin-top: 16px;
+
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 150%;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  color: var(--gray-color);
+
+  @media screen and (min-width: 768px) {
+    margin-top: 20px;
+
+    font-size: 14px;
+    line-height: 129%;
+  }
+}
+
+.button {
+  padding: none;
+
+  color: var(--main-color);
+
+  background-color: transparent;
+  border: none;
+
+  cursor: pointer;
+}
+
+@media (hover: hover) {
+  .button:hover {
+    text-decoration: underline;
+  }
+}
+
+@media (hover: none) {
+  .button:active {
+    text-decoration: underline;
+  }
+}
