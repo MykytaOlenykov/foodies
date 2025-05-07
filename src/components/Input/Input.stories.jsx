@@ -43,6 +43,7 @@ export const WithIcon = () => {
 
   return (
     <Input
+      name="password"
       placeholder="Password"
       type={visible ? 'text' : 'password'}
       required
@@ -61,6 +62,7 @@ export const Variants = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '300px' }}>
       <Input
+        name="default"
         placeholder="Default input"
         value={value}
         onChange={(e) => setValue(e.target.value)}
@@ -80,6 +82,7 @@ export const WithCounter = () => {
 
   return (
     <Input
+      name="recipe"
       placeholder="Enter recipe"
       value={value}
       onChange={(e) => setValue(e.target.value)}
