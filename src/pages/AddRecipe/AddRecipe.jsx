@@ -18,7 +18,7 @@ import { useSelector } from "react-redux";
 import { selectIngredients } from "../../store/ingredients/index.js";
 import { selectCategories } from "../../store/categories/index.js";
 import { selectAreas } from "../../store/areas/index.js";
-import { object, string } from 'yup';
+import { object, string, array } from 'yup';
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import api from "../../services/api.js";
 
@@ -86,6 +86,12 @@ const validationSchema = object({
   category: object().required("Category is required"),
   area: object().required("Area is required"),
   instructions: string().required("Instructions are required"),
+  ingredients: array().of(
+    object().shape({
+      id: string().required("Ingredient ID is required"),
+      measure: string().required("Measure is required"),
+    })
+  ).min(1, "At least one ingredient is required"),
 });
 
 const AddRecipe = () => {
@@ -231,12 +237,15 @@ const AddRecipe = () => {
                   </div>
                 </div>
 
-                <IngredientsFieldGroup
-                  ingredientsList={ingredientsList}
-                  onAdd={(newData) => {
-                    setFieldValue("ingredients", [...values.ingredients, newData]);
-                  }}
-                />
+                <div>
+                  <IngredientsFieldGroup
+                    ingredientsList={ingredientsList}
+                    onAdd={(newData) => {
+                      setFieldValue("ingredients", [...values.ingredients, newData]);
+                    }}
+                  />
+                  <ErrorMessage name="ingredients" component="div" className={styles.errorMessage} />
+                </div>
 
                 {values.ingredients.length > 0 && (
                   <div className={styles.AddRecipe__ingredientsList}>
