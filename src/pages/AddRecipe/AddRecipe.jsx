@@ -14,21 +14,17 @@ import { InputStepper } from "../../components/InputStepper/InputStepper.jsx";
 import PlusIcon from "../../assets/icons/plus.svg?react";
 import clsx from "clsx";
 import { IngredientBadge } from "../../components/IngredientBadge/IngredientBadge.jsx";
-import { useDropdownLists } from "./useLists.jsx";
-
-const defaultData = {
-  image: null,
-  title: '',
-  description: '',
-  category: null,
-  cookingTime: 10,
-  ingredients: [],
-  instructions: '',
-}
+import { useSelector } from "react-redux";
+import { selectIngredients } from "../../store/ingredients/index.js";
+import { selectCategories } from "../../store/categories/index.js";
+import { selectAreas } from "../../store/areas/index.js";
+import { object, string } from 'yup';
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import api from "../../services/api.js";
 
 const IngredientsFieldGroup = ({ ingredientsList, onAdd }) => {
   const [selectedIngredient, setSelectedIngredient] = useState(null);
-  const [quantity, setQuantity] = useState('');
+  const [measure, setMeasure] = useState("");
 
   return (
     <div className={styles.IngredientsFieldGroup}>
@@ -44,8 +40,8 @@ const IngredientsFieldGroup = ({ ingredientsList, onAdd }) => {
           />
         </div>
         <Input
-          value={quantity}
-          onChange={(e) => setQuantity(e.target.value)}
+          value={measure}
+          onChange={(e) => setMeasure(e.target.value)}
           variant="underline"
           placeholder="Enter quantity"
         />
@@ -57,51 +53,76 @@ const IngredientsFieldGroup = ({ ingredientsList, onAdd }) => {
         bordered
         size="medium"
         icon={<PlusIcon />}
-        disabled={!setSelectedIngredient || !quantity}
+        disabled={!setSelectedIngredient || !measure}
         onClick={() => {
           onAdd({
             ...selectedIngredient,
-            quantity: quantity,
-          })
+            measure: measure,
+          });
           setSelectedIngredient(null);
-          setQuantity('');
+          setMeasure("");
         }}
       >
         Add ingredient
       </Button>
     </div>
-  )
-}
+  );
+};
+
+const defaultData = {
+  image: null,
+  title: "",
+  description: "",
+  category: null,
+  area: null,
+  cookingTime: 10,
+  ingredients: [],
+  instructions: "",
+};
+
+const validationSchema = object({
+  title: string().required("Recipe title is required"),
+  description: string().required("Description is required"),
+  category: object().required("Category is required"),
+  area: object().required("Area is required"),
+  instructions: string().required("Instructions are required"),
+});
 
 const AddRecipe = () => {
-  const { ingredientsList, categoriesList } = useDropdownLists();
-  const [data, setData] = useState(defaultData);
+  const ingredientsList = useSelector(selectIngredients);
+  const categoriesList = useSelector(selectCategories);
+  const areasList = useSelector(selectAreas);
 
-  const onSubmit = () => {
-    const dataToSend = {
-      title: data.title,
-      categoryId: data.category.id,
-      areaId: null,
-      description: data.description,
-      instructions: data.instructions,
-      time: data.cookingTime,
-      ingredients: data.ingredients.map((ingredient) => ({
-        id: ingredient.id,
-        quantity: ingredient.quantity,
-      })),
-      thumb: data.image,
+  const onSubmit = async (values, { setSubmitting, resetForm, setStatus }) => {
+    setSubmitting(true);
+
+    const formData = new FormData();
+
+    formData.append("file", values.image);
+    formData.append("title", values.title);
+    formData.append("description", values.description);
+    formData.append("categoryId", values.category.id);
+    formData.append("areaId", values.area.id);
+    formData.append("time", values.cookingTime.toString());
+    formData.append("instructions", values.instructions);
+
+    values.ingredients.forEach((ing, i) => {
+      formData.append(`ingredients[${i}][id]`,    ing.id);
+      formData.append(`ingredients[${i}][measure]`, ing.measure);
+    });
+
+    try {
+      await api.post("/recipes", formData);
+      resetForm();
+      setStatus({ success: true });
+    } catch (err) {
+      console.error("Error creating recipe:", err);
+      setStatus({ error: "Failed to create recipe. Please try again." });
+    } finally {
+      setSubmitting(false);
     }
-
-    console.log(dataToSend);
-  }
-
-  const onImageUpload = (file) => {
-    setData({ ...data, image: file });
   };
 
-  const onClear = () => {
-    setData(defaultData);
-  };
 
   return (
     <Container>
@@ -113,130 +134,176 @@ const AddRecipe = () => {
             Home
           </BreadcrumbsItem>
           <BreadcrumbsDivider />
-          <BreadcrumbsItem isActive>
-            Add recipe
-          </BreadcrumbsItem>
+          <BreadcrumbsItem isActive>Add recipe</BreadcrumbsItem>
         </Breadcrumbs>
 
         <div className={styles.AddRecipe__header}>
           <Typography variant="h2">
-              Add recipe
-            </Typography>
-            <Typography variant="body">
-              Reveal your culinary art, share your favorite recipe and create gastronomic masterpieces with us.
-            </Typography>
+            Add recipe
+          </Typography>
+          <Typography variant="body">
+            Reveal your culinary art, share your favorite recipe and create gastronomic masterpieces with us.
+          </Typography>
         </div>
 
-        <form className={styles.AddRecipe__form}>
-          <ImageUpload onUpload={onImageUpload} />
+        <Formik
+          initialValues={defaultData}
+          validationSchema={validationSchema}
+          onSubmit={onSubmit}
+        >
+          {({ setFieldValue, values, resetForm, isSubmitting }) => (
+            <Form className={styles.AddRecipe__form}>
+              <ImageUpload onUpload={(file) => setFieldValue('image', file)} />
 
-          <div className={styles.AddRecipe__inputs}>
-            <div className={styles.AddRecipe__inputGroup_top}>
-              <Input
-                value={data.title}
-                onChange={(e) => setData({ ...data, title: e.target.value })}
-                variant="ghost"
-                placeholder="The name of the recipe"
-              />
-              <Textarea
-                value={data.description}
-                onChange={(e) => setData({ ...data, description: e.target.value })}
-                placeholder="Enter a description of the dish"
-              />
-            </div>
+              <div className={styles.AddRecipe__inputs}>
+                <div className={styles.AddRecipe__inputGroup_top}>
+                  <div>
+                    <Field
+                      name="title"
+                      as={Input}
+                      variant="ghost"
+                      placeholder="The name of the recipe"
+                    />
+                    <ErrorMessage name="title" component="div" className={styles.errorMessage} />
+                  </div>
 
-            <div className={styles.AddRecipe__inputGroupWrapper}>
-            <div className={styles.AddRecipe__inputGroup}>
-              <Typography variant="h4">
-                Category
-              </Typography>
-              <SearchSelect
-                items={categoriesList}
-                onSelect={(item) => setData({ ...data, category: item })}
-                placeholder="Select a category"
-              />
-            </div>
+                  <div>
+                    <Field
+                      name="description"
+                      as={Textarea}
+                      placeholder="Enter a description of the dish"
+                    />
+                    <ErrorMessage name="description" component="div" className={styles.errorMessage} />
+                  </div>
+                </div>
 
-            <div className={styles.AddRecipe__inputGroup}>
-              <Typography variant="h4">
-                Cooking time
-              </Typography>
-              <InputStepper
-                value={data.cookingTime}
-                onChange={(value) => setData({ ...data, cookingTime: value })}
-              />
-            </div>
-            </div>
+                <div className={styles.AddRecipe__inputGroup}>
+                  <Typography variant="h4">
+                    Area
+                  </Typography>
+                  <div>
+                    <Field
+                      name="area"
+                      render={({ field }) => (
+                        <SearchSelect
+                          {...field}
+                          items={areasList}
+                          onSelect={(item) => setFieldValue("area", item)}
+                          placeholder="Select an area"
+                        />
+                      )}
+                    />
+                    <ErrorMessage name="area" component="div" className={styles.errorMessage} />
+                  </div>
+                </div>
 
-            <IngredientsFieldGroup
-              ingredientsList={ingredientsList}
-              onAdd={(newData) => {
-                setData((prev) => ({
-                  ...prev,
-                  ingredients: [...prev.ingredients, newData],
-                }));
-              }}
-            />
+                <div className={styles.AddRecipe__inputGroupWrapper}>
+                  <div className={styles.AddRecipe__inputGroup}>
+                    <Typography variant="h4">
+                      Category
+                    </Typography>
+                    <div>
+                      <Field
+                        name="category"
+                        render={({ field }) => (
+                          <SearchSelect
+                            {...field}
+                            items={categoriesList}
+                            onSelect={(item) => setFieldValue("category", item)}
+                            placeholder="Select a category"
+                          />
+                        )}
+                      />
+                      <ErrorMessage name="category" component="div" className={styles.errorMessage} />
+                    </div>
+                  </div>
 
-            {data.ingredients.length > 0 && (
-              <div className={styles.AddRecipe__ingredientsList}>
-                {data.ingredients.map((ingredient) => (
-                  <IngredientBadge
-                    imgURL={ingredient.imgURL}
-                    name={ingredient.name}
-                    measure={ingredient.quantity}
-                    key={ingredient.id}
-                    onDelete={() => {
-                      setData((prev) => ({
-                        ...prev,
-                        ingredients: prev.ingredients.filter((i) => i.id !== ingredient.id),
-                      }));
+                  <div className={styles.AddRecipe__inputGroup}>
+                    <Typography variant="h4">
+                      Cooking time
+                    </Typography>
+                    <Field
+                      name="cookingTime"
+                      component={InputStepper}
+                      value={values.cookingTime}
+                      onChange={(value) => setFieldValue("cookingTime", value)}
+                    />
+                  </div>
+                </div>
+
+                <IngredientsFieldGroup
+                  ingredientsList={ingredientsList}
+                  onAdd={(newData) => {
+                    setFieldValue("ingredients", [...values.ingredients, newData]);
+                  }}
+                />
+
+                {values.ingredients.length > 0 && (
+                  <div className={styles.AddRecipe__ingredientsList}>
+                    {values.ingredients.map((ingredient) => (
+                      <IngredientBadge
+                        imgURL={ingredient.imgURL}
+                        name={ingredient.name}
+                        measure={ingredient.measure}
+                        key={ingredient.id}
+                        onDelete={() => {
+                          setFieldValue(
+                            "ingredients",
+                            values.ingredients.filter((i) => i.id !== ingredient.id)
+                          );
+                        }}
+                      />
+                    ))}
+                  </div>
+                )}
+
+                <div className={clsx(
+                  styles.AddRecipe__inputGroup,
+                  styles.AddRecipe__inputGroup_bottom,
+                )}>
+                  <Typography variant="h4">
+                    Recipe Preparation
+                  </Typography>
+                  <div>
+                    <Field
+                      name="instructions"
+                      as={Textarea}
+                      placeholder="Enter recipe"
+                    />
+                    <ErrorMessage name="instructions" component="div" className={styles.errorMessage} />
+                  </div>
+                </div>
+
+                <div className={styles.AddRecipe__actions}>
+                  <ButtonIcon
+                    icon={<TrashIcon />}
+                    variant="light"
+                    size="large"
+                    type="button"
+                    disabled={isSubmitting}
+                    onClick={() => {
+                      resetForm();
                     }}
                   />
-                ))}
+                  <Button
+                    className={styles.AddRecipe__publishBtn}
+                    variant="dark"
+                    size="small"
+                    type="submit"
+                    disabled={isSubmitting}
+                  >
+                    Publish
+                  </Button>
+                </div>
               </div>
-            )}
-
-            <div className={clsx(
-              styles.AddRecipe__inputGroup,
-              styles.AddRecipe__inputGroup_bottom,
-            )}>
-              <Typography variant="h4">
-                Recipe Preparation
-              </Typography>
-              <Textarea
-                value={data.instructions}
-                onChange={(e) => setData({ ...data, instructions: e.target.value })}
-                placeholder="Enter recipe"
-              />
-            </div>
-
-            <div className={styles.AddRecipe__actions}>
-              <ButtonIcon
-                icon={<TrashIcon />}
-                variant="light"
-                size="large"
-                type="button"
-                onClick={onClear}
-              />
-              <Button
-                className={styles.AddRecipe__publishBtn}
-                variant="dark"
-                size="small"
-                type="submit"
-                onClick={(e) => {
-                  e.preventDefault();
-                  onSubmit();
-                }}
-              >
-                Publish
-              </Button>
-            </div>
-          </div>
-        </form>
+            </Form>
+          )}
+        </Formik>
       </div>
     </Container>
   );
-}
+};
 
-export default AddRecipe
+export default AddRecipe;
+
+

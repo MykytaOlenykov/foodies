@@ -12,6 +12,7 @@ const MAX_LENGTH = 200;
  * @param {string} [props.placeholder] - Placeholder text
  * @param {boolean} [props.disabled] - Whether the textarea is disabled
  * @param {boolean} [props.required] - Whether the textarea is required
+ * @param {string} [props.name] - Name of the textarea
  */
 const Textarea = ({
   value = '',
@@ -20,6 +21,7 @@ const Textarea = ({
   maxLength = MAX_LENGTH,
   disabled = false,
   required = false,
+  name,
 }) => {
   const ref = useRef(null);
 
@@ -38,11 +40,12 @@ const Textarea = ({
   return (
     <div className={styles.TextareaContainer}>
       <textarea
+        name={name}
         ref={ref}
         className={styles.Textarea}
         value={value}
         onChange={onChange}
-        placeholder={placeholder}
+        placeholder={required ? `${placeholder}*` : placeholder}
         disabled={disabled}
         required={required}
       />

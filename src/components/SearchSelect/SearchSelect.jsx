@@ -8,10 +8,12 @@ import { Typography } from "../Typography/Typography.jsx";
 /**
  * @param {Object} props
  * @param {{ id: number, name: string }[]} props.items - List of options to display
+ * @param {string} props.name - Name of the input field
  * @param {function} props.onSelect - Callback with selected item { id, name }
  * @param {string} props.placeholder - Placeholder for the input field
+ * @param {boolean} [props.required] - Whether the input is required
  */
-const SearchSelect = ({ items, onSelect, placeholder = "Select item" }) => {
+const SearchSelect = ({ name, items, onSelect, placeholder = "Select item", required }) => {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
 
@@ -30,12 +32,13 @@ const SearchSelect = ({ items, onSelect, placeholder = "Select item" }) => {
   return (
     <div className={styles.wrapper}>
       <Input
+        name={name}
         value={query}
         onChange={(e) => {
           setQuery(e.target.value);
           setOpen(true);
         }}
-        placeholder={placeholder}
+        placeholder={required ? `${placeholder}*` : placeholder}
         iconRight={open ? <ChevronUp /> : <ChevronDown />}
         onIconClick={toggleOpen}
       />

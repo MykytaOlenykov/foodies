@@ -155,3 +155,10 @@
     flex-wrap: wrap;
     max-width: 649px;
 }
+
+.errorMessage {
+    color: var(--red-color);
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 4px;
+}
