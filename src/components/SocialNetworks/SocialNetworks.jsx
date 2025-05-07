@@ -39,7 +39,7 @@ export const SocialNetworks = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className={clsx(styles.light, styles.small, styles.link)}
+              className={clsx(styles.light, styles.link)}
             >
               <Icon />
             </a>
