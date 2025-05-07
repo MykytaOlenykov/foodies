@@ -1,26 +1,124 @@
 .card {
-  display: block;
-  width: 150px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  text-decoration: none;
-  color: inherit;
-  overflow: hidden;
-  transition: transform 0.2s ease;
-}
-
-.card:hover {
-  transform: scale(1.03);
+  background-color: var(--white-color);
+  max-width: 551px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .image {
-  width: 150px;
-  height: 100px;
+  width: 100%;
+  height: 230px;
+  max-width: 551px;
   object-fit: cover;
+  border-radius: 30px;
+  margin-bottom: 16px;
 }
 
-.title {
-  padding: 8px;
-  font-weight: bold;
-  text-align: center;
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-grow: 1;
+}
+
+.description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 8px;
+}
+
+.wrap {
+  display: flex;
+  gap: 4px;
+}
+
+.heart,
+.arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 30px;
+  border: 1px solid var(--gray-color);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.heart svg,
+.arrow svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: var(--main-color);
+}
+
+.heart.active {
+  background-color: var(--main-color);
+  border-color: var(--main-color);
+}
+
+.heart.active svg {
+  stroke: var(--white-color);
+}
+
+.heart:hover,
+.arrow:hover {
+  background-color: var(--main-color);
+  border-color: var(--main-color);
+}
+
+.heart:hover svg,
+.arrow:hover svg {
+  stroke: var(--white-color);
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .image {
+    height: 275px;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .heart,
+  .arrow {
+    width: 42px;
+    height: 42px;
+  }
+
+  .heart svg,
+  .arrow svg {
+    width: 18px;
+    height: 18px;
+  }
 }

@@ -1,33 +1,28 @@
-import RecipeCard from "../RecipeCard/RecipeCard";
+import styles from "./PopularRecipes.module.css";
+import { Typography } from "../Typography/Typography";
+import RecipeCardContainer from "../RecipeCardContainer/RecipeCardContainer";
 
-const PopularRecipes = () => {
-  // Тимчасові мок-дані
-  const mockPopular = [
-    {
-      id: 1,
-      title: "Avocado Toast",
-      preview: "https://via.placeholder.com/150x100?text=Avocado+Toast",
-    },
-    {
-      id: 2,
-      title: "Chocolate Cake",
-      preview: "https://via.placeholder.com/150x100?text=Chocolate+Cake",
-    },
-    {
-      id: 3,
-      title: "Spaghetti Bolognese",
-      preview: "https://via.placeholder.com/150x100?text=Spaghetti",
-    },
-  ];
+const PopularRecipes = ({ recipes = [] }) => {
+  if (!recipes.length) {
+    return (
+      <Typography variant="body" textColor="gray" className={styles.message}>
+        No popular recipes available.
+      </Typography>
+    );
+  }
 
   return (
-    <section>
-      <h2>Popular Recipes</h2>
-      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
-        {mockPopular.map((recipe) => (
-          <RecipeCard key={recipe.id} recipe={recipe} />
+    <section className={styles.popular}>
+      <Typography variant="h3" textColor="black" className={styles.title}>
+        Popular Recipes
+      </Typography>
+      <ul className={styles.list}>
+        {recipes.slice(0, 4).map((recipe) => (
+          <li key={recipe._id?.$oid || recipe.id}>
+            <RecipeCardContainer recipe={recipe} />
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 };

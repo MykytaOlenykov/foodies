@@ -1,0 +1,40 @@
+.popular {
+  margin-top: 64px;
+  margin-bottom: 64px;
+}
+
+.title {
+  margin-bottom: 32px;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .popular {
+    margin-top: 100px;
+    margin-bottom: 100px;
+  }
+
+  .title {
+    margin-bottom: 40px;
+  }
+
+  .list {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    column-gap: 20px;
+    row-gap: 40px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1440px) {
+  .list {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+}

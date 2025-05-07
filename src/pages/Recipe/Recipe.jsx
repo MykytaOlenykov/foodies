@@ -1,5 +1,74 @@
+// import { useParams } from "react-router-dom";
+// import { useEffect, useState } from "react";
+// import PathInfo from "../../components/PathInfo/PathInfo";
+// import RecipeInfo from "../../components/RecipeInfo/RecipeInfo";
+// import PopularRecipes from "../../components/PopularRecipes/PopularRecipes";
+// import { getRecipeById, getPopularRecipes } from "../../services/recipes";
+
+// const RecipePage = () => {
+//   const { id } = useParams();
+
+//   const [recipe, setRecipe] = useState(null);
+//   const [popular, setPopular] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState("");
+
+//   useEffect(() => {
+//     if (!id) {
+//       console.log("No recipe ID in params");
+//       return;
+//     }
+
+//     console.log("Fetching data for recipe ID:", id);
+
+//     const fetchData = async () => {
+//       try {
+//         setLoading(true);
+
+//         const recipeRes = await getRecipeById(id);
+//         console.log("Recipe response:", recipeRes);
+
+//         const popularRes = await getPopularRecipes();
+//         console.log("Popular response:", popularRes);
+
+//         const recipeData = recipeRes.data.recipe || recipeRes.data.data?.recipe;
+//         const popularData =
+//           popularRes.data.recipes || popularRes.data.data || [];
+
+//         if (!recipeData) {
+//           throw new Error("Recipe not found in response");
+//         }
+
+//         setRecipe(recipeData);
+//         setPopular(popularData);
+//       } catch (err) {
+//         console.error("Fetch error:", err);
+//         setError("Something went wrong while loading recipe data.");
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchData();
+//   }, [id]);
+
+//   if (loading) return <p>Loading...</p>;
+//   if (error || !recipe) return <p>{error || "Recipe not found."}</p>;
+
+//   return (
+//     <div>
+//       <PathInfo current={recipe.title} />
+//       <RecipeInfo recipe={recipe} favoriteRecipes={[]} />
+//       <PopularRecipes recipes={popular} />
+//     </div>
+//   );
+// };
+
+// export default RecipePage;
+
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import Container from "../../components/UI/Container/Container";
 import PathInfo from "../../components/PathInfo/PathInfo";
 import RecipeInfo from "../../components/RecipeInfo/RecipeInfo";
 import PopularRecipes from "../../components/PopularRecipes/PopularRecipes";
@@ -81,12 +150,73 @@ const RecipePage = () => {
       "Pour cake mixture into prepared tin and smooth out. Bake in preheated oven for 20 minutes. Reduce the oven temperature to 160 C / Gas 2 and bake again for 30 minutes. Bake until the cake is golden brown and a skewer comes out clean. Cool on a wire cake rack.",
   };
 
+  const mockFavorites = [
+    {
+      id: 283,
+    },
+  ];
+
+  const mockPopular = [
+    {
+      id: 101,
+      title: "Avocado Toast",
+      description: "Healthy toast with avocado, egg and greens.",
+      preview:
+        "https://cdn.pixabay.com/photo/2016/03/05/19/02/hamburger-1238246_1280.jpg",
+      user: {
+        id: 1,
+        name: "Marta Green",
+        avatar:
+          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+      },
+    },
+    {
+      id: 102,
+      title: "Spaghetti Bolognese",
+      description: "Classic Italian pasta with meat sauce.",
+      preview:
+        "https://cdn.pixabay.com/photo/2017/05/07/08/56/spaghetti-2291908_1280.jpg",
+      user: {
+        id: 2,
+        name: "Luca Rossi",
+        avatar:
+          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+      },
+    },
+    {
+      id: 103,
+      title: "Greek Salad",
+      description: "Fresh salad with feta, olives and cucumbers.",
+      preview:
+        "https://cdn.pixabay.com/photo/2016/03/05/19/02/salad-1238247_1280.jpg",
+      user: {
+        id: 3,
+        name: "Nikos Papas",
+        avatar:
+          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+      },
+    },
+    {
+      id: 104,
+      title: "Chicken Curry",
+      description: "Spicy Indian-style chicken in rich sauce.",
+      preview:
+        "https://cdn.pixabay.com/photo/2017/05/07/08/56/spaghetti-2291908_1280.jpg",
+      user: {
+        id: 4,
+        name: "Anjali Sharma",
+        avatar:
+          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+      },
+    },
+  ];
+
   return (
-    <div>
-      <PathInfo currentPage={mockRecipe.title} />
-      <RecipeInfo recipe={mockRecipe} />
-      <PopularRecipes />
-    </div>
+    <Container>
+      <PathInfo current={mockRecipe.title} />
+      <RecipeInfo recipe={mockRecipe} favoriteRecipes={mockFavorites} />
+      <PopularRecipes recipes={mockPopular} />
+    </Container>
   );
 };
 
