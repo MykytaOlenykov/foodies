@@ -14,6 +14,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../store/auth/selectors";
 import { useBreakpoint } from "../../hooks/useBreakpoint";
 import { openLogOut } from "../../store/auth";
+import { normalizeHttpError } from "../../utils";
+import toast from "react-hot-toast";
+import { DEFAULT_ERROR_MESSAGE } from "../../constants/common";
 
 const UserPage = () => {
   const { id } = useParams();
@@ -31,8 +34,8 @@ const UserPage = () => {
       const data = await getUserDataById(id);
       setUser(data.user);
     } catch (err) {
-      //TODO: add notification
-      console.error("Failed to load user:", err);
+      const error = normalizeHttpError(err);
+      toast.error(error.message);
     }
   };
 
@@ -47,37 +50,35 @@ const UserPage = () => {
         ...prev,
         avatarURL: data.avatarURL,
       }));
-    } catch (error) {
-      //TODO: add notification
-      console.error("Failed to update user avatar:", error);
+    } catch (err) {
+      const error = normalizeHttpError(err);
+      toast.error(error.message);
     }
   };
 
   const handleFollow = async () => {
     try {
       const data = await followUserById(id);
-      //TODO: add notification
-      console.log(data.message);
+      toast.success(data.message);
 
       // Refresh user data after follow
       await fetchUserData();
-    } catch (error) {
-      //TODO: add notification
-      console.error("Failed to follow user:", error);
+    } catch (err) {
+      const error = normalizeHttpError(err);
+      toast.error(error.message);
     }
   };
 
   const handleUnFollow = async () => {
     try {
       const data = await unfollowUserById(id);
-      //TODO: add notification
-      console.log(data.message);
+      toast.success(data.message);
 
       // Refresh user data after follow
       await fetchUserData();
-    } catch (error) {
-      //TODO: add notification
-      console.error("Failed to unfollow user:", error);
+    } catch (err) {
+      const error = normalizeHttpError(err);
+      toast.error(error.message);
     }
   };
 
