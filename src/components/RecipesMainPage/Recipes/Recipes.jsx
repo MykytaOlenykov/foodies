@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import ArrowLefttIcon from "../../../assets/icons/arrow-left.svg?react";
 import Container from "../../UI/Container/Container.jsx";
 import Categories from "../../Categories/Categories.jsx";
@@ -9,7 +8,6 @@ import css from "./Recipes.module.css";
 
 const Recipes = (category) => {
   const [showCategories, setShowCategories] = useState(false);
-  const testimonials = useSelector((state) => state.testimonials.items);
 
   if (showCategories) {
     return <Categories />;
@@ -39,7 +37,6 @@ const Recipes = (category) => {
           </p>
         </div>
         <RecipeList category={category} />
-        <Testimonials data={testimonials} />
       </div>
     </Container>
   );

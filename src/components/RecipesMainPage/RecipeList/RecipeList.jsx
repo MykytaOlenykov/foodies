@@ -6,23 +6,28 @@ import { fetchRecipesByCategory } from "../../../store/recipes/operations.js";
 import { useBreakpoint } from "../../../hooks/useBreakpoint.js";
 import SearchSelect from "../../SearchSelect/SearchSelect.jsx";
 import Loader from "../../Loader/Loader.jsx";
+import { selectAreas } from "../../../store/areas/selectors.js";
+import { selectIngredients } from "../../../store/ingredients/selectors.js";
 import css from "./RecipeList.module.css";
 
 const RecipeList = ({ category }) => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedRecipes, setSelectedRecipes] = useState([]);
-  const ingredients = useSelector((state) => state.ingredients.items);
-  const areas = useSelector((state) => state.areas.items);
   const loading = useSelector((state) => state.recipes.loading);
   const error = useSelector((state) => state.recipes.error);
   const [selectedIngredient, setSelectedIngredient] = useState(null);
   const [selectedArea, setSelectedArea] = useState(null);
-  const mediaMode = useBreakpoint();
+  const areas = useSelector(selectAreas);
+  const ingredients = useSelector(selectIngredients);
 
   let recipesPerPage = 12; // Default for Desktop and Tablet
 
-  if (mediaMode === "mobile" || mediaMode === "small-mobile") {
+  const breakpoint = useBreakpoint();
+
+  const isMobile = ["mobile", "small-mobile"].includes(breakpoint);
+
+  if (isMobile) {
     recipesPerPage = 8;
   }
 
@@ -99,7 +104,7 @@ const RecipeList = ({ category }) => {
                 description={recipe.description}
                 owner={recipe.owner}
                 favorited={recipe.isFavorite}
-                mediaMode={mediaMode}
+                mediaMode={breakpoint}
               />
             ))}
           </div>

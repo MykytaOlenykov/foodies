@@ -31,7 +31,6 @@ export const App = () => {
     dispatch(getAllAreas());
     dispatch(getAllCategories());
     dispatch(getAllIngredients());
-    dispatch(getAllTestimonials());
   }, [dispatch]);
 
   return (
