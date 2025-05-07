@@ -19,7 +19,7 @@ export const App = () => {
       .then(() => console.log("✅ API is reachable"))
       .catch((err) => console.error("❌ API connection failed:", err));
   }, []);
-  
+
   return (
     <Routes>
       <Route path="/" element={<SharedLayout />}>
@@ -29,7 +29,7 @@ export const App = () => {
         <Route path="/recipe/:recipeId" element={<Recipe />} />
         <Route
           path="/recipe/add"
-          element={<PrivateRoute component={AddRecipe} />}
+          element={<PrivateRoute element={<AddRecipe />} />}
         />
         <Route path="/auth/verify/:token" element={<Verify />} />
         <Route path="*" element={<NotFound />} />

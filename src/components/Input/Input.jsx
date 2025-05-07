@@ -10,7 +10,7 @@ import { Typography } from "../Typography/Typography.jsx";
  * @param {(e: React.ChangeEvent<HTMLInputElement>) => void} props.onChange - Handler called when input value changes.
  * @param {string} [props.type='text'] - The HTML input type (e.g. 'text', 'password').
  * @param {string} [props.error] - Optional error message shown below the input.
- * @param {'default' | 'underline'} [variant='default'] - Visual style of the input.
+ * @param {'default' | 'underline' | 'ghost'} [variant='default'] - Visual style of the input.
  * @param {number} [props.maxLength] - Maximum number of characters allowed in the input.
  * @param {boolean} [props.disabled=false] - If true, the input is disabled.
  * @param {boolean} [props.required=false] - If true, appends "*" to the placeholder and sets `required` on the input.
@@ -29,11 +29,12 @@ const Input = ({
   required = false,
   iconRight,
   onIconClick,
+  className,
 }) => {
   const showCounter = typeof maxLength === 'number';
 
   return (
-    <div className={`${styles.wrapper} ${disabled ? styles.disabled : ''}`}>
+    <div className={`${styles.wrapper} ${disabled ? styles.disabled : ''} ${className}`}>
       <div className={styles.inputWrapper}>
         <input
           className={`${styles.input} ${styles[variant]} ${error ? styles.error : ''}`}

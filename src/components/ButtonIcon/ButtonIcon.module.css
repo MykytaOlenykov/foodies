@@ -29,6 +29,16 @@
     height: 18px;
 }
 
+.ButtonIcon.large {
+    width: 48px;
+    height: 48px;
+}
+
+.ButtonIcon.large svg {
+    width: 20px;
+    height: 20px;
+}
+
 .ButtonIcon.light {
     background: var(--white-color);
     color: var(--main-color);

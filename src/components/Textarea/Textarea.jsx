@@ -14,7 +14,7 @@ const MAX_LENGTH = 200;
  * @param {boolean} [props.required] - Whether the textarea is required
  */
 const Textarea = ({
-  value,
+  value = '',
   onChange,
   placeholder = '',
   maxLength = MAX_LENGTH,
@@ -27,8 +27,10 @@ const Textarea = ({
     const ta = ref.current;
     if (!ta) return;
 
-    ta.style.height = 'auto';
-    ta.style.height = ta.scrollHeight + 'px';
+    ta.style.height = '28px';
+    if(value) {
+      ta.style.height = ta.scrollHeight + 'px';
+    }
   }, [value]);
 
   const overLimit = value.length > maxLength;
