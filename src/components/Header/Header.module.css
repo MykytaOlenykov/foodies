@@ -1,87 +1,87 @@
 .header {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-radius: var(--border-radius-m) var(--border-radius-m) 0 0;
-  background-color: var(--main-color);
-  padding: 68px 8px 0 8px;
-  margin: 8px 8px 0 8px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  padding: 24px 0;
+  width: 100%;
+
+  @media screen and (min-width: 768px) {
+    padding: 36px 0;
+  }
+
+  @media screen and (min-width: 1440px) {
+    padding: 40px 0;
+  }
 }
 
-.headerAll {
-  color: var(--main-color);
-  background-color: inherit;
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 24px;
+
+  @media screen and (min-width: 768px) {
+    padding: 0 48px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    padding: 0 80px;
+  }
 }
 
 .logo {
-  position: absolute;
-  left: 16px;
-  top: 23px;
-  color: var(--white-color);
-  font-size: 20px;
   font-weight: 800;
-  line-height: 1.2;
-  letter-spacing: -0.4px;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: -0.02em;
   text-transform: lowercase;
-}
-
-.logo_white {
+  text-decoration: none;
   color: var(--main-color);
-  background-color: var(--white-color);
+
+  @media screen and (min-width: 768px) {
+    font-size: 24px;
+    line-height: 117%;
+    letter-spacing: -0.02em;
+  }
 }
 
-.authWrap {
-  position: absolute;
-  right: 16px;
-  top: 19px;
+.whiteLogo {
+  color: var(--white-color);
+}
+
+.menuBtn {
+  margin-left: 4px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.menuIcon {
+  width: 28px;
+  height: 28px;
+  fill: var(--main-color);
+}
+
+.menuBtn:hover .menuIcon {
+  stroke: var(--main-color);
+}
+
+.whiteMenuBtn .menuIcon {
+  fill: var(--white-color);
+}
+
+.whiteMenuBtn:hover .menuIcon {
+  stroke: var(--white-color);
+}
+
+.profileContainer {
   display: flex;
-  gap: 8px;
-  z-index: 10;
-}
-
-@media screen and (min-width: 768px) {
-  .header {
-    padding: 22px 32px 0 32px;
-    margin: 16px 16px 0 16px;
-  }
-
-  .headerAll {
-    padding: 38px 48px 0 48px;
-  }
-
-  .header ul {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0px;
-  }
-
-  .logo {
-    left: 32px;
-    top: 29px;
-  }
-
-  .authWrap {
-    position: static;
-    gap: 16px;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .header {
-    margin: 20px 20px 0 20px;
-  }
-
-  .headerAll {
-    margin: 40px 20px 0 20px;
-  }
-
-  .header ul {
-    gap: 40px;
-  }
-
-  .logo {
-    left: 60px;
-  }
+  justify-content: center;
+  align-items: center;
 }

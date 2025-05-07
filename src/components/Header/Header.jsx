@@ -1,53 +1,63 @@
+import { useState } from "react";
 import { NavLink, useLocation } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import clx from "clsx";
 
 import Auth from "../Auth/Auth";
 import HeaderNav from "./HeaderNav/HeaderNav";
-import HeaderProfile from "./HeaderProfile/HeaderProfile";
-import { openLogOut, openSignIn, openSignUp } from "../../store/auth";
+import Container from "../UI/Container/Container";
+import { HeaderProfile } from "./HeaderProfile";
+import { useBreakpoint } from "../../hooks/useBreakpoint";
+import { openSignIn, selectIsLoggedIn } from "../../store/auth";
 
-import styles from "./Header.module.css";
+import css from "./Header.module.css";
 
-// Temp stub instead of Redux-selector
-// TODO: Temp stub for Modal
-const selectAuthIsSignedIn = () => false;
+import BurgerMenuIcon from "../../assets/icons/burger-menu.svg?react";
 
 export default function Header() {
   const dispatch = useDispatch();
+  const breakpoint = useBreakpoint();
+  const isMobile = ["mobile", "small-mobile"].includes(breakpoint);
+  const [_, setIsOpenMenu] = useState(false);
 
   const { pathname } = useLocation();
 
-  const isSignedIn = useSelector(selectAuthIsSignedIn);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const isHome = pathname === "/" || pathname.split("/")[1] === "category";
 
   return (
-    <header className={clx(isHome ? styles.header : styles.headerAll)}>
-      <NavLink
-        className={clx(styles.logo, !isHome && styles.logo_white)}
-        to="/"
-        aria-label="Logo Foodies"
-      >
-        Foodies
-      </NavLink>
+    <header className={css.header}>
+      <Container className={css.container}>
+        <NavLink
+          className={clx(css.logo, isHome && css.whiteLogo)}
+          to="/"
+          aria-label="Logo Foodies"
+        >
+          Foodies
+        </NavLink>
 
-      <HeaderNav
-        isHome={isHome}
-        notAutorizedClick={() => dispatch(openSignIn())}
-      />
-
-      {isSignedIn ? (
-        <HeaderProfile onClick={() => dispatch(openLogOut())} isHome={isHome} />
-      ) : (
-        <div className={styles.authWrap}>
-          <Auth
-            isHomepage={isHome}
-            openSignIn={() => dispatch(openSignIn())}
-            openSignUp={() => dispatch(openSignUp())}
+        {isLoggedIn && (
+          <HeaderNav
+            isHome={isHome}
+            notAutorizedClick={() => dispatch(openSignIn())}
           />
+        )}
+
+        <div className={css.profileContainer}>
+          {isLoggedIn ? <HeaderProfile /> : <Auth />}
+
+          {isMobile && isLoggedIn && (
+            <button
+              type="button"
+              className={clx(css.menuBtn, isHome && css.whiteMenuBtn)}
+              onClick={() => setIsOpenMenu(true)}
+            >
+              <BurgerMenuIcon className={css.menuIcon} />
+            </button>
+          )}
         </div>
-      )}
+      </Container>
     </header>
   );
 }

@@ -1,4 +1,4 @@
-.authContainer {
+.container {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -9,51 +9,35 @@
   overflow: hidden;
 }
 
-.homeSignIn {
-  color: var(--main-color);
-  background-color: var(--white-color);
+.button {
+  cursor: pointer;
+  transition: all var(--transition-duration) var(--transition-timing-function);
 }
 
-.allSighIn {
-  color: var(--white-color);
-  background-color: var(--button-color);
+.button.signInButton {
+  border-color: var(--white-color) !important;
 }
 
-.homeSignUp {
-  color: var(--white-color);
-  background-color: var(--button-color);
-  border: 1px solid var(--gray-color);
+.button.signUpButton {
+  border-color: var(--gray-light-color) !important;
 }
 
-.allSighUp {
-  color: var(--main-color);
-  background-color: var(--white-color);
-}
-
-.auth-loader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 122px;
-  height: 32px;
-}
-
-.loader-light {
-  color: var(--white-color);
-}
-
-.loader-dark {
-  color: var(--main-color);
-}
-
-@media screen and (min-width: 768px) {
-
-  .authContainer .authButton {
-    padding: 14px 28px;
+@media (hover: hover) {
+  .button.signInButton:hover {
+    border-color: var(--gray-light-color) !important;
   }
 
-  .auth-loader {
-    min-width: 148px;
-    height: 50px;
+  .button.signUpButton:hover {
+    border-color: var(--white-color) !important;
+  }
+}
+
+@media (hover: none) {
+  .button.signInButton:active {
+    border-color: var(--gray-light-color) !important;
+  }
+
+  .button.signUpButton:active {
+    border-color: var(--white-color) !important;
   }
 }

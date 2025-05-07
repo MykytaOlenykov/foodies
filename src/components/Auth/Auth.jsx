@@ -1,48 +1,34 @@
-import { useSelector } from "react-redux";
-import clx from "clsx";
+import { useDispatch } from "react-redux";
 
 import { Button } from "../Button/Button";
-import styles from "./Auth.module.css";
-import Loader from "../Loader/Loader";
+import { openSignIn, openSignUp } from "../../store/auth";
 
-// Temp stub instead of Redux-selector
-const selectAuthIsLoading = () => false;
+import css from "./Auth.module.css";
+import clsx from "clsx";
 
-const Auth = ({
-  isHomepage = true,
-  openSignIn = () => {},
-  openSignUp = () => {},
-}) => {
-  const isAuthLoading = useSelector(selectAuthIsLoading);
+const Auth = () => {
+  const dispatch = useDispatch();
 
-  return isAuthLoading ? (
-    <Loader
-      className={clx(
-        styles["auth-loader"],
-        isHomepage ? styles["loader-light"] : styles["loader-dark"],
-      )}
-    />
-  ) : (
-    <div className={styles.authContainer}>
+  return (
+    <div className={css.container}>
       <Button
+        className={clsx(css.button, css.signInButton)}
         variant="light"
         size="small"
-        className={clx(
-          isHomepage ? styles.homeSignIn : styles.allSighIn,
-        )}
-        onClick={openSignIn}
+        bordered
+        onClick={() => dispatch(openSignIn())}
       >
-        SIGN IN
+        Sign in
       </Button>
+
       <Button
+        className={clsx(css.button, css.signUpButton)}
         variant="dark"
         size="small"
-        className={clx(
-          isHomepage ? styles.homeSignUp : styles.allSighUp,
-        )}
-        onClick={openSignUp}
+        bordered
+        onClick={() => dispatch(openSignUp())}
       >
-        SIGN UP
+        Sign up
       </Button>
     </div>
   );

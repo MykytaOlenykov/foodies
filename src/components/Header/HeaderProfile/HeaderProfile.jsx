@@ -1,84 +1,44 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import clx from "clsx";
+
+import { HeaderProfileMenu } from "../HeaderProfileMenu";
+import { selectUser } from "../../../store/auth";
+
+import css from "./HeaderProfile.module.css";
+
 import emptyImages from "../../../assets/images/empty";
-
 import ChevronDownIcon from "../../../assets/icons/chevron-down.svg?react";
-import BurgerMenuIcon from "../../../assets/icons/burger-menu.svg?react";
 
-import styles from "./HeaderProfile.module.css";
-import HeaderProfileMenu from "./HeaderProfileMenu";
-import HeaderModal from "../HeaderModal/HeaderModal";
-import styleModal from "../HeaderModal/HeaderModal.module.css";
+export const HeaderProfile = () => {
+  const user = useSelector(selectUser);
 
-// Temp stub instead of Redux-selector
-const selectAuthUserData = () => false;
+  const [isOpenProfile, setIsOpenProfile] = useState(false);
 
-// Temp stub for Modal
-const Modal = () => {
-  return null;
-};
-
-const HeaderProfile = ({ isHome, onClick }) => {
-  const userData = useSelector(selectAuthUserData);
-
-  const [toogleOpen, setToogleOpen] = useState(false);
-  const [toogleModal, setToogleModal] = useState(false);
-
-  const avatarURL = userData?.avatar ? userData.avatar : emptyImages.noAvatar;
-  const name = userData?.name || "User";
-
-  const handlerOpenProfile = () => {
-    setToogleOpen(!toogleOpen);
-  };
-
-  const handlerToogleModal = () => {
-    setToogleModal(!toogleModal);
-  };
+  const avatarURL = user?.avatar ?? emptyImages.noAvatar;
+  const userName = user?.name || "User";
 
   return (
-    <div className={styles.wrap}>
-      <div className={styles.profile} onClick={handlerOpenProfile}>
-        <img className={styles.profileImg} src={avatarURL} alt={name} />
-        <p className={styles.profileName}>{name}</p>
+    <div className={css.container}>
+      <div
+        className={css.profile}
+        onClick={() => setIsOpenProfile((prev) => !prev)}
+      >
+        <div className={css.avatarThumb}>
+          <img className={css.avatar} src={avatarURL} alt={userName} />
+        </div>
+        <p className={css.profileName}>{userName}</p>
         <button
           type="button"
-          className={clx(styles.btn_arrow, toogleOpen && styles.btn_arrow_open)}
+          className={clx(css.button, isOpenProfile && css.buttonOpen)}
         >
-          <ChevronDownIcon className={styles.icon_arrow} />
+          <ChevronDownIcon className={css.arrowIcon} />
         </button>
       </div>
 
-      {toogleOpen && (
-        <HeaderProfileMenu onClick={onClick} onClose={handlerOpenProfile} />
-      )}
-
-      <button
-        type="button"
-        className={styles.btn_menu}
-        onClick={handlerToogleModal}
-      >
-        <BurgerMenuIcon
-          className={styles.icon_menu}
-          stroke={isHome ? "#fff" : "#000"}
-        />
-      </button>
-
-      {toogleModal && (
-        <Modal
-          isOpen={toogleModal}
-          onClose={handlerToogleModal}
-          customeStyles={styleModal.wrap_modal}
-          btnStyle={styleModal.btn_close}
-          width="28"
-          height="28"
-          stroke="#fff"
-        >
-          <HeaderModal handlerToogleModal={handlerToogleModal} />
-        </Modal>
+      {isOpenProfile && (
+        <HeaderProfileMenu onClose={() => setIsOpenProfile(false)} />
       )}
     </div>
   );
 };
-
-export default HeaderProfile;
