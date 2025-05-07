@@ -1,11 +1,20 @@
 import { useCallback, useEffect } from "react";
-import style from "./Modal.module.css";
+import { createPortal } from "react-dom";
+import clsx from "clsx";
+
+import css from "./Modal.module.css";
+
 import CloseIcon from "../../assets/icons/x.svg?react";
 
-export const Modal = ({ isOpen, closeModal, children }) => {
-  const handleBackdropClick = useCallback((e) => {
-    if (e.target === e.currentTarget) closeModal();
-  }, [closeModal]);
+const modalRootRef = document.getElementById("modal-root");
+
+export const Modal = ({ isOpen, closeModal, modalClassName, children }) => {
+  const handleBackdropClick = useCallback(
+    (e) => {
+      if (e.target === e.currentTarget) closeModal();
+    },
+    [closeModal],
+  );
 
   useEffect(() => {
     const handleEsc = (e) => {
@@ -23,25 +32,26 @@ export const Modal = ({ isOpen, closeModal, children }) => {
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "auto";
+
     return () => {
       document.body.style.overflow = "auto";
     };
   }, [isOpen]);
 
-  return (
+  if (!isOpen) return null;
+
+  return createPortal(
     <div
-      className={`${style.backdrop} ${isOpen ? style.open : ""}`}
+      className={clsx(css.backdrop, isOpen && css.open)}
       onClick={handleBackdropClick}
-      role="dialog"
-      aria-modal="true"
-      style={{ display: isOpen ? "flex" : "none" }}
     >
-      <div className={`${style.content} ${isOpen ? style.open : ""}`}>
-        <button onClick={closeModal} className={style.close} aria-label="Close modal">
-          <CloseIcon className={style.closeIcon} />
+      <div className={clsx(css.content, isOpen && css.open, modalClassName)}>
+        <button onClick={closeModal} className={css.close}>
+          <CloseIcon className={css.closeIcon} />
         </button>
         {children}
       </div>
-    </div>
+    </div>,
+    modalRootRef,
   );
 };
