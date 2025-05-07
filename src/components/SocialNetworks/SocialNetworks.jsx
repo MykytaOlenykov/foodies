@@ -1,5 +1,5 @@
-import { ButtonIcon } from "../ButtonIcon/ButtonIcon";
 import styles from "./SocialNetworks.module.css";
+import clsx from "clsx";
 
 import FacebookSVG from "../../assets/icons/facebook.svg?react";
 import InstagramSVG from "../../assets/icons/instagram.svg?react";
@@ -26,7 +26,7 @@ const socialLinks = [
   },
 ];
 
-const SocialNetworks = () => {
+export const SocialNetworks = () => {
   return (
     <ul className={styles.list}>
       {socialLinks.map((link) => {
@@ -39,9 +39,9 @@ const SocialNetworks = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className={styles.link}
+              className={clsx(styles.light, styles.small, styles.link)}
             >
-              <ButtonIcon variant="light" size="small" icon={<Icon />} />
+              <Icon />
             </a>
           </li>
         );
@@ -49,5 +49,3 @@ const SocialNetworks = () => {
     </ul>
   );
 };
-
-export default SocialNetworks;

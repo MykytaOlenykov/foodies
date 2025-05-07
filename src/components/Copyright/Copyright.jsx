@@ -1,6 +1,6 @@
 import styles from "./Copyright.module.css";
 
-const Copyright = () => {
+export const Copyright = () => {
   const year = new Date().getFullYear();
   return (
     <div className={styles.wrapper}>
@@ -8,5 +8,3 @@ const Copyright = () => {
     </div>
   );
 };
-
-export default Copyright;
