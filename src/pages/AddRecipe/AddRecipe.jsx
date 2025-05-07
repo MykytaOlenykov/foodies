@@ -104,7 +104,7 @@ const AddRecipe = () => {
 
     const formData = new FormData();
 
-    formData.append("file", values.image);
+    formData.append("thumb", values.image);
     formData.append("title", values.title);
     formData.append("description", values.description);
     formData.append("categoryId", values.category.id);
@@ -112,13 +112,13 @@ const AddRecipe = () => {
     formData.append("time", values.cookingTime.toString());
     formData.append("instructions", values.instructions);
 
-    values.ingredients.forEach((ing, i) => {
-      formData.append(`ingredients[${i}][id]`,    ing.id);
-      formData.append(`ingredients[${i}][measure]`, ing.measure);
-    });
+    formData.append(
+      "ingredients",
+      JSON.stringify(values.ingredients.map(({ id, measure }) => ({ id, measure })))
+    );
 
     try {
-      await api.post("/recipes", formData);
+      await api.post("/recipes", formData, {});
       resetForm();
       setStatus({ success: true });
     } catch (err) {
@@ -128,7 +128,6 @@ const AddRecipe = () => {
       setSubmitting(false);
     }
   };
-
 
   return (
     <Container>
@@ -188,16 +187,11 @@ const AddRecipe = () => {
                     Area
                   </Typography>
                   <div>
-                    <Field
+                    <SearchSelect
                       name="area"
-                      render={({ field }) => (
-                        <SearchSelect
-                          {...field}
-                          items={areasList}
-                          onSelect={(item) => setFieldValue("area", item)}
-                          placeholder="Select an area"
-                        />
-                      )}
+                      items={areasList}
+                      onSelect={(item) => setFieldValue("area", item)}
+                      placeholder="Select an area"
                     />
                     <ErrorMessage name="area" component="div" className={styles.errorMessage} />
                   </div>
@@ -209,16 +203,11 @@ const AddRecipe = () => {
                       Category
                     </Typography>
                     <div>
-                      <Field
+                      <SearchSelect
                         name="category"
-                        render={({ field }) => (
-                          <SearchSelect
-                            {...field}
-                            items={categoriesList}
-                            onSelect={(item) => setFieldValue("category", item)}
-                            placeholder="Select a category"
-                          />
-                        )}
+                        items={categoriesList}
+                        onSelect={(item) => setFieldValue("category", item)}
+                        placeholder="Select a category"
                       />
                       <ErrorMessage name="category" component="div" className={styles.errorMessage} />
                     </div>

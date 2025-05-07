@@ -26,6 +26,10 @@
     color: var(--white-color);
 }
 
+.red {
+    color: var(--red-color);
+}
+
 .h1 {
     font-size: 40px;
     text-transform: uppercase;

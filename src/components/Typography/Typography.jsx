@@ -14,7 +14,7 @@ const tagMap = {
 
  * @param {object} props
  * @param {"h1"|"h2"|"h3"|"h4"|"body"} props.variant  — typography style
- * @param {"black"|"gray"|"white"} [props.textColor] — text color
+ * @param {"black"|"gray"|"white"|"red"} [props.textColor] — text color
  * @param {boolean} [props.truncate] — whether to truncate the text
  * @param {number} [props.lineClamp] — number of lines to clamp
  * @param {React.ReactNode} props.children
