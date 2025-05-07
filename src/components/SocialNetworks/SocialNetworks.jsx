@@ -1,6 +1,4 @@
-import clsx from "clsx";
-import { Button } from "../Button/Button";
-import buttonStyles from "../Button/Button.module.css";
+import { ButtonIcon } from "../ButtonIcon/ButtonIcon";
 import styles from "./SocialNetworks.module.css";
 
 import FacebookSVG from "../../assets/icons/facebook.svg?react";
@@ -43,17 +41,7 @@ const SocialNetworks = () => {
               aria-label={label}
               className={styles.link}
             >
-              <Button
-                variant="transparent"
-                bordered={true}
-                className={clsx(
-                  buttonStyles.Button,
-                  buttonStyles.transparent,
-                  buttonStyles.bordered,
-                  styles.socialButton,
-                )}
-                icon={<Icon className={styles.icon} />}
-              />
+              <ButtonIcon variant="light" size="small" icon={<Icon />} />
             </a>
           </li>
         );
