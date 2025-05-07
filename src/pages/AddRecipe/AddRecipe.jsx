@@ -130,6 +130,8 @@ const AddRecipe = () => {
     try {
       await api.post("/recipes", formData, {});
       resetForm();
+      setCategorySearch("");
+      setAreaSearch("");
       setStatus({ success: true });
     } catch (err) {
       console.error("Error creating recipe:", err);
@@ -330,5 +332,3 @@ const AddRecipe = () => {
 };
 
 export default AddRecipe;
-
-
