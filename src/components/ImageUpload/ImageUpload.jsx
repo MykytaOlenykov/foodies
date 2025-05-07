@@ -1,9 +1,27 @@
 import React, { useState, useRef, useEffect } from 'react';
 import MockOfPicture from '../../assets/images/mock-of-picture.svg?react';
 import * as styles from './ImageUpload.module.css';
+import { ErrorMessage } from "formik";
+import { TypographyError } from "../Typography/Typography.jsx";
+import { useUncontrolled } from "../../hooks/useUncontrolled.js";
 
-const ImageUpload = ({ onUpload }) => {
-  const [file, setFile] = useState(null);
+/**
+ * @param {Object} props
+ * @param {File} props.value - The current file object
+ * @param {File} [props.defaultValue] - The default file object
+ * @param {(file: File) => void} props.onUpload - Callback function to handle file upload
+ * @param {string} [props.name] - The name attribute for the input element
+ * @param {string} [props.error] - Error message to display
+ * @returns {JSX.Element}
+ */
+const ImageUpload = ({
+  value,
+  defaultValue = null,
+  onUpload,
+  name,
+  error
+}) => {
+  const [file, setFile] = useUncontrolled(value, defaultValue, onUpload);
   const [previewUrl, setPreviewUrl] = useState(null);
   const inputRef = useRef();
 
@@ -21,7 +39,6 @@ const ImageUpload = ({ onUpload }) => {
     const picked = e.target.files[0];
     if (!picked) return;
     setFile(picked);
-    onUpload(picked);
   };
 
   const openFileDialog = () => {
@@ -36,6 +53,7 @@ const ImageUpload = ({ onUpload }) => {
         ref={inputRef}
         onChange={handleChange}
         style={{ display: 'none' }}
+        name={name}
       />
 
       {previewUrl ? (
@@ -68,6 +86,7 @@ const ImageUpload = ({ onUpload }) => {
           <div className={styles.ImageUpload__text}>Upload a photo</div>
         </div>
       )}
+      {error && <ErrorMessage name={name} component={TypographyError} /> }
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import Container from "../../components/UI/Container/Container.jsx";
-import { Typography } from "../../components/Typography/Typography.jsx";
+import { Typography, TypographyError } from "../../components/Typography/Typography.jsx";
 import * as styles from "./AddRecipe.module.css";
 import { Breadcrumbs, BreadcrumbsDivider, BreadcrumbsItem } from "../../components/Breadcrumbs/Breadcrumbs.jsx";
 import { ImageUpload } from "../../components/ImageUpload/ImageUpload.jsx";
@@ -25,6 +25,7 @@ import api from "../../services/api.js";
 const IngredientsFieldGroup = ({ ingredientsList, onAdd }) => {
   const [selectedIngredient, setSelectedIngredient] = useState(null);
   const [measure, setMeasure] = useState("");
+  const [ingredientSearch, setIngredientSearch] = useState("");
 
   return (
     <div className={styles.IngredientsFieldGroup}>
@@ -34,8 +35,13 @@ const IngredientsFieldGroup = ({ ingredientsList, onAdd }) => {
             Ingredients
           </Typography>
           <SearchSelect
+            value={ingredientSearch}
+            onChange={setIngredientSearch}
             items={ingredientsList}
-            onSelect={(item) => setSelectedIngredient(item)}
+            onSelect={(item) => {
+              setSelectedIngredient(item)
+              setIngredientSearch(item.name);
+            }}
             placeholder="Add the ingredient"
           />
         </div>
@@ -61,6 +67,7 @@ const IngredientsFieldGroup = ({ ingredientsList, onAdd }) => {
           });
           setSelectedIngredient(null);
           setMeasure("");
+          setIngredientSearch("");
         }}
       >
         Add ingredient
@@ -92,12 +99,15 @@ const validationSchema = object({
       measure: string().required("Measure is required"),
     })
   ).min(1, "At least one ingredient is required"),
+  image: string().required("Image is required"),
 });
 
 const AddRecipe = () => {
   const ingredientsList = useSelector(selectIngredients);
   const categoriesList = useSelector(selectCategories);
   const areasList = useSelector(selectAreas);
+  const [categorySearch, setCategorySearch] = useState("");
+  const [areaSearch, setAreaSearch] = useState("");
 
   const onSubmit = async (values, { setSubmitting, resetForm, setStatus }) => {
     setSubmitting(true);
@@ -156,9 +166,14 @@ const AddRecipe = () => {
           validationSchema={validationSchema}
           onSubmit={onSubmit}
         >
-          {({ setFieldValue, values, resetForm, isSubmitting }) => (
+          {({ setFieldValue, values, resetForm, isSubmitting, errors }) => (
             <Form className={styles.AddRecipe__form}>
-              <ImageUpload onUpload={(file) => setFieldValue('image', file)} />
+              <ImageUpload
+                value={values.image}
+                error={errors.image}
+                name="image"
+                onUpload={(file) => setFieldValue('image', file)}
+              />
 
               <div className={styles.AddRecipe__inputs}>
                 <div className={styles.AddRecipe__inputGroup_top}>
@@ -169,7 +184,7 @@ const AddRecipe = () => {
                       variant="ghost"
                       placeholder="The name of the recipe"
                     />
-                    <ErrorMessage name="title" component="div" className={styles.errorMessage} />
+                    <ErrorMessage name="title" component={TypographyError} />
                   </div>
 
                   <div>
@@ -178,7 +193,7 @@ const AddRecipe = () => {
                       as={Textarea}
                       placeholder="Enter a description of the dish"
                     />
-                    <ErrorMessage name="description" component="div" className={styles.errorMessage} />
+                    <ErrorMessage name="description" component={TypographyError} />
                   </div>
                 </div>
 
@@ -188,12 +203,17 @@ const AddRecipe = () => {
                   </Typography>
                   <div>
                     <SearchSelect
+                      value={areaSearch}
+                      onChange={setAreaSearch}
                       name="area"
                       items={areasList}
-                      onSelect={(item) => setFieldValue("area", item)}
+                      onSelect={(item) => {
+                        setFieldValue("area", item)
+                        setAreaSearch(item.name);
+                      }}
                       placeholder="Select an area"
                     />
-                    <ErrorMessage name="area" component="div" className={styles.errorMessage} />
+                    <ErrorMessage name="area" component={TypographyError} />
                   </div>
                 </div>
 
@@ -204,12 +224,17 @@ const AddRecipe = () => {
                     </Typography>
                     <div>
                       <SearchSelect
+                        value={categorySearch}
+                        onChange={setCategorySearch}
                         name="category"
                         items={categoriesList}
-                        onSelect={(item) => setFieldValue("category", item)}
+                        onSelect={(item) => {
+                          setFieldValue("category", item)
+                          setCategorySearch(item.name);
+                        }}
                         placeholder="Select a category"
                       />
-                      <ErrorMessage name="category" component="div" className={styles.errorMessage} />
+                      <ErrorMessage name="category" component={TypographyError} />
                     </div>
                   </div>
 
@@ -233,7 +258,7 @@ const AddRecipe = () => {
                       setFieldValue("ingredients", [...values.ingredients, newData]);
                     }}
                   />
-                  <ErrorMessage name="ingredients" component="div" className={styles.errorMessage} />
+                  <ErrorMessage name="ingredients" component={TypographyError} />
                 </div>
 
                 {values.ingredients.length > 0 && (
@@ -268,7 +293,7 @@ const AddRecipe = () => {
                       as={Textarea}
                       placeholder="Enter recipe"
                     />
-                    <ErrorMessage name="instructions" component="div" className={styles.errorMessage} />
+                    <ErrorMessage name="instructions" component={TypographyError} />
                   </div>
                 </div>
 
@@ -281,6 +306,8 @@ const AddRecipe = () => {
                     disabled={isSubmitting}
                     onClick={() => {
                       resetForm();
+                      setCategorySearch("");
+                      setAreaSearch("");
                     }}
                   />
                   <Button

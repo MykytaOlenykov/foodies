@@ -18,6 +18,7 @@ import { Typography } from "../Typography/Typography.jsx";
  * @param {() => void} [props.onIconClick] - Optional click handler for the right-side icon button.
  * @param {string} [props.className] - Additional CSS classes for custom styling.
  * @param {string} [props.name] - The name attribute for the input element.
+ * @param {(e) => void} [props.onFocus] - Optional focus handler for the input.
  */
 const Input = ({
   placeholder,
@@ -33,6 +34,7 @@ const Input = ({
   onIconClick,
   className,
   name,
+  onFocus,
 }) => {
   const showCounter = typeof maxLength === "number";
 
@@ -48,6 +50,7 @@ const Input = ({
           onChange={onChange}
           disabled={disabled}
           name={name}
+          onFocus={onFocus}
         />
         {iconRight && (
           <button type="button" className={styles.iconButton} onClick={onIconClick}>

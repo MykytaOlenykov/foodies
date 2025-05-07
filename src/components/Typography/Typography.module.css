@@ -104,3 +104,20 @@
         line-height: 24px;
     }
 }
+
+.bodyS {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+}
+
+@media (min-width: 481px) {
+    .bodyS {
+        font-size: 14px;
+        line-height: 20px;
+    }
+}
+
+.TypographyError {
+    margin: 4px 0;
+}

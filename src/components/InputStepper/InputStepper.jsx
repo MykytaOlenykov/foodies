@@ -4,6 +4,12 @@ import MinusIcon from "../../assets/icons/minus.svg?react";
 import PlusIcon from "../../assets/icons/plus.svg?react";
 import { Typography } from "../Typography/Typography.jsx";
 
+/**
+ * @param {object} props
+ * @param {number} props.value - Current value
+ * @param {function} props.onChange - Change handler (e) => void
+ * @param {number} [props.step] - Step value (default: 5)
+ */
 const InputStepper = ({value, onChange, step = 5}) => {
   const handleDecrease = () => {
     if (value - step >= 0) {

@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Input from "../Input/Input";
 import styles from "./SearchSelect.module.css";
 import ChevronDown from "../../assets/icons/chevron-down.svg?react";
 import ChevronUp from "../../assets/icons/chevron-up.svg?react";
 import { Typography } from "../Typography/Typography.jsx";
+import { useUncontrolled } from "../../hooks/useUncontrolled.js";
 
 /**
  * @param {Object} props
@@ -13,9 +14,19 @@ import { Typography } from "../Typography/Typography.jsx";
  * @param {string} props.placeholder - Placeholder for the input field
  * @param {boolean} [props.required] - Whether the input is required
  */
-const SearchSelect = ({ name, items, onSelect, placeholder = "Select item", required }) => {
-  const [query, setQuery] = useState("");
+const SearchSelect = ({
+  value,
+  onValueChange,
+  defaultValue = "",
+  name,
+  items,
+  onSelect,
+  placeholder = "Select item",
+  required
+}) => {
+  const [query, setQuery] = useUncontrolled(value, defaultValue, onValueChange);
   const [open, setOpen] = useState(false);
+  const wrapperRef = useRef(null);
 
   const filteredItems = items.filter((item) =>
     item.name.toLowerCase().includes(query.toLowerCase()),
@@ -27,10 +38,19 @@ const SearchSelect = ({ name, items, onSelect, placeholder = "Select item", requ
     setOpen(false);
   };
 
-  const toggleOpen = () => setOpen((prev) => !prev);
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
-    <div className={styles.wrapper}>
+    <div ref={wrapperRef} className={styles.wrapper} >
       <Input
         name={name}
         value={query}
@@ -40,7 +60,8 @@ const SearchSelect = ({ name, items, onSelect, placeholder = "Select item", requ
         }}
         placeholder={required ? `${placeholder}*` : placeholder}
         iconRight={open ? <ChevronUp /> : <ChevronDown />}
-        onIconClick={toggleOpen}
+        onFocus={() => setOpen(true)}
+        onIconClick={() => setOpen((prev) => !prev)}
       />
       {open && (
         <ul className={styles.dropdownList}>

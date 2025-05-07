@@ -7,13 +7,14 @@ const tagMap = {
   h3: 'h3',
   h4: 'h4',
   body: 'p',
+  bodyS: 'p',
 };
 
 /**
  * A responsive Typography component with native HTML tags.
 
  * @param {object} props
- * @param {"h1"|"h2"|"h3"|"h4"|"body"} props.variant  — typography style
+ * @param {"h1"|"h2"|"h3"|"h4"|"body"|"bodyS"} props.variant  — typography style
  * @param {"black"|"gray"|"white"|"red"} [props.textColor] — text color
  * @param {boolean} [props.truncate] — whether to truncate the text
  * @param {number} [props.lineClamp] — number of lines to clamp
@@ -40,4 +41,16 @@ const Typography = ({ variant = "body", children, truncate, lineClamp, className
   );
 }
 
-export { Typography }
+/**
+ * @param {object} props
+ * @param {React.ReactNode} props.children
+ */
+const TypographyError = ({ children }) => {
+  return (
+    <Typography variant="bodyS" textColor="red" className={styles.TypographyError}>
+      {children}
+    </Typography>
+  );
+}
+
+export { Typography, TypographyError }
