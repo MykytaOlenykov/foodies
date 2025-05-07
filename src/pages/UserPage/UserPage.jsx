@@ -16,7 +16,6 @@ import { useBreakpoint } from "../../hooks/useBreakpoint";
 import { openLogOut } from "../../store/auth";
 import { normalizeHttpError } from "../../utils";
 import toast from "react-hot-toast";
-import { DEFAULT_ERROR_MESSAGE } from "../../constants/common";
 
 const UserPage = () => {
   const { id } = useParams();
