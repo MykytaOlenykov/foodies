@@ -1,5 +1,5 @@
-import React, { Fragment, useRef } from "react";
-import styles from "./ProfileCard.module.css";
+import { Fragment, useRef } from "react";
+import styles from "./UserInfo.module.css";
 import PlusIcon from "../../assets/icons/plus.svg?react";
 import { ButtonIcon } from "../ButtonIcon/ButtonIcon";
 import { Typography } from "../Typography/Typography";
@@ -11,7 +11,7 @@ import { Typography } from "../Typography/Typography";
  * @param {() => void} [props.onAvatarChange] — Optional click handler for changing avatar.
  */
 
-export const ProfileCard = ({ user, isMyProfile, onAvatarChange }) => {
+export const UserInfo = ({ user, isMyProfile, onAvatarChange }) => {
   const baseApiURL = import.meta.env.VITE_API_BASE_URL;
   const fileInputRef = useRef();
 
@@ -47,7 +47,7 @@ export const ProfileCard = ({ user, isMyProfile, onAvatarChange }) => {
         {avatarURL ? (
           <img
             className={styles.avatar}
-            src={`${baseApiURL}api/static${avatarURL}`}
+            src={`${baseApiURL}static${avatarURL}`}
             alt={`${name}'s avatar`}
           />
         ) : (

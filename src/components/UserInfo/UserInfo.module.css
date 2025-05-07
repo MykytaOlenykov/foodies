@@ -1,15 +1,16 @@
 .profileCard {
-  width: 394px;
+  width: 100%;
   display: flex;
-  padding: 40px 80px;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
+  padding: 30px 54px;
   border-radius: 30px;
   border: 1px solid #bfbebe;
   background-color: #fff;
   position: relative;
 }
+
 .avatarWrapper {
   position: relative;
   display: flex;
@@ -18,10 +19,12 @@
   width: 120px;
   height: 120px;
 }
+
 .avatar {
   width: 100%;
   border-radius: var(--border-radius-full);
 }
+
 .fallbackAvatar {
   display: flex;
   align-items: center;
@@ -31,6 +34,7 @@
   background-color: var(--gray-color);
   border-radius: var(--border-radius-full);
 }
+
 .avatarEdit {
   position: absolute;
   bottom: 0;
@@ -38,11 +42,13 @@
   transform: translate(-50%, 50%);
   z-index: 1;
 }
+
 .fileInput {
   display: none;
 }
+
 .profileData {
-  width: 100%;
+  width: auto;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -53,10 +59,12 @@
   line-height: 24px;
   letter-spacing: -0.32px;
 }
+
 .profileData div {
   text-overflow: ellipsis;
   overflow: hidden;
 }
+
 .profileData > div > label {
   color: var(--gray-color);
   font-size: 14px;
@@ -65,13 +73,14 @@
   letter-spacing: -0.28px;
   margin-right: 8px;
 }
-@media (max-width: 440px) {
+
+@media (min-width: 440px) {
   .profileCard {
-    width: 100%;
-    padding: 30px 54px;
-    gap: 16px;
+    padding: 40px 80px;
+    gap: 20px;
   }
+
   .profileData {
-    width: auto;
+    width: 100%;
   }
 }
