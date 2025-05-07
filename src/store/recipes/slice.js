@@ -1,9 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  fetchRecipesByCategory,
-  fetchIngredients,
-  fetchAreas,
-} from "./operations";
+import { fetchRecipesByCategory } from "./operations";
 
 const initialState = {
   items: [], // Список рецептів
@@ -37,38 +33,4 @@ const recipesSlice = createSlice({
   },
 });
 
-const ingredientsSlice = createSlice({
-  name: "ingredients",
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchIngredients.pending, handlePending)
-      .addCase(fetchIngredients.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.items = action.payload.data;
-        state.total = action.payload.total;
-      })
-      .addCase(fetchIngredients.rejected, handleRejected);
-  },
-});
-
-const areasSlice = createSlice({
-  name: "areas",
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchAreas.pending, handlePending)
-      .addCase(fetchAreas.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.items = action.payload.data;
-        state.total = action.payload.total;
-      })
-      .addCase(fetchAreas.rejected, handleRejected);
-  },
-});
-
 export const recipesReducer = recipesSlice.reducer;
-export const ingredientsReducer = ingredientsSlice.reducer;
-export const areasReducer = areasSlice.reducer;

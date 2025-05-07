@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 32px;
 }
-@media (min-width: 1440px) {
+@media (min-width: 768px) {
   .recipesMainBlock {
     gap: 40px;
   }
@@ -13,8 +13,9 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 343px;
 }
-@media (min-width: 1440px) {
+@media (min-width: 768px) {
   .recipesTitleBlock {
     width: 540px;
     gap: 20px;
@@ -35,7 +36,7 @@
   text-transform: uppercase;
   cursor: pointer;
 }
-@media (min-width: 1440px) {
+@media (min-width: 768px) {
   .recipesBackButton {
     font-size: 14px;
     line-height: 18px;
@@ -47,7 +48,7 @@
   width: 16px;
   height: 16px;
 }
-@media (min-width: 1440px) {
+@media (min-width: 768px) {
   .recipesBackIcon {
     width: 18px;
     height: 18px;
@@ -61,7 +62,7 @@
   letter-spacing: -0.02em;
   text-transform: uppercase;
 }
-@media (min-width: 1440px) {
+@media (min-width: 768px) {
   .recipesCategory {
     font-size: 40px;
     line-height: 44px;
@@ -75,7 +76,7 @@
   letter-spacing: -0.02em;
   color: var(--gray-color);
 }
-@media (min-width: 1440px) {
+@media (min-width: 768px) {
   .recipesDescription {
     font-size: 16px;
     line-height: 24px;

@@ -10,6 +10,7 @@ import { getCurrentUser } from "./store/auth";
 import { getAllAreas } from "./store/areas";
 import { getAllCategories } from "./store/categories";
 import { getAllIngredients } from "./store/ingredients";
+import { getAllTestimonials } from "./store/testimonials";
 
 const Home = lazy(() => import("./pages/Home/Home.jsx"));
 const Category = lazy(() => import("./pages/Category/Category.jsx"));
@@ -30,6 +31,7 @@ export const App = () => {
     dispatch(getAllAreas());
     dispatch(getAllCategories());
     dispatch(getAllIngredients());
+    dispatch(getAllTestimonials());
   }, [dispatch]);
 
   return (

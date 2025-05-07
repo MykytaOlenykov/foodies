@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Modal } from "../../Modal/Modal.jsx";
+import { openSignIn } from "../../../store/auth";
+import { toggleFavorite } from "../../../store/recipes";
+
 import NoImage from "../../../assets/images/no-image.svg?react";
 import HeartIcon from "../../../assets/icons/heart.svg?react";
 import ArrowUpIcon from "../../../assets/icons/arrow-up-right.svg?react";
@@ -12,63 +15,45 @@ const RecipeCard = ({
   image,
   description,
   owner,
-  isAuthenticated,
   favorited,
   mediaMode,
 }) => {
   const navigate = useNavigate();
-  const [isFavorite, setIsFavorite] = useState(favorited); // Локальний стан для улюбленого рецепта
-  const [loading, setLoading] = useState(false); // Стан для відстеження запиту
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const [isFavorite, setIsFavorite] = useState(favorited);
 
   let truncatedDescription = null;
+  let truncatedCardTitle = null;
 
   if (mediaMode === "desktop") {
     truncatedDescription =
       description.length > 70 ? description.slice(0, 67) + "..." : description;
+    truncatedCardTitle = title.length > 18 ? title.slice(0, 20) + "..." : title;
+  } else if (mediaMode === "tablet") {
+    truncatedDescription =
+      description.length > 70 ? description.slice(0, 83) + "..." : description;
+    truncatedCardTitle = title.length > 25 ? title.slice(0, 24) + "..." : title;
   } else {
     truncatedDescription =
       description.length > 100 ? description.slice(0, 97) + "..." : description;
+    truncatedCardTitle = title;
   }
 
-  const truncatedCardTitle =
-    title.length > 18 ? title.slice(0, 20) + "..." : title;
-
-  isAuthenticated = true;
-
   const handleFavoriteClick = async () => {
-    if (!isAuthenticated) {
-      alert("Please sign in to manage your favorite recipes."); // Замініть на виклик Modal
-      return;
+    if (!isLoggedIn) {
+      dispatch(openSignIn());
     }
 
-    try {
-      setLoading(true);
-      const response = await fetch(
-        `https://mykytaolenykov.com/foodies/api/recipes/favorites/${recipeId}`,
-        {
-          method: isFavorite ? "DELETE" : "POST", // DELETE для видалення, POST для додавання
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`, // Додаємо токен авторизації
-          },
-        },
-      );
-      if (!response.ok) {
-        throw new Error("Failed to update favorite status");
-      }
-      setIsFavorite((prev) => !prev); // Змінюємо локальний стан
-    } catch (error) {
-      console.error("Error updating favorite status:", error);
-    } finally {
-      setLoading(false);
-    }
+    dispatch(toggleFavorite({ recipeId, isFavorite }));
+    setIsFavorite((prev) => !prev);
   };
 
   const handleAuthorClick = () => {
-    if (isAuthenticated) {
-      navigate(`/user/${owner.id}`); // Перенаправляємо на сторінку профілю автора
+    if (!isLoggedIn) {
+      dispatch(openSignIn());
     } else {
-      return <Modal />;
+      navigate(`/user/${owner.id}`);
     }
   };
 
@@ -114,14 +99,12 @@ const RecipeCard = ({
             <span className={css.cardAuthorName}>{owner.name}</span>
           </div>
           <div className={css.recipeIcons}>
-            {/* Кнопка для улюблених */}
             <button
               type="button"
               className={`${css.receiptButtons} ${
                 isFavorite ? css.isFavorite : ""
               }`}
               onClick={handleFavoriteClick}
-              disabled={loading}
             >
               {isFavorite ? (
                 <HeartIcon className={`${css.fillFavorite} ${css.svgIcon}`} />
@@ -129,7 +112,6 @@ const RecipeCard = ({
                 <HeartIcon className={css.svgIcon} />
               )}
             </button>
-            {/* Кнопка для переходу на сторінку рецепта */}
             <button
               type="button"
               className={css.receiptButtons}

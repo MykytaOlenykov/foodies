@@ -9,18 +9,15 @@
   .recipeCard {
     width: 342px;
     height: 427px;
+    gap: 16px;
   }
 }
 @media (min-width: 1440px) {
   .recipeCard {
     width: 290px;
-    gap: 16px;
   }
 }
-
 .recipeImage {
-  width: 100%;
-  height: 230px;
   border-radius: 20px;
 }
 
@@ -30,7 +27,7 @@
   justify-content: center;
   gap: 6px;
 }
-@media (min-width: 1440px) {
+@media (min-width: 768px) {
   .cardInfo {
     gap: 8px;
   }
@@ -44,7 +41,7 @@
   text-transform: uppercase;
   color: var(--main-color);
 }
-@media (min-width: 1440px) {
+@media (min-width: 768px) {
   .cardTitle {
     font-size: 20px;
   }
@@ -58,7 +55,7 @@
   color: var(--button-color);
   height: 54px;
 }
-@media (min-width: 1440px) {
+@media (min-width: 768px) {
   .cardDescription {
     font-size: 16px;
     line-height: 24px;
@@ -87,7 +84,7 @@
   border: none;
   cursor: pointer;
 }
-@media (min-width: 1440px) {
+@media (min-width: 768px) {
   .cardAuthorButton {
     width: 40px;
     height: 40px;
@@ -108,7 +105,7 @@
   letter-spacing: -0.02em;
   color: #1a1a1a;
 }
-@media (min-width: 1440px) {
+@media (min-width: 768px) {
   .cardAuthorName {
     font-size: 16px;
     line-height: 24px;
@@ -132,7 +129,7 @@
   justify-content: center;
   align-items: center;
 }
-@media (min-width: 1440px) {
+@media (min-width: 768px) {
   .receiptButtons {
     width: 42px;
     height: 42px;
@@ -173,7 +170,7 @@
   justify-content: center;
   align-items: center;
 }
-@media (min-width: 1440px) {
+@media (min-width: 768px) {
   .initials {
     font-size: 18px;
   }
@@ -184,7 +181,7 @@
   height: 16px;
   fill: var(--main-color);
 }
-@media (min-width: 1440px) {
+@media (min-width: 768px) {
   .svgIcon {
     width: 18px;
     height: 18px;
