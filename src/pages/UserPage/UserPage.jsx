@@ -28,7 +28,7 @@ const UserPage = () => {
   const dispatch = useDispatch();
   const isMyProfile = user?.id === currentUser?.id;
 
-  const fetchUserData = async () => {
+  const fetchUserData = async (id) => {
     try {
       const data = await getUserDataById(id);
       setUser(data.user);
@@ -39,7 +39,7 @@ const UserPage = () => {
   };
 
   useEffect(() => {
-    fetchUserData();
+    fetchUserData(id);
   }, [id]);
 
   const handleAvatarChange = async (file) => {
@@ -61,7 +61,7 @@ const UserPage = () => {
       toast.success(data.message);
 
       // Refresh user data after follow
-      await fetchUserData();
+      await fetchUserData(id);
     } catch (err) {
       const error = normalizeHttpError(err);
       toast.error(error.message);
@@ -74,7 +74,7 @@ const UserPage = () => {
       toast.success(data.message);
 
       // Refresh user data after follow
-      await fetchUserData();
+      await fetchUserData(id);
     } catch (err) {
       const error = normalizeHttpError(err);
       toast.error(error.message);
