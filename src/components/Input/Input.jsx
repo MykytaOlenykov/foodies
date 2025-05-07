@@ -5,6 +5,7 @@ import { Typography } from "../Typography/Typography.jsx";
  * A reusable styled input component with optional error message and right-side icon.
  *
  * @param {Object} props
+ * @param {string} props.name - The input name used in form submission.
  * @param {string} props.placeholder - The input placeholder text. Appends "*" if the field is required.
  * @param {string} props.value - The current value of the input.
  * @param {(e: React.ChangeEvent<HTMLInputElement>) => void} props.onChange - Handler called when input value changes.
@@ -22,6 +23,7 @@ import { Typography } from "../Typography/Typography.jsx";
  * @param {(e) => void} [props.onBlur] - Optional blur handler for the input.
  */
 const Input = ({
+  name,
   placeholder,
   value,
   onChange,
