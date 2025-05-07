@@ -26,3 +26,10 @@ dist-ssr
 *storybook.log
 .env
 .npmrc
+src/pages/Home/Home.jsx
+src/components/CategoryList/CategoryList.module.css
+src/components/CategoryList/CategoryList.jsx
+src/components/Categories/Categories.module.css
+src/components/Categories/Categories.jsx
+src/pages/Home/Home.jsx
+

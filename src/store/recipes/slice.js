@@ -4,16 +4,16 @@ import { fetchRecipesByCategory } from "./operations";
 const initialState = {
   items: [], // Список рецептів
   total: 0, // Загальна кількість рецептів
-  isLoading: false, // Стан завантаження
+  loading: false, // Стан завантаження
   error: null, // Помилки
 };
 
 const handlePending = (state) => {
-  state.isLoading = true;
+  state.loading = true;
 };
 
 const handleRejected = (state, action) => {
-  state.isLoading = false;
+  state.loading = false;
   state.error = action.payload;
 };
 
@@ -25,7 +25,7 @@ const recipesSlice = createSlice({
     builder
       .addCase(fetchRecipesByCategory.pending, handlePending)
       .addCase(fetchRecipesByCategory.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.loading = false;
         state.items = action.payload.data;
         state.total = action.payload.total;
       })
