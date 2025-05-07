@@ -14,6 +14,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../store/auth/selectors";
 import { useBreakpoint } from "../../hooks/useBreakpoint";
 import { openLogOut } from "../../store/auth";
+import { TabsList } from "../../components/TabsList/TabsList";
+import { ListItems } from "../../components/ListItems/ListItems";
 
 const UserPage = () => {
   const { id } = useParams();
@@ -25,6 +27,9 @@ const UserPage = () => {
   const currentUser = useSelector(selectUser);
   const dispatch = useDispatch();
   const isMyProfile = user?.id === currentUser?.id;
+
+  const [activeTab, setActiveTab] = useState("recipes");
+  const [items, setItems] = useState([]);
 
   const fetchUserData = async () => {
     try {
@@ -85,6 +90,11 @@ const UserPage = () => {
     dispatch(openLogOut());
   };
 
+  const handleTabChange = (tabKey) => {
+    setActiveTab(tabKey);
+    //setPage(1);
+  };
+
   //TODO: add loader
 
   if (!user)
@@ -96,7 +106,7 @@ const UserPage = () => {
       <Typography
         variant="body"
         textColor={isMobile ? "gray" : "black"}
-        className={styles.text}
+        className={styles.description}
       >
         Reveal your culinary art, share your favorite recipe and create
         gastronomic masterpieces with us.
@@ -137,7 +147,14 @@ const UserPage = () => {
             </Button>
           )}
         </div>
-        <div className={styles.profileTabs}>Tabs will be here</div>
+        <div className={styles.profileTabs}>
+          <TabsList
+            isMyProfile={isMyProfile}
+            activeTab={activeTab}
+            onTabChange={handleTabChange}
+          />
+          <ListItems tab={activeTab} items={items} />
+        </div>
       </div>
     </section>
   );
