@@ -36,7 +36,6 @@ const Input = ({
   iconRight,
   onIconClick,
   className,
-  name,
   onFocus,
   onBlur,
 }) => {
