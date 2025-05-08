@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router";
 import clx from "clsx";
 
 import { openLogOut, selectUser } from "../../store/auth";
@@ -8,8 +9,10 @@ import css from "./UserBar.module.css";
 
 import emptyImages from "../../assets/images/empty";
 import ChevronDownIcon from "../../assets/icons/chevron-down.svg?react";
+import ArrowUpRightIcon from "../../assets/icons/arrow-up-right.svg?react";
 
 const ProfileMenu = ({ onClose }) => {
+  const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
   return (
@@ -21,7 +24,7 @@ const ProfileMenu = ({ onClose }) => {
       <button
         type="button"
         className={clx(css.link, css.logoutButton)}
-        onClick={() => dispatchEvent(openLogOut())}
+        onClick={() => dispatch(openLogOut())}
       >
         Log out
         <ArrowUpRightIcon className={css.logoutIcon} />

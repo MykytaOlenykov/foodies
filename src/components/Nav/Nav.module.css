@@ -1,0 +1,15 @@
+.list {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+@media screen and (min-width: 1440px) {
+  .list {
+    gap: 40px;
+  }
+}
+
+.activeBtn {
+  border-color: var(--gray-color) !important;
+}
