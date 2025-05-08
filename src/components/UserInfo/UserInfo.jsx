@@ -3,6 +3,8 @@ import styles from "./UserInfo.module.css";
 import PlusIcon from "../../assets/icons/plus.svg?react";
 import { ButtonIcon } from "../ButtonIcon/ButtonIcon";
 import { Typography } from "../Typography/Typography";
+import { normalizeHttpError } from "../../utils";
+import toast from "react-hot-toast";
 
 /**
  * @param {object} props
@@ -35,9 +37,9 @@ export const UserInfo = ({ user, isMyProfile, onAvatarChange }) => {
 
     try {
       onAvatarChange?.(file);
-    } catch (error) {
-      //TODO add notification
-      console.error("Avatar update failed", error);
+    } catch (err) {
+      const error = normalizeHttpError(err);
+      toast.error(error.message);
     }
   };
 

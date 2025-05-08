@@ -17,6 +17,6 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-export const checkApiConnection = () => api.get("ok");
+export const checkApiConnection = () => api.get("/ok");
 
 export default api;
