@@ -1,6 +1,9 @@
 import styles from "./RecipeCard.module.css";
 import { Typography } from "../Typography/Typography";
 
+import heartIcon from "../../assets/icons/heart.svg";
+import arrowIcon from "../../assets/icons/arrow-up-right.svg";
+
 const RecipeCard = ({
   recipe,
   isFavorite,
@@ -12,15 +15,11 @@ const RecipeCard = ({
 
   const avatarUrl = recipe.user?.avatar?.startsWith("http")
     ? recipe.user.avatar
-    : "https://via.placeholder.com/32";
+    : "/assets/images/empty/no-avatar.jpg";
 
   return (
     <div className={styles.card}>
-      <img
-        src={recipe.thumb || recipe.preview}
-        alt={recipe.title}
-        className={styles.image}
-      />
+      <img src={recipe.preview} alt={recipe.title} className={styles.image} />
       <div className={styles.content}>
         <Typography variant="h4" textColor="black" className={styles.title}>
           {recipe.title}
@@ -56,7 +55,7 @@ const RecipeCard = ({
               }}
               aria-label="Toggle favorite"
             >
-              ❤️
+              <img src={heartIcon} alt="Favorite" className={styles.icon} />
             </button>
 
             <button
@@ -64,7 +63,7 @@ const RecipeCard = ({
               onClick={onViewRecipe}
               aria-label="View recipe"
             >
-              ➜
+              <img src={arrowIcon} alt="View" className={styles.icon} />
             </button>
           </div>
         </div>

@@ -1,48 +1,76 @@
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getRecipeById } from "../../services/recipes";
+import PathInfo from "../PathInfo/PathInfo";
+import styles from "./RecipeInfo.module.css";
+
 import RecipeMainInfo from "../RecipeMainInfo/RecipeMainInfo";
 import RecipeIngredients from "../RecipeIngredients/RecipeIngredients";
 import RecipePreparation from "../RecipePreparation/RecipePreparation";
-import styles from "./RecipeInfo.module.css";
 
-const RecipeInfo = ({ recipe, favoriteRecipes }) => {
-  const recipeId = recipe._id?.$oid || recipe.id;
-  const isRecipeFavorite = favoriteRecipes.some(
-    (favorite) => favorite._id === recipeId || favorite.id === recipeId,
-  );
+const RecipeInfo = () => {
+  const { recipeId } = useParams();
+  const [recipe, setRecipe] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchRecipe = async () => {
+      try {
+        const res = await getRecipeById(recipeId);
+        const data = res.data.data.recipe;
+
+        const adapted = {
+          ...data,
+          preview: data.thumb,
+          author: {
+            name: data.owner?.name,
+            id: data.owner?.id,
+            avatar: data.owner?.avatarURL,
+          },
+        };
+
+        setRecipe(adapted);
+      } catch (err) {
+        console.error("Failed to fetch recipe:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRecipe();
+  }, [recipeId]);
+
+  if (loading) return <p>Loading recipe...</p>;
+  if (!recipe) return <p>Recipe not found.</p>;
 
   return (
-    <div className={styles.recipeInfo}>
-      <div className={styles.imageBlock}>
-        <img src={recipe.preview} alt={recipe.title} className={styles.image} />
+    <>
+      <PathInfo current={recipe.title} />
+      <div className={styles.recipeInfo}>
+        <div className={styles.imageBlock}>
+          <img
+            src={recipe.preview}
+            alt={recipe.title}
+            className={styles.image}
+          />
+        </div>
+        <div className={styles.detailsBlock}>
+          <RecipeMainInfo
+            title={recipe.title}
+            category={recipe.category?.name}
+            time={recipe.time}
+            description={recipe.description}
+            user={recipe.author}
+          />
+          <RecipeIngredients ingredients={recipe.ingredients} />
+          <RecipePreparation
+            preparation={recipe.instructions}
+            recipeId={recipe.id}
+            isFavorite={false}
+          />
+        </div>
       </div>
-      <div className={styles.detailsBlock}>
-        <RecipeMainInfo
-          title={recipe.title}
-          category={recipe.category?.name || "Unknown"}
-          time={recipe.time}
-          description={recipe.description}
-          user={recipe.user || { name: "Anonymous", id: null }}
-        />
-        <RecipeIngredients
-          ingredients={
-            recipe.ingredients?.map((ingredient) => ({
-              _id: ingredient._id || ingredient.id,
-              name: ingredient.name,
-              img: ingredient.imgURL,
-              amount:
-                ingredient?.RecipeIngredient?.measure ||
-                ingredient?.through?.measure ||
-                ingredient.measure ||
-                "n/a",
-            })) || []
-          }
-        />
-        <RecipePreparation
-          preparation={recipe.instructions}
-          recipeId={recipeId}
-          isFavorite={isRecipeFavorite}
-        />
-      </div>
-    </div>
+    </>
   );
 };
 

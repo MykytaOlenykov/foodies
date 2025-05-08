@@ -71,21 +71,13 @@
   padding: 0;
 }
 
-.heart svg,
-.arrow svg {
-  width: 16px;
-  height: 16px;
-  fill: none;
-  stroke: var(--main-color);
-}
-
 .heart.active {
   background-color: var(--main-color);
   border-color: var(--main-color);
 }
 
-.heart.active svg {
-  stroke: var(--white-color);
+.heart.active .icon {
+  filter: brightness(0) invert(1);
 }
 
 .heart:hover,
@@ -94,9 +86,16 @@
   border-color: var(--main-color);
 }
 
-.heart:hover svg,
-.arrow:hover svg {
-  stroke: var(--white-color);
+.heart:hover .icon,
+.arrow:hover .icon {
+  filter: brightness(0) invert(1);
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  transition: filter 0.2s ease;
 }
 
 /* Tablet */
@@ -116,8 +115,7 @@
     height: 42px;
   }
 
-  .heart svg,
-  .arrow svg {
+  .icon {
     width: 18px;
     height: 18px;
   }
