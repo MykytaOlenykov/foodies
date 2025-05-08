@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: var(--white-color);
+  border-radius: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.button {
+  cursor: pointer;
+  transition: all var(--transition-duration) var(--transition-timing-function);
+}
+
+.button.signInButton {
+  border-color: var(--white-color) !important;
+}
+
+.button.signUpButton {
+  border-color: var(--gray-light-color) !important;
+}
+
+@media (hover: hover) {
+  .button.signInButton:hover {
+    border-color: var(--gray-light-color) !important;
+  }
+
+  .button.signUpButton:hover {
+    border-color: var(--white-color) !important;
+  }
+}
+
+@media (hover: none) {
+  .button.signInButton:active {
+    border-color: var(--gray-light-color) !important;
+  }
+
+  .button.signUpButton:active {
+    border-color: var(--white-color) !important;
+  }
+}

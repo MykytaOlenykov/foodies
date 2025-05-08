@@ -1,0 +1,26 @@
+.notFoundMsg {
+  max-width: 610px;
+  width: 100%;
+  text-align: center;
+  margin: 80px auto;
+}
+
+.listContainer {
+  width: 100%;
+  margin-top: 32px;
+}
+
+@media (min-width: 481px) {
+  .notFoundMsg {
+    margin-top: 100px;
+  }
+  .listContainer {
+    margin-top: 40px;
+  }
+}
+
+@media (min-width: 1148px) {
+  .notFoundMsg {
+    margin-top: 140px;
+  }
+}
