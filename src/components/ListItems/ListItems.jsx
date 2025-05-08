@@ -1,4 +1,7 @@
-import { emptyTabMessages } from "../../constants/common";
+import {
+  emptyTabMessagesForOwner,
+  emptyTabMessagesForUser,
+} from "../../constants/common";
 import { Typography } from "../Typography/Typography";
 import styles from "./ListItems.module.css";
 
@@ -6,10 +9,15 @@ import styles from "./ListItems.module.css";
  * @param {object} props
  * @param {Array} props.items
  * @param {string} props.tab
+ * @param {boolean} props.isMyProfile
  */
-export const ListItems = ({ items, tab }) => {
+export const ListItems = ({ items, tab, isMyProfile }) => {
   if (!items || items.length === 0) {
-    const message = emptyTabMessages[tab] || "No data found.";
+    const messages = isMyProfile
+      ? emptyTabMessagesForOwner
+      : emptyTabMessagesForUser;
+    const message = messages[tab] || "No data found.";
+
     return (
       <Typography textColor="black" className={styles.notFoundMsg}>
         {message}
@@ -24,11 +32,11 @@ export const ListItems = ({ items, tab }) => {
       {items.map((item) =>
         isRecipeTab ? (
           <div key={item.id} {...item}>
-            Here RecipePreview Component
+            {`RecipePreview Component: ${item.id} ${item.title} ${item.thumb} ${item.description}`}
           </div>
         ) : (
           <div key={item.id} {...item}>
-            Here UserCard Compnent
+            {`UserCard Compnent: ${item.id} ${item.name} ${item.avatarURL} ${item.recipesCount}`}
           </div>
         ),
       )}
