@@ -2,15 +2,35 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import clx from "clsx";
 
-import { HeaderProfileMenu } from "../HeaderProfileMenu";
-import { selectUser } from "../../../store/auth";
+import { openLogOut, selectUser } from "../../store/auth";
 
-import css from "./HeaderProfile.module.css";
+import css from "./UserBar.module.css";
 
-import emptyImages from "../../../assets/images/empty";
-import ChevronDownIcon from "../../../assets/icons/chevron-down.svg?react";
+import emptyImages from "../../assets/images/empty";
+import ChevronDownIcon from "../../assets/icons/chevron-down.svg?react";
 
-export const HeaderProfile = () => {
+const ProfileMenu = ({ onClose }) => {
+  const user = useSelector(selectUser);
+
+  return (
+    <div className={css.popover}>
+      <NavLink to={`/user/${user.id}`} className={css.link} onClick={onClose}>
+        Profile
+      </NavLink>
+
+      <button
+        type="button"
+        className={clx(css.link, css.logoutButton)}
+        onClick={() => dispatchEvent(openLogOut())}
+      >
+        Log out
+        <ArrowUpRightIcon className={css.logoutIcon} />
+      </button>
+    </div>
+  );
+};
+
+export const UserBar = () => {
   const user = useSelector(selectUser);
 
   const [isOpenProfile, setIsOpenProfile] = useState(false);
@@ -36,9 +56,7 @@ export const HeaderProfile = () => {
         </button>
       </div>
 
-      {isOpenProfile && (
-        <HeaderProfileMenu onClose={() => setIsOpenProfile(false)} />
-      )}
+      {isOpenProfile && <ProfileMenu onClose={() => setIsOpenProfile(false)} />}
     </div>
   );
 };

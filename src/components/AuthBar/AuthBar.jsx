@@ -3,10 +3,10 @@ import { useDispatch } from "react-redux";
 import { Button } from "../Button/Button";
 import { openSignIn, openSignUp } from "../../store/auth";
 
-import css from "./Auth.module.css";
+import css from "./AuthBar.module.css";
 import clsx from "clsx";
 
-const Auth = () => {
+export const AuthBar = () => {
   const dispatch = useDispatch();
 
   return (
@@ -33,5 +33,3 @@ const Auth = () => {
     </div>
   );
 };
-
-export default Auth;

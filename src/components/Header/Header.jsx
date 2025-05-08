@@ -3,10 +3,10 @@ import { NavLink, useLocation } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import clx from "clsx";
 
-import Auth from "../Auth/Auth";
+import { AuthBar } from "../AuthBar";
 import HeaderNav from "./HeaderNav/HeaderNav";
 import Container from "../UI/Container/Container";
-import { HeaderProfile } from "./HeaderProfile";
+import { UserBar } from "../UserBar";
 import { useBreakpoint } from "../../hooks/useBreakpoint";
 import { openSignIn, selectIsLoggedIn } from "../../store/auth";
 
@@ -45,7 +45,7 @@ export default function Header() {
         )}
 
         <div className={css.profileContainer}>
-          {isLoggedIn ? <HeaderProfile /> : <Auth />}
+          {isLoggedIn ? <UserBar /> : <AuthBar />}
 
           {isMobile && isLoggedIn && (
             <button
