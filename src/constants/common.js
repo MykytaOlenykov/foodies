@@ -1,3 +1,5 @@
+export const BACKEND_URL = import.meta.env.VITE_API_BASE_URL;
+
 export const DEFAULT_ERROR_MESSAGE = "Something went wrong. Try again.";
 
 export const TabKey = {
