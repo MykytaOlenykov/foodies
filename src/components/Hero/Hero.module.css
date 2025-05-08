@@ -173,3 +173,89 @@
     display: block;
   }
 }
+
+.heroImageSmall,
+.heroImageLarge {
+  display: block;
+  height: auto;
+  z-index: 0;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ========= MOBILE 1x (default) ========= */
+
+.heroImageSmall {
+  width: 77px;
+  transform: rotate(10deg);
+  content: url("../../assets/images/hero/mobile_small_dessert.webp@1x.webp");
+}
+
+.heroImageLarge {
+  width: 190px;
+  border-radius: 30px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  transform: rotate(-10deg);
+  z-index: 1;
+  content: url("../../assets/images/hero/mobile_big_meat.webp@1x.webp");
+}
+
+/* ========= TABLET 1x ========= */
+@media screen and (min-width: 768px) {
+  .heroImageSmall {
+    width: 128px;
+    content: url("../../assets/images/hero/tablet_small_dessert.webp@1x.webp");
+  }
+
+  .heroImageLarge {
+    width: 302px;
+    content: url("../../assets/images/hero/tablet_big_meat.webp@1x.webp");
+  }
+}
+
+/* ========= DESKTOP 1x ========= */
+@media screen and (min-width: 1280px) {
+  .heroImageSmall {
+    content: url("../../assets/images/hero/desktop_small_dessert.webp@1x.webp");
+  }
+
+  .heroImageLarge {
+    content: url("../../assets/images/hero/desktop_big_meat.webp@1x.webp");
+  }
+}
+
+/* ========= RETINA (2x) ========= */
+@media (min-device-pixel-ratio: 2),
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
+  /* Mobile 2x (default retina) */
+  .heroImageSmall {
+    content: url("../../assets/images/hero/mobile_small_dessert.webp@2x.webp");
+  }
+
+  .heroImageLarge {
+    content: url("../../assets/images/hero/mobile_big_meat.webp@2x.webp");
+  }
+
+  /* Tablet 2x */
+  @media screen and (min-width: 768px) {
+    .heroImageSmall {
+      content: url("../../assets/images/hero/tablet_small_dessert.webp@2x.webp");
+    }
+
+    .heroImageLarge {
+      content: url("../../assets/images/hero/tablet_big_meat.webp@2x.webp");
+    }
+  }
+
+  /* Desktop 2x */
+  @media screen and (min-width: 1280px) {
+    .heroImageSmall {
+      content: url("../../assets/images/hero/desktop_small_dessert.webp@2x.webp");
+    }
+
+    .heroImageLarge {
+      content: url("../../assets/images/hero/desktop_big_meat.webp@2x.webp");
+    }
+  }
+}
