@@ -26,9 +26,16 @@ export const NavMenu = ({ onClose }) => {
   return (
     <div className={clsx(css.container, isOpen && css.open)}>
       <div className={css.bar}>
-        <Link className={clsx(css.logo)} to="/" aria-label="Logo Foodies">
+        <button
+          className={clsx(css.logo)}
+          onClick={() => {
+            handleClose();
+            navigate("/");
+          }}
+          aria-label="Logo Foodies"
+        >
           Foodies
-        </Link>
+        </button>
 
         <button onClick={handleClose} className={css.close}>
           <CloseIcon className={clsx(css.closeIcon)} />

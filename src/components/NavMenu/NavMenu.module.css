@@ -123,6 +123,8 @@
 }
 
 .logo {
+  padding: 0;
+
   font-weight: 800;
   font-size: 20px;
   line-height: 120%;
@@ -130,4 +132,7 @@
   text-transform: lowercase;
   text-decoration: none;
   color: var(--white-color);
+
+  background-color: transparent;
+  border: none;
 }
