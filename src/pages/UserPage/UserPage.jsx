@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import {
   followUserById,
   getUserDataById,
+  getUserFollowers,
+  getUserFollowing,
   unfollowUserById,
   updateUserAvatar,
 } from "../../services/users";
@@ -14,11 +16,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../store/auth/selectors";
 import { useBreakpoint } from "../../hooks/useBreakpoint";
 import { openLogOut } from "../../store/auth";
+import { TabsList } from "../../components/TabsList/TabsList";
+import { ListItems } from "../../components/ListItems/ListItems";
 import { normalizeHttpError } from "../../utils";
 import toast from "react-hot-toast";
+import { getFavoriteRecipes, getRecipesByUserId } from "../../services/recipes";
+import { TabKey } from "../../constants/common";
 
 const UserPage = () => {
   const { id } = useParams();
+  const PAGE_LIMIT = 10;
+  const [page, setPage] = useState(1);
   const [user, setUser] = useState(null);
 
   const breakpoint = useBreakpoint();
@@ -28,19 +36,57 @@ const UserPage = () => {
   const dispatch = useDispatch();
   const isMyProfile = user?.id === currentUser?.id;
 
-  const fetchUserData = async (id) => {
-    try {
-      const data = await getUserDataById(id);
-      setUser(data.user);
-    } catch (err) {
-      const error = normalizeHttpError(err);
-      toast.error(error.message);
-    }
-  };
+  const [activeTab, setActiveTab] = useState(TabKey.RECIPES);
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
     fetchUserData(id);
+    setPage(1);
+    setActiveTab(TabKey.RECIPES);
   }, [id]);
+
+  useEffect(() => {
+    const fetchTabData = async () => {
+      try {
+        const pagination = { page, limit: PAGE_LIMIT };
+        let data = {};
+
+        switch (activeTab) {
+          case TabKey.RECIPES:
+            data = await getRecipesByUserId(id, pagination);
+            break;
+
+          case TabKey.FAVORITES:
+            if (isMyProfile) {
+              data = await getFavoriteRecipes(pagination);
+            }
+            break;
+
+          case TabKey.FOLLOWERS:
+            data = await getUserFollowers(id, pagination);
+            break;
+
+          case TabKey.FOLLOWING:
+            if (isMyProfile) {
+              data = await getUserFollowing(pagination);
+            }
+            break;
+
+          default:
+            data = {};
+        }
+
+        console.log(data);
+
+        setItems(data?.items || []);
+      } catch (err) {
+        const error = normalizeHttpError(err);
+        toast.error(error.message);
+      }
+    };
+
+    fetchTabData();
+  }, [activeTab, id, isMyProfile, page, user]);
 
   const handleAvatarChange = async (file) => {
     try {
@@ -85,6 +131,21 @@ const UserPage = () => {
     dispatch(openLogOut());
   };
 
+  const handleTabChange = (tabKey) => {
+    setActiveTab(tabKey);
+    setPage(1);
+  };
+
+  const fetchUserData = async (id) => {
+    try {
+      const data = await getUserDataById(id);
+      setUser(data.user);
+    } catch (err) {
+      const error = normalizeHttpError(err);
+      toast.error(error.message);
+    }
+  };
+
   //TODO: add loader
 
   if (!user)
@@ -96,7 +157,7 @@ const UserPage = () => {
       <Typography
         variant="body"
         textColor={isMobile ? "gray" : "black"}
-        className={styles.text}
+        className={styles.description}
       >
         Reveal your culinary art, share your favorite recipe and create
         gastronomic masterpieces with us.
@@ -137,7 +198,14 @@ const UserPage = () => {
             </Button>
           )}
         </div>
-        <div className={styles.profileTabs}>Tabs will be here</div>
+        <div className={styles.profileTabs}>
+          <TabsList
+            isMyProfile={isMyProfile}
+            activeTab={activeTab}
+            onTabChange={handleTabChange}
+          />
+          <ListItems tab={activeTab} items={items} isMyProfile={isMyProfile} />
+        </div>
       </div>
     </section>
   );
