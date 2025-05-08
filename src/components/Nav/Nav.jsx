@@ -12,7 +12,7 @@ export const Nav = () => {
   const isHomePage = !!homePath;
 
   return (
-    <nav>
+    <nav className={css.container}>
       <ul className={clx(css.list, !isHomePage && css.headerAll)}>
         <li>
           <Button
