@@ -13,28 +13,17 @@
   }
 }
 
-.recipesMainBlock {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-
-@media (min-width: 768px) {
-  .recipesMainBlock {
-    gap: 40px;
-  }
-}
-
 .recipesTitleBlock {
   display: flex;
   flex-direction: column;
+  align-items: start;
   gap: 16px;
-  width: 343px;
-}
-@media (min-width: 768px) {
-  .recipesTitleBlock {
-    width: 540px;
+  margin-bottom: 32px;
+
+  @media only screen and (min-width: 768px) {
     gap: 20px;
+    margin-bottom: 40px;
+    max-width: 540px;
   }
 }
 
@@ -52,6 +41,7 @@
   text-transform: uppercase;
   cursor: pointer;
 }
+
 @media (min-width: 768px) {
   .recipesBackButton {
     font-size: 14px;
