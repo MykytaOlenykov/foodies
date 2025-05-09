@@ -90,20 +90,7 @@
   color: var(--white-color);
   letter-spacing: -0.02em;
   text-align: center;
-  max-width: 327px;
   margin: 0 auto;
-
-  @media screen and (min-width: 768px) {
-    font-size: 70px;
-    line-height: 70px;
-    max-width: 678px;
-  }
-
-  @media (min-width: 1280px) {
-    font-size: 90px;
-    line-height: 90px;
-    max-width: 875px;
-  }
 }
 
 .heroSubtitle {
