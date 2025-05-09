@@ -9,5 +9,3 @@ export const selectIsOpenSignUp = (state) => state.auth.isOpenSignUp;
 export const selectIsOpenSignIn = (state) => state.auth.isOpenSignIn;
 
 export const selectIsOpenLogOut = (state) => state.auth.isOpenLogOut;
-
-export const selectIsSignedIn = (state) => Boolean(state.auth.user);

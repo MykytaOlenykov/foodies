@@ -1,20 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { openSignIn } from "../../store/auth";
-import { selectIsSignedIn } from "../../store/auth/selectors";
+import { Typography } from "../Typography/Typography";
+import { Button } from "../Button/Button";
+import { openSignIn, selectIsLoggedIn } from "../../store/auth";
 
 import styles from "./Hero.module.css";
-import { HeroImageSet } from "./HeroImageSet";
-import { Typography } from "../Typography/Typography";
 
 export const Hero = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isSignedIn = useSelector(selectIsSignedIn);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const handleClick = () => {
-    if (isSignedIn) {
+    if (isLoggedIn) {
       navigate("/recipe/add");
     } else {
       dispatch(openSignIn());
@@ -32,11 +31,15 @@ export const Hero = () => {
             Amazing recipes for beginners in the world of cooking, enveloping
             you in the aromas and tastes of various cuisines.
           </Typography>
-          <button onClick={handleClick} className={styles.heroButton}>
-            ADD RECIPE
-          </button>
+          <Button
+            bordered
+            variant="transparent"
+            size="medium"
+            onClick={handleClick}
+          >
+            Add recipe
+          </Button>
         </div>
-        <HeroImageSet />
       </div>
     </section>
   );
