@@ -10,6 +10,7 @@ import css from "./UserBar.module.css";
 import emptyImages from "../../assets/images/empty";
 import ChevronDownIcon from "../../assets/icons/chevron-down.svg?react";
 import ArrowUpRightIcon from "../../assets/icons/arrow-up-right.svg?react";
+import { BACKEND_URL } from "../../constants/common";
 
 const ProfileMenu = ({ onClose }) => {
   const dispatch = useDispatch();
@@ -38,7 +39,9 @@ export const UserBar = () => {
 
   const [isOpenProfile, setIsOpenProfile] = useState(false);
 
-  const avatarURL = user?.avatar ?? emptyImages.noAvatar;
+  const avatarURL = user?.avatarURL
+    ? `${BACKEND_URL}static${user.avatarURL}`
+    : emptyImages.noAvatar;
   const userName = user?.name || "User";
 
   return (
@@ -48,7 +51,12 @@ export const UserBar = () => {
         onClick={() => setIsOpenProfile((prev) => !prev)}
       >
         <div className={css.avatarThumb}>
-          <img className={css.avatar} src={avatarURL} alt={userName} />
+          <img
+            className={css.avatar}
+            // TODO: add util
+            src={avatarURL}
+            alt={userName}
+          />
         </div>
         <p className={css.profileName}>{userName}</p>
         <button
