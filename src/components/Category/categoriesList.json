@@ -1,0 +1,56 @@
+[
+  {
+    "id": 5,
+    "name": "Beef"
+  },
+  {
+    "id": 12,
+    "name": "Breakfast"
+  },
+
+  {
+    "id": 6,
+    "name": "Dessert"
+  },
+  {
+    "id": 2,
+    "name": "Lamb"
+  },
+  {
+    "id": 14,
+    "name": "Goat"
+  },
+  {
+    "id": 10,
+    "name": "Miscellaneous"
+  },
+  {
+    "id": 11,
+    "name": "Pasta"
+  },
+  {
+    "id": 8,
+    "name": "Pork"
+  },
+  {
+    "id": 1,
+    "name": "Seafood"
+  },
+  {
+    "id": 13,
+    "name": "Side"
+  },
+
+  {
+    "id": 3,
+    "name": "Starter"
+  },
+  {
+    "id": 7,
+    "name": "Vegan"
+  },
+  {
+    "id": 9,
+    "name": "Vegetarian"
+  }
+]
