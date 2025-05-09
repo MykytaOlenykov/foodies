@@ -28,16 +28,3 @@ export const fetchRecipesByCategory = createAsyncThunk(
     }
   },
 );
-
-export const toggleFavorite = createAsyncThunk(
-  "recipes/toggleFavorite",
-  async ({ recipeId, isFavorite }, { rejectWithValue }) => {
-    try {
-      const method = isFavorite ? "DELETE" : "POST";
-      const { data } = await api[method](`recipes/favorites/${recipeId}`, {});
-      return data.data;
-    } catch (error) {
-      return rejectWithValue({ error: normalizeHttpError(error) });
-    }
-  },
-);

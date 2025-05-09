@@ -99,7 +99,6 @@ export const RecipeList = ({ categoryId }) => {
               description={recipe.description}
               owner={recipe.owner}
               isFavorite={recipe.isFavorite}
-              mediaMode={breakpoint}
             />
           ))}
         </div>

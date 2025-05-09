@@ -1,15 +1,22 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 import { Typography } from "../Typography/Typography";
-import { openSignIn } from "../../store/auth";
-import { toggleFavorite } from "../../store/recipes";
+import { openSignIn, selectIsLoggedIn } from "../../store/auth";
 
 import css from "./RecipeCard.module.css";
 import ArrowUpIcon from "../../assets/icons/arrow-up-right.svg?react";
 import HeartIcon from "../../assets/icons/heart.svg?react";
 import NoImage from "../../assets/images/no-image.svg?react";
+import { BACKEND_URL, DEFAULT_ERROR_MESSAGE } from "../../constants/common";
+import { normalizeHttpError } from "../../utils";
+import { appClearSessionAction } from "../../store/utils";
+import {
+  addRecipeToFavorite,
+  removeRecipeFromFavorite,
+} from "../../services/recipes";
 
 export const RecipeCard = ({
   recipeId,
@@ -21,36 +28,49 @@ export const RecipeCard = ({
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const [isFavorite, setIsFavorite] = useState(favorite);
+  const [updating, setUpdating] = useState(false);
 
   const handleFavoriteClick = async () => {
     if (!isLoggedIn) {
       dispatch(openSignIn());
+      return;
     }
 
-    dispatch(toggleFavorite({ recipeId, isFavorite }));
-    setIsFavorite((prev) => !prev);
+    try {
+      setUpdating(true);
+      let message;
+
+      if (isFavorite) {
+        message = await removeRecipeFromFavorite(recipeId);
+        setIsFavorite(false);
+      } else {
+        message = await addRecipeToFavorite(recipeId);
+        setIsFavorite(true);
+      }
+
+      toast.success(message);
+    } catch (error) {
+      const { message, status } = normalizeHttpError(error);
+      toast.error(message ?? DEFAULT_ERROR_MESSAGE);
+      if (status === 401) dispatch(appClearSessionAction());
+    } finally {
+      setUpdating(false);
+    }
   };
 
-  const handleAuthorClick = () => {
+  const navigateToAuthor = () => {
     if (!isLoggedIn) {
       dispatch(openSignIn());
-    } else {
-      navigate(`/user/${owner.id}`);
+      return;
     }
+
+    navigate(`/user/${owner.id}`);
   };
 
-  const handleRecipeClick = () => {
+  const navigateToRecipe = () => {
     navigate(`/recipe/${recipeId}`);
-  };
-
-  const getInitials = (name) => {
-    if (!name) return "NN";
-    const words = name.split(" ");
-    const firstInitial = words[0]?.[0]?.toUpperCase() || "";
-    const secondInitial = words[1]?.[0]?.toUpperCase() || "";
-    return `${firstInitial}${secondInitial}`;
   };
 
   return (
@@ -77,19 +97,19 @@ export const RecipeCard = ({
             <button
               type="button"
               className={css.cardAuthorButton}
-              onClick={handleAuthorClick}
+              onClick={navigateToAuthor}
             >
               {owner.avatarURL ? (
                 <img
-                  src={
-                    "https://mykytaolenykov.com/foodies/api/static" +
-                    owner.avatarURL
-                  }
+                  // TODO: add util
+                  src={`${BACKEND_URL}static${owner.avatarURL}`}
                   alt={owner.name}
                   className={css.avatar}
                 />
               ) : (
-                <div className={css.initials}>{getInitials(owner.name)}</div>
+                <div className={css.initials}>
+                  {owner.name ? owner.name[0] : "U"}
+                </div>
               )}
             </button>
             <span className={css.cardAuthorName}>{owner.name}</span>
@@ -102,6 +122,7 @@ export const RecipeCard = ({
                 isFavorite ? css.isFavorite : ""
               }`}
               onClick={handleFavoriteClick}
+              disabled={updating}
             >
               {isFavorite ? (
                 <HeartIcon className={`${css.fillFavorite} ${css.svgIcon}`} />
@@ -112,7 +133,7 @@ export const RecipeCard = ({
             <button
               type="button"
               className={css.receiptButtons}
-              onClick={handleRecipeClick}
+              onClick={navigateToRecipe}
             >
               <ArrowUpIcon className={css.svgIcon} />
             </button>
