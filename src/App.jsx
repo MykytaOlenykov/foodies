@@ -11,7 +11,6 @@ import { getAllCategories } from "./store/categories";
 import { getAllIngredients } from "./store/ingredients";
 
 const Home = lazy(() => import("./pages/Home/Home.jsx"));
-const Category = lazy(() => import("./pages/Category/Category.jsx"));
 const Recipe = lazy(() => import("./pages/Recipe/Recipe.jsx"));
 const UserPage = lazy(() => import("./pages/UserPage/UserPage.jsx"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFound.jsx"));
@@ -35,9 +34,6 @@ export const App = () => {
     <Routes>
       <Route path="/" element={<SharedLayout />}>
         <Route index element={<Home />} />
-
-        {/* // TODO: remove Category */}
-        <Route path="/category" element={<Category />} />
 
         <Route
           path="/user/:id"
