@@ -54,6 +54,7 @@
 }
 
 .cardAuthorButton {
+  flex-shrink: 0;
   width: 32px;
   height: 32px;
   border-radius: 30px;
@@ -83,6 +84,18 @@
   line-height: 20px;
   letter-spacing: -0.02em;
   color: #1a1a1a;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @supports (-webkit-line-clamp: 2) and (display: -webkit-box) {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: normal;
+  }
 }
 @media (min-width: 768px) {
   .cardAuthorName {

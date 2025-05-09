@@ -4,12 +4,11 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 import { Typography } from "../Typography/Typography";
-import { openSignIn, selectIsLoggedIn } from "../../store/auth";
+import { openSignIn, selectIsLoggedIn, selectUser } from "../../store/auth";
 
 import css from "./RecipeCard.module.css";
 import ArrowUpIcon from "../../assets/icons/arrow-up-right.svg?react";
 import HeartIcon from "../../assets/icons/heart.svg?react";
-import NoImage from "../../assets/images/no-image.svg?react";
 import { BACKEND_URL, DEFAULT_ERROR_MESSAGE } from "../../constants/common";
 import { normalizeHttpError } from "../../utils";
 import { appClearSessionAction } from "../../store/utils";
@@ -29,8 +28,11 @@ export const RecipeCard = ({
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const { id } = useSelector(selectUser);
   const [isFavorite, setIsFavorite] = useState(favorite);
   const [updating, setUpdating] = useState(false);
+
+  const showFavoriteBtn = id !== owner.id;
 
   const handleFavoriteClick = async () => {
     if (!isLoggedIn) {
@@ -73,10 +75,15 @@ export const RecipeCard = ({
     navigate(`/recipe/${recipeId}`);
   };
 
+  // TODO: add util
+  const imageURL = image?.startsWith("http")
+    ? image
+    : `${BACKEND_URL}static${image}`;
+
   return (
     <div className={css.recipeCard}>
       <div className={css.thumb}>
-        <img src={image || NoImage} alt={title} className={css.recipeImage} />
+        <img src={imageURL} alt={title} className={css.recipeImage} />
       </div>
 
       <div className={css.cardInfo}>
@@ -116,20 +123,22 @@ export const RecipeCard = ({
           </div>
 
           <div className={css.recipeIcons}>
-            <button
-              type="button"
-              className={`${css.receiptButtons} ${
-                isFavorite ? css.isFavorite : ""
-              }`}
-              onClick={handleFavoriteClick}
-              disabled={updating}
-            >
-              {isFavorite ? (
-                <HeartIcon className={`${css.fillFavorite} ${css.svgIcon}`} />
-              ) : (
-                <HeartIcon className={css.svgIcon} />
-              )}
-            </button>
+            {showFavoriteBtn && (
+              <button
+                type="button"
+                className={`${css.receiptButtons} ${
+                  isFavorite ? css.isFavorite : ""
+                }`}
+                onClick={handleFavoriteClick}
+                disabled={updating}
+              >
+                {isFavorite ? (
+                  <HeartIcon className={`${css.fillFavorite} ${css.svgIcon}`} />
+                ) : (
+                  <HeartIcon className={css.svgIcon} />
+                )}
+              </button>
+            )}
             <button
               type="button"
               className={css.receiptButtons}
