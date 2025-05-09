@@ -110,24 +110,6 @@
   gap: 8px;
 }
 
-.receiptButtons {
-  width: 36px;
-  height: 36px;
-  background-color: #f4f4f4;
-  border-radius: 30px;
-  cursor: pointer;
-  border: 1px solid var(--gray-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-@media (min-width: 768px) {
-  .receiptButtons {
-    width: 42px;
-    height: 42px;
-  }
-}
-
 .isFavorite {
   background-color: var(--main-color);
 }
@@ -142,18 +124,6 @@
 @media (min-width: 768px) {
   .initials {
     font-size: 18px;
-  }
-}
-
-.svgIcon {
-  width: 16px;
-  height: 16px;
-  fill: var(--main-color);
-}
-@media (min-width: 768px) {
-  .svgIcon {
-    width: 18px;
-    height: 18px;
   }
 }
 

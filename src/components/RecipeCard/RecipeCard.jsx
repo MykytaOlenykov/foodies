@@ -16,6 +16,7 @@ import {
   addFavoriteRecipe,
   removeFavoriteRecipe,
 } from "../../services/recipes";
+import { ButtonIcon } from "../ButtonIcon/ButtonIcon";
 
 export const RecipeCard = ({
   recipeId,
@@ -24,6 +25,7 @@ export const RecipeCard = ({
   description,
   owner,
   isFavorite: favorite,
+  isMobile,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -129,27 +131,20 @@ export const RecipeCard = ({
           </div>
 
           <div className={css.recipeIcons}>
-            <button
-              type="button"
-              className={`${css.receiptButtons} ${
-                isFavorite ? css.isFavorite : ""
-              }`}
+            <ButtonIcon
+              variant={isFavorite ? "dark" : "light"}
+              size={isMobile ? "small" : "medium"}
               onClick={handleFavoriteClick}
               disabled={updating}
-            >
-              {isFavorite ? (
-                <HeartIcon className={`${css.fillFavorite} ${css.svgIcon}`} />
-              ) : (
-                <HeartIcon className={css.svgIcon} />
-              )}
-            </button>
-            <button
-              type="button"
-              className={css.receiptButtons}
+              icon={isFavorite ? <HeartIcon /> : <HeartIcon />}
+            />
+
+            <ButtonIcon
+              variant="light"
+              size={isMobile ? "small" : "medium"}
               onClick={navigateToRecipe}
-            >
-              <ArrowUpIcon className={css.svgIcon} />
-            </button>
+              icon={<ArrowUpIcon />}
+            />
           </div>
         </div>
       </div>

@@ -38,6 +38,7 @@ export const RecipeList = ({ categoryId }) => {
   const [total, setTotal] = useState(0);
 
   const recipesPerPage = getCountOfRecipes(breakpoint);
+  const isMobile = ["mobile", "small-mobile"].includes(breakpoint);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -148,6 +149,7 @@ export const RecipeList = ({ categoryId }) => {
               description={recipe.description}
               owner={recipe.owner}
               isFavorite={recipe.isFavorite}
+              isMobile={isMobile}
             />
           ))}
         </div>
