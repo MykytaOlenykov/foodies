@@ -5,7 +5,6 @@ import { authReducer } from "./auth";
 import { categoriesReducer } from "./categories";
 import { ingredientsReducer } from "./ingredients";
 import { appClearSessionMiddleware } from "./utils";
-import { recipesReducer } from "./recipes";
 
 export const store = configureStore({
   reducer: {
@@ -13,7 +12,6 @@ export const store = configureStore({
     auth: authReducer,
     categories: categoriesReducer,
     ingredients: ingredientsReducer,
-    recipes: recipesReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(appClearSessionMiddleware),

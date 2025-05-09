@@ -1,78 +1,80 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 import { Pagination } from "../Pagination/Pagination.jsx";
 import SearchSelect from "../SearchSelect/SearchSelect.jsx";
 import { RecipeCard } from "../RecipeCard";
-import { fetchRecipesByCategory } from "../../store/recipes/operations.js";
 import { selectAreas } from "../../store/areas";
 import { selectIngredients } from "../../store/ingredients";
 import { useBreakpoint } from "../../hooks/useBreakpoint.js";
+import { getRecipes } from "../../services/recipes.js";
+import { normalizeHttpError } from "../../utils/normalizeHttpError.js";
+import { DEFAULT_ERROR_MESSAGE } from "../../constants/common.js";
 
 import css from "./RecipeList.module.css";
+import { isCancel } from "axios";
+
+const getCountOfRecipes = (breakpoint) => {
+  if (["desktop", "tablet"].includes(breakpoint)) return 12;
+  return 8;
+};
 
 export const RecipeList = ({ categoryId }) => {
-  const dispatch = useDispatch();
-  const [currentPage, setCurrentPage] = useState(1);
-  const [selectedRecipes, setSelectedRecipes] = useState([]);
-  const [selectedIngredient, setSelectedIngredient] = useState(null);
-  const [selectedArea, setSelectedArea] = useState(null);
   const areas = useSelector(selectAreas);
   const ingredients = useSelector(selectIngredients);
+  const breakpoint = useBreakpoint({ tablet: 540 });
 
-  let recipesPerPage = 12; // Default for Desktop and Tablet
+  const [recipes, setRecipes] = useState([]);
+  const [areaId, setAreaId] = useState(null);
+  const [ingredientId, setIngredientId] = useState(null);
+  const [total, setTotal] = useState(0);
 
-  const breakpoint = useBreakpoint();
-
-  const isMobile = ["mobile", "small-mobile"].includes(breakpoint);
-
-  if (isMobile) {
-    recipesPerPage = 8;
-  }
+  const [currentPage, setCurrentPage] = useState(1);
+  const recipesPerPage = getCountOfRecipes(breakpoint);
 
   useEffect(() => {
-    dispatch(
-      fetchRecipesByCategory({
-        ingredient: selectedIngredient?.id,
-        area: selectedArea?.id,
-        page: currentPage,
-        limit: recipesPerPage,
-        ...(categoryId ? { categoryId } : {}),
-      }),
-    )
-      .unwrap()
-      .then((recipes) => {
-        setSelectedRecipes(recipes);
-      })
-      .catch((err) => {
-        console.error("Error fetching recipes:", err);
-      });
-  }, [
-    dispatch,
-    categoryId,
-    currentPage,
-    recipesPerPage,
-    selectedIngredient,
-    selectedArea,
-  ]);
+    const abortController = new AbortController();
 
-  if (!selectedRecipes || selectedRecipes.length === 0) {
-    return <p>No recipes available.</p>;
-  }
+    (async () => {
+      try {
+        const { total, recipes } = await getRecipes(
+          {
+            categoryId,
+            areaId,
+            ingredientId,
+            limit: recipesPerPage,
+            page: currentPage,
+          },
+          { signal: abortController.signal },
+        );
+        setRecipes(recipes);
+        setTotal(total);
+      } catch (error) {
+        if (!isCancel(error)) {
+          setRecipes([]);
+          setTotal(0);
+          const { message } = normalizeHttpError(error);
+          toast.error(message ?? DEFAULT_ERROR_MESSAGE);
+        }
+      }
+    })();
 
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
+    return () => {
+      abortController.abort();
+    };
+  }, [categoryId, areaId, ingredientId, currentPage, recipesPerPage]);
 
   const handleIngredientChange = (ingredient) => {
-    setSelectedIngredient(ingredient);
+    setIngredientId(ingredient?.id);
   };
 
   const handleAreaChange = (area) => {
-    setSelectedArea(area);
+    setAreaId(area?.id);
   };
 
-  const totalPages = Math.ceil(selectedRecipes.total / recipesPerPage);
+  const totalPages = Math.ceil(total / recipesPerPage);
+
   return (
     <div className={css.recipesBlock}>
       <div className={css.recipesFiltersBlock}>
@@ -90,7 +92,7 @@ export const RecipeList = ({ categoryId }) => {
 
       <div className={css.recipeListBlock}>
         <div className={css.recipeList}>
-          {selectedRecipes.recipes.map((recipe) => (
+          {recipes.map((recipe) => (
             <RecipeCard
               key={recipe.id}
               recipeId={recipe.id}
@@ -105,7 +107,7 @@ export const RecipeList = ({ categoryId }) => {
         <Pagination
           totalPages={totalPages}
           activePage={currentPage}
-          onPageChange={handlePageChange}
+          onPageChange={(page) => setCurrentPage(page)}
         />
       </div>
     </div>
