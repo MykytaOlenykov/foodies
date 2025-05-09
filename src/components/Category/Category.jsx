@@ -1,19 +1,29 @@
 import { useEffect, useState } from "react";
+
 import { CategoryList } from "../../components/CategoriesList/CategoriesList";
-import allCategories from "./categoriesList.json";
 import Container from "../../components/UI/Container/Container";
-import css from "./Category.module.css";
 import { Typography } from "../../components/Typography/Typography";
+import { useBreakpoint } from "../../hooks/useBreakpoint";
+
+import css from "./Category.module.css";
+
+import allCategories from "./categoriesList.json";
+
+const getCountOfCategories = (breakpoint) => {
+  if (["desktop", "tablet"].includes(breakpoint)) return 11;
+  return 8;
+};
 
 export function Category() {
+  const breakpoint = useBreakpoint({ tablet: 640 });
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    const limit = window.innerWidth < 768 ? 8 : 11;
-    setCategories(allCategories.slice(0, limit));
-  }, []);
+    setCategories(allCategories.slice(0, getCountOfCategories(breakpoint)));
+  }, [breakpoint]);
+
   return (
-    <Container>
+    <Container className={css.container}>
       <div className={css.headWrapper}>
         <Typography variant="h2">Categories</Typography>
         <Typography variant="body" className={css.description}>
@@ -22,6 +32,7 @@ export function Category() {
           the kitchen.
         </Typography>
       </div>
+
       {categories.length > 0 && <CategoryList categories={categories} />}
     </Container>
   );

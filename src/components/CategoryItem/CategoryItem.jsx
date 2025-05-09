@@ -10,7 +10,7 @@ export default function CategoryItem({ data }) {
       <div className={`${css.thumb} ${css[categoryName.toLowerCase()]}`}>
         <div className={css.wrapper}>
           <p className={css.label}>{data.name}</p>
-          <Link to={`/category/${data.id}`}>
+          <Link to={`/?category=${data.id}`}>
             <ButtonIcon
               className={css.btnIcn}
               size="medium"

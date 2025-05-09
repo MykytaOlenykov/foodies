@@ -12,7 +12,7 @@ export function CategoryList({ categories }) {
         </li>
       ))}
       <li className={css.liLoadMore}>
-        <Link to={`/category/recipes`}>
+        <Link to={"/?category=all"}>
           <Typography
             variant="h4"
             textColor="white"

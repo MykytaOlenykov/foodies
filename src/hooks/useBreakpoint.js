@@ -15,7 +15,9 @@ import { useState, useEffect } from "react";
  * const breakpoint = useBreakpoint();
  * if (breakpoint === "desktop") renderManyItems();
  */
-export const useBreakpoint = () => {
+export const useBreakpoint = (props) => {
+  const { desktop = 1440, tablet = 768, mobile = 375 } = props ?? {};
+
   const [width, setWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -24,8 +26,8 @@ export const useBreakpoint = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  if (width >= 1440) return "desktop";
-  if (width >= 768) return "tablet";
-  if (width >= 375) return "mobile";
+  if (width >= desktop) return "desktop";
+  if (width >= tablet) return "tablet";
+  if (width >= mobile) return "mobile";
   return "small-mobile"; // < 375px (320–374)
 };
