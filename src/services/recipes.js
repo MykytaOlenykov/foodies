@@ -1,5 +1,26 @@
 import api from "./api";
 
+export const getRecipes = async (
+  { page, limit, categoryId, areaId, ingredientId },
+  options = {},
+) => {
+  const { signal } = options;
+  const { data } = await api.get(`/recipes`, {
+    params: {
+      ...(page ? { page } : {}),
+      ...(limit ? { limit } : {}),
+      ...(categoryId ? { categoryId } : {}),
+      ...(areaId ? { areaId } : {}),
+      ...(ingredientId ? { ingredientId } : {}),
+    },
+    signal,
+  });
+  return {
+    total: data.data.total,
+    recipes: data.data.recipes,
+  };
+};
+
 export const getRecipesByUserId = async (userId, { page, limit }) => {
   const response = await api.get(`/recipes`, {
     params: {
