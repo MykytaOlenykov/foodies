@@ -8,6 +8,7 @@ import NoImage from "../../../assets/images/no-image.svg?react";
 import HeartIcon from "../../../assets/icons/heart.svg?react";
 import ArrowUpIcon from "../../../assets/icons/arrow-up-right.svg?react";
 import css from "./RecipeCard.module.css";
+import { Typography } from "../../Typography/Typography";
 
 const RecipeCard = ({
   recipeId,
@@ -74,8 +75,12 @@ const RecipeCard = ({
         <img src={image || NoImage} alt={title} className={css.recipeImage} />
       </div>
       <div className={css.cardInfo}>
-        <h3 className={css.cardTitle}>{truncatedCardTitle}</h3>
-        <p className={css.cardDescription}>{truncatedDescription}</p>
+        <Typography className={css.cardTitle} variant="h3">
+          {truncatedCardTitle}{" "}
+        </Typography>
+        <Typography className={css.cardDescription} variant="p">
+          {truncatedDescription}{" "}
+        </Typography>
         <div className={css.cardActions}>
           <div className={css.cardAuthorInfo}>
             <button
