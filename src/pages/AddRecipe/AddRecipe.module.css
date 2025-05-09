@@ -1,164 +1,169 @@
 .AddRecipe {
-    margin-top: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 40px;
-    width: 100%;
-    padding: 64px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  width: 100%;
+  padding: 126px 0 64px;
 }
 
-@media (min-width: 769px) {
-    .AddRecipe {
-        margin-top: 0;
-    }
+@media (min-width: 768px) {
+  .AddRecipe {
+    padding-top: 150px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .AddRecipe {
+    padding-top: 170px;
+  }
 }
 
 .AddRecipe__header {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 @media (min-width: 481px) {
-    .AddRecipe__header {
-        max-width: 443px;
-    }
+  .AddRecipe__header {
+    max-width: 443px;
+  }
 }
 
 .AddRecipe__form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 32px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
 }
 
 @media (min-width: 481px) {
-    .AddRecipe__form {
-        gap: 80px;
-    }
+  .AddRecipe__form {
+    gap: 80px;
+  }
 }
 
 @media (min-width: 769px) {
-    .AddRecipe__form {
-        flex-direction: row;
-    }
+  .AddRecipe__form {
+    flex-direction: row;
+  }
 }
 
 .AddRecipe__inputs {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    flex-shrink: 0;
-    flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  flex-shrink: 0;
+  flex-grow: 1;
 }
 
 @media (min-width: 481px) {
-    .AddRecipe__inputs {
-        gap: 60px;
-    }
+  .AddRecipe__inputs {
+    gap: 60px;
+  }
 }
 
 @media (min-width: 769px) {
-    .AddRecipe__inputs {
-        width: unset;
-    }
+  .AddRecipe__inputs {
+    width: unset;
+  }
 }
 
 .AddRecipe__inputGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 @media (min-width: 769px) {
-    .AddRecipe__inputGroup {
-        gap: 16px;
-    }
+  .AddRecipe__inputGroup {
+    gap: 16px;
+  }
 }
 
 .AddRecipe__inputGroupWrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 @media (min-width: 481px) {
-    .AddRecipe__inputGroupWrapper {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        align-items: end;
-    }
+  .AddRecipe__inputGroupWrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    align-items: end;
+  }
 }
 
 .AddRecipe__inputGroup_bottom {
-    margin-top: 44px;
+  margin-top: 44px;
 }
 
 @media (min-width: 481px) {
-    .AddRecipe__inputGroup_bottom {
-        margin-top: 20px;
-    }
+  .AddRecipe__inputGroup_bottom {
+    margin-top: 20px;
+  }
 }
 
 .AddRecipe__inputGroup_top {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 @media (min-width: 481px) {
-    .AddRecipe__inputGroup_top {
-        gap: 40px;
-    }
+  .AddRecipe__inputGroup_top {
+    gap: 40px;
+  }
 }
 
 .AddRecipe__inputGroup .Typography {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .AddRecipe__actions {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    gap: 8px;
-    margin-top: 12px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+  margin-top: 12px;
 }
 
 @media (min-width: 481px) {
-    .AddRecipe__actions {
-        margin-top: 20px;
-    }
+  .AddRecipe__actions {
+    margin-top: 20px;
+  }
 }
 
 .AddRecipe__publishBtn {
-    padding: 14px 32px !important;
+  padding: 14px 32px !important;
 }
 
 .IngredientsFieldGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .IngredientsFieldGroup__button {
-    margin-top: 12px;
+  margin-top: 12px;
 }
 
 .AddRecipe__ingredientsList {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    flex-wrap: wrap;
-    max-width: 649px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 649px;
 }
 
 .errorMessage {
-    color: var(--red-color);
-    font-size: 14px;
-    line-height: 20px;
-    margin-top: 4px;
+  color: var(--red-color);
+  font-size: 14px;
+  line-height: 20px;
+  margin-top: 4px;
 }
