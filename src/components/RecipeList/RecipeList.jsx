@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import RecipeCard from "../RecipeCard/RecipeCard.jsx";
-import { Pagination } from "../../Pagination/Pagination.jsx";
-import { fetchRecipesByCategory } from "../../../store/recipes/operations.js";
-import { useBreakpoint } from "../../../hooks/useBreakpoint.js";
-import SearchSelect from "../../SearchSelect/SearchSelect.jsx";
-import Loader from "../../Loader/Loader.jsx";
-import { selectAreas } from "../../../store/areas/selectors.js";
-import { selectIngredients } from "../../../store/ingredients/selectors.js";
+
+import RecipeCard from "../RecipesMainPage/RecipeCard/RecipeCard.jsx";
+import { Pagination } from "../Pagination/Pagination.jsx";
+import SearchSelect from "../SearchSelect/SearchSelect.jsx";
+import Loader from "../Loader/Loader.jsx";
+import { fetchRecipesByCategory } from "../../store/recipes/operations.js";
+import { selectAreas } from "../../store/areas";
+import { selectIngredients } from "../../store/ingredients";
+import { useBreakpoint } from "../../hooks/useBreakpoint.js";
+
 import css from "./RecipeList.module.css";
 
-const RecipeList = ({ categoryId }) => {
+export const RecipeList = ({ categoryId }) => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedRecipes, setSelectedRecipes] = useState([]);
@@ -88,6 +90,7 @@ const RecipeList = ({ categoryId }) => {
           onSelect={handleAreaChange}
         />
       </div>
+
       {loading ? (
         <Loader />
       ) : error ? (
@@ -118,5 +121,3 @@ const RecipeList = ({ categoryId }) => {
     </div>
   );
 };
-
-export default RecipeList;

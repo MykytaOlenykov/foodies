@@ -2,21 +2,18 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
-  width: 343px;
 }
-@media (min-width: 768px) {
+
+@media screen and (min-width: 640px) {
   .recipesBlock {
     gap: 40px;
-    width: 704px;
   }
 }
 
-@media (min-width: 1440px) {
+@media screen and (min-width: 1080px) {
   .recipesBlock {
     flex-direction: row;
     justify-content: space-between;
-    gap: 40px;
-    width: 1280px;
   }
 }
 
@@ -28,28 +25,24 @@
 }
 
 .recipeList {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 32px;
+
+  @media screen and (min-width: 640px) {
+    row-gap: 40px;
+    column-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (min-width: 1440px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 img {
   display: block;
   max-width: 100%;
-}
-
-@media (min-width: 768px) {
-  .recipeList {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 16px;
-    justify-content: space-between;
-  }
-}
-@media (min-width: 1440px) {
-  .recipeList {
-    gap: 20px;
-  }
 }
 
 .recipesFiltersBlock {
@@ -59,7 +52,7 @@ img {
   width: 100%;
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 640px) {
   .recipesFiltersBlock {
     justify-content: space-between;
     flex-direction: row;
@@ -67,10 +60,10 @@ img {
   }
 }
 
-@media (min-width: 1440px) {
+@media screen and (min-width: 1080px) {
   .recipesFiltersBlock {
+    max-width: 330px;
     justify-content: flex-start;
     flex-direction: column;
-    width: 464px;
   }
 }

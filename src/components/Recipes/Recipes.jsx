@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
 import Container from "../UI/Container/Container.jsx";
-import RecipeList from "../RecipesMainPage/RecipeList/RecipeList.jsx";
 import { Typography } from "../Typography/Typography.jsx";
+import { RecipeList } from "../RecipeList";
 import { selectCategories } from "../../store/categories/selectors.js";
 
 import css from "./Recipes.module.css";
