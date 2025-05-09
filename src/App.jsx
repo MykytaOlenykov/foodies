@@ -3,8 +3,7 @@ import { lazy, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import SharedLayout from "./components/layout/SharedLayout/SharedLayout";
-import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-import Verify from "./pages/Verify/Verify";
+import { PrivateRoute } from "./components/PrivateRoute";
 import { checkApiConnection } from "./services/api.js";
 import { getCurrentUser } from "./store/auth";
 import { getAllAreas } from "./store/areas";
@@ -36,14 +35,30 @@ export const App = () => {
     <Routes>
       <Route path="/" element={<SharedLayout />}>
         <Route index element={<Home />} />
+
+        {/* // TODO: remove Category */}
         <Route path="/category" element={<Category />} />
-        <Route path="/user/:id" element={<UserPage />} />
+
+        <Route
+          path="/user/:id"
+          element={
+            <PrivateRoute>
+              <UserPage />
+            </PrivateRoute>
+          }
+        />
+
         <Route path="/recipe/:recipeId" element={<Recipe />} />
+
         <Route
           path="/recipe/add"
-          element={<PrivateRoute component={AddRecipe} />}
+          element={
+            <PrivateRoute>
+              <AddRecipe />
+            </PrivateRoute>
+          }
         />
-        <Route path="/auth/verify/:token" element={<Verify />} />
+
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
