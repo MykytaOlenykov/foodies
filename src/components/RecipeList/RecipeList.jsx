@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import RecipeCard from "../RecipesMainPage/RecipeCard/RecipeCard.jsx";
 import { Pagination } from "../Pagination/Pagination.jsx";
 import SearchSelect from "../SearchSelect/SearchSelect.jsx";
-import Loader from "../Loader/Loader.jsx";
+import { RecipeCard } from "../RecipeCard";
 import { fetchRecipesByCategory } from "../../store/recipes/operations.js";
 import { selectAreas } from "../../store/areas";
 import { selectIngredients } from "../../store/ingredients";
@@ -16,8 +15,6 @@ export const RecipeList = ({ categoryId }) => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedRecipes, setSelectedRecipes] = useState([]);
-  const loading = useSelector((state) => state.recipes.loading);
-  const error = useSelector((state) => state.recipes.error);
   const [selectedIngredient, setSelectedIngredient] = useState(null);
   const [selectedArea, setSelectedArea] = useState(null);
   const areas = useSelector(selectAreas);
@@ -91,33 +88,27 @@ export const RecipeList = ({ categoryId }) => {
         />
       </div>
 
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <div>Error: {error}</div>
-      ) : (
-        <div className={css.recipeListBlock}>
-          <div className={css.recipeList}>
-            {selectedRecipes.recipes.map((recipe) => (
-              <RecipeCard
-                key={recipe.id}
-                recipeId={recipe.id}
-                title={recipe.title}
-                image={recipe.thumb}
-                description={recipe.description}
-                owner={recipe.owner}
-                favorited={recipe.isFavorite}
-                mediaMode={breakpoint}
-              />
-            ))}
-          </div>
-          <Pagination
-            totalPages={totalPages}
-            activePage={currentPage}
-            onPageChange={handlePageChange}
-          />
+      <div className={css.recipeListBlock}>
+        <div className={css.recipeList}>
+          {selectedRecipes.recipes.map((recipe) => (
+            <RecipeCard
+              key={recipe.id}
+              recipeId={recipe.id}
+              title={recipe.title}
+              image={recipe.thumb}
+              description={recipe.description}
+              owner={recipe.owner}
+              isFavorite={recipe.isFavorite}
+              mediaMode={breakpoint}
+            />
+          ))}
         </div>
-      )}
+        <Pagination
+          totalPages={totalPages}
+          activePage={currentPage}
+          onPageChange={handlePageChange}
+        />
+      </div>
     </div>
   );
 };

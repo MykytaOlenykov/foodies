@@ -4,7 +4,7 @@
   gap: 32px;
 }
 
-@media screen and (min-width: 640px) {
+@media screen and (min-width: 540px) {
   .recipesBlock {
     gap: 40px;
   }
@@ -29,7 +29,7 @@
   grid-template-columns: 1fr;
   gap: 32px;
 
-  @media screen and (min-width: 640px) {
+  @media screen and (min-width: 540px) {
     row-gap: 40px;
     column-gap: 20px;
     grid-template-columns: repeat(2, 1fr);
@@ -52,7 +52,7 @@ img {
   width: 100%;
 }
 
-@media screen and (min-width: 640px) {
+@media screen and (min-width: 540px) {
   .recipesFiltersBlock {
     justify-content: space-between;
     flex-direction: row;
