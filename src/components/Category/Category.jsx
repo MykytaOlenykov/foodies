@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { CategoryList } from "../../components/CategoriesList/CategoriesList";
-import allCategories from "./categorieList.json";
+import allCategories from "./categoriesList.json";
 import Container from "../../components/UI/Container/Container";
 import css from "./Category.module.css";
 import { Typography } from "../../components/Typography/Typography";
 
-export default function Category() {
+export function Category() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
