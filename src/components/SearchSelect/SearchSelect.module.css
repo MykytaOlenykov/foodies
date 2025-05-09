@@ -3,6 +3,10 @@
   width: 100%;
 }
 
+.wrapper input::placeholder {
+  color: var(--gray-color);
+}
+
 .dropdownList {
   position: absolute;
   top: 100%;

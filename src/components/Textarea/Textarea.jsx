@@ -12,14 +12,16 @@ const MAX_LENGTH = 200;
  * @param {string} [props.placeholder] - Placeholder text
  * @param {boolean} [props.disabled] - Whether the textarea is disabled
  * @param {boolean} [props.required] - Whether the textarea is required
+ * @param {string} [props.name] - Name of the textarea
  */
 const Textarea = ({
-  value,
+  value = '',
   onChange,
   placeholder = '',
   maxLength = MAX_LENGTH,
   disabled = false,
   required = false,
+  name,
 }) => {
   const ref = useRef(null);
 
@@ -27,8 +29,10 @@ const Textarea = ({
     const ta = ref.current;
     if (!ta) return;
 
-    ta.style.height = 'auto';
-    ta.style.height = ta.scrollHeight + 'px';
+    ta.style.height = '28px';
+    if(value) {
+      ta.style.height = ta.scrollHeight + 'px';
+    }
   }, [value]);
 
   const overLimit = value.length > maxLength;
@@ -36,11 +40,12 @@ const Textarea = ({
   return (
     <div className={styles.TextareaContainer}>
       <textarea
+        name={name}
         ref={ref}
         className={styles.Textarea}
         value={value}
         onChange={onChange}
-        placeholder={placeholder}
+        placeholder={required ? `${placeholder}*` : placeholder}
         disabled={disabled}
         required={required}
       />

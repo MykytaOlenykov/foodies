@@ -4,7 +4,7 @@
   padding: 4rem 1rem;
 }
 
-.text {
+.description {
   max-width: 100%;
   margin-top: 16px;
   margin-bottom: 32px;
@@ -13,7 +13,7 @@
 .profileContainer {
   display: flex;
   flex-direction: column;
-  gap: 80px;
+  gap: 64px;
   align-items: center;
 }
 
@@ -29,13 +29,17 @@
 
 .profileTabs {
   width: 100%;
+  min-height: 400px;
 }
 
 @media (min-width: 440px) {
-  .text {
+  .description {
     max-width: 443px;
     margin-top: 20px;
     margin-bottom: 40px;
+  }
+  .profileContainer {
+    gap: 80px;
   }
   .profile {
     max-width: 396px;
@@ -48,7 +52,7 @@
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1148px) {
   .profileContainer {
     flex-direction: row;
     gap: 40px;

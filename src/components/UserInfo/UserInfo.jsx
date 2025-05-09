@@ -49,7 +49,7 @@ export const UserInfo = ({ user, isMyProfile, onAvatarChange }) => {
         {avatarURL ? (
           <img
             className={styles.avatar}
-            src={`${baseApiURL}static${avatarURL}`}
+            src={`${baseApiURL}/static${avatarURL}`}
             alt={`${name}'s avatar`}
           />
         ) : (
