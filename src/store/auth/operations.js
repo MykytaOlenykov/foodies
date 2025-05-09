@@ -56,3 +56,36 @@ export const getCurrentUser = createAsyncThunk(
     }
   },
 );
+
+export const updateUserAvatarAPI = createAsyncThunk(
+  "auth/updateUserAvatar",
+  async (file, { rejectWithValue }) => {
+    try {
+      const formData = new FormData();
+      formData.append("avatar", file);
+
+      const response = await api.patch("/users/avatars", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      return response.data?.data;
+    } catch (error) {
+      return rejectWithValue({ error: normalizeHttpError(error) });
+    }
+  },
+);
+
+export const getUserDataById = createAsyncThunk(
+  "auth/getUserDataById",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await api.get(`/users/${id}`);
+
+      return response.data?.data;
+    } catch (error) {
+      return rejectWithValue({ error: normalizeHttpError(error) });
+    }
+  },
+);
