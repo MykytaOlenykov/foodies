@@ -41,7 +41,7 @@ export const App = () => {
         <Route path="/recipe/:recipeId" element={<Recipe />} />
         <Route
           path="/recipe/add"
-          element={<PrivateRoute component={AddRecipe} />}
+          element={<PrivateRoute element={<AddRecipe />} />}
         />
         <Route path="/auth/verify/:token" element={<Verify />} />
         <Route path="*" element={<NotFound />} />

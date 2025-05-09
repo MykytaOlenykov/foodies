@@ -1,6 +1,11 @@
-.footer {
-  background-color: #eee;
-  padding: 1rem;
-  text-align: center;
-  font-weight: bold;
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.separator {
+  height: 1px;
+  border: none;
+  border-bottom: 1px solid var(--gray-color);
+  margin: 40px 0;
 }

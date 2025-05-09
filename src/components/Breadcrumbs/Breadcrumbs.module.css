@@ -1,0 +1,16 @@
+.Breadcrumbs {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.BreadcrumbsItem {
+    background: transparent;
+    border: none;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.BreadcrumbsItem.active {
+    cursor: default;
+}

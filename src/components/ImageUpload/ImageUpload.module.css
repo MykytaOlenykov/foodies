@@ -1,0 +1,89 @@
+.ImageUpload {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+}
+
+@media (min-width: 769px) {
+    .ImageUpload {
+        max-width: 551px;
+    }
+}
+
+.ImageUpload__preview {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 318px;
+}
+
+@media (min-width: 769px) {
+    .ImageUpload__preview {
+        max-width: 551px;
+        min-width: 130px;
+    }
+}
+
+@media (min-width: 481px) {
+    .ImageUpload__preview {
+        height: 400px;
+    }
+}
+
+.ImageUpload__img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+}
+
+.ImageUpload__replaceButton {
+    background: none;
+    border: none;
+    color: var(--main-color);
+    font-size: 16px;
+    line-height: 24px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.ImageUpload__placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    height: 318px;
+}
+
+@media (min-width: 769px) {
+    .ImageUpload__placeholder {
+        max-width: 551px;
+        min-width: 130px;
+    }
+}
+
+@media (min-width: 481px) {
+    .ImageUpload__placeholder {
+        height: 400px;
+    }
+}
+
+.ImageUpload__icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.ImageUpload__text {
+    color: #666;
+    text-decoration: underline;
+}
