@@ -110,18 +110,28 @@ export const RecipeList = ({ categoryId }) => {
 
   const totalPages = Math.ceil(total / recipesPerPage);
 
+  const currentIngredient = ingredientId
+    ? ingredients.find(({ id }) => id === Number(ingredientId))
+    : {};
+
+  const currentArea = areaId
+    ? areas.find(({ id }) => id === Number(areaId))
+    : {};
+
   return (
     <div className={css.recipesBlock}>
       <div className={css.recipesFiltersBlock}>
         <SearchSelect
           items={ingredients}
           placeholder="Ingredients"
+          value={currentIngredient?.name ?? ""}
           onSelect={handleIngredientSelect}
           onChange={handleIngredientChange}
         />
         <SearchSelect
           items={areas}
           placeholder="Areas"
+          value={currentArea?.name ?? ""}
           onSelect={handleAreaSelect}
           onChange={handleAreaChange}
         />

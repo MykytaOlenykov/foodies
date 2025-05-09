@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 import toast from "react-hot-toast";
 
 import { Typography } from "../Typography/Typography";
@@ -25,6 +25,7 @@ export const RecipeCard = ({
   owner,
   isFavorite: favorite,
 }) => {
+  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -70,11 +71,11 @@ export const RecipeCard = ({
       return;
     }
 
-    navigate(`/user/${owner.id}`);
+    navigate(`/user/${owner.id}`, { state: { from: location } });
   };
 
   const navigateToRecipe = () => {
-    navigate(`/recipe/${recipeId}`);
+    navigate(`/recipe/${recipeId}`, { state: { from: location } });
   };
 
   // TODO: add util
