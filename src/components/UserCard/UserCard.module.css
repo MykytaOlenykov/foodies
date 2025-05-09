@@ -1,0 +1,81 @@
+.card {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    background-color: var(--white-color);
+    flex-wrap: nowrap;
+    padding: 32px 0;
+}
+
+.card:not(:last-child) {
+  border-bottom: 1px solid var(--gray-light-color);
+}
+
+.userInfo {
+    display: flex;
+    gap: 16px;
+}
+
+/* Avatar image */
+.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--border-radius-full);
+    object-fit: cover;
+    background-color: var(--gray-light-color);
+    flex-shrink: 0;
+}
+
+/* Group containing name, count, and follow button */
+.userDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+}
+
+/* Recipe thumbnails (tablet and desktop only) */
+.recipeList {
+    display: none;
+}
+
+/* Thumbnail images */
+.recipeThumb {
+    width: 100px;
+    height: 100px;
+    border-radius: var(--border-radius-s);
+    object-fit: cover;
+    background-color: var(--gray-light-color);
+    flex-shrink: 0;
+}
+
+/* Arrow icon button wrapper */
+.arrowButton {
+    align-self: flex-start;
+}
+
+.followButton {
+    padding: 10px 24px !important;
+    border-color: var(--gray-color) !important; /* the color has to be forced */
+    color: var(--gray-color) !important; /* the color has to be forced */
+}
+
+/* Tablet (768px+) layout */
+@media (min-width: 768px) {
+    .card {
+        align-items: center;
+        padding: 40px 0;
+    }
+
+    .recipeList {
+        display: flex;
+        gap: 12px;
+        flex-wrap: nowrap;
+    }
+
+    .avatar {
+        width: 80px;
+        height: 80px;
+    }
+}
