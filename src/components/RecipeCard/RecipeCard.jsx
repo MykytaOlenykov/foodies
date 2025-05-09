@@ -85,7 +85,12 @@ export const RecipeCard = ({
   return (
     <div className={css.recipeCard}>
       <div className={css.thumb}>
-        <img src={imageURL} alt={title} className={css.recipeImage} />
+        <img
+          src={imageURL}
+          alt={title}
+          className={css.recipeImage}
+          loading="lazy"
+        />
       </div>
 
       <div className={css.cardInfo}>
@@ -114,6 +119,7 @@ export const RecipeCard = ({
                   src={`${BACKEND_URL}static${owner.avatarURL}`}
                   alt={owner.name}
                   className={css.avatar}
+                  loading="lazy"
                 />
               ) : (
                 <div className={css.initials}>

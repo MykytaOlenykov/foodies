@@ -14,6 +14,7 @@ import { DEFAULT_ERROR_MESSAGE } from "../../constants/common.js";
 
 import css from "./RecipeList.module.css";
 import { isCancel } from "axios";
+import { useSearchParams } from "react-router";
 
 const getCountOfRecipes = (breakpoint) => {
   if (["desktop", "tablet"].includes(breakpoint)) return 12;
@@ -24,13 +25,18 @@ export const RecipeList = ({ categoryId }) => {
   const areas = useSelector(selectAreas);
   const ingredients = useSelector(selectIngredients);
   const breakpoint = useBreakpoint({ tablet: 540 });
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [recipes, setRecipes] = useState([]);
-  const [areaId, setAreaId] = useState(null);
-  const [ingredientId, setIngredientId] = useState(null);
+  const [areaId, setAreaId] = useState(() => searchParams.get("area") ?? null);
+  const [ingredientId, setIngredientId] = useState(
+    () => searchParams.get("ingredient") ?? null,
+  );
+  const [currentPage, setCurrentPage] = useState(
+    () => searchParams.get("page") ?? 1,
+  );
   const [total, setTotal] = useState(0);
 
-  const [currentPage, setCurrentPage] = useState(1);
   const recipesPerPage = getCountOfRecipes(breakpoint);
 
   useEffect(() => {
@@ -65,12 +71,41 @@ export const RecipeList = ({ categoryId }) => {
     };
   }, [categoryId, areaId, ingredientId, currentPage, recipesPerPage]);
 
-  const handleIngredientChange = (ingredient) => {
+  useEffect(() => {
+    setSearchParams((prev) => {
+      if (areaId) prev.set("area", areaId);
+      else prev.delete("area");
+
+      if (ingredientId) prev.set("ingredient", ingredientId);
+      else prev.delete("ingredient");
+
+      if (currentPage) prev.set("page", currentPage);
+      else prev.delete("page");
+
+      return prev;
+    });
+  }, [areaId, ingredientId, currentPage, setSearchParams]);
+
+  const handleIngredientSelect = (ingredient) => {
     setIngredientId(ingredient?.id);
+    setCurrentPage(1);
   };
 
-  const handleAreaChange = (area) => {
+  const handleIngredientChange = (value) => {
+    if (value) return;
+    setIngredientId(null);
+    setCurrentPage(1);
+  };
+
+  const handleAreaSelect = (area) => {
     setAreaId(area?.id);
+    setCurrentPage(1);
+  };
+
+  const handleAreaChange = (value) => {
+    if (value) return;
+    setAreaId(null);
+    setCurrentPage(1);
   };
 
   const totalPages = Math.ceil(total / recipesPerPage);
@@ -81,12 +116,14 @@ export const RecipeList = ({ categoryId }) => {
         <SearchSelect
           items={ingredients}
           placeholder="Ingredients"
-          onSelect={handleIngredientChange}
+          onSelect={handleIngredientSelect}
+          onChange={handleIngredientChange}
         />
         <SearchSelect
           items={areas}
           placeholder="Areas"
-          onSelect={handleAreaChange}
+          onSelect={handleAreaSelect}
+          onChange={handleAreaChange}
         />
       </div>
 
