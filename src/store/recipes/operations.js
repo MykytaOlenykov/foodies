@@ -5,12 +5,15 @@ import api from "../../services/api";
 
 export const fetchRecipesByCategory = createAsyncThunk(
   "recipes/fetchRecipesByCategory",
-  async ({ category, ingredient, area, page, limit }, { rejectWithValue }) => {
+  async (
+    { categoryId, ingredient, area, page, limit },
+    { rejectWithValue },
+  ) => {
     try {
       const params = new URLSearchParams({
         page,
         limit,
-        ...(category !== "all" && { categoryId: category }),
+        ...(categoryId ? { categoryId } : {}),
         ...(ingredient && { ingredientId: ingredient }),
         ...(area && { areaId: area }),
       });

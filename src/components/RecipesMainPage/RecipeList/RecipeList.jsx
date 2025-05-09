@@ -10,7 +10,7 @@ import { selectAreas } from "../../../store/areas/selectors.js";
 import { selectIngredients } from "../../../store/ingredients/selectors.js";
 import css from "./RecipeList.module.css";
 
-const RecipeList = ({ category }) => {
+const RecipeList = ({ categoryId }) => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedRecipes, setSelectedRecipes] = useState([]);
@@ -34,11 +34,11 @@ const RecipeList = ({ category }) => {
   useEffect(() => {
     dispatch(
       fetchRecipesByCategory({
-        category: category.categoryId,
         ingredient: selectedIngredient?.id,
         area: selectedArea?.id,
         page: currentPage,
         limit: recipesPerPage,
+        ...(categoryId ? { categoryId } : {}),
       }),
     )
       .unwrap()
@@ -50,7 +50,7 @@ const RecipeList = ({ category }) => {
       });
   }, [
     dispatch,
-    category.categoryId,
+    categoryId,
     currentPage,
     recipesPerPage,
     selectedIngredient,
