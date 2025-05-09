@@ -1,10 +1,10 @@
 import * as styles from "./Testimonials.module.css";
 import { Typography } from "../Typography/Typography.jsx";
-import { Swiper, SwiperSlide } from "swiper/react";
-import QuoteImage from "../../assets/images/quote.svg?react";
-import { Pagination, Autoplay } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import QuoteImage from '../../assets/images/quote.svg?react';
+import { Pagination, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 const SLIDE_PER_VIEW = 1;
 const SLIDE_AUTOPLAY_DELAY = 5000;
@@ -28,7 +28,7 @@ const TestimonialsCard = ({ text, author }) => {
  * @param {object} props
  * @param {Array<{text: string, author: string}>} props.data
  */
-const Testimonials = ({ data }) => {
+const Testimonials = ({data}) => {
   return (
     <div className={styles.Testimonials}>
       <Typography variant="body" className={styles.Testimonials__subtitle}>
@@ -53,11 +53,7 @@ const Testimonials = ({ data }) => {
       >
         {data.map((item, index) => (
           <SwiperSlide>
-            <TestimonialsCard
-              key={index}
-              text={item.testimonial}
-              author={item.owner.name}
-            />
+            <TestimonialsCard key={index} text={item.text} author={item.author} />
           </SwiperSlide>
         ))}
       </Swiper>

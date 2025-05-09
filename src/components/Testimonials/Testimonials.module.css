@@ -1,16 +1,9 @@
 .Testimonials {
-  margin: 0 auto;
-  width: 343px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-@media (min-width: 481px) {
-    .Testimonials {
-        width: 704px;
-    }
 }
 
 .Testimonials__swiper {
@@ -27,10 +20,10 @@
 
 @media (min-width: 481px) {
   .Testimonials__illustration {
-    width: 59px;
-    height: 48px;
-    left: 40px;
-    top: -75px;
+      width: 59px;
+      height: 48px;
+      left: 40px;
+      top: -75px;
   }
 }
 
@@ -53,8 +46,8 @@
 
 @media (min-width: 481px) {
   .Testimonials__paginationBullet {
-    width: 16px;
-    height: 16px;
+      width: 16px;
+      height: 16px;
   }
 }
 
@@ -90,12 +83,12 @@
 
 @media (min-width: 481px) {
   .TestimonialsCard {
-    margin-top: 80px;
-    max-width: 730px;
+      margin-top: 80px;
+      max-width: 730px;
   }
 
   .TestimonialsCard__comment {
-    font-size: 24px;
-    line-height: 36px;
+      font-size: 24px;
+      line-height: 36px;
   }
 }
