@@ -13,8 +13,8 @@ import { BACKEND_URL, DEFAULT_ERROR_MESSAGE } from "../../constants/common";
 import { normalizeHttpError } from "../../utils";
 import { appClearSessionAction } from "../../store/utils";
 import {
-  addRecipeToFavorite,
-  removeRecipeFromFavorite,
+  addFavoriteRecipe,
+  removeFavoriteRecipe,
 } from "../../services/recipes";
 
 export const RecipeCard = ({
@@ -45,10 +45,12 @@ export const RecipeCard = ({
       let message;
 
       if (isFavorite) {
-        message = await removeRecipeFromFavorite(recipeId);
+        const data = await removeFavoriteRecipe(recipeId);
+        message = data.message;
         setIsFavorite(false);
       } else {
-        message = await addRecipeToFavorite(recipeId);
+        const data = await addFavoriteRecipe(recipeId);
+        message = data.message;
         setIsFavorite(true);
       }
 

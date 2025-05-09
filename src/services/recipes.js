@@ -24,12 +24,17 @@ export const getFavoriteRecipes = async ({ page, limit }) => {
   };
 };
 
-export const addRecipeToFavorite = async (recipeId) => {
-  const { data } = await api.post(`/recipes/favorites/${recipeId}`);
-  return data.data.message;
+export const deleteRecipeById = async (recipeId) => {
+  const response = await api.delete(`/recipes/${recipeId}`);
+  return response.data?.data;
 };
 
-export const removeRecipeFromFavorite = async (recipeId) => {
-  const { data } = await api.delete(`/recipes/favorites/${recipeId}`);
-  return data.data.message;
+export const removeFavoriteRecipe = async (recipeId) => {
+  const response = await api.delete(`/recipes/favorites/${recipeId}`);
+  return response.data?.data;
+};
+
+export const addFavoriteRecipe = async (recipeId) => {
+  const response = await api.post(`/recipes/favorites/${recipeId}`);
+  return response.data?.data;
 };
