@@ -7,6 +7,14 @@
     transition: border-bottom var(--transition-duration) var(--transition-timing-function);
 }
 
+.Textarea {
+    color: var(--gray-color);
+}
+
+.Textarea:focus {
+    color: var(--main-color);
+}
+
 .TextareaContainer:has(.Textarea:focus) {
     border-bottom: 1px solid var(--main-color);
 }

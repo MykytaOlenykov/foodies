@@ -4,7 +4,7 @@ import clsx from "clsx";
 /**
  * @param {object} props
  * @param {"dark"|"light"} props.variant— colour/style preset.
- * @param {"small"|"medium"} props.size — padding/font-size preset.
+ * @param {"small"|"medium"|"large"} props.size — padding/font-size preset.
  * @param {boolean} props.disabled — whether the button is disabled.
  * @param {"button"|"submit"|"reset"} [props.type] — button type.
  * @param {React.ReactNode} [props.icon] — an icon element.

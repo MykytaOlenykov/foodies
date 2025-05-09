@@ -4,9 +4,6 @@ import { BACKEND_URL } from "../constants/common.js";
 
 const api = axios.create({
   baseURL: BACKEND_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
 });
 
 // Interceptors: Add auth token if needed
@@ -15,6 +12,13 @@ api.interceptors.request.use((config) => {
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
+
+  if (config.data instanceof FormData) {
+    delete config.headers["Content-Type"];
+  } else {
+    config.headers["Content-Type"] = "application/json";
+  }
+
   return config;
 });
 
