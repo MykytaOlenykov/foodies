@@ -23,3 +23,18 @@ export const getFavoriteRecipes = async ({ page, limit }) => {
     items: response.data?.data?.favoriteRecipes ?? [],
   };
 };
+
+export const deleteRecipeById = async (recipeId) => {
+  const response = await api.delete(`/recipes/${recipeId}`);
+  return response.data?.data;
+};
+
+export const removeFavoriteRecipe = async (recipeId) => {
+  const response = await api.delete(`/recipes/favorites/${recipeId}`);
+  return response.data?.data;
+};
+
+export const addFavoriteRecipe = async (recipeId) => {
+  const response = await api.post(`/recipes/favorites/${recipeId}`);
+  return response.data?.data;
+};

@@ -5,6 +5,7 @@ import { ButtonIcon } from "../ButtonIcon/ButtonIcon";
 import { Typography } from "../Typography/Typography";
 import { normalizeHttpError } from "../../utils";
 import toast from "react-hot-toast";
+import { normalizeImagePath } from "../../utils/normalizeImagePath";
 
 /**
  * @param {object} props
@@ -14,7 +15,6 @@ import toast from "react-hot-toast";
  */
 
 export const UserInfo = ({ user, isMyProfile, onAvatarChange }) => {
-  const baseApiURL = import.meta.env.VITE_API_BASE_URL;
   const fileInputRef = useRef();
 
   const {
@@ -49,7 +49,7 @@ export const UserInfo = ({ user, isMyProfile, onAvatarChange }) => {
         {avatarURL ? (
           <img
             className={styles.avatar}
-            src={`${baseApiURL}/static${avatarURL}`}
+            src={normalizeImagePath(avatarURL)}
             alt={`${name}'s avatar`}
           />
         ) : (
