@@ -18,6 +18,7 @@ import {
   removeFavoriteRecipe,
 } from "../../services/recipes";
 import { ButtonIcon } from "../ButtonIcon/ButtonIcon";
+import { Avatar } from "../Avatar/Avatar.jsx";
 
 export const RecipeCard = ({
   recipeId,
@@ -114,19 +115,12 @@ export const RecipeCard = ({
               className={css.cardAuthorButton}
               onClick={navigateToAuthor}
             >
-              {owner.avatarURL ? (
-                <img
-                  // TODO: add util
-                  src={`${BACKEND_URL}static${owner.avatarURL}`}
-                  alt={owner.name}
-                  className={css.avatar}
-                  loading="lazy"
-                />
-              ) : (
-                <div className={css.initials}>
-                  {owner.name ? owner.name[0] : "U"}
-                </div>
-              )}
+              <Avatar
+                src={owner.avatarURL}
+                alt={owner.name}
+                name={owner.name}
+                size={isMobile ? 32 : 40}
+              />
             </button>
             <span className={css.cardAuthorName}>{owner.name}</span>
           </div>
