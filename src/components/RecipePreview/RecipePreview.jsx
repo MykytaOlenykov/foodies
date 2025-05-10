@@ -71,7 +71,7 @@ export const RecipePreview = ({ recipe, tab, isMyProfile, onDelete }) => {
           variant="light"
           size="medium"
           icon={<ArrowUpRightIcon width={18} height={18} />}
-          onClick={() => navigate(`/recipes/${recipe.id}`)}
+          onClick={() => navigate(`/recipe/${recipe.id}`)}
         />
 
         {isMyProfile && (
