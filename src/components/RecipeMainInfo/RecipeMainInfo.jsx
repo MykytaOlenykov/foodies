@@ -77,7 +77,7 @@ export const RecipeMainInfo = ({
             type="button"
             onClick={navigateToAuthor}
           >
-            <Avatar src={avatarUrl} size={32} alt={owner?.name} />
+            <Avatar src={avatarUrl} size={32} alt={owner?.name} name={owner?.name} />
             <div className={css.authorText}>
               <Typography variant="body" textColor="gray">
                 Created by:

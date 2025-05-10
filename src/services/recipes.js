@@ -69,3 +69,8 @@ export const addFavoriteRecipe = async (recipeId) => {
   const response = await api.post(`/recipes/favorites/${recipeId}`);
   return response.data?.data;
 };
+
+export const addRecipe = async (recipe) => {
+  const response = await api.post("/recipes", recipe);
+  return response.data?.data;
+}

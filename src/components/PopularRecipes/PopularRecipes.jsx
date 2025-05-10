@@ -31,21 +31,14 @@ const PopularRecipes = ({ recipes }) => {
     <div className={styles.PopularRecipes}>
       <Typography variant="h3">Popular recipes</Typography>
       <Swiper
-        slidesPerView={4}
+        slidesPerView={1}
         modules={[Grid]}
         grid={{
-          rows: 1,
+          rows: 4,
           fill: "row",
         }}
         spaceBetween={20}
         breakpoints={{
-          375: {
-            slidesPerView: 1,
-            grid: {
-              rows: 4,
-              fill: "row"
-            }
-          },
           768: {
             slidesPerView: 2,
             grid: {

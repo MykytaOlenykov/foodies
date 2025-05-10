@@ -14,15 +14,19 @@ import { InputStepper } from "../../components/InputStepper/InputStepper.jsx";
 import PlusIcon from "../../assets/icons/plus.svg?react";
 import clsx from "clsx";
 import { IngredientBadge } from "../../components/IngredientBadge/IngredientBadge.jsx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectIngredients } from "../../store/ingredients/index.js";
 import { selectCategories } from "../../store/categories/index.js";
 import { selectAreas } from "../../store/areas/index.js";
 import { object, string, array } from 'yup';
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import api from "../../services/api.js";
+import { normalizeHttpError } from "../../utils/index.js";
+import toast from "react-hot-toast";
+import { DEFAULT_ERROR_MESSAGE } from "../../constants/common.js";
+import { appClearSessionAction } from "../../store/utils.js";
+import { addRecipe } from "../../services/recipes.js";
 
-const IngredientsFieldGroup = ({ ingredientsList, onAdd }) => {
+const IngredientsFieldGroup = ({ ingredientsList, onAdd, excludeIds }) => {
   const [selectedIngredient, setSelectedIngredient] = useState(null);
   const [measure, setMeasure] = useState("");
   const [ingredientSearch, setIngredientSearch] = useState("");
@@ -35,6 +39,7 @@ const IngredientsFieldGroup = ({ ingredientsList, onAdd }) => {
             Ingredients
           </Typography>
           <SearchSelect
+            excludeIds={excludeIds}
             value={ingredientSearch}
             onChange={(val) => {
               setIngredientSearch(val);
@@ -106,6 +111,7 @@ const validationSchema = object({
 });
 
 const AddRecipe = () => {
+  const dispatch = useDispatch();
   const ingredientsList = useSelector(selectIngredients);
   const categoriesList = useSelector(selectCategories);
   const areasList = useSelector(selectAreas);
@@ -131,14 +137,16 @@ const AddRecipe = () => {
     );
 
     try {
-      await api.post("/recipes", formData, {});
+      await addRecipe(formData);
       resetForm();
       setCategorySearch("");
       setAreaSearch("");
       setStatus({ success: true });
-    } catch (err) {
-      console.error("Error creating recipe:", err);
-      setStatus({ error: "Failed to create recipe. Please try again." });
+      toast.success('Recipe added successfully');
+    } catch (error) {
+      const { message, status } = normalizeHttpError(error);
+      toast.error(message ?? DEFAULT_ERROR_MESSAGE);
+      if (status === 401) dispatch(appClearSessionAction());
     } finally {
       setSubmitting(false);
     }
@@ -264,6 +272,7 @@ const AddRecipe = () => {
 
                 <div>
                   <IngredientsFieldGroup
+                    excludeIds={values.ingredients.map((item) => item.id)}
                     ingredientsList={ingredientsList}
                     onAdd={(newData) => {
                       setFieldValue("ingredients", [...values.ingredients, newData]);
