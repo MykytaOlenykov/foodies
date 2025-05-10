@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router";
 import toast from "react-hot-toast";
 
 import { Typography } from "../Typography/Typography";
+import { Image } from "../Image/Image";
 import { openSignIn, selectIsLoggedIn } from "../../store/auth";
 
 import css from "./RecipeCard.module.css";
@@ -85,7 +86,7 @@ export const RecipeCard = ({
   return (
     <div className={css.recipeCard}>
       <div className={css.thumb}>
-        <img
+        <Image
           src={imageURL}
           alt={title}
           className={css.recipeImage}
@@ -101,7 +102,7 @@ export const RecipeCard = ({
           lineClamp={3}
           truncate
           className={css.cardDescription}
-          variant="p"
+          variant="body"
         >
           {description}
         </Typography>

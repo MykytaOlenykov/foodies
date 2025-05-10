@@ -27,7 +27,7 @@ export const Hero = () => {
           <Typography className={styles.heroTitle} variant="h1">
             Improve Your Culinary Talents
           </Typography>
-          <Typography className={styles.heroSubtitle} variant="p">
+          <Typography className={styles.heroSubtitle} variant="body">
             Amazing recipes for beginners in the world of cooking, enveloping
             you in the aromas and tastes of various cuisines.
           </Typography>
