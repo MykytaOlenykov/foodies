@@ -12,7 +12,7 @@ export default function CategoryItem({ data }) {
       <div className={css.wrapper}>
         <p className={css.label}>{data.name}</p>
         <ButtonIcon
-          className={css.btnIcn}
+          variant="transparent"
           size="medium"
           type="button"
           icon={<ArrowUpRight />}
