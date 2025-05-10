@@ -11,8 +11,8 @@ export function CategoryList({ categories }) {
           <CategoryItem data={category} />
         </li>
       ))}
-      <li className={css.liLoadMore}>
-        <Link to={"/?category=all"}>
+      <li>
+        <Link to={"/?category=all"} className={css.liLoadMore}>
           <Typography
             variant="h4"
             textColor="white"
