@@ -8,14 +8,14 @@ import {
   BreadcrumbsDivider,
   BreadcrumbsItem,
 } from "../../components/Breadcrumbs/Breadcrumbs.jsx";
-import RecipeMainInfo from "../RecipeMainInfo/RecipeMainInfo";
+import { RecipeMainInfo } from "../RecipeMainInfo";
 import { normalizeHttpError } from "../../utils/normalizeHttpError.js";
 import { getRecipeById } from "../../services/recipes";
 
 import css from "./RecipeInfo.module.css";
 import Loader from "../Loader/Loader.jsx";
 
-const RecipeInfo = () => {
+export const RecipeInfo = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const goBackPath = useRef(state.from ?? "/");
@@ -70,5 +70,3 @@ const RecipeInfo = () => {
     </>
   );
 };
-
-export default RecipeInfo;

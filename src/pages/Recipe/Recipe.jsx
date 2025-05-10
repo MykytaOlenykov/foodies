@@ -1,5 +1,5 @@
 import Container from "../../components/UI/Container/Container";
-import RecipeInfo from "../../components/RecipeInfo/RecipeInfo";
+import { RecipeInfo } from "../../components/RecipeInfo";
 
 import css from "./Recipe.module.css";
 
