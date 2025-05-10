@@ -25,6 +25,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 4px;
+    max-width: 101px; /* 100px + 1px border because on the Figma it's designed this way */
 }
 
 /* Recipe thumbnails (tablet and desktop only) */

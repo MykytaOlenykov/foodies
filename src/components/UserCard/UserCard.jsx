@@ -71,7 +71,7 @@ export const UserCard = ({
       <div className={styles.userInfo}>
         <Avatar src={normalizeImagePath(user.avatarURL)} name={user.name} size={breakpoint === 'mobile' ? 60 : 85}/>
         <div className={styles.userDetails}>
-          <Typography variant="h4">{user.name}</Typography>
+          <Typography variant="h4" truncate>{user.name}</Typography>
           <Typography variant="bodyS" textColor="gray">
             Own recipes: {user.recipesCount}
           </Typography>
