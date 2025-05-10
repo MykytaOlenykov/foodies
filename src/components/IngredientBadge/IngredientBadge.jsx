@@ -1,5 +1,6 @@
 import React from "react";
 import * as styles from "./IngredientBadge.module.css";
+import { Image } from "../Image/Image";
 import { ButtonIcon } from "../ButtonIcon/ButtonIcon";
 import XIcon from "../../assets/icons/x.svg?react";
 
@@ -14,7 +15,7 @@ const IngredientBadge = ({ imgURL, name, measure, onDelete }) => {
   return (
     <div className={styles.IngredientBadge}>
       <div className={styles.imageWrapper}>
-        <img src={imgURL} alt={name} className={styles.image} />
+        <Image src={imgURL} alt={name} className={styles.image} />
       </div>
 
       <div className={styles.content}>

@@ -1,4 +1,4 @@
-const baseApiURL = import.meta.env.VITE_API_BASE_URL;
+import { BACKEND_URL } from "../constants/common";
 
 /**
  * Normalize image path for use in <img> or background styles.
@@ -12,5 +12,7 @@ export const normalizeImagePath = (path) => {
     return path;
   }
 
-  return `${baseApiURL}/static${path.replace(/\\/g, "/")}`;
+  const separator = (BACKEND_URL || "").endsWith("/") ? "" : "/";
+
+  return `${BACKEND_URL}${separator}static${path.replace(/\\/g, "/")}`;
 };
