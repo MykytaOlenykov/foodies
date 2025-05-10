@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router";
 import clx from "clsx";
@@ -38,6 +38,23 @@ export const UserBar = () => {
   const user = useSelector(selectUser);
 
   const [isOpenProfile, setIsOpenProfile] = useState(false);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target)
+      ) {
+        setIsOpenProfile(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const avatarURL = user?.avatarURL
     ? `${BACKEND_URL}static${user.avatarURL}`
@@ -45,7 +62,7 @@ export const UserBar = () => {
   const userName = user?.name || "User";
 
   return (
-    <div className={css.container}>
+    <div className={css.container} ref={containerRef}>
       <div
         className={css.profile}
         onClick={() => setIsOpenProfile((prev) => !prev)}
