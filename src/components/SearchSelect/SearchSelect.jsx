@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import Input from "../Input/Input";
+import { Input } from "../Input/Input";
 import styles from "./SearchSelect.module.css";
 import ChevronDown from "../../assets/icons/chevron-down.svg?react";
 import ChevronUp from "../../assets/icons/chevron-up.svg?react";
 import { Typography } from "../Typography/Typography.jsx";
-import { useUncontrolled } from "../../hooks/useUncontrolled.js";
+import { useUncontrolled } from "../../hooks/index.js";
 
 /**
  * @param {Object} props

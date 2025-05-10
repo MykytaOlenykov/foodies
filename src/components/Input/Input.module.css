@@ -77,10 +77,6 @@
     color: var(--main-color);
 }
 
-.error {
-    border-color: #dc2626;
-}
-
 .iconButton {
     position: absolute;
     top: 50%;
