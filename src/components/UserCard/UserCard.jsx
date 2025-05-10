@@ -1,11 +1,12 @@
-import { useNavigate } from 'react-router';
-import PropTypes from 'prop-types';
-import { useBreakpoint } from '../../hooks';
-import styles from './UserCard.module.css';
-import { Typography } from '../Typography/Typography';
-import { ButtonIcon } from '../ButtonIcon/ButtonIcon';
-import { Button } from '../Button/Button';
-import ArrowUpRight from '../../assets/icons/arrow-up-right.svg?react';
+import { useNavigate } from "react-router";
+import PropTypes from "prop-types";
+import { useBreakpoint } from "../../hooks";
+import styles from "./UserCard.module.css";
+import { Typography } from "../Typography/Typography";
+import { ButtonIcon } from "../ButtonIcon/ButtonIcon";
+import { Button } from "../Button/Button";
+import ArrowUpRight from "../../assets/icons/arrow-up-right.svg?react";
+import { normalizeImagePath } from "../../utils/normalizeImagePath.jsx";
 
 /**
  * @typedef {Object} RecipePreview
@@ -29,7 +30,6 @@ import ArrowUpRight from '../../assets/icons/arrow-up-right.svg?react';
  * @param {Object} props
  * @param {UserCardData} props.user - User data object
  * @param {'followers'|'following'} props.tabType - List context
- * @param {boolean} props.isFollowing - Follow state
  * @param {Function} props.onFollow - Follow handler
  * @param {Function} props.onUnfollow - Unfollow handler
  * @param {string} [props.userPageBasePath='/users'] - Base path to build user page link
@@ -38,7 +38,6 @@ import ArrowUpRight from '../../assets/icons/arrow-up-right.svg?react';
 export const UserCard = ({
   user,
   tabType,
-  isFollowing,
   onFollow,
   onUnfollow,
   userPageBasePath = '/users',
@@ -47,13 +46,9 @@ export const UserCard = ({
   const breakpoint = useBreakpoint();
   const navigate = useNavigate();
 
-  const shouldRender = !(tabType === 'following' && !isFollowing);
-  if (!shouldRender) return null;
-
-  const userPageLink = `${userPageBasePath}/${user.id}`;
-
+  const isFollowing = tabType === "following" || (user.isFollowed ?? false);
   const handleNavigateToUser = () => {
-    navigate(userPageLink);
+    navigate(`${userPageBasePath}/${user.id}`);
   };
 
   const handleToggleFollow = () => {
@@ -72,7 +67,12 @@ export const UserCard = ({
   return (
     <div className={styles.card}>
       <div className={styles.userInfo}>
-        <img src={user.avatarURL} alt={user.name} className={styles.avatar} />
+        <div className={styles.avatarWrapper}>
+          <img
+            src={normalizeImagePath(user.avatarURL)}
+            alt={user.name}
+            className={styles.avatar} />
+        </div>
         <div className={styles.userDetails}>
           <Typography variant="h4">{user.name}</Typography>
           <Typography variant="bodyS" textColor="gray">
@@ -92,15 +92,16 @@ export const UserCard = ({
         </div>
       </div>
 
-      {showRecipes && (
+      {showRecipes && user.recipes?.length > 0 && (
         <div className={styles.recipeList}>
           {user.recipes.slice(0, thumbCount).map((recipe) => (
-            <img
-              key={recipe.id}
-              src={recipe.thumb}
-              alt={`Recipe ${recipe.id}`}
-              className={styles.recipeThumb}
-            />
+            <div key={recipe.id} className={styles.recipeThumbWrapper}>
+              <img
+                src={normalizeImagePath(recipe.thumb)}
+                alt={`Recipe ${recipe.id}`}
+                className={styles.recipeThumb}
+              />
+            </div>
           ))}
         </div>
       )}
@@ -129,9 +130,9 @@ UserCard.propTypes = {
       })
     ).isRequired,
     recipesCount: PropTypes.number.isRequired,
+    isFollowed: PropTypes.bool, // will be added in the future can be undefined
   }).isRequired,
   tabType: PropTypes.oneOf(['followers', 'following']).isRequired,
-  isFollowing: PropTypes.bool.isRequired,
   onFollow: PropTypes.func.isRequired,
   onUnfollow: PropTypes.func.isRequired,
   userPageBasePath: PropTypes.string,
