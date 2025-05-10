@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getPopularRecipes } from "../../services/recipes";
 import styles from "./PopularRecipes.module.css";
-import RecipeCardContainer from "../RecipeCardContainer/RecipeCardContainer";
+import RecipeCardContainer from "../RecipeCardContainerOld/RecipeCardContainer";
 import { Typography } from "../Typography/Typography";
 
 const PopularRecipes = () => {

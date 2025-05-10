@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import RecipeCard from "../RecipeCard/RecipeCard";
+import RecipeCard from "../RecipeCardOld/RecipeCard";
 
 const RecipeCardContainer = ({ recipe }) => {
   const navigate = useNavigate();
