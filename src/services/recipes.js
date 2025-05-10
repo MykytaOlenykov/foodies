@@ -45,6 +45,16 @@ export const getFavoriteRecipes = async ({ page, limit }) => {
   };
 };
 
+export const getRecipeById = async (id) => {
+  const { data } = await api.get(`/recipes/${id}`);
+  return data.data.recipe;
+};
+
+export const getPopularRecipes = async () => {
+  const { data } = await api.get("/recipes/popular?limit=10&page=1");
+  return { popularRecipes: data.data.popularRecipes };
+};
+
 export const deleteRecipeById = async (recipeId) => {
   const response = await api.delete(`/recipes/${recipeId}`);
   return response.data?.data;

@@ -1,11 +1,8 @@
-import {
-  emptyTabMessagesForOwner,
-  emptyTabMessagesForUser,
-  TabKey,
-} from "../../constants/common";
+import { emptyTabMessagesForOwner, emptyTabMessagesForUser, TabKey } from "../../constants/common";
 import { RecipePreview } from "../RecipePreview/RecipePreview";
 import { Typography } from "../Typography/Typography";
 import styles from "./ListItems.module.css";
+import { UserCard } from "../UserCard/UserCard.jsx";
 
 /**
  * @param {object} props
@@ -14,7 +11,7 @@ import styles from "./ListItems.module.css";
  * @param {boolean} props.isMyProfile
  * @param {Function} props.onDelete — optional, callback to remove the item from UI after deletion
  */
-export const ListItems = ({ items, tab, isMyProfile, onDelete }) => {
+export const ListItems = ({ items, tab, isMyProfile, onDelete, onFollow, onUnFollow }) => {
   if (!items || items.length === 0) {
     const messages = isMyProfile
       ? emptyTabMessagesForOwner
@@ -42,9 +39,9 @@ export const ListItems = ({ items, tab, isMyProfile, onDelete }) => {
             onDelete={onDelete}
           />
         ) : (
-          <div key={item.id} {...item}>
-            {`UserCard Compnent: ${item.id} ${item.name} ${item.avatarURL} ${item.recipesCount}`}
-          </div>
+          items.map((item) =>
+            <UserCard key={item.id} user={item} tabType={tab} onFollow={onFollow} onUnfollow={onUnFollow} />
+          )
         ),
       )}
     </div>

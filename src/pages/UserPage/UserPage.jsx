@@ -13,8 +13,8 @@ import {
 } from "../../services/users";
 import { UserInfo } from "../../components/UserInfo/UserInfo";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser } from "../../store/auth/selectors";
-import { useBreakpoint } from "../../hooks/useBreakpoint";
+import { selectUser } from "../../store/auth/index.js";
+import { useBreakpoint } from "../../hooks/index.js";
 import { openLogOut } from "../../store/auth";
 import { TabsList } from "../../components/TabsList/TabsList";
 import { ListItems } from "../../components/ListItems/ListItems";
@@ -22,6 +22,7 @@ import { normalizeHttpError } from "../../utils";
 import toast from "react-hot-toast";
 import { getFavoriteRecipes, getRecipesByUserId } from "../../services/recipes";
 import { TabKey } from "../../constants/common";
+import { appClearSessionAction } from "../../store/utils.js";
 
 const UserPage = () => {
   const { id } = useParams();
@@ -96,32 +97,37 @@ const UserPage = () => {
       }));
     } catch (err) {
       const error = normalizeHttpError(err);
+      if (error.status === 401) dispatch(appClearSessionAction());
       toast.error(error.message);
     }
   };
 
-  const handleFollow = async () => {
+  const handleFollow = async (userId = id) => {
     try {
-      const data = await followUserById(id);
+      const data = await followUserById(userId);
       toast.success(data.message);
 
       // Refresh user data after follow
       await fetchUserData(id);
+      await reloadData();
     } catch (err) {
       const error = normalizeHttpError(err);
+      if (error.status === 401) dispatch(appClearSessionAction());
       toast.error(error.message);
     }
   };
 
-  const handleUnFollow = async () => {
+  const handleUnFollow = async (userId = id) => {
     try {
-      const data = await unfollowUserById(id);
+      const data = await unfollowUserById(userId);
       toast.success(data.message);
 
       // Refresh user data after follow
       await fetchUserData(id);
+      await reloadData();
     } catch (err) {
       const error = normalizeHttpError(err);
+      if (error.status === 401) dispatch(appClearSessionAction());
       toast.error(error.message);
     }
   };
@@ -208,6 +214,8 @@ const UserPage = () => {
             items={items}
             isMyProfile={isMyProfile}
             onDelete={reloadData}
+            onFollow={handleFollow}
+            onUnFollow={handleUnFollow}
           />
         </div>
       </div>

@@ -24,7 +24,7 @@ const Image = ({
     setFailed(!src)
   }, [src])
 
-  if (failed) {
+  if (failed || !src) {
     if (renderFallback) return <>{renderFallback()}</>
 
     return (

@@ -12,6 +12,7 @@
   text-transform: uppercase;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
 }
 
@@ -87,4 +88,8 @@
   border: 1px solid var(--gray-color);
   color: var(--white-color);
   cursor: not-allowed;
+}
+
+.Button.fullWidth {
+  width: 100%;
 }

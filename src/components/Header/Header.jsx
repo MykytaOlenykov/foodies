@@ -32,7 +32,7 @@ export default function Header() {
   return (
     <>
       <header className={css.header}>
-        <Container className={css.container}>
+        <Container className={clsx(css.container, isHome && css.homeContainer)}>
           <Link
             className={clsx(css.logo, isHome && css.whiteLogo)}
             to="/"

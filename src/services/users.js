@@ -28,6 +28,24 @@ export const unfollowUserById = async (userId) => {
   return response.data?.data;
 };
 
+/**
+ * Follow a user by ID
+ * @param {string} userId
+ * @returns {Promise<void>}
+ */
+export async function followUser(userId) {
+  await api.post(`/api/users/following/${userId}`);
+}
+
+/**
+ * Unfollow a user by ID
+ * @param {string} userId
+ * @returns {Promise<void>}
+ */
+export async function unfollowUser(userId) {
+  await api.delete(`/api/users/following/${userId}`);
+}
+
 export const getUserFollowers = async (userId, { page, limit }) => {
   const response = await api.get(`/users/${userId}/followers`, {
     params: { page, limit },

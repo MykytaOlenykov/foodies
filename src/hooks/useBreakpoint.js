@@ -18,13 +18,16 @@ import { useState, useEffect } from "react";
 export const useBreakpoint = (props) => {
   const { desktop = 1440, tablet = 768, mobile = 375 } = props ?? {};
 
+  const isClient = typeof window !== 'undefined';
   const [width, setWidth] = useState(window.innerWidth);
 
   useEffect(() => {
+    if (!isClient) return; // for SSR (storybook)
+
     const handleResize = () => setWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [isClient]);
 
   if (width >= desktop) return "desktop";
   if (width >= tablet) return "tablet";
