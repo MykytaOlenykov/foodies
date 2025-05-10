@@ -1,6 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { register, login, logout, getCurrentUser } from "./operations";
+import {
+  register,
+  login,
+  logout,
+  getCurrentUser,
+  updateUserAvatarAPI,
+  getUserDataById,
+} from "./operations";
 import { appClearSessionAction } from "../utils";
 
 const initialState = {
@@ -76,6 +83,12 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
         state.isLoadingStatus = false;
         state.isOpenLogOut = false;
+      })
+      .addCase(updateUserAvatarAPI.fulfilled, (state, { payload }) => {
+        state.user = { ...state.user, avatarURL: payload.avatarURL };
+      })
+      .addCase(getUserDataById.fulfilled, (state, { payload }) => {
+        state.user = { ...state.user, ...payload.user };
       }),
 });
 

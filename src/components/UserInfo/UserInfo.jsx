@@ -10,15 +10,15 @@ import { normalizeImagePath } from "../../utils/normalizeImagePath";
 /**
  * @param {object} props
  * @param {UserModel} props.user — User data object.
+ * @param {string} props.avatarURL — String with avatar url.
  * @param {boolean} props.isMyProfile — Flag indicating if this is the current user's own profile.
- * @param {() => void} [props.onAvatarChange] — Optional click handler for changing avatar.
+ * @param {(file: File) => void} [props.onAvatarChange] — Optional click handler for changing avatar.
  */
 
-export const UserInfo = ({ user, isMyProfile, onAvatarChange }) => {
+export const UserInfo = ({ user, isMyProfile, avatarURL, onAvatarChange }) => {
   const fileInputRef = useRef();
 
   const {
-    avatarURL,
     name,
     email,
     recipesCount,

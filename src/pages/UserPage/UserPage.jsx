@@ -5,29 +5,35 @@ import styles from "./UserPage.module.css";
 import { useCallback, useEffect, useState } from "react";
 import {
   followUserById,
-  getUserDataById,
   getUserFollowers,
   getUserFollowing,
   unfollowUserById,
-  updateUserAvatar,
 } from "../../services/users";
 import { UserInfo } from "../../components/UserInfo/UserInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../store/auth/selectors";
 import { useBreakpoint } from "../../hooks/useBreakpoint";
-import { openLogOut } from "../../store/auth";
+import {
+  getUserDataById,
+  openLogOut,
+  updateUserAvatarAPI,
+} from "../../store/auth";
 import { TabsList } from "../../components/TabsList/TabsList";
 import { ListItems } from "../../components/ListItems/ListItems";
 import { normalizeHttpError } from "../../utils";
 import toast from "react-hot-toast";
 import { getFavoriteRecipes, getRecipesByUserId } from "../../services/recipes";
-import { TabKey } from "../../constants/common";
+import { BACKEND_URL, TabKey } from "../../constants/common";
+import emptyImages from "../../assets/images/empty";
 
 const UserPage = () => {
   const { id } = useParams();
   const PAGE_LIMIT = 10;
   const [page, setPage] = useState(1);
-  const [user, setUser] = useState(null);
+
+  const user = useSelector(selectUser);
+
+  const avatarURL = user?.avatarURL ? user.avatarURL : emptyImages.noAvatar;
 
   const breakpoint = useBreakpoint();
   const isMobile = ["mobile", "small-mobile"].includes(breakpoint);
@@ -89,11 +95,12 @@ const UserPage = () => {
 
   const handleAvatarChange = async (file) => {
     try {
-      const data = await updateUserAvatar(file);
-      setUser((prev) => ({
-        ...prev,
-        avatarURL: data.avatarURL,
-      }));
+      dispatch(updateUserAvatarAPI(file));
+      // const data = await updateUserAvatar(file);
+      // setUser((prev) => ({
+      //   ...prev,
+      //   avatarURL: data.avatarURL,
+      // }));
     } catch (err) {
       const error = normalizeHttpError(err);
       toast.error(error.message);
@@ -137,8 +144,9 @@ const UserPage = () => {
 
   const fetchUserData = async (id) => {
     try {
-      const data = await getUserDataById(id);
-      setUser(data.user);
+      dispatch(getUserDataById(id));
+      // const data = await getUserDataById(id);
+      // setUser(data.user);
     } catch (err) {
       const error = normalizeHttpError(err);
       toast.error(error.message);
@@ -165,6 +173,7 @@ const UserPage = () => {
         <div className={styles.profile}>
           <UserInfo
             user={user}
+            avatarURL={avatarURL}
             isMyProfile={isMyProfile}
             onAvatarChange={handleAvatarChange}
           />
