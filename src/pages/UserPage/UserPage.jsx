@@ -22,6 +22,7 @@ import { normalizeHttpError } from "../../utils";
 import toast from "react-hot-toast";
 import { getFavoriteRecipes, getRecipesByUserId } from "../../services/recipes";
 import { TabKey } from "../../constants/common";
+import { appClearSessionAction } from "../../store/utils.js";
 
 const UserPage = () => {
   const { id } = useParams();
@@ -96,6 +97,7 @@ const UserPage = () => {
       }));
     } catch (err) {
       const error = normalizeHttpError(err);
+      if (error.status === 401) dispatch(appClearSessionAction());
       toast.error(error.message);
     }
   };
@@ -110,6 +112,7 @@ const UserPage = () => {
       await reloadData();
     } catch (err) {
       const error = normalizeHttpError(err);
+      if (error.status === 401) dispatch(appClearSessionAction());
       toast.error(error.message);
     }
   };
@@ -124,6 +127,7 @@ const UserPage = () => {
       await reloadData();
     } catch (err) {
       const error = normalizeHttpError(err);
+      if (error.status === 401) dispatch(appClearSessionAction());
       toast.error(error.message);
     }
   };
