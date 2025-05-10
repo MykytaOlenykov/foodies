@@ -22,7 +22,7 @@ import { Typography } from "../Typography/Typography.jsx";
  * @param {(e) => void} [props.onFocus] - Optional focus handler for the input.
  * @param {(e) => void} [props.onBlur] - Optional blur handler for the input.
  */
-const Input = ({
+export const Input = ({
   name,
   placeholder,
   value,
@@ -67,9 +67,7 @@ const Input = ({
           </div>
         )}
       </div>
-      {error && <Typography variant="body" className={styles.errorMessage}>{error}</Typography>}
+      {error && <Typography variant="body" textColor="red">{error}</Typography>}
     </div>
   );
 };
-
-export default Input;

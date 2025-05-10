@@ -1,0 +1,78 @@
+.card {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    background-color: var(--white-color);
+    flex-wrap: nowrap;
+    padding: 32px 0;
+}
+.card:first-child {
+    padding-top: 0;
+}
+.card:not(:last-child) {
+  border-bottom: 1px solid var(--gray-light-color);
+}
+
+.userInfo {
+    display: flex;
+    gap: 16px;
+}
+
+/* Group containing name, count, and follow button */
+.userDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    max-width: 101px; /* 100px + 1px border because on the Figma it's designed this way */
+}
+
+/* Recipe thumbnails (tablet and desktop only) */
+.recipeList {
+    display: none;
+}
+
+/* Thumbnail images */
+.thumb {
+    width: 100px;
+    height: 100px;
+    border-radius: var(--border-radius-s);
+    flex-shrink: 0;
+    overflow: hidden;
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+}
+
+.thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Arrow icon button wrapper */
+.arrowButton {
+    align-self: flex-start;
+}
+
+.followButton {
+    padding: 10px 24px !important;
+    max-width: 100px !important;
+    border-color: var(--gray-color) !important; /* the color has to be forced */
+    color: var(--gray-color) !important; /* the color has to be forced */
+}
+
+/* Tablet (768px+) layout */
+@media (min-width: 768px) {
+    .card {
+        align-items: center;
+        padding: 40px 0;
+    }
+
+    .recipeList {
+        display: flex;
+        gap: 12px;
+        flex-wrap: nowrap;
+    }
+}

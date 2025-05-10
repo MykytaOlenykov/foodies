@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Input from './Input';
+import { Input } from './Input';
 import { Eye, EyeOff } from 'lucide-react';
 
 export default {

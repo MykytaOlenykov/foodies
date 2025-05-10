@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import { Eye, EyeOff } from "lucide-react";
 
-import Input from "../Input/Input";
+import { Input } from "../Input/Input";
 import { Button } from "../Button/Button";
 import { loginValidationSchema } from "./lib";
 

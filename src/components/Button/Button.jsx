@@ -12,6 +12,7 @@ import clsx from "clsx";
  * @param {"button"|"submit"|"reset"} [props.type] — button type.
  * @param {React.ReactNode} props.children — button text or other content.
  * @param {(e) => void} props.onClick — click handler
+ * @param {boolean} [props.fullWidth]
  */
 const Button = ({
   variant,
@@ -23,6 +24,7 @@ const Button = ({
   children,
   onClick,
   className,
+  fullWidth = false,
   ...restProps
 }) => {
   return (
@@ -32,6 +34,7 @@ const Button = ({
         styles[variant],
         styles[size],
         bordered && styles.bordered,
+        fullWidth && styles.fullWidth,
         className,
       )}
       disabled={disabled}

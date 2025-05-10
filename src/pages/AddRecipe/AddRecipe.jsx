@@ -3,7 +3,7 @@ import { Typography, TypographyError } from "../../components/Typography/Typogra
 import * as styles from "./AddRecipe.module.css";
 import { Breadcrumbs, BreadcrumbsDivider, BreadcrumbsItem } from "../../components/Breadcrumbs/Breadcrumbs.jsx";
 import { ImageUpload } from "../../components/ImageUpload/ImageUpload.jsx";
-import Input from "../../components/Input/Input.jsx";
+import { Input } from "../../components/Input/Input.jsx";
 import { Textarea } from "../../components/Textarea/Textarea.jsx";
 import { useState } from "react";
 import { ButtonIcon } from "../../components/ButtonIcon/ButtonIcon.jsx";

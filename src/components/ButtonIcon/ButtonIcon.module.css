@@ -30,13 +30,13 @@
 }
 
 .ButtonIcon.large {
-    width: 48px;
-    height: 48px;
+    width: 56px;
+    height: 56px;
 }
 
 .ButtonIcon.large svg {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
 }
 
 .ButtonIcon.light {
