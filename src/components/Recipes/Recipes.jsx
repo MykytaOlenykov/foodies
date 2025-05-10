@@ -34,7 +34,7 @@ export const Recipes = ({ categoryId }) => {
         <Typography className={css.recipesCategory} variant="h1">
           {currentCategory.name}
         </Typography>
-        <Typography className={css.recipesDescription} variant="p">
+        <Typography className={css.recipesDescription} variant="body">
           Go on a taste journey, where every sip is a sophisticated creative
           chord, and every dessert is an expression of the most refined
           gastronomic desires.
