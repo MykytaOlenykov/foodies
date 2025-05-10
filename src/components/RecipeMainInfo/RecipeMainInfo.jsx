@@ -8,8 +8,10 @@ import { normalizeImagePath } from "../../utils";
 import { useBreakpoint } from "../../hooks/useBreakpoint";
 
 import css from "./RecipeMainInfo.module.css";
+import { RecipePreparation } from "../RecipePreparation";
 
 export const RecipeMainInfo = ({
+  recipeId,
   imgURL,
   title,
   category,
@@ -17,6 +19,9 @@ export const RecipeMainInfo = ({
   time,
   owner,
   ingredients,
+  instructions,
+  isFavorite,
+  updateFavoriteStatus,
 }) => {
   const breakpoint = useBreakpoint();
   const navigate = useNavigate();
@@ -77,6 +82,13 @@ export const RecipeMainInfo = ({
         </div>
 
         <RecipeIngredients ingredients={ingredients} />
+        <RecipePreparation
+          recipeId={recipeId}
+          isFavorite={isFavorite}
+          instructions={instructions}
+          textColor={textColor}
+          updateFavoriteStatus={updateFavoriteStatus}
+        />
       </div>
     </div>
   );

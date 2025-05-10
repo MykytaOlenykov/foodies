@@ -1,45 +1,81 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
+
 import { Typography } from "../Typography/Typography";
+import { Button } from "../Button/Button";
+import { openSignIn, selectIsLoggedIn } from "../../store/auth";
+import { DEFAULT_ERROR_MESSAGE } from "../../constants/common";
+import { appClearSessionAction } from "../../store/utils";
+import { normalizeHttpError } from "../../utils";
+import {
+  addFavoriteRecipe,
+  removeFavoriteRecipe,
+} from "../../services/recipes";
+
 import styles from "./RecipePreparation.module.css";
 
-const RecipePreparation = ({
-  preparation,
+export const RecipePreparation = ({
   recipeId,
-  isFavorite: initialIsFavorite = false,
+  textColor,
+  instructions,
+  isFavorite,
+  updateFavoriteStatus,
 }) => {
-  const [isRecipeFavorite, setIsRecipeFavorite] = useState(initialIsFavorite);
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const [updating, setUpdating] = useState(false);
 
-  const handleToggleFavorite = () => {
-    // тут реалізувати dispatch або openModal згодом
-    setIsRecipeFavorite((prev) => !prev);
+  const handleFavoriteClick = async () => {
+    if (!isLoggedIn) {
+      dispatch(openSignIn());
+      return;
+    }
+
+    try {
+      setUpdating(true);
+      let message;
+
+      if (isFavorite) {
+        const data = await removeFavoriteRecipe(recipeId);
+        message = data.message;
+        updateFavoriteStatus(false);
+      } else {
+        const data = await addFavoriteRecipe(recipeId);
+        message = data.message;
+        updateFavoriteStatus(true);
+      }
+
+      toast.success(message);
+    } catch (error) {
+      const { message, status } = normalizeHttpError(error);
+      toast.error(message ?? DEFAULT_ERROR_MESSAGE);
+      if (status === 401) dispatch(appClearSessionAction());
+    } finally {
+      setUpdating(false);
+    }
   };
 
-  const paragraphs = preparation.split("\n\n");
-
   return (
-    <div className={styles.wrapper}>
+    <div>
       <Typography variant="h3" textColor="black" className={styles.title}>
         Recipe Preparation
       </Typography>
 
-      {paragraphs.map((para, index) => (
-        <Typography
-          key={index}
-          variant="body"
-          textColor="gray"
-          className={styles.text}
-        >
-          {para}
-        </Typography>
-      ))}
+      <Typography variant="body" textColor={textColor} className={styles.text}>
+        {instructions}
+      </Typography>
 
-      <button onClick={handleToggleFavorite} className={styles.favoriteBtn}>
-        <Typography variant="body" textColor="gray">
-          {isRecipeFavorite ? "Remove from favorites" : "Add to favorites"}
-        </Typography>
-      </button>
+      <Button
+        onClick={handleFavoriteClick}
+        type="button"
+        variant="light"
+        size="medium"
+        bordered
+        disabled={updating}
+      >
+        {isFavorite ? "Remove from favorites" : "Add to favorites"}
+      </Button>
     </div>
   );
 };
-
-export default RecipePreparation;

@@ -41,6 +41,14 @@
   }
 
   @media screen and (min-width: 880px) {
+    flex-grow: 1;
+    flex-shrink: 0;
+    max-width: 451px;
+  }
+
+  @media screen and (min-width: 1080px) {
+    flex-grow: 1;
+    flex-shrink: 0;
     max-width: 551px;
   }
 }

@@ -1,6 +1,5 @@
-import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router";
+import { useNavigate, useParams, useLocation } from "react-router";
 import toast from "react-hot-toast";
 
 import {
@@ -9,11 +8,11 @@ import {
   BreadcrumbsItem,
 } from "../../components/Breadcrumbs/Breadcrumbs.jsx";
 import { RecipeMainInfo } from "../RecipeMainInfo";
+import Loader from "../Loader/Loader.jsx";
 import { normalizeHttpError } from "../../utils/normalizeHttpError.js";
 import { getRecipeById } from "../../services/recipes";
 
 import css from "./RecipeInfo.module.css";
-import Loader from "../Loader/Loader.jsx";
 
 export const RecipeInfo = () => {
   const navigate = useNavigate();
@@ -41,6 +40,10 @@ export const RecipeInfo = () => {
     fetchRecipe();
   }, [recipeId]);
 
+  const updateFavoriteStatus = (isFavorite) => {
+    setRecipe((prev) => ({ ...prev, isFavorite }));
+  };
+
   if (loading) return <Loader />;
 
   return (
@@ -59,6 +62,7 @@ export const RecipeInfo = () => {
 
       <div className={css.detailsBlock}>
         <RecipeMainInfo
+          recipeId={recipe.id}
           imgURL={recipe.thumb}
           title={recipe.title}
           description={recipe.description}
@@ -66,6 +70,9 @@ export const RecipeInfo = () => {
           time={recipe.time}
           owner={recipe.owner}
           ingredients={recipe.ingredients}
+          instructions={recipe.instructions}
+          isFavorite={recipe.isFavorite}
+          updateFavoriteStatus={updateFavoriteStatus}
         />
       </div>
     </>
