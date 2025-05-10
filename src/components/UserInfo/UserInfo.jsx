@@ -5,6 +5,8 @@ import { ButtonIcon } from "../ButtonIcon/ButtonIcon";
 import { Typography } from "../Typography/Typography";
 import { normalizeHttpError, normalizeImagePath } from "../../utils";
 import toast from "react-hot-toast";
+import { Avatar } from "../Avatar/Avatar.jsx";
+import { useBreakpoint } from "../../hooks/useBreakpoint.js";
 
 /**
  * @param {object} props
@@ -15,6 +17,8 @@ import toast from "react-hot-toast";
 
 export const UserInfo = ({ user, isMyProfile, onAvatarChange }) => {
   const fileInputRef = useRef();
+  const breakpoint = useBreakpoint();
+  const isMobile = ["mobile", "small-mobile"].includes(breakpoint);
 
   const {
     avatarURL,
@@ -45,17 +49,12 @@ export const UserInfo = ({ user, isMyProfile, onAvatarChange }) => {
   return (
     <div className={styles.profileCard}>
       <div className={styles.avatarWrapper}>
-        {avatarURL ? (
-          <img
-            className={styles.avatar}
-            src={normalizeImagePath(avatarURL)}
-            alt={`${name}'s avatar`}
-          />
-        ) : (
-          <Typography variant="h2" className={styles.fallbackAvatar}>
-            {name?.charAt(0).toUpperCase()}
-          </Typography>
-        )}
+        <Avatar
+          src={normalizeImagePath(avatarURL)}
+          alt={`${name}'s avatar`}
+          size={isMobile ? 80 : 120}
+          name={name}
+        />
         {isMyProfile && (
           <Fragment>
             <ButtonIcon

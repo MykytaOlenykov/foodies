@@ -1,0 +1,9 @@
+.Avatar {
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    background: var(--gray-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

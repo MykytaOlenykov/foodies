@@ -7,10 +7,10 @@ import { openLogOut, selectUser } from "../../store/auth";
 
 import css from "./UserBar.module.css";
 
-import emptyImages from "../../assets/images/empty";
 import ChevronDownIcon from "../../assets/icons/chevron-down.svg?react";
 import ArrowUpRightIcon from "../../assets/icons/arrow-up-right.svg?react";
-import { BACKEND_URL } from "../../constants/common";
+import { Avatar } from "../Avatar/Avatar.jsx";
+import { useBreakpoint } from "../../hooks/useBreakpoint.js";
 
 const ProfileMenu = ({ onClose }) => {
   const dispatch = useDispatch();
@@ -36,7 +36,8 @@ const ProfileMenu = ({ onClose }) => {
 
 export const UserBar = () => {
   const user = useSelector(selectUser);
-
+  const breakpoint = useBreakpoint();
+  const isMobile = ["mobile", "small-mobile"].includes(breakpoint);
   const [isOpenProfile, setIsOpenProfile] = useState(false);
   const containerRef = useRef(null);
 
@@ -56,9 +57,6 @@ export const UserBar = () => {
     };
   }, []);
 
-  const avatarURL = user?.avatarURL
-    ? `${BACKEND_URL}static${user.avatarURL}`
-    : emptyImages.noAvatar;
   const userName = user?.name || "User";
 
   return (
@@ -67,14 +65,12 @@ export const UserBar = () => {
         className={css.profile}
         onClick={() => setIsOpenProfile((prev) => !prev)}
       >
-        <div className={css.avatarThumb}>
-          <img
-            className={css.avatar}
-            // TODO: add util
-            src={avatarURL}
-            alt={userName}
-          />
-        </div>
+        <Avatar
+          src={user?.avatarURL}
+          alt={`${userName}'s avatar`}
+          size={isMobile ? 32 : 50}
+          name={userName}
+        />
         <p className={css.profileName}>{userName}</p>
         <button
           type="button"
