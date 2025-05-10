@@ -5,9 +5,9 @@ import 'swiper/css';
 import 'swiper/css/grid';
 import 'swiper/css/pagination';
 
-import { Grid, Pagination } from "swiper/modules";
-
-const SLIDE_PER_VIEW = 4;
+import { Grid } from "swiper/modules";
+import { Typography } from "../Typography/Typography.jsx";
+import * as styles from "./PopularRecipes.module.css";
 
 /**
  * @param {object} props
@@ -28,51 +28,54 @@ const PopularRecipes = ({ recipes }) => {
   const isMobile = ["mobile", "small-mobile"].includes(breakpoint);
 
   return (
-    <Swiper
-      slidesPerView={4}
-      modules={[Grid]}
-      grid={{
-        rows: 1,
-        fill: "row",
-      }}
-      spaceBetween={20}
-      breakpoints={{
-        375: {
-          slidesPerView: 1,
-          grid: {
-            rows: 4,
-            fill: "row"
-          }
-        },
-        768: {
-          slidesPerView: 2,
-          grid: {
-            rows: 2,
-            fill: "row"
-          }
-        },
-        1280: {
-          slidesPerView: 4,
-          grid: {
-            rows: 1,
-            fill: "row"
-          }
-        },
-      }}
-    >
-      {recipes.map((recipe) => (
-        <SwiperSlide key={recipe.id}>
-          <RecipeCard
-            recipeId={recipe.id}
-            title={recipe.title}
-            image={recipe.thumb}
-            description={recipe.description}
-            owner={recipe.owner}
-            isMobile={isMobile}
-          />
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <div className={styles.PopularRecipes}>
+      <Typography variant="h3">Popular recipes</Typography>
+      <Swiper
+        slidesPerView={4}
+        modules={[Grid]}
+        grid={{
+          rows: 1,
+          fill: "row",
+        }}
+        spaceBetween={20}
+        breakpoints={{
+          375: {
+            slidesPerView: 1,
+            grid: {
+              rows: 4,
+              fill: "row"
+            }
+          },
+          768: {
+            slidesPerView: 2,
+            grid: {
+              rows: 2,
+              fill: "row"
+            }
+          },
+          1280: {
+            slidesPerView: 4,
+            grid: {
+              rows: 1,
+              fill: "row"
+            }
+          },
+        }}
+      >
+        {recipes.map((recipe) => (
+          <SwiperSlide key={recipe.id}>
+            <RecipeCard
+              recipeId={recipe.id}
+              title={recipe.title}
+              image={recipe.thumb}
+              description={recipe.description}
+              owner={recipe.owner}
+              isMobile={isMobile}
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   )
 }
 
