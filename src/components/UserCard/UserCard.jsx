@@ -8,6 +8,7 @@ import { Button } from "../Button/Button";
 import ArrowUpRight from "../../assets/icons/arrow-up-right.svg?react";
 import { normalizeImagePath } from "../../utils/index.js";
 import { Avatar } from "../Avatar/Avatar.jsx";
+import { Image } from "../Image/Image.jsx";
 
 /**
  * @typedef {Object} RecipePreview
@@ -91,11 +92,10 @@ export const UserCard = ({
       {showRecipes && user.recipes?.length > 0 && (
         <div className={styles.recipeList}>
           {user.recipes.slice(0, thumbCount).map((recipe) => (
-            <div key={recipe.id} className={styles.recipeThumbWrapper}>
-              <img
+            <div key={recipe.id} className={styles.thumb}>
+              <Image
                 src={normalizeImagePath(recipe.thumb)}
                 alt={`Recipe ${recipe.id}`}
-                className={styles.recipeThumb}
               />
             </div>
           ))}
