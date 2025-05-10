@@ -71,6 +71,17 @@
     color: var(--main-color);
 }
 
+.ButtonIcon.transparent {
+    background: transparent;
+    color: var(--white-color);
+    border-color: var(--white-transparent-color);
+}
+
+.ButtonIcon.transparent:not(:disabled):hover {
+    background: transparent;
+    border-color: var(--white-color);
+}
+
 .ButtonIcon:disabled {
     background: var(--gray-light-color);
     border-color: var(--gray-light-color);
