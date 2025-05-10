@@ -23,7 +23,7 @@ const userOne = {
 
 const userTwo = {
   id: 2,
-  name: 'OKSANA',
+  name: 'OKSANA SHEVCHENKO',
   avatarURL: 'https://i.pravatar.cc/56?img=4',
   recipes: [
     { id: 1, thumb: 'https://placehold.co/80x80?text=Borscht' },

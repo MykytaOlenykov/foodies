@@ -19,26 +19,6 @@
     gap: 16px;
 }
 
-/* Avatar image */
-.avatarWrapper {
-    width: 60px;
-    height: 60px;
-    text-align: center; /* to center the alt text */
-    border-radius: var(--border-radius-full);
-    background-color: var(--gray-light-color);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.avatar {
-    object-fit: cover;
-    display: block;
-    /*width: 100%;*/
-}
-
 /* Group containing name, count, and follow button */
 .userDetails {
     display: flex;
@@ -78,6 +58,7 @@
 
 .followButton {
     padding: 10px 24px !important;
+    max-width: 100px !important;
     border-color: var(--gray-color) !important; /* the color has to be forced */
     color: var(--gray-color) !important; /* the color has to be forced */
 }
@@ -93,10 +74,5 @@
         display: flex;
         gap: 12px;
         flex-wrap: nowrap;
-    }
-
-    .avatarWrapper {
-        width: 80px;
-        height: 80px;
     }
 }

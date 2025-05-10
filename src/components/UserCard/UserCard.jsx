@@ -6,7 +6,8 @@ import { Typography } from "../Typography/Typography";
 import { ButtonIcon } from "../ButtonIcon/ButtonIcon";
 import { Button } from "../Button/Button";
 import ArrowUpRight from "../../assets/icons/arrow-up-right.svg?react";
-import { normalizeImagePath } from "../../utils/normalizeImagePath.jsx";
+import { normalizeImagePath } from "../../utils/index.js";
+import { Avatar } from "../Avatar/Avatar.jsx";
 
 /**
  * @typedef {Object} RecipePreview
@@ -67,12 +68,7 @@ export const UserCard = ({
   return (
     <div className={styles.card}>
       <div className={styles.userInfo}>
-        <div className={styles.avatarWrapper}>
-          <img
-            src={normalizeImagePath(user.avatarURL)}
-            alt={user.name}
-            className={styles.avatar} />
-        </div>
+        <Avatar src={normalizeImagePath(user.avatarURL)} name={user.name} size={breakpoint === 'mobile' ? 60 : 85}/>
         <div className={styles.userDetails}>
           <Typography variant="h4">{user.name}</Typography>
           <Typography variant="bodyS" textColor="gray">
