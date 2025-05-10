@@ -19,7 +19,7 @@
     transition: background var(--transition-duration) var(--transition-timing-function), color var(--transition-duration) var(--transition-timing-function);
 }
 
-.PaginationButton:not(.PaginationButton__active):hover {
+.PaginationButton:not(.PaginationButton__active):not(.PaginationButton__disabled):hover {
     background: var(--gray-color);
     cursor: pointer;
     color: var(--white-color);
@@ -27,4 +27,17 @@
 
 .PaginationButton__active {
     border: 1px solid var(--gray-color);
+}
+
+.PaginationButton__disabled {
+    color: var(--gray-color);
+    cursor: not-allowed;
+}
+
+.PaginationButtonPrev {
+    transform: rotate(-90deg);
+}
+
+.PaginationButtonNext {
+    transform: rotate(90deg);
 }
