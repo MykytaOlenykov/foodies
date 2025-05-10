@@ -42,7 +42,7 @@ export const UserCard = ({
   tabType,
   onFollow,
   onUnfollow,
-  userPageBasePath = '/users',
+  userPageBasePath = "/user",
   loading = false,
 }) => {
   const breakpoint = useBreakpoint();
@@ -61,17 +61,23 @@ export const UserCard = ({
     }
   };
 
-  const showRecipes = breakpoint === 'tablet' || breakpoint === 'desktop';
-  const thumbCount = breakpoint === 'desktop' ? 4 : 3;
-  const iconSize = breakpoint === 'desktop' ? 'medium' : 'small';
-  const buttonSize = breakpoint === 'desktop' ? 'medium' : 'small';
+  const showRecipes = breakpoint === "tablet" || breakpoint === "desktop";
+  const thumbCount = breakpoint === "desktop" ? 4 : 3;
+  const iconSize = breakpoint === "desktop" ? "medium" : "small";
+  const buttonSize = breakpoint === "desktop" ? "medium" : "small";
 
   return (
     <div className={styles.card}>
       <div className={styles.userInfo}>
-        <Avatar src={normalizeImagePath(user.avatarURL)} name={user.name} size={breakpoint === 'mobile' ? 60 : 85}/>
+        <Avatar
+          src={normalizeImagePath(user.avatarURL)}
+          name={user.name}
+          size={breakpoint === "mobile" ? 60 : 85}
+        />
         <div className={styles.userDetails}>
-          <Typography variant="h4" truncate>{user.name}</Typography>
+          <Typography variant="h4" truncate>
+            {user.name}
+          </Typography>
           <Typography variant="bodyS" textColor="gray">
             Own recipes: {user.recipesCount}
           </Typography>
@@ -84,7 +90,7 @@ export const UserCard = ({
             disabled={loading}
             className={styles.followButton}
           >
-            {isFollowing ? 'FOLLOWING' : 'FOLLOW'}
+            {isFollowing ? "FOLLOWING" : "FOLLOW"}
           </Button>
         </div>
       </div>
@@ -123,12 +129,12 @@ UserCard.propTypes = {
       PropTypes.shape({
         id: PropTypes.number.isRequired,
         thumb: PropTypes.string.isRequired,
-      })
+      }),
     ).isRequired,
     recipesCount: PropTypes.number.isRequired,
     isFollowed: PropTypes.bool, // will be added in the future can be undefined
   }).isRequired,
-  tabType: PropTypes.oneOf(['followers', 'following']).isRequired,
+  tabType: PropTypes.oneOf(["followers", "following"]).isRequired,
   onFollow: PropTypes.func.isRequired,
   onUnfollow: PropTypes.func.isRequired,
   userPageBasePath: PropTypes.string,
