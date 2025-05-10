@@ -65,6 +65,7 @@ export const RecipeInfo = () => {
           category={recipe.category}
           time={recipe.time}
           owner={recipe.owner}
+          ingredients={recipe.ingredients}
         />
       </div>
     </>
