@@ -96,11 +96,6 @@ const UserPage = () => {
   const handleAvatarChange = async (file) => {
     try {
       dispatch(updateUserAvatarAPI(file));
-      // const data = await updateUserAvatar(file);
-      // setUser((prev) => ({
-      //   ...prev,
-      //   avatarURL: data.avatarURL,
-      // }));
     } catch (err) {
       const error = normalizeHttpError(err);
       toast.error(error.message);
@@ -112,7 +107,6 @@ const UserPage = () => {
       const data = await followUserById(id);
       toast.success(data.message);
 
-      // Refresh user data after follow
       await fetchUserData(id);
     } catch (err) {
       const error = normalizeHttpError(err);
@@ -125,7 +119,6 @@ const UserPage = () => {
       const data = await unfollowUserById(id);
       toast.success(data.message);
 
-      // Refresh user data after follow
       await fetchUserData(id);
     } catch (err) {
       const error = normalizeHttpError(err);
@@ -145,15 +138,11 @@ const UserPage = () => {
   const fetchUserData = async (id) => {
     try {
       dispatch(getUserDataById(id));
-      // const data = await getUserDataById(id);
-      // setUser(data.user);
     } catch (err) {
       const error = normalizeHttpError(err);
       toast.error(error.message);
     }
   };
-
-  //TODO: add loader
 
   if (!user)
     return <section className={styles.userPage}>User not found</section>;
