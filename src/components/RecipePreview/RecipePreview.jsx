@@ -3,11 +3,10 @@ import styles from "./RecipePreview.module.css";
 import ArrowUpRightIcon from "../../assets/icons/arrow-up-right.svg?react";
 import TrashIcon from "../../assets/icons/trash.svg?react";
 import { TabKey } from "../../constants/common";
-import { normalizeHttpError } from "../../utils";
+import { normalizeHttpError, normalizeImagePath } from "../../utils";
 import { Typography } from "../Typography/Typography";
 import { ButtonIcon } from "../ButtonIcon/ButtonIcon";
 import toast from "react-hot-toast";
-import { normalizeImagePath } from "../../utils/normalizeImagePath";
 import { deleteRecipeById, removeFavoriteRecipe } from "../../services/recipes";
 
 /**

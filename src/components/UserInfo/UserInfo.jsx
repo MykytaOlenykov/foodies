@@ -3,9 +3,8 @@ import styles from "./UserInfo.module.css";
 import PlusIcon from "../../assets/icons/plus.svg?react";
 import { ButtonIcon } from "../ButtonIcon/ButtonIcon";
 import { Typography } from "../Typography/Typography";
-import { normalizeHttpError } from "../../utils";
+import { normalizeHttpError, normalizeImagePath } from "../../utils";
 import toast from "react-hot-toast";
-import { normalizeImagePath } from "../../utils/normalizeImagePath";
 
 /**
  * @param {object} props
@@ -62,8 +61,7 @@ export const UserInfo = ({ user, isMyProfile, onAvatarChange }) => {
             <ButtonIcon
               className={styles.avatarEdit}
               variant="dark"
-              size="small"
-              icon={<PlusIcon width={18} height={18} />}
+              icon={<PlusIcon width={16} height={16} />}
               onClick={handleAvatarClick}
             />
             <input
