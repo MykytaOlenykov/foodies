@@ -17,7 +17,7 @@ import css from "./RecipeInfo.module.css";
 export const RecipeInfo = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
-  const goBackPath = useRef(state.from ?? "/");
+  const goBackPath = useRef(state?.from ?? "/");
 
   const { recipeId } = useParams();
   const [recipe, setRecipe] = useState(null);

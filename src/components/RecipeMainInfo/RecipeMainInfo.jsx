@@ -1,4 +1,5 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Typography } from "../Typography/Typography";
 import { Image } from "../Image/Image";
@@ -9,6 +10,7 @@ import { useBreakpoint } from "../../hooks/useBreakpoint";
 
 import css from "./RecipeMainInfo.module.css";
 import { RecipePreparation } from "../RecipePreparation";
+import { openSignIn, selectIsLoggedIn } from "../../store/auth";
 
 export const RecipeMainInfo = ({
   recipeId,
@@ -23,6 +25,8 @@ export const RecipeMainInfo = ({
   isFavorite,
   updateFavoriteStatus,
 }) => {
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const breakpoint = useBreakpoint();
   const navigate = useNavigate();
 
@@ -31,6 +35,11 @@ export const RecipeMainInfo = ({
     : "black";
 
   const navigateToAuthor = () => {
+    if (!isLoggedIn) {
+      dispatch(openSignIn());
+      return;
+    }
+
     navigate(`/user/${owner?.id}`);
   };
 
