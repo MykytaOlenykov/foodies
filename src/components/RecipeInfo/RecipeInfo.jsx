@@ -47,7 +47,7 @@ export const RecipeInfo = () => {
   if (loading) return <Loader />;
 
   return (
-    <>
+    <div>
       <Breadcrumbs>
         <BreadcrumbsItem
           onClick={() => {
@@ -75,6 +75,6 @@ export const RecipeInfo = () => {
           updateFavoriteStatus={updateFavoriteStatus}
         />
       </div>
-    </>
+    </div>
   );
 };
