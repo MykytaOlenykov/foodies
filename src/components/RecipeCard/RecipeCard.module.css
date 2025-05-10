@@ -1,0 +1,114 @@
+.recipeCard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.thumb {
+  margin-bottom: 16px;
+  width: 100%;
+  height: 230px;
+
+  border-radius: 20px;
+  overflow: hidden;
+
+  @media screen and (min-width: 768px) {
+    height: 275px;
+    border-radius: 30px;
+  }
+}
+
+.recipeImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  width: 100%;
+  gap: 8px;
+}
+
+@media screen and (min-width: 540px) {
+  .cardDescription {
+    margin-bottom: auto;
+  }
+}
+
+.cardActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.cardAuthorInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cardAuthorButton {
+  flex-shrink: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.cardAuthorName {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  color: #1a1a1a;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @supports (-webkit-line-clamp: 2) and (display: -webkit-box) {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: normal;
+  }
+}
+@media (min-width: 768px) {
+  .cardAuthorName {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+.recipeIcons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.isFavorite {
+  background-color: var(--main-color);
+}
+
+.initials {
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .initials {
+    font-size: 18px;
+  }
+}
+
+.fillFavorite {
+  fill: var(--white-color);
+}

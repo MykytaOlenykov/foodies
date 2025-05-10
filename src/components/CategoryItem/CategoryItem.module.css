@@ -1,0 +1,175 @@
+.thumb {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+}
+
+.wrapper {
+  display: flex;
+  gap: 4px;
+
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+}
+
+.label {
+  font-weight: 700;
+  color: var(--white-color);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px solid var(--white-color);
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 12px;
+  border-radius: 30px;
+}
+
+/* tablet -> desktop */
+@media only screen and (min-width: 768px) {
+  .label {
+    font-size: 20px;
+  }
+  .wrapper {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+  }
+}
+
+.btnIcn {
+  color: var(--white-color);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.beef {
+  background-image: linear-gradient(
+      0deg,
+      rgba(5, 5, 5, 0.2) 0%,
+      rgba(5, 5, 5, 0.2) 100%
+    ),
+    image-set(
+      url("../../assets/images/categories/Beef.webp@1x.webp") 1x,
+      url("../../assets/images/categories/Beef.webp@2x.webp") 2x
+    );
+}
+
+.breakfast {
+  background-image: linear-gradient(
+      0deg,
+      rgba(5, 5, 5, 0.2) 0%,
+      rgba(5, 5, 5, 0.2) 100%
+    ),
+    image-set(
+      url("../../assets/images/categories/Breakfast.webp@1x.webp") 1x,
+      url("../../assets/images/categories/Breakfast.webp@2x.webp") 2x
+    );
+}
+
+.dessert {
+  background-image: linear-gradient(
+      0deg,
+      rgba(5, 5, 5, 0.2) 0%,
+      rgba(5, 5, 5, 0.2) 100%
+    ),
+    image-set(
+      url("../../assets/images/categories/Desserts.webp@1x.webp") 1x,
+      url("../../assets/images/categories/Desserts.webp@2x.webp") 2x
+    );
+}
+
+.goat {
+  background-image: linear-gradient(
+      0deg,
+      rgba(5, 5, 5, 0.2) 0%,
+      rgba(5, 5, 5, 0.2) 100%
+    ),
+    image-set(
+      url("../../assets/images/categories/Goat.webp@1x.webp") 1x,
+      url("../../assets/images/categories/Goat.webp@2x.webp") 2x
+    );
+}
+
+.lamb {
+  background-image: linear-gradient(
+      0deg,
+      rgba(5, 5, 5, 0.2) 0%,
+      rgba(5, 5, 5, 0.2) 100%
+    ),
+    image-set(
+      url("../../assets/images/categories/Lamb.webp@1x.webp") 1x,
+      url("../../assets/images/categories/Lamb.webp@2x.webp") 2x
+    );
+}
+
+.miscellaneous {
+  background-image: linear-gradient(
+      0deg,
+      rgba(5, 5, 5, 0.2) 0%,
+      rgba(5, 5, 5, 0.2) 100%
+    ),
+    image-set(
+      url("../../assets/images/categories/Miscellaneous.webp@1x.webp") 1x,
+      url("../../assets/images/categories/Miscellaneous.webp@2x.webp") 2x
+    );
+}
+
+.pasta {
+  background-image: linear-gradient(
+      0deg,
+      rgba(5, 5, 5, 0.2) 0%,
+      rgba(5, 5, 5, 0.2) 100%
+    ),
+    image-set(
+      url("../../assets/images/categories/Pasta.webp@1x.webp") 1x,
+      url("../../assets/images/categories/Pasta.webp@2x.webp") 2x
+    );
+}
+
+.pork {
+  background-image: image-set(
+    url("../../assets/images/categories/Pork.webp@1x.webp") 1x,
+    url("../../assets/images/categories/Pork.webp@2x.webp") 2x
+  );
+}
+
+.seafood {
+  background-image: image-set(
+    url("../../assets/images/categories/Seafood.webp@1x.webp") 1x,
+    url("../../assets/images/categories/Seafood.webp@2x.webp") 2x
+  );
+}
+
+.side {
+  background-image: image-set(
+    url("../../assets/images/categories/Side.webp@1x.webp") 1x,
+    url("../../assets/images/categories/Side.webp@2x.webp") 2x
+  );
+}
+
+.starter {
+  background-image: image-set(
+    url("../../assets/images/categories/Starter.webp@1x.webp") 1x,
+    url("../../assets/images/categories/Starter.webp@2x.webp") 2x
+  );
+}
+
+.vegan {
+  background-image: image-set(
+    url("../../assets/images/categories/Vegan.webp@1x.webp") 1x,
+    url("../../assets/images/categories/Vegan.webp@2x.webp") 2x
+  );
+}
+
+.vegetarian {
+  background-image: image-set(
+    url("../../assets/images/categories/Vegetarian.webp@1x.webp") 1x,
+    url("../../assets/images/categories/Vegetarian.webp@2x.webp") 2x
+  );
+}

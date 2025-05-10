@@ -1,0 +1,69 @@
+.recipesBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+@media screen and (min-width: 540px) {
+  .recipesBlock {
+    gap: 40px;
+  }
+}
+
+@media screen and (min-width: 1080px) {
+  .recipesBlock {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.recipeListBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+.recipeList {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+
+  @media screen and (min-width: 540px) {
+    row-gap: 40px;
+    column-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (min-width: 1440px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.recipesFiltersBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+@media screen and (min-width: 540px) {
+  .recipesFiltersBlock {
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 16px;
+  }
+}
+
+@media screen and (min-width: 1080px) {
+  .recipesFiltersBlock {
+    max-width: 330px;
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,91 @@
+.container {
+  padding-top: 64px;
+  padding-bottom: 64px;
+
+  @media screen and (min-width: 768px) {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+}
+
+.recipesTitleBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 16px;
+  margin-bottom: 32px;
+
+  @media only screen and (min-width: 768px) {
+    gap: 20px;
+    margin-bottom: 40px;
+    max-width: 540px;
+  }
+}
+
+.recipesBackButton {
+  display: flex;
+  gap: 4px;
+  padding: 0px;
+  background-color: transparent;
+  color: var(--main-color);
+  border: none;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+  .recipesBackButton {
+    font-size: 14px;
+    line-height: 18px;
+    gap: 6px;
+  }
+}
+
+.recipesBackIcon {
+  width: 16px;
+  height: 16px;
+}
+@media screen and (min-width: 768px) {
+  .recipesBackIcon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.recipesCategory {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 32px;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+@media screen and (min-width: 768px) {
+  .recipesCategory {
+    font-size: 40px;
+    line-height: 44px;
+  }
+}
+
+.recipesDescription {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  color: var(--gray-color);
+}
+@media screen and (min-width: 768px) {
+  .recipesDescription {
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--button-color);
+  }
+}

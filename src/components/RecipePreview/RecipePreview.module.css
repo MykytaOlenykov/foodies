@@ -1,0 +1,53 @@
+.card {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.image {
+  width: 75px;
+  height: 75px;
+  border-radius: 15px;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.description {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.28px;
+}
+
+.actions {
+  display: flex;
+  margin-left: 6px;
+  gap: 4px;
+}
+
+@media (min-width: 768px) {
+  .card {
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .image {
+    width: 100px;
+    height: 100px;
+  }
+  .content {
+    gap: 10px;
+  }
+  .description {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.32px;
+    color: var(--main-color);
+  }
+  .actions {
+    margin-left: 16px;
+  }
+}

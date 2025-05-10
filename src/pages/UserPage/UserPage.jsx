@@ -2,7 +2,7 @@ import { useParams } from "react-router";
 import { Button } from "../../components/Button/Button";
 import { Typography } from "../../components/Typography/Typography";
 import styles from "./UserPage.module.css";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   followUserById,
   getUserDataById,
@@ -45,38 +45,33 @@ const UserPage = () => {
     setActiveTab(TabKey.RECIPES);
   }, [id]);
 
-  useEffect(() => {
+  const reloadData = useCallback(() => {
+    const pagination = { page, limit: PAGE_LIMIT };
+
     const fetchTabData = async () => {
       try {
-        const pagination = { page, limit: PAGE_LIMIT };
         let data = {};
 
         switch (activeTab) {
           case TabKey.RECIPES:
             data = await getRecipesByUserId(id, pagination);
             break;
-
           case TabKey.FAVORITES:
             if (isMyProfile) {
               data = await getFavoriteRecipes(pagination);
             }
             break;
-
           case TabKey.FOLLOWERS:
             data = await getUserFollowers(id, pagination);
             break;
-
           case TabKey.FOLLOWING:
             if (isMyProfile) {
               data = await getUserFollowing(pagination);
             }
             break;
-
           default:
             data = {};
         }
-
-        console.log(data);
 
         setItems(data?.items || []);
       } catch (err) {
@@ -86,7 +81,11 @@ const UserPage = () => {
     };
 
     fetchTabData();
-  }, [activeTab, id, isMyProfile, page, user]);
+  }, [activeTab, id, isMyProfile, page]);
+
+  useEffect(() => {
+    reloadData();
+  }, [reloadData]);
 
   const handleAvatarChange = async (file) => {
     try {
@@ -204,7 +203,12 @@ const UserPage = () => {
             activeTab={activeTab}
             onTabChange={handleTabChange}
           />
-          <ListItems tab={activeTab} items={items} isMyProfile={isMyProfile} />
+          <ListItems
+            tab={activeTab}
+            items={items}
+            isMyProfile={isMyProfile}
+            onDelete={reloadData}
+          />
         </div>
       </div>
     </section>
