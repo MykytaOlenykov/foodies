@@ -1,62 +1,76 @@
-import styles from "./RecipeMainInfo.module.css";
 import { useNavigate } from "react-router-dom";
 import { Typography } from "../Typography/Typography";
+import { Image } from "../Image/Image";
+import { normalizeImagePath } from "../../utils";
 
-const RecipeMainInfo = ({ title, category, time, description, user }) => {
+import css from "./RecipeMainInfo.module.css";
+import { Avatar } from "../Avatar/Avatar";
+import { useBreakpoint } from "../../hooks/useBreakpoint";
+
+export const RecipeMainInfo = ({
+  imgURL,
+  title,
+  category,
+  description,
+  time,
+  owner,
+}) => {
+  const breakpoint = useBreakpoint();
   const navigate = useNavigate();
 
-  const handleAuthorClick = () => {
-    if (user?.id) {
-      navigate(`/user/${user.id}`);
-    }
+  const textColor = ["small-mobile", "mobile"].includes(breakpoint)
+    ? "gray"
+    : "black";
+
+  const navigateToAuthor = () => {
+    navigate(`/user/${owner?.id}`);
   };
 
-  const avatarUrl = user?.avatar?.startsWith("http")
-    ? user.avatar
-    : "https://via.placeholder.com/32";
+  const avatarUrl = owner?.avatarURL && normalizeImagePath(owner.avatarURL);
 
   return (
-    <section className="wrap">
-      <div className={styles.recipeMainInfo}>
-        <div className={styles.info}>
-          <Typography variant="h3" textColor="black">
-            {title}
-          </Typography>
-
-          <div className={styles.category}>
-            <span>{category}</span>
-            <span>{time} min</span>
-          </div>
-
-          <Typography variant="body" textColor="gray">
-            {description}
-          </Typography>
-
-          <div className={styles.authorBlock}>
-            <img
-              src={avatarUrl}
-              alt={user?.name || "Anonymous"}
-              className={styles.authorImage}
-            />
-            <div className={styles.authorText}>
-              <Typography variant="body" textColor="gray">
-                Created by:
-              </Typography>
-              <button
-                type="button"
-                onClick={handleAuthorClick}
-                className={styles.authorName}
-              >
-                <Typography variant="body" textColor="main">
-                  {user?.name || "Anonymous"}
-                </Typography>
-              </button>
-            </div>
-          </div>
-        </div>
+    <div className={css.container}>
+      <div className={css.thumb}>
+        <Image
+          src={normalizeImagePath(imgURL)}
+          alt={title}
+          className={css.img}
+        />
       </div>
-    </section>
+
+      <div>
+        <Typography variant="h3">{title}</Typography>
+
+        <div className={css.category}>
+          <span>{category?.name}</span>
+          <span>{time} min</span>
+        </div>
+
+        <Typography
+          variant="body"
+          textColor={textColor}
+          className={css.description}
+        >
+          {description}
+        </Typography>
+
+        <button
+          className={css.authorBlock}
+          type="button"
+          onClick={navigateToAuthor}
+        >
+          <Avatar src={avatarUrl} size={32} alt={owner?.name} />
+          <div className={css.authorText}>
+            <Typography variant="body" textColor="gray">
+              Created by:
+            </Typography>
+
+            <Typography variant="body" textColor="main">
+              {owner?.name}
+            </Typography>
+          </div>
+        </button>
+      </div>
+    </div>
   );
 };
-
-export default RecipeMainInfo;

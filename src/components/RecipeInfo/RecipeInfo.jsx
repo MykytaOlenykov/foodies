@@ -1,14 +1,25 @@
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { getRecipeById } from "../../services/recipes";
-import PathInfo from "../PathInfo/PathInfo";
-import styles from "./RecipeInfo.module.css";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router";
+import toast from "react-hot-toast";
 
+import {
+  Breadcrumbs,
+  BreadcrumbsDivider,
+  BreadcrumbsItem,
+} from "../../components/Breadcrumbs/Breadcrumbs.jsx";
 import RecipeMainInfo from "../RecipeMainInfo/RecipeMainInfo";
-import RecipeIngredients from "../RecipeIngredients/RecipeIngredients";
-import RecipePreparation from "../RecipePreparation/RecipePreparation";
+import { normalizeHttpError } from "../../utils/normalizeHttpError.js";
+import { getRecipeById } from "../../services/recipes";
+
+import css from "./RecipeInfo.module.css";
+import Loader from "../Loader/Loader.jsx";
 
 const RecipeInfo = () => {
+  const navigate = useNavigate();
+  const { state } = useLocation();
+  const goBackPath = useRef(state.from ?? "/");
+
   const { recipeId } = useParams();
   const [recipe, setRecipe] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -16,22 +27,12 @@ const RecipeInfo = () => {
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
-        const res = await getRecipeById(recipeId);
-        const data = res.data.data.recipe;
-
-        const adapted = {
-          ...data,
-          preview: data.thumb,
-          author: {
-            name: data.owner?.name,
-            id: data.owner?.id,
-            avatar: data.owner?.avatarURL,
-          },
-        };
-
-        setRecipe(adapted);
+        setLoading(true);
+        const recipe = await getRecipeById(recipeId);
+        setRecipe(recipe);
       } catch (err) {
-        console.error("Failed to fetch recipe:", err);
+        const { message } = normalizeHttpError(err);
+        toast.error(message);
       } finally {
         setLoading(false);
       }
@@ -40,35 +41,31 @@ const RecipeInfo = () => {
     fetchRecipe();
   }, [recipeId]);
 
-  if (loading) return <p>Loading recipe...</p>;
-  if (!recipe) return <p>Recipe not found.</p>;
+  if (loading) return <Loader />;
 
   return (
     <>
-      <PathInfo current={recipe.title} />
-      <div className={styles.recipeInfo}>
-        <div className={styles.imageBlock}>
-          <img
-            src={recipe.preview}
-            alt={recipe.title}
-            className={styles.image}
-          />
-        </div>
-        <div className={styles.detailsBlock}>
-          <RecipeMainInfo
-            title={recipe.title}
-            category={recipe.category?.name}
-            time={recipe.time}
-            description={recipe.description}
-            user={recipe.author}
-          />
-          <RecipeIngredients ingredients={recipe.ingredients} />
-          <RecipePreparation
-            preparation={recipe.instructions}
-            recipeId={recipe.id}
-            isFavorite={false}
-          />
-        </div>
+      <Breadcrumbs>
+        <BreadcrumbsItem
+          onClick={() => {
+            navigate(goBackPath.current);
+          }}
+        >
+          Home
+        </BreadcrumbsItem>
+        <BreadcrumbsDivider />
+        <BreadcrumbsItem isActive>{recipe.title}</BreadcrumbsItem>
+      </Breadcrumbs>
+
+      <div className={css.detailsBlock}>
+        <RecipeMainInfo
+          imgURL={recipe.thumb}
+          title={recipe.title}
+          description={recipe.description}
+          category={recipe.category}
+          time={recipe.time}
+          owner={recipe.owner}
+        />
       </div>
     </>
   );
