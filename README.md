@@ -61,6 +61,11 @@ npm run build
 ```
 
 ---
+## 🧩 API Documentation
+
+This frontend consumes a [REST API](https://github.com/MykytaOlenykov/foodies-api) documented via [Swagger](https://mykytaolenykov.com/foodies/api/docs/#/).
+Make sure your `.env` file includes the correct `VITE_API_BASE_URL` to match the deployed or local backend environment.
+
 
 ## 📁 Project Structure
 
