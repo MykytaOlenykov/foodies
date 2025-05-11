@@ -52,7 +52,7 @@ export const RecipeInfo = () => {
   if (!recipe) return <NotFound />;
 
   return (
-    <div>
+    <section>
       <Breadcrumbs>
         <BreadcrumbsItem
           onClick={() => {
@@ -80,6 +80,6 @@ export const RecipeInfo = () => {
           updateFavoriteStatus={updateFavoriteStatus}
         />
       </div>
-    </div>
+    </section>
   );
 };

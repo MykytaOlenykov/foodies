@@ -26,11 +26,13 @@ const RecipePage = () => {
   }, []);
 
   return (
-    <Container className={css.container}>
-      <RecipeInfo />
+    <main>
+      <Container className={css.container}>
+        <RecipeInfo />
 
-      <PopularRecipes recipes={recipes} />
-    </Container>
+        <PopularRecipes recipes={recipes} />
+      </Container>
+    </main>
   );
 };
 
