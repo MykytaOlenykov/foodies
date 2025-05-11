@@ -68,7 +68,7 @@
 .followButton {
     padding: 10px 24px !important;
     border-color: var(--gray-color) !important; /* the color has to be forced */
-    color: var(--gray-color); !important; /* the color has to be forced */
+    color: var(--gray-color) !important; /* the color has to be forced */
     margin-top: 4px;
 }
 
