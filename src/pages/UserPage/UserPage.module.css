@@ -2,11 +2,18 @@
   margin-top: 126px;
   margin-bottom: 64px;
 }
+.pagination {
+  margin-top: 30px;
+}
 
 @media (min-width: 768px) {
   .container {
     margin-top: 150px;
     margin-bottom: 100px;
+  }
+
+  .pagination {
+    margin-top: 60px;
   }
 }
 

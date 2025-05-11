@@ -1,43 +1,47 @@
 .Pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
 .PaginationButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    background: transparent;
-    border: none;
-    border-radius: var(--border-radius-full);
-    color: var(--main-color);
-    transition: background var(--transition-duration) var(--transition-timing-function), color var(--transition-duration) var(--transition-timing-function);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  border-radius: var(--border-radius-full);
+  color: var(--main-color);
+  transition: background var(--transition-duration)
+      var(--transition-timing-function),
+    color var(--transition-duration) var(--transition-timing-function);
 }
 
-.PaginationButton:not(.PaginationButton__active):not(.PaginationButton__disabled):hover {
-    background: var(--gray-color);
-    cursor: pointer;
-    color: var(--white-color);
+.PaginationButton:not(.PaginationButton__active):not(
+    .PaginationButton__disabled
+  ):hover {
+  background: var(--gray-color);
+  cursor: pointer;
+  color: var(--white-color);
 }
 
 .PaginationButton__active {
-    border: 1px solid var(--gray-color);
+  border: 1px solid var(--gray-color);
 }
 
 .PaginationButton__disabled {
-    color: var(--gray-color);
-    cursor: not-allowed;
+  color: var(--gray-color);
+  cursor: not-allowed;
 }
 
 .PaginationButtonPrev {
-    transform: rotate(-90deg);
+  transform: rotate(-90deg);
 }
 
 .PaginationButtonNext {
-    transform: rotate(90deg);
+  transform: rotate(90deg);
 }
