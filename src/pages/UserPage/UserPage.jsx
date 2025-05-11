@@ -251,11 +251,13 @@ const UserPage = () => {
             onUnFollow={handleUnFollow}
           />
           {totalPages > 1 && (
-            <Pagination
-              totalPages={totalPages}
-              activePage={page}
-              onPageChange={onPageChange}
-            />
+            <div className={styles.pagination}>
+              <Pagination
+                totalPages={totalPages}
+                activePage={page}
+                onPageChange={onPageChange}
+              />
+            </div>
           )}
         </div>
       </div>
