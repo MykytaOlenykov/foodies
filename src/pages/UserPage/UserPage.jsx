@@ -23,6 +23,8 @@ import toast from "react-hot-toast";
 import { getFavoriteRecipes, getRecipesByUserId } from "../../services/recipes";
 import { TabKey } from "../../constants/common";
 import { appClearSessionAction } from "../../store/utils.js";
+import { Container } from "../../components/UI/index.js";
+import { PathInfo } from "../../components/PathInfo/PathInfo.jsx";
 
 const UserPage = () => {
   const { id } = useParams();
@@ -157,11 +159,12 @@ const UserPage = () => {
     return <section className={styles.userPage}>User not found</section>;
 
   return (
-    <section className={styles.userPage}>
-      <Typography variant="h2">Profile</Typography>
+    <Container className={styles.container}>
+      <PathInfo current={user.name} />
+      <Typography variant="h2" className={styles.title}>Profile</Typography>
       <Typography
         variant="body"
-        textColor={isMobile ? "gray" : "black"}
+        textColor={isMobile ? "black" : "gray"}
         className={styles.description}
       >
         Reveal your culinary art, share your favorite recipe and create
@@ -219,7 +222,7 @@ const UserPage = () => {
           />
         </div>
       </div>
-    </section>
+    </Container>
   );
 };
 

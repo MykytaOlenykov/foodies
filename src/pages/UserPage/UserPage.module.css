@@ -1,7 +1,27 @@
-.userPage {
-  min-height: 60vh;
-  background-color: var(--white-color);
-  padding: 4rem 1rem;
+.container {
+  margin-top: 126px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    margin-top: 150px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    margin-top: 170px;
+  }
+}
+
+.title {
+  margin-top: 32px;
+}
+
+@media (min-width: 768px) {
+  .title {
+    margin-top: 40px;
+  };
 }
 
 .description {

@@ -1,6 +1,3 @@
-import { NavLink } from "react-router";
-import { Button } from "../Button/Button";
-
 import Container from "../UI/Container/Container";
 import { Logo } from "../Logo/Logo";
 

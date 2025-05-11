@@ -6,7 +6,7 @@ import styles from './PathInfo.module.css';
  * @param {Object} props
  * @param {string} props.current - The current page title
  */
-const PathInfo = ({ current }) => {
+export const PathInfo = ({ current }) => {
   return (
     <div className={styles.wrapper}>
       <Link to="/" className={styles.link}>
@@ -17,5 +17,3 @@ const PathInfo = ({ current }) => {
     </div>
   );
 };
-
-export default PathInfo;
