@@ -188,7 +188,7 @@ const UserPage = () => {
               variant="dark"
               size="medium"
               bordered={true}
-              onClick={handleUnFollow}
+              onClick={() => handleUnFollow(id)}
             >
               FOLLOWING
             </Button>
@@ -197,7 +197,7 @@ const UserPage = () => {
               variant="dark"
               size="medium"
               bordered={true}
-              onClick={handleFollow}
+              onClick={() => handleFollow(id)}
             >
               FOLLOW
             </Button>
