@@ -1,16 +1,19 @@
 .container {
   margin-top: 126px;
+  margin-bottom: 64px;
 }
 
 @media (min-width: 768px) {
   .container {
     margin-top: 150px;
+    margin-bottom: 100px;
   }
 }
 
 @media (min-width: 1440px) {
   .container {
     margin-top: 170px;
+    margin-bottom: 120px;
   }
 }
 
@@ -21,7 +24,7 @@
 @media (min-width: 768px) {
   .title {
     margin-top: 40px;
-  };
+  }
 }
 
 .description {
