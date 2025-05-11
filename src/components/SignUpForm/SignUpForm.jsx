@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useFormik } from "formik";
-import { Eye, EyeOff } from "lucide-react";
+import Eye from "../../assets/icons/eye-icon.svg?react";
+import EyeOff from "../../assets/icons/eye-icon-crossed.svg?react";
 
 import { Input } from "../Input/Input";
 import { Button } from "../Button/Button";

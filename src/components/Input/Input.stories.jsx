@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { Input } from './Input';
-import { Eye, EyeOff } from 'lucide-react';
+import React, { useState } from "react";
+import { Input } from "./Input";
+import Eye from "../../assets/icons/eye-icon.svg?react";
+import EyeOff from "../../assets/icons/eye-icon-crossed.svg?react";
 
 export default {
   title: 'Components/Input',
