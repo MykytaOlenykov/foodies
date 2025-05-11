@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { ButtonIcon } from "../ButtonIcon/ButtonIcon";
 import css from "./CategoryItem.module.css";
-import { ArrowUpRight } from "lucide-react";
+import ArrowUpRight from "../../assets/icons/arrow-up-right.svg?react";
 
 export default function CategoryItem({ data }) {
   const categoryName = data.name;
