@@ -25,10 +25,12 @@ import { TabKey } from "../../constants/common";
 import { appClearSessionAction } from "../../store/utils.js";
 import { Container } from "../../components/UI/index.js";
 import { PathInfo } from "../../components/PathInfo/PathInfo.jsx";
+import { Pagination } from "../../components/Pagination/Pagination.jsx";
 
 const UserPage = () => {
   const { id } = useParams();
   const PAGE_LIMIT = 10;
+  const [totalPages, setTotalPages] = useState(1);
   const [page, setPage] = useState(1);
   const [user, setUser] = useState(null);
 
@@ -43,52 +45,63 @@ const UserPage = () => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    fetchUserData(id);
-    setPage(1);
-    setActiveTab(TabKey.RECIPES);
-  }, [id]);
-
-  const reloadData = useCallback(() => {
-    const pagination = { page, limit: PAGE_LIMIT };
-
-    const fetchTabData = async () => {
-      try {
-        let data = {};
-
-        switch (activeTab) {
-          case TabKey.RECIPES:
-            data = await getRecipesByUserId(id, pagination);
-            break;
-          case TabKey.FAVORITES:
-            if (isMyProfile) {
-              data = await getFavoriteRecipes(pagination);
-            }
-            break;
-          case TabKey.FOLLOWERS:
-            data = await getUserFollowers(id, pagination);
-            break;
-          case TabKey.FOLLOWING:
-            if (isMyProfile) {
-              data = await getUserFollowing(pagination);
-            }
-            break;
-          default:
-            data = {};
-        }
-
-        setItems(data?.items || []);
-      } catch (err) {
-        const error = normalizeHttpError(err);
-        toast.error(error.message);
-      }
+    const loadUser = async () => {
+      await fetchUserData(id);
+      setPage(1);
+      setTotalPages(1);
+      setActiveTab(TabKey.RECIPES);
     };
 
-    fetchTabData();
-  }, [activeTab, id, isMyProfile, page]);
+    loadUser();
+  }, [id]);
+
+  const reloadData = useCallback(
+    (pageToLoad) => {
+      const pagination = { page: pageToLoad, limit: PAGE_LIMIT };
+
+      const fetchTabData = async () => {
+        try {
+          let data = {};
+
+          switch (activeTab) {
+            case TabKey.RECIPES:
+              data = await getRecipesByUserId(id, pagination);
+              break;
+            case TabKey.FAVORITES:
+              if (isMyProfile) {
+                data = await getFavoriteRecipes(pagination);
+              }
+              break;
+            case TabKey.FOLLOWERS:
+              data = await getUserFollowers(id, pagination);
+              break;
+            case TabKey.FOLLOWING:
+              if (isMyProfile) {
+                data = await getUserFollowing(pagination);
+              }
+              break;
+            default:
+              data = {};
+          }
+
+          setItems(data?.items || []);
+          setTotalPages(Math.ceil((data?.total || 0) / PAGE_LIMIT));
+        } catch (err) {
+          const error = normalizeHttpError(err);
+          toast.error(error.message);
+        }
+      };
+
+      fetchTabData();
+    },
+    [activeTab, id, isMyProfile],
+  );
 
   useEffect(() => {
-    reloadData();
-  }, [reloadData]);
+    if (user) {
+      reloadData(page);
+    }
+  }, [user, page, reloadData]);
 
   const handleAvatarChange = async (file) => {
     try {
@@ -112,7 +125,7 @@ const UserPage = () => {
 
       // Refresh user data after follow
       await fetchUserData(id);
-      await reloadData();
+      reloadData(page);
     } catch (err) {
       const error = normalizeHttpError(err);
       if (error.status === 401) dispatch(appClearSessionAction());
@@ -125,13 +138,25 @@ const UserPage = () => {
       const data = await unfollowUserById(userId);
       toast.success(data.message);
 
-      // Refresh user data after follow
+      // Refresh user data after unfollow
       await fetchUserData(id);
-      await reloadData();
+      if (page > 1 && items.length === 1) {
+        setPage((prev) => prev - 1);
+      } else {
+        reloadData(page);
+      }
     } catch (err) {
       const error = normalizeHttpError(err);
       if (error.status === 401) dispatch(appClearSessionAction());
       toast.error(error.message);
+    }
+  };
+
+  const handleDelete = () => {
+    if (page > 1 && items.length === 1) {
+      setPage((prev) => prev - 1);
+    } else {
+      reloadData(page);
     }
   };
 
@@ -154,7 +179,9 @@ const UserPage = () => {
     }
   };
 
-  //TODO: add loader
+  const onPageChange = (newPage) => {
+    setPage(newPage);
+  };
 
   if (!user)
     return <section className={styles.userPage}>User not found</section>;
@@ -219,10 +246,17 @@ const UserPage = () => {
             tab={activeTab}
             items={items}
             isMyProfile={isMyProfile}
-            onDelete={reloadData}
+            onDelete={handleDelete}
             onFollow={handleFollow}
             onUnFollow={handleUnFollow}
           />
+          {totalPages > 1 && (
+            <Pagination
+              totalPages={totalPages}
+              activePage={page}
+              onPageChange={onPageChange}
+            />
+          )}
         </div>
       </div>
     </Container>
