@@ -89,31 +89,9 @@ _(Ask your team for access if the link doesn’t work.)_
 
 ---
 
-## 📦 Dependencies Overview
-
-You can find all runtime and dev dependencies in [`package.json`](./package.json). Notable ones include:
-
-- `react`, `react-dom`, `react-router-dom`
-- `redux-toolkit`, `axios`, `clsx`, `yup`, `formik`
-- `vite`, `vite-plugin-svgr`, `storybook`, `eslint`
-
----
-
 ## ⚙️ Requirements
 
 - **Node.js v20+** is required (enforced via `engines` in `package.json`)
 - Works with modern browsers and supports responsive breakpoints (mobile, tablet, desktop)
-
----
-
-## 🧪 Testing
-
-_Vitest is included but not yet configured for unit tests. Add tests under `src/__tests__` as needed._
-
----
-
-## 📄 License
-
-This project is licensed under MIT or as defined by your team.
 
 ---
