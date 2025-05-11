@@ -13,7 +13,7 @@ import {
 } from "../../services/users";
 import { UserInfo } from "../../components/UserInfo/UserInfo";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser } from "../../store/auth/index.js";
+import { selectUser, updateAvatar } from "../../store/auth/index.js";
 import { useBreakpoint } from "../../hooks/index.js";
 import { openLogOut } from "../../store/auth";
 import { TabsList } from "../../components/TabsList/TabsList";
@@ -97,6 +97,7 @@ const UserPage = () => {
         ...prev,
         avatarURL: data.avatarURL,
       }));
+      dispatch(updateAvatar(data.avatarURL));
     } catch (err) {
       const error = normalizeHttpError(err);
       if (error.status === 401) dispatch(appClearSessionAction());
@@ -161,7 +162,9 @@ const UserPage = () => {
   return (
     <Container className={styles.container}>
       <PathInfo current={user.name} />
-      <Typography variant="h2" className={styles.title}>Profile</Typography>
+      <Typography variant="h2" className={styles.title}>
+        Profile
+      </Typography>
       <Typography
         variant="body"
         textColor={isMobile ? "black" : "gray"}

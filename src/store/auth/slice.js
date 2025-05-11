@@ -40,6 +40,9 @@ const authSlice = createSlice({
     closeLogOut(state) {
       state.isOpenLogOut = false;
     },
+    updateAvatar(state, { payload }) {
+      state.user.avatarURL = payload;
+    },
   },
   extraReducers: (builder) =>
     builder
@@ -86,6 +89,7 @@ export const {
   closeSignIn,
   openLogOut,
   closeLogOut,
+  updateAvatar,
 } = authSlice.actions;
 
 export const authReducer = authSlice.reducer;
