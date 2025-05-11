@@ -23,6 +23,8 @@ import toast from "react-hot-toast";
 import { getFavoriteRecipes, getRecipesByUserId } from "../../services/recipes";
 import { TabKey } from "../../constants/common";
 import { appClearSessionAction } from "../../store/utils.js";
+import { Container } from "../../components/UI/index.js";
+import { PathInfo } from "../../components/PathInfo/PathInfo.jsx";
 
 const UserPage = () => {
   const { id } = useParams();
@@ -157,71 +159,70 @@ const UserPage = () => {
     return <section className={styles.userPage}>User not found</section>;
 
   return (
-    <main>
-      <section className={styles.userPage}>
-        <Typography variant="h2">Profile</Typography>
-        <Typography
-          variant="body"
-          textColor={isMobile ? "gray" : "black"}
-          className={styles.description}
-        >
-          Reveal your culinary art, share your favorite recipe and create
-          gastronomic masterpieces with us.
-        </Typography>
-        <div className={styles.profileContainer}>
-          <div className={styles.profile}>
-            <UserInfo
-              user={user}
-              isMyProfile={isMyProfile}
-              onAvatarChange={handleAvatarChange}
-            />
-            {isMyProfile ? (
-              <Button
-                variant="dark"
-                bordered={true}
-                size="medium"
-                onClick={handleOpenLogOut}
-              >
-                LOG OUT
-              </Button>
-            ) : user.isFollowed ? (
-              <Button
-                variant="dark"
-                size="medium"
-                bordered={true}
-                onClick={handleUnFollow}
-              >
-                FOLLOWING
-              </Button>
-            ) : (
-              <Button
-                variant="dark"
-                size="medium"
-                bordered={true}
-                onClick={handleFollow}
-              >
-                FOLLOW
-              </Button>
-            )}
-          </div>
-          <div className={styles.profileTabs}>
-            <TabsList
-              isMyProfile={isMyProfile}
-              activeTab={activeTab}
-              onTabChange={handleTabChange}
-            />
-            <ListItems
-              tab={activeTab}
-              items={items}
-              isMyProfile={isMyProfile}
-              onDelete={reloadData}
-              onFollow={handleFollow}
-              onUnFollow={handleUnFollow}
-            />
-          </div>
+    <Container className={styles.container}>
+      <PathInfo current={user.name} />
+      <Typography variant="h2" className={styles.title}>Profile</Typography>
+      <Typography
+        variant="body"
+        textColor={isMobile ? "black" : "gray"}
+        className={styles.description}
+      >
+        Reveal your culinary art, share your favorite recipe and create
+        gastronomic masterpieces with us.
+      </Typography>
+      <div className={styles.profileContainer}>
+        <div className={styles.profile}>
+          <UserInfo
+            user={user}
+            isMyProfile={isMyProfile}
+            onAvatarChange={handleAvatarChange}
+          />
+          {isMyProfile ? (
+            <Button
+              variant="dark"
+              bordered={true}
+              size="medium"
+              onClick={handleOpenLogOut}
+            >
+              LOG OUT
+            </Button>
+          ) : user.isFollowed ? (
+            <Button
+              variant="dark"
+              size="medium"
+              bordered={true}
+              onClick={() => handleUnFollow(id)}
+            >
+              FOLLOWING
+            </Button>
+          ) : (
+            <Button
+              variant="dark"
+              size="medium"
+              bordered={true}
+              onClick={() => handleFollow(id)}
+            >
+              FOLLOW
+            </Button>
+          )}
         </div>
-      </section>
-    </main>
+        <div className={styles.profileTabs}>
+          <TabsList
+            isMyProfile={isMyProfile}
+            activeTab={activeTab}
+            onTabChange={handleTabChange}
+          />
+          <ListItems
+            tab={activeTab}
+            items={items}
+            isMyProfile={isMyProfile}
+            onDelete={reloadData}
+            onFollow={handleFollow}
+            onUnFollow={handleUnFollow}
+          />
+        </div>
+      </div>
+    </Container>
   );
 };
 
