@@ -6,8 +6,7 @@ recipe-sharing platform, supporting user profiles, following functionality, reci
 ## 🔗 Live Demo
 
 Check out the live website here: [https://foodies-pink.vercel.app](hhttps://foodies-pink.vercel.app)
-
-> Note: Make sure you're logged in (if required) or that your backend is properly running for full functionality.
+> Make sure the backend is properly running for full functionality.
 
 ## 🧰 Tech Stack
 
