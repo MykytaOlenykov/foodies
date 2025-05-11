@@ -16,6 +16,7 @@ import { useUncontrolled } from "../../hooks/index.js";
  * @param {string} [props.value] - Controlled value of the input
  * @param {string} [props.defaultValue] - Default value of the input
  * @param {function} [props.onChange] - Change handler (e) => void
+ * @param {number[]} [props.excludeIds] - List of IDs to exclude from the dropdown
  */
 const SearchSelect = ({
   value,
@@ -25,6 +26,7 @@ const SearchSelect = ({
   items,
   onSelect,
   placeholder = "Select item",
+  excludeIds = [],
   required
 }) => {
   const [query, setQuery] = useUncontrolled(value, defaultValue, onChange);
@@ -32,7 +34,8 @@ const SearchSelect = ({
   const wrapperRef = useRef(null);
 
   const filteredItems = items.filter((item) =>
-    item.name.toLowerCase().includes(query.toLowerCase()),
+    item.name.toLowerCase().includes(query.toLowerCase()) &&
+    !excludeIds.includes(item.id)
   );
 
   const handleSelect = (item) => {
@@ -81,6 +84,7 @@ const SearchSelect = ({
               key={item.id}
               className={styles.item}
               onClick={() => handleSelect(item)}
+              onMouseDown={(e) => e.preventDefault()}
             >
               <Typography variant="body">{item.name}</Typography>
             </li>

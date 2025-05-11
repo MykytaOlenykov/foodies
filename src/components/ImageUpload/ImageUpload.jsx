@@ -49,7 +49,7 @@ const ImageUpload = ({
     <div className={styles.ImageUpload}>
       <input
         type="file"
-        accept="image/*"
+        accept="image/png, image/jpeg, image/jpg"
         ref={inputRef}
         onChange={handleChange}
         style={{ display: 'none' }}

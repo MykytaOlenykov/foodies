@@ -6,7 +6,7 @@
     width: 100%;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1440px) {
     .ImageUpload {
         max-width: 551px;
     }
@@ -19,7 +19,7 @@
     height: 318px;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1440px) {
     .ImageUpload__preview {
         max-width: 551px;
         min-width: 130px;
@@ -65,7 +65,7 @@
     height: 318px;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1440px) {
     .ImageUpload__placeholder {
         max-width: 551px;
         min-width: 130px;

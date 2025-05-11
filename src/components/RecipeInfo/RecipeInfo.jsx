@@ -6,13 +6,14 @@ import {
   Breadcrumbs,
   BreadcrumbsDivider,
   BreadcrumbsItem,
-} from "../../components/Breadcrumbs/Breadcrumbs.jsx";
+} from "../Breadcrumbs/Breadcrumbs.jsx";
 import { RecipeMainInfo } from "../RecipeMainInfo";
 import Loader from "../Loader/Loader.jsx";
-import { normalizeHttpError } from "../../utils/normalizeHttpError.js";
+import { normalizeHttpError } from "../../utils/index.js";
 import { getRecipeById } from "../../services/recipes";
 
 import css from "./RecipeInfo.module.css";
+import NotFound from "../../pages/NotFound/NotFound.jsx";
 
 export const RecipeInfo = () => {
   const navigate = useNavigate();
@@ -30,8 +31,10 @@ export const RecipeInfo = () => {
         const recipe = await getRecipeById(recipeId);
         setRecipe(recipe);
       } catch (err) {
-        const { message } = normalizeHttpError(err);
-        toast.error(message);
+        const { message, status } = normalizeHttpError(err);
+        if (status !== 404) {
+          toast.error(message);
+        }
       } finally {
         setLoading(false);
       }
@@ -45,6 +48,8 @@ export const RecipeInfo = () => {
   };
 
   if (loading) return <Loader />;
+
+  if (!recipe) return <NotFound />;
 
   return (
     <div>

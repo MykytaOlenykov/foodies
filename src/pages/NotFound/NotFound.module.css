@@ -1,0 +1,7 @@
+.NotFound {
+    padding: 120px 0 80px;
+    display: flex;
+    min-height: 80vh;
+    justify-content: center;
+    align-items: center;
+}
