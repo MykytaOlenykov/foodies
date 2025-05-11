@@ -3,6 +3,12 @@
 Foodies is a modern React-based frontend application built with Vite. It serves as the user interface for a
 recipe-sharing platform, supporting user profiles, following functionality, recipe browsing, and responsive layout.
 
+## 🔗 Live Demo
+
+Check out the live website here: [https://foodies-pink.vercel.app](hhttps://foodies-pink.vercel.app)
+
+> Note: Make sure you're logged in (if required) or that your backend is properly running for full functionality.
+
 ## 🧰 Tech Stack
 
 - **React 19** with JSX
