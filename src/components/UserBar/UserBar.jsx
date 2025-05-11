@@ -65,12 +65,14 @@ export const UserBar = () => {
         className={css.profile}
         onClick={() => setIsOpenProfile((prev) => !prev)}
       >
-        <Avatar
-          src={user?.avatarURL}
-          alt={`${userName}'s avatar`}
-          size={isMobile ? 32 : 50}
-          name={userName}
-        />
+        <div style={{ flexShrink: 0 }}>
+          <Avatar
+            src={user?.avatarURL}
+            alt={`${userName}'s avatar`}
+            size={isMobile ? 32 : 50}
+            name={userName}
+          />
+        </div>
         <p className={css.profileName}>{userName}</p>
         <button
           type="button"
