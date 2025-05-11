@@ -23,17 +23,19 @@ export function Category() {
   }, [breakpoint]);
 
   return (
-    <Container className={css.container}>
-      <div className={css.headWrapper}>
-        <Typography variant="h2">Categories</Typography>
-        <Typography variant="body" className={css.description}>
-          Discover a limitless world of culinary possibilities and enjoy
-          exquisite recipes that combine taste, style and the warm atmosphere of
-          the kitchen.
-        </Typography>
-      </div>
+    <section>
+      <Container className={css.container}>
+        <div className={css.headWrapper}>
+          <Typography variant="h2">Categories</Typography>
+          <Typography variant="body" className={css.description}>
+            Discover a limitless world of culinary possibilities and enjoy
+            exquisite recipes that combine taste, style and the warm atmosphere
+            of the kitchen.
+          </Typography>
+        </div>
 
-      {categories.length > 0 && <CategoryList categories={categories} />}
-    </Container>
+        {categories.length > 0 && <CategoryList categories={categories} />}
+      </Container>
+    </section>
   );
 }

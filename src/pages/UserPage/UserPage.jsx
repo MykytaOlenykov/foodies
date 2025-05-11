@@ -157,69 +157,71 @@ const UserPage = () => {
     return <section className={styles.userPage}>User not found</section>;
 
   return (
-    <section className={styles.userPage}>
-      <Typography variant="h2">Profile</Typography>
-      <Typography
-        variant="body"
-        textColor={isMobile ? "gray" : "black"}
-        className={styles.description}
-      >
-        Reveal your culinary art, share your favorite recipe and create
-        gastronomic masterpieces with us.
-      </Typography>
-      <div className={styles.profileContainer}>
-        <div className={styles.profile}>
-          <UserInfo
-            user={user}
-            isMyProfile={isMyProfile}
-            onAvatarChange={handleAvatarChange}
-          />
-          {isMyProfile ? (
-            <Button
-              variant="dark"
-              bordered={true}
-              size="medium"
-              onClick={handleOpenLogOut}
-            >
-              LOG OUT
-            </Button>
-          ) : user.isFollowed ? (
-            <Button
-              variant="dark"
-              size="medium"
-              bordered={true}
-              onClick={handleUnFollow}
-            >
-              FOLLOWING
-            </Button>
-          ) : (
-            <Button
-              variant="dark"
-              size="medium"
-              bordered={true}
-              onClick={handleFollow}
-            >
-              FOLLOW
-            </Button>
-          )}
+    <main>
+      <section className={styles.userPage}>
+        <Typography variant="h2">Profile</Typography>
+        <Typography
+          variant="body"
+          textColor={isMobile ? "gray" : "black"}
+          className={styles.description}
+        >
+          Reveal your culinary art, share your favorite recipe and create
+          gastronomic masterpieces with us.
+        </Typography>
+        <div className={styles.profileContainer}>
+          <div className={styles.profile}>
+            <UserInfo
+              user={user}
+              isMyProfile={isMyProfile}
+              onAvatarChange={handleAvatarChange}
+            />
+            {isMyProfile ? (
+              <Button
+                variant="dark"
+                bordered={true}
+                size="medium"
+                onClick={handleOpenLogOut}
+              >
+                LOG OUT
+              </Button>
+            ) : user.isFollowed ? (
+              <Button
+                variant="dark"
+                size="medium"
+                bordered={true}
+                onClick={handleUnFollow}
+              >
+                FOLLOWING
+              </Button>
+            ) : (
+              <Button
+                variant="dark"
+                size="medium"
+                bordered={true}
+                onClick={handleFollow}
+              >
+                FOLLOW
+              </Button>
+            )}
+          </div>
+          <div className={styles.profileTabs}>
+            <TabsList
+              isMyProfile={isMyProfile}
+              activeTab={activeTab}
+              onTabChange={handleTabChange}
+            />
+            <ListItems
+              tab={activeTab}
+              items={items}
+              isMyProfile={isMyProfile}
+              onDelete={reloadData}
+              onFollow={handleFollow}
+              onUnFollow={handleUnFollow}
+            />
+          </div>
         </div>
-        <div className={styles.profileTabs}>
-          <TabsList
-            isMyProfile={isMyProfile}
-            activeTab={activeTab}
-            onTabChange={handleTabChange}
-          />
-          <ListItems
-            tab={activeTab}
-            items={items}
-            isMyProfile={isMyProfile}
-            onDelete={reloadData}
-            onFollow={handleFollow}
-            onUnFollow={handleUnFollow}
-          />
-        </div>
-      </div>
-    </section>
+      </section>
+    </main>
   );
 };
 

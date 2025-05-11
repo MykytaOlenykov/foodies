@@ -21,27 +21,29 @@ export const Recipes = ({ categoryId }) => {
   const currentCategory = categories.find(({ id }) => id === categoryId) ?? {};
 
   return (
-    <Container className={css.container}>
-      <div className={css.recipesTitleBlock}>
-        <button
-          className={css.recipesBackButton}
-          type="button"
-          onClick={handleBackClick}
-        >
-          <ArrowLeftIcon className={css.recipesBackIcon} />
-          Back
-        </button>
-        <Typography className={css.recipesCategory} variant="h1">
-          {currentCategory.name}
-        </Typography>
-        <Typography className={css.recipesDescription} variant="body">
-          Go on a taste journey, where every sip is a sophisticated creative
-          chord, and every dessert is an expression of the most refined
-          gastronomic desires.
-        </Typography>
-      </div>
+    <section>
+      <Container className={css.container}>
+        <div className={css.recipesTitleBlock}>
+          <button
+            className={css.recipesBackButton}
+            type="button"
+            onClick={handleBackClick}
+          >
+            <ArrowLeftIcon className={css.recipesBackIcon} />
+            Back
+          </button>
+          <Typography className={css.recipesCategory} variant="h1">
+            {currentCategory.name}
+          </Typography>
+          <Typography className={css.recipesDescription} variant="body">
+            Go on a taste journey, where every sip is a sophisticated creative
+            chord, and every dessert is an expression of the most refined
+            gastronomic desires.
+          </Typography>
+        </div>
 
-      <RecipeList categoryId={categoryId} />
-    </Container>
+        <RecipeList categoryId={categoryId} />
+      </Container>
+    </section>
   );
 };
