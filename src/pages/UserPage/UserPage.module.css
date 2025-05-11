@@ -38,6 +38,8 @@
   flex-direction: column;
   gap: 64px;
   align-items: center;
+
+  padding-bottom: 64px;
 }
 
 .profile {
@@ -63,6 +65,7 @@
   }
   .profileContainer {
     gap: 80px;
+    padding-bottom: 100px;
   }
   .profile {
     max-width: 396px;
@@ -80,5 +83,7 @@
     flex-direction: row;
     gap: 40px;
     align-items: initial;
+
+    padding-bottom: 120px;
   }
 }
