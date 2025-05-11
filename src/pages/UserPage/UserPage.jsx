@@ -24,7 +24,7 @@ import { getFavoriteRecipes, getRecipesByUserId } from "../../services/recipes";
 import { TabKey } from "../../constants/common";
 import { appClearSessionAction } from "../../store/utils.js";
 import { Container } from "../../components/UI/index.js";
-import PathInfo from "../../components/PathInfo/PathInfo.jsx";
+import { PathInfo } from "../../components/PathInfo/PathInfo.jsx";
 
 const UserPage = () => {
   const { id } = useParams();
