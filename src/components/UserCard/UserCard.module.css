@@ -72,14 +72,14 @@
     margin-top: 4px;
 }
 
-/* special button styles only for desktop */
+/* special button styles only for desktop -- has to be forced */
 @media (min-width: 1440px) {
     .followButton {
-        color: var(--main-color);
+        color: var(--main-color) !important;
     }
 
     .followButton:hover {
-        color: var(--white-color);
+        color: var(--white-color) !important;
     }
 }
 
