@@ -25,7 +25,19 @@
     flex-direction: column;
     justify-content: center;
     gap: 4px;
-    max-width: 101px; /* 100px + 1px border because on the Figma it's designed this way */
+    max-width: 92px;
+}
+
+@media (min-width: 768px) {
+    .userDetails {
+        max-width: 116px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .userDetails {
+        max-width: 144px;
+    }
 }
 
 /* Recipe thumbnails (tablet and desktop only) */
@@ -40,9 +52,6 @@
     border-radius: var(--border-radius-s);
     flex-shrink: 0;
     overflow: hidden;
-    /*display: flex;*/
-    /*align-items: center;*/
-    /*justify-content: center;*/
 }
 
 .thumb img {
@@ -58,9 +67,20 @@
 
 .followButton {
     padding: 10px 24px !important;
-    max-width: 100px !important;
     border-color: var(--gray-color) !important; /* the color has to be forced */
     color: var(--gray-color) !important; /* the color has to be forced */
+    margin-top: 4px;
+}
+
+/* special button styles only for desktop -- has to be forced */
+@media (min-width: 1440px) {
+    .followButton {
+        color: var(--main-color) !important;
+    }
+
+    .followButton:hover {
+        color: var(--white-color) !important;
+    }
 }
 
 /* Tablet (768px+) layout */
