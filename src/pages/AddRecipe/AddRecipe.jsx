@@ -1,7 +1,14 @@
 import Container from "../../components/UI/Container/Container.jsx";
-import { Typography, TypographyError } from "../../components/Typography/Typography.jsx";
+import {
+  Typography,
+  TypographyError,
+} from "../../components/Typography/Typography.jsx";
 import * as styles from "./AddRecipe.module.css";
-import { Breadcrumbs, BreadcrumbsDivider, BreadcrumbsItem } from "../../components/Breadcrumbs/Breadcrumbs.jsx";
+import {
+  Breadcrumbs,
+  BreadcrumbsDivider,
+  BreadcrumbsItem,
+} from "../../components/Breadcrumbs/Breadcrumbs.jsx";
 import { ImageUpload } from "../../components/ImageUpload/ImageUpload.jsx";
 import { Input } from "../../components/Input/Input.jsx";
 import { Textarea } from "../../components/Textarea/Textarea.jsx";
@@ -18,13 +25,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectIngredients } from "../../store/ingredients/index.js";
 import { selectCategories } from "../../store/categories/index.js";
 import { selectAreas } from "../../store/areas/index.js";
-import { object, string, array } from 'yup';
+import { object, string, array } from "yup";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { normalizeHttpError } from "../../utils/index.js";
 import toast from "react-hot-toast";
 import { DEFAULT_ERROR_MESSAGE } from "../../constants/common.js";
 import { appClearSessionAction } from "../../store/utils.js";
 import { addRecipe } from "../../services/recipes.js";
+import { useNavigate } from "react-router";
 
 const IngredientsFieldGroup = ({ ingredientsList, onAdd, excludeIds }) => {
   const [selectedIngredient, setSelectedIngredient] = useState(null);
@@ -35,9 +43,7 @@ const IngredientsFieldGroup = ({ ingredientsList, onAdd, excludeIds }) => {
     <div className={styles.IngredientsFieldGroup}>
       <div className={styles.AddRecipe__inputGroupWrapper}>
         <div className={styles.AddRecipe__inputGroup}>
-          <Typography variant="h4">
-            Ingredients
-          </Typography>
+          <Typography variant="h4">Ingredients</Typography>
           <SearchSelect
             excludeIds={excludeIds}
             value={ingredientSearch}
@@ -47,7 +53,7 @@ const IngredientsFieldGroup = ({ ingredientsList, onAdd, excludeIds }) => {
             }}
             items={ingredientsList}
             onSelect={(item) => {
-              setSelectedIngredient(item)
+              setSelectedIngredient(item);
               setIngredientSearch(item.name);
             }}
             placeholder="Add the ingredient"
@@ -101,17 +107,20 @@ const validationSchema = object({
   category: object().required("Category is required"),
   area: object().required("Area is required"),
   instructions: string().required("Instructions are required"),
-  ingredients: array().of(
-    object().shape({
-      id: string().required("Ingredient ID is required"),
-      measure: string().required("Measure is required"),
-    })
-  ).min(1, "At least one ingredient is required"),
+  ingredients: array()
+    .of(
+      object().shape({
+        id: string().required("Ingredient ID is required"),
+        measure: string().required("Measure is required"),
+      }),
+    )
+    .min(1, "At least one ingredient is required"),
   image: string().required("Image is required"),
 });
 
 const AddRecipe = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const ingredientsList = useSelector(selectIngredients);
   const categoriesList = useSelector(selectCategories);
   const areasList = useSelector(selectAreas);
@@ -133,16 +142,19 @@ const AddRecipe = () => {
 
     formData.append(
       "ingredients",
-      JSON.stringify(values.ingredients.map(({ id, measure }) => ({ id, measure })))
+      JSON.stringify(
+        values.ingredients.map(({ id, measure }) => ({ id, measure })),
+      ),
     );
 
     try {
-      await addRecipe(formData);
+      const data = await addRecipe(formData);
       resetForm();
       setCategorySearch("");
       setAreaSearch("");
       setStatus({ success: true });
-      toast.success('Recipe added successfully');
+      toast.success("Recipe added successfully");
+      data?.recipe && navigate(`/recipe/${data.recipe.id}`);
     } catch (error) {
       const { message, status } = normalizeHttpError(error);
       toast.error(message ?? DEFAULT_ERROR_MESSAGE);
@@ -156,9 +168,11 @@ const AddRecipe = () => {
     <Container>
       <div className={styles.AddRecipe}>
         <Breadcrumbs>
-          <BreadcrumbsItem onClick={() => {
-            window.open("/", "_self");
-          }}>
+          <BreadcrumbsItem
+            onClick={() => {
+              window.open("/", "_self");
+            }}
+          >
             Home
           </BreadcrumbsItem>
           <BreadcrumbsDivider />
@@ -166,11 +180,10 @@ const AddRecipe = () => {
         </Breadcrumbs>
 
         <div className={styles.AddRecipe__header}>
-          <Typography variant="h2">
-            Add recipe
-          </Typography>
+          <Typography variant="h2">Add recipe</Typography>
           <Typography variant="body">
-            Reveal your culinary art, share your favorite recipe and create gastronomic masterpieces with us.
+            Reveal your culinary art, share your favorite recipe and create
+            gastronomic masterpieces with us.
           </Typography>
         </div>
 
@@ -185,7 +198,7 @@ const AddRecipe = () => {
                 value={values.image}
                 error={errors.image}
                 name="image"
-                onUpload={(file) => setFieldValue('image', file)}
+                onUpload={(file) => setFieldValue("image", file)}
               />
 
               <div className={styles.AddRecipe__inputs}>
@@ -206,14 +219,15 @@ const AddRecipe = () => {
                       as={Textarea}
                       placeholder="Enter a description of the dish"
                     />
-                    <ErrorMessage name="description" component={TypographyError} />
+                    <ErrorMessage
+                      name="description"
+                      component={TypographyError}
+                    />
                   </div>
                 </div>
 
                 <div className={styles.AddRecipe__inputGroup}>
-                  <Typography variant="h4">
-                    Area
-                  </Typography>
+                  <Typography variant="h4">Area</Typography>
                   <div>
                     <SearchSelect
                       value={areaSearch}
@@ -224,7 +238,7 @@ const AddRecipe = () => {
                       name="area"
                       items={areasList}
                       onSelect={(item) => {
-                        setFieldValue("area", item)
+                        setFieldValue("area", item);
                         setAreaSearch(item.name);
                       }}
                       placeholder="Select an area"
@@ -235,9 +249,7 @@ const AddRecipe = () => {
 
                 <div className={styles.AddRecipe__inputGroupWrapper}>
                   <div className={styles.AddRecipe__inputGroup}>
-                    <Typography variant="h4">
-                      Category
-                    </Typography>
+                    <Typography variant="h4">Category</Typography>
                     <div>
                       <SearchSelect
                         value={categorySearch}
@@ -248,19 +260,20 @@ const AddRecipe = () => {
                         name="category"
                         items={categoriesList}
                         onSelect={(item) => {
-                          setFieldValue("category", item)
+                          setFieldValue("category", item);
                           setCategorySearch(item.name);
                         }}
                         placeholder="Select a category"
                       />
-                      <ErrorMessage name="category" component={TypographyError} />
+                      <ErrorMessage
+                        name="category"
+                        component={TypographyError}
+                      />
                     </div>
                   </div>
 
                   <div className={styles.AddRecipe__inputGroup}>
-                    <Typography variant="h4">
-                      Cooking time
-                    </Typography>
+                    <Typography variant="h4">Cooking time</Typography>
                     <Field
                       name="cookingTime"
                       component={InputStepper}
@@ -275,10 +288,16 @@ const AddRecipe = () => {
                     excludeIds={values.ingredients.map((item) => item.id)}
                     ingredientsList={ingredientsList}
                     onAdd={(newData) => {
-                      setFieldValue("ingredients", [...values.ingredients, newData]);
+                      setFieldValue("ingredients", [
+                        ...values.ingredients,
+                        newData,
+                      ]);
                     }}
                   />
-                  <ErrorMessage name="ingredients" component={TypographyError} />
+                  <ErrorMessage
+                    name="ingredients"
+                    component={TypographyError}
+                  />
                 </div>
 
                 {values.ingredients.length > 0 && (
@@ -292,7 +311,9 @@ const AddRecipe = () => {
                         onDelete={() => {
                           setFieldValue(
                             "ingredients",
-                            values.ingredients.filter((i) => i.id !== ingredient.id)
+                            values.ingredients.filter(
+                              (i) => i.id !== ingredient.id,
+                            ),
                           );
                         }}
                       />
@@ -300,20 +321,23 @@ const AddRecipe = () => {
                   </div>
                 )}
 
-                <div className={clsx(
-                  styles.AddRecipe__inputGroup,
-                  styles.AddRecipe__inputGroup_bottom,
-                )}>
-                  <Typography variant="h4">
-                    Recipe Preparation
-                  </Typography>
+                <div
+                  className={clsx(
+                    styles.AddRecipe__inputGroup,
+                    styles.AddRecipe__inputGroup_bottom,
+                  )}
+                >
+                  <Typography variant="h4">Recipe Preparation</Typography>
                   <div>
                     <Field
                       name="instructions"
                       as={Textarea}
                       placeholder="Enter recipe"
                     />
-                    <ErrorMessage name="instructions" component={TypographyError} />
+                    <ErrorMessage
+                      name="instructions"
+                      component={TypographyError}
+                    />
                   </div>
                 </div>
 
